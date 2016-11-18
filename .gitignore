@@ -1,0 +1,93 @@
+## Mac OSX and other OS stuff
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
+## Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+## Libraries
+*.lib
+*.a
+
+## Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+## Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+*.mexmaci64
+*.mexa64
+
+## Emacs
+\#*
+.#*
+*~
+
+## LaTeX
+*.aux
+*.glo
+*.idx
+*.log
+*.toc
+*.ist
+*.acn
+*.acr
+*.alg
+*.bbl
+*.blg
+*.dvi
+*.glg
+*.gls
+*.ilg
+*.ind
+*.lof
+*.lot
+*.loa
+*.out
+*.snm
+*.nav
+*.fls
+*.fdb_latexmk
+*.bcf
+*.run.xml
+*.synctex
+*.synctex.gz
+*-converted-to.*
+
+## XFig
+*.fig.bak
+
+## Simulink
+slprj
+
+## Python
+__pycache__
+*.py[cod]
+
+## MS Office
+*.tmp
+~$*.doc*
+~$*.xls*
+*.xlk
+~$*.ppt*
+
+## EAGLE
+*.l#?
+*.s#?
+*.b#?
