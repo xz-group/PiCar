@@ -7,8 +7,8 @@ This repository contains all the software and hardware source files required to 
 * Chassis 3D printer CAD sources.
 * Raspberry Pi B+ breakout PCB to connect peripherals and draw power from LiPo battery.
 * Source code of the following sofware modules capable of:
-** Acquire wheel angle data from two quadrature encoders.
-** Acquire acceleration, angular velocity, and compass data from an I²C LSM9DS1 IMU.
-** Acquire video data from a Raspberry Pi NoIR camera.
-** Acquire position and angle data from a motion-capture server.
-** Control the speed of two brushless DC motors.
+ * Acquire wheel angle data from two quadrature encoders.
+ * Acquire acceleration, angular velocity, and compass data from an I²C LSM9DS1 IMU.
+ * Acquire video data from a Raspberry Pi NoIR camera.
+ * Acquire position and angle data from a motion-capture server.
+ * Control the speed of two brushless DC motors.
