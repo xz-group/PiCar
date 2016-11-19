@@ -12,3 +12,4 @@ This repository contains all the software and hardware source files required to 
  * Acquire video data from a Raspberry Pi NoIR camera.
  * Acquire position and angle data from a motion-capture server.
  * Control the speed of two brushless DC motors.
+ * Control an I²C 8x8 LED matrix.
