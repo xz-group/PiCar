@@ -1,0 +1,21 @@
+Item,Qty Needed,Qty to Buy,Price per Unit,Provider,Serial No.,URL,Description
+"2x20 Pinhead 0.1"" Female",1,1,$2.73,Digikey,S6104-ND,https://www.digikey.com/product-detail/en/sullins-connector-solutions/PPTC202LFBN-RC/S6104-ND/807240,RPi compatible female pinhead connector
+8x8 LED Matrix,1,1,$13.50,Digikey,1528-1419-ND,https://www.digikey.com/product-detail/en/adafruit-industries-llc/1080/1528-1419-ND/5699174,Controller + LED Matrix kit
+BSS138 Dual MOSFET,1,2,$0.38,Digikey,568-8392-1-ND,"https://www.digikey.com/product-detail/en/nxp-usa-inc/BSS138BKS,115/568-8392-1-ND/2763926",Low Vgs transistors for I2C interface
+Capacitor 1uF,3,10,$0.15,Digikey,399-8148-1-ND,https://www.digikey.com/product-detail/en/kemet/C1206C105M3RACTU/399-8148-1-ND/3471871,1206
+Capacitor 220uF,2,4,$0.48,Digikey,399-6113-ND,https://www.digikey.com/product-detail/en/kemet/ESW227M035AG4AA/399-6113-ND/2712539,"Low ESR, through hole, 3.5-8"
+"Molex KK 4809, Contact for Female Housing, 1 circuit",20,50,$0.17,Digikey,WM2623-ND,http://www.digikey.com/product-detail/en/molex-llc/0008500032/WM2623-ND/1634868,22-30 AWG
+"Molex KK 6373, PCB Male, 3 circuit, vertical",2,5,$0.23,Digikey,WM4201-ND,http://www.digikey.com/product-detail/en/molex-llc/0022232031/WM4201-ND/26669,"0.1"", friction lock, white"
+"Molex KK 6373, PCB Male, 4 circuit, vertical",3,5,$0.27,Digikey,WM4202-ND,http://www.digikey.com/product-detail/en/molex-llc/0022232041/WM4202-ND/26671,"0.1"", friction lock, white"
+"Molex KK 6471, Housing Female, 3 circuits",2,5,$0.34,Digikey,WM2626-ND,http://www.digikey.com/product-detail/en/molex-llc/0022012035/WM2626-ND/304070,"with friction ramp, polarized"
+"Molex KK 6471, Housing Female, 4 circuits",3,5,$0.40,Digikey,WM2614-ND,http://www.digikey.com/product-detail/en/molex-llc/0022012045/WM2614-ND/1634859,"with friction ramp, polarized"
+"Molex Ultra-Fit 172253, Contact for Female Housing, 16-18 AWG, 1 circuit",4,25,$0.31,Digikey,WM11559CT-ND,http://www.digikey.com/product-detail/en/molex-llc/1722533023/WM11559CT-ND/5344300,16-18 AWG
+"Molex Ultra-Fit 172253, Contact for Female Housing, 20-22 AWG, 1 circuit",2,25,$0.28,Digikey,WM11561CT-ND,http://www.digikey.com/product-detail/en/molex-llc/1722533123/WM11561CT-ND/5344302,20-22 AWG
+"Molex Ultra-Fit 172256, Housing Female, 2 circuits",3,5,$0.32,Digikey,WM11608-ND,http://www.digikey.com/product-detail/en/molex-llc/1722561102/WM11608-ND/5291233,"with lock, polarized"
+"Molex Ultra-Fit 172264, TPA for Female Housing, 2 circuits",3,5,$0.20,Digikey,WM11653-ND,http://www.digikey.com/product-detail/en/molex-llc/1722641002/WM11653-ND/5291282,Attachment to hold crimp contacts
+"Molex Ultra-Fit 172310, PCB male, 2 circuit, right angle",3,5,$0.74,Digikey,WM11586-ND,https://www.digikey.com/product-detail/en/molex-llc/1723101102/WM11586-ND/5344283,Rated for 13A
+PTR08060W Power Module,1,1,$9.36,Digikey,296-22673-5-ND,http://www.digikey.com/product-detail/en/texas-instruments/PTR08060WVD/296-22673-5-ND/1698955,Texas Instruments Buck Converter
+Resistor 1.8KOhm,4,10,$0.10,Digikey,P1.80KFCT-ND,http://www.digikey.com/product-detail/en/panasonic-electronic-components/ERJ-8ENF1801V/P1.80KFCT-ND/1746557,"1%, 1/4W, 1206"
+Resistor 267Ohm,1,10,$0.10,Digikey,P267FCT-ND,https://www.digikey.com/product-detail/en/panasonic-electronic-components/ERJ-8ENF2670V/P267FCT-ND/89414,"1%, 1/4W, 1206"
+,,,,,,,
+,,Subtotal,$67.52,,,,
