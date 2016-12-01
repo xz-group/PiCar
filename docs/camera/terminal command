@@ -1,0 +1,19 @@
+Terminal command
+Camera:
+
+$sudo raspi-config //enable camera
+
+$raspistill -o image.jpg -t 5000 //take picture after 5s
+$raspivid -o video.h264 -t 10000 //record video as "video" for 10s
+$omxplayer video.h264//play video
+
+
+
+live video:
+//https://www.element14.com/community/community/raspberry-pi/raspberrypi_projects/blog/2016/04/25/noir-v2-video-streaming-baby-monitor
+//download source code form https://github.com/silvanmelchior/RPi_Cam_Web_Interface.git
+
+$git clone https://github.com/silvanmelchior/RPi_Cam_Web_Interface.git  
+$cd RPi_Cam_Web_Interface  
+$chmod u+x *.sh  
+$./install.sh
