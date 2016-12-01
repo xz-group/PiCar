@@ -1,0 +1,55 @@
+accelerometer
+
+//linear acceleration sensitivity(mg/LSB)
+	+/-2g    = 0.061
+	+/-4g    = 0.122
+	+/-8g    = 0.244
+	+/-16g   = 0.732
+
+//change power mode
+	accelerometer on, gyro down CTRL_REG6_XL (20h) 
+	accelerometer on, gyro on   CTRL_REG1_G (10h)
+
+//change scales
+	CTRL_REG6_XL, FS_XL[1:0]
+	(00: ±2g; 01: ±16 g; 10: ±4 g; 11: ±8 g)
+=================================================
+
+//magnetic sensitivity(mgauss/LSB)
+	4 gauss  = 0.14
+	8 gauss  = 0.29
+	12 gauss  = 0.43 
+	16 gauss  = 0.58
+//change scales
+	CTRL_REG2_M FS
+	(00: 4gauss; 01: 8gauss; 10: 12gauss; 11: 16 gauss)
+=================================================
+gyro
+//angular rate sensitivity(mdps/LSB)
+	245 dps  = 8.75
+	500 dps  =17.5
+	2000dps  = 70
+//power mode
+	Low power  CTRL_REG3_G (12h) 
+//scale
+	CTRL_REG1_G, FS_G [1:0] 
+	(00: 245 dps; 01: 500 dps; 10: NOT AVAILABLE; 11: 2000 dps)
+
+
+
+
+
+
+
+
+
+
+CTRL_REG4
+0;0;Zen_G;Yen_G;Xen_G;0;0;0
+
+CTRL_REG5_XL
+DEC_1; DEC_0; Zen_XL; Yen_XL; Xen_XL; 0; 0; 0;
+(00: no decimation;
+01: update every 2 samples;
+10: update every 4 samples;
+11: update every 8 samples)
