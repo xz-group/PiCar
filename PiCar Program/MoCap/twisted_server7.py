@@ -1,25 +1,31 @@
-# uses netstring receiver as both the subclass for input and output
+# uses netstring receiver
 
 # !/usr/bin/env python
 
 # Copyright (c) Twisted Matrix Laboratories.
 # See LICENSE for details.
 
+from twisted.python import log, usage
 from twisted.internet import defer, task
 from twisted.internet.protocol import Protocol, ClientFactory, ServerFactory, Factory
+# from twisted.internet.endpoints import TCP4ServerEndpoint, TCP4ClientEndpoint
 from twisted.protocols import basic
-import sys, time, struct
+import sys, time, struct, bitarray
+import ipdb
+import ctypes   # for C++ conversions
 
 prevTime = 0.0
 streamError = []
 
 if sys.platform == 'win32':
     from twisted.internet import win32eventreactor
+
     win32eventreactor.install()
 
-class OutputProtocol(object, basic.NetstringReceiver):
+
+class OutputProtocol(object, basic.LineOnlyReceiver):
     def __init__(self):
-        self.MAX_LENGTH = 33    # seven 4-byte values
+        # self.delimiter = '\n'
         self.count = 0
 
     def connectionMade(self):
@@ -33,7 +39,7 @@ class OutputProtocol(object, basic.NetstringReceiver):
         self.factory.client_list.remove(self)
 
     def sendMsg(self, data):
-        self.sendString(data)
+        self.transport.write(str(data)+'\r\n')
 
 
 class OutputProtocolFactory(ServerFactory):
@@ -51,7 +57,8 @@ class OutputProtocolFactory(ServerFactory):
 
 class InputProtocol(basic.NetstringReceiver):
     def __init__(self, outputHandle):
-        self.MAX_LENGTH = 33;
+        # self.MAX_LENGTH = 33;
+        self.MAX_LENGTH = 37;
         self.dataBuff = []
         self.outputHandle = outputHandle
         print ("Input Protocol built")
@@ -61,30 +68,29 @@ class InputProtocol(basic.NetstringReceiver):
         print ("Connected to Motive")
 
     def stringReceived(self, string):
-        # global prevTime
-        # currTime = time.clock()
+        global prevTime
 
-        bytesReceived = sys.getsizeof(string)
-        print 'Size of data: %d\n' % (bytesReceived)  # prints out 66 bytes... padding?
+        currTime = time.clock()
+        # bytesReceived = sys.getsizeof(string)
+        # print 'Size of data: %d\n' % (bytesReceived)  # prints out 66 bytes... padding?
 
         # convert to binary format - this gets condensed down to 33 bytes
-        # binData = ' '.join('{0:08b}'.format(ord(x), 'b') for x in string)
-        # outputFile_bin.write(binData)
-        # outputFile_bin.write('\tReceived %d bytes\tBefore: %f\tNow: %f\n\n' % (bytesReceived, prevTime, currTime))
+        binData = ' '.join('{0:08b}'.format(ord(x), 'b') for x in string)
+        outputFile_bin.write(binData)
+        outputFile_bin.write('\tBefore: %f\tNow: %f\tInterval: %f\n\n' % (prevTime, currTime, currTime-prevTime))
 
-        # try:
-        #     self.dataBuff.append(struct.unpack("!HBBBfffffff", string))
-        #     outputFile.write(str(self.dataBuff))
-        # except:
-        #     print 'Failed to unpack\n'
+        try:
+            self.dataBuff.append(struct.unpack("<iHBBBfffffff", string))
+            outputFile.write(str(self.dataBuff))
+        except:
+            print 'Failed to unpack\n'
 
-        # outputFile.write('\tBefore: %f\tNow: %f\n\n' % (prevTime, currTime))
-        # prevTime = currTime
-        #
-        # self.outputHandle.sendToAll(self.dataBuff)
-        # self.dataBuff = []
+        outputFile.write('\tBefore: %f\tNow: %f\tInterval: %f\n\n' % (prevTime, currTime, currTime-prevTime))
+        prevTime = currTime
 
-        self.outputHandle.sendToAll(string)
+        for payload in self.dataBuff:
+            self.outputHandle.sendToAll(payload)
+        self.dataBuff = []
 
 
 class InputProtocolFactory(ClientFactory):
@@ -116,6 +122,7 @@ if __name__ == '__main__':
     outputFile = open(r'Data Files/motive_results.txt', 'w+')
 
     out = OutputProtocolFactory()
+
     reactor.listenTCP(53335, out, interface="192.168.95.109")
     reactor.connectTCP("192.168.95.109", 27015, InputProtocolFactory(out))
 
