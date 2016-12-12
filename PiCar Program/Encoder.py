@@ -28,6 +28,7 @@ class Encoder(object):
     LockRotary = threading.Lock()
     rotary_interrupt = 0
 
+## Create encoder object with pin #'s as inputs
     def __init__(self, pin1, pin2):
 
         self.pin1 = pin1
@@ -51,7 +52,7 @@ class Encoder(object):
 
         
 
-
+## Defintes the rotary interrupt for the encoder --> called in the init
     def rotary_interrupt(self,A_or_B):
 
         Switch_A = GPIO.input(self.pin1)
@@ -87,6 +88,7 @@ class Encoder(object):
         return                                 
 
 
+## Samples the encoder from a main program if called repeatedly
     def sample(self):
         
         LockRotary.acquire()
