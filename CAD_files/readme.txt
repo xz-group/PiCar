@@ -1,1 +1,1 @@
-This folder contains all the CAD created or used to build the PI Car.
+This folder contains all the CAD files created or used to build the PI Car.
