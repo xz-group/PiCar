@@ -1,12 +1,12 @@
 ## Measures Encoder data while controlling a motor.
-## 
+## Only testing for Left Encoder and Left Motor 
 
 
 import pigpio
 import time
 import RPi.GPIO as GPIO
 import sys
-sys.path.append("/home/pi/PiCarAPI/ToBeIncluded/Objects")
+#sys.path.append("/home/pi/PiCarAPI/ToBeIncluded/Objects")
 from Motor import Motor
 from Encoder import Encoder
 
