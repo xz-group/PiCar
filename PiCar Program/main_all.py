@@ -1,3 +1,13 @@
+"""
+main_all.py
+
+Script that samples from encoders, IMU, and Motive at approximately 50Hz. Uses Twisted's LoopingCall function to call respective sampling method
+every 20 milliseconds.
+
+Also opens a web socket, to which it outputs the most recent position, acceleration, and velocity in HTML. To view while running, open
+a browser tab on any device and enter <Raspbery Pi's wlan IP>:<web socket port>
+"""
+
 import IMU, Encoder
 import sys, socket, struct, time
 from twisted.internet.protocol import Protocol, Factory, ClientFactory
@@ -11,8 +21,11 @@ R_Enc = Encoder.Encoder(19, 26)
 L_Enc = Encoder.Encoder(6, 13)
 IMU1 = IMU.IMU()
 
+# list structure that web server samples from
+# TODO (suggestion): pass into PID control algorithm
 payload = ['dummy']*4
 
+# hostname and port setup for Motive TCP connection
 hostName = 'bach.ese.wustl.edu'
 host = None
 defaultTwistedServerPort = 53335
@@ -22,7 +35,7 @@ if sys.platform == 'win32':
     from twisted.internet import win32eventreactor
     win32eventreactor.install()
 
-# find hostname
+# finds hostname
 def findHost():
     addr = socket.gethostbyname(hostName)
     return addr
@@ -60,20 +73,18 @@ def motiveSample():
         timePost = time.time()
         outputFileMotive.write('%s\t%f\t%f\n' % (sample, timePre, timePost))
 
+# SocketClient Protocol and Factory manage data receives from MoCap Twisted Server
+# Loads most recent frame into dataBuff
 class SocketClientProtocol(LineOnlyReceiver):
-    # after framing is removed:
     def lineReceived(self, line):
         self.factory.got_msg(line)
 
     def connectionMade(self):
-        self.transport.setTcpNoDelay(True)
+        self.transport.setTcpNoDelay(True)  # disable Nagle's algo
         print ("connected to twisted server")
         self.factory.clientReady(self)
 
 class SocketClientFactory(ClientFactory):
-    """ Created with callbacks for connection and receiving.
-        send_msg can be used to send messages when connected.
-    """
     protocol = SocketClientProtocol
 
     def __init__(self):
@@ -94,23 +105,23 @@ class SocketClientFactory(ClientFactory):
         self.client = client
 
     def got_msg(self, msg):
-        # data = literal_eval(msg)
+        # line sent from server is in string form -- convert to tuple
         data = literal_eval(str(map(str,msg.split(','))))
 
+        # TODO: currently, only takes in one rigid body's position (dataBuff intentionally kept at size 1)
         if self.dataBuff:
             self.dataBuff[0] = data
-
         else:
             self.dataBuff.append(data)
 
+# class object that handles serving up to web page
 class WebPage(Resource):
     isLeaf = True
 
     def __init__(self):
-        # self.inputHandle = inputHandle
-        # self.payload = ["dummy"]*4
         pass
 
+    # renders webpage with GET request ... using global list
     def render_GET(self, request):
         return "<html><head><meta http-equiv= 'refresh' content='0.1'></head>" \
                "<body>" \
@@ -118,23 +129,9 @@ class WebPage(Resource):
                "</body>" \
                "</html>" % (payload[0], payload[1], payload[2], payload[3])
 
-    # def load(self):
-    #     # TODO: define order for payload list
-    #     if self.inputHandle is not None:
-    #         # counter = 0
-    #         # for client, line in self.inputHandle.client.iteritems():
-    #         #     if line is not None:
-    #         #         self.payload[counter] = line
-    #         #     counter += 1
-    #         if (line = self.inputHandle.frame) is not None:
-    #             payload[0] = line
-    #
-    #     else:
-    #         print("no data available from motive")
-
 if __name__ == "__main__":
 
-    # benchmarks:
+    # output files for benchmarking
     outputFileIMU = open('imu-simul-results.txt', 'w+')
     outputFileEncR = open('encR-simul-results.txt', 'w+')
     outputFileEncL = open('encL-simul-results.txt', 'w+')
