@@ -1,8 +1,13 @@
+## This file is necessary to use the IMU object
+## It is imported into the object and it contains register information from the
+## LSM9DS1 datasheet
+
 MAG_ADDRESS	=	0x1E
 ACC_ADDRESS	=	0x6B
-GYR_ADDRESS     =       0x6B
+GYR_ADDRESS     = 0x6B
 
 #LSM9DS1 Accelerometer and Gyro Registers
+
 ACT_THS = 0x04
 
 WHO_AM_I_G	=	0x0F
