@@ -7,3 +7,5 @@ The list of the files are as follows:
 * Encoder Holder
 * Second Level
 * Top Motor Holder
+
+Editable .step files can be accessed through GrabCAD (https://grabcad.com/library/pi-car-1).
