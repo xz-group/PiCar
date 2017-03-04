@@ -12941,9 +12941,9 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <part name="+3V9" library="supply1" deviceset="+3V3" device=""/>
 <part name="C6" library="resistor" deviceset="C-US" device="C1206" value="0.1u"/>
 <part name="GND13" library="supply1" deviceset="GND" device=""/>
-<part name="U$1" library="rpibout" deviceset="DMG2305UX" device=""/>
-<part name="U$2" library="rpibout" deviceset="MMDT5401" device=""/>
-<part name="U$4" library="rpibout" deviceset="EEPROM_CAT24C32WI-GT3" device=""/>
+<part name="DMG2305" library="rpibout" deviceset="DMG2305UX" device=""/>
+<part name="MMDT5401" library="rpibout" deviceset="MMDT5401" device=""/>
+<part name="EEPROM" library="rpibout" deviceset="EEPROM_CAT24C32WI-GT3" device=""/>
 <part name="JP1" library="pinhead" deviceset="PINHD-1X2" device=""/>
 <part name="JP2" library="jumper" deviceset="JP1Q" device=""/>
 </parts>
@@ -13034,9 +13034,9 @@ WashU ESE Dept - Nov 2016</text>
 <instance part="+3V9" gate="G$1" x="53.34" y="160.02"/>
 <instance part="C6" gate="G$1" x="58.42" y="137.16"/>
 <instance part="GND13" gate="1" x="53.34" y="114.3"/>
-<instance part="U$1" gate="G$1" x="109.22" y="101.6" rot="MR90"/>
-<instance part="U$2" gate="G$1" x="114.3" y="48.26"/>
-<instance part="U$4" gate="G$1" x="93.98" y="132.08"/>
+<instance part="DMG2305" gate="G$1" x="109.22" y="101.6" rot="MR90"/>
+<instance part="MMDT5401" gate="G$1" x="114.3" y="48.26"/>
+<instance part="EEPROM" gate="G$1" x="93.98" y="132.08"/>
 <instance part="JP1" gate="G$1" x="20.32" y="124.46" rot="R180"/>
 <instance part="JP2" gate="A" x="40.64" y="119.38" rot="R90"/>
 </instances>
@@ -13075,10 +13075,13 @@ WashU ESE Dept - Nov 2016</text>
 <segment>
 <wire x1="121.92" y1="55.88" x2="121.92" y2="88.9" width="0.1524" layer="91"/>
 <pinref part="P+7" gate="1" pin="+5V"/>
-<pinref part="U$1" gate="G$1" pin="S"/>
+<pinref part="DMG2305" gate="G$1" pin="S"/>
 <wire x1="121.92" y1="88.9" x2="121.92" y2="91.44" width="0.1524" layer="91"/>
 <wire x1="114.3" y1="88.9" x2="121.92" y2="88.9" width="0.1524" layer="91"/>
-<pinref part="U$2" gate="G$1" pin="E1"/>
+<pinref part="MMDT5401" gate="G$1" pin="E1"/>
+<junction x="121.92" y="88.9"/>
+<junction x="114.3" y="88.9"/>
+<junction x="121.92" y="55.88"/>
 </segment>
 </net>
 <net name="GND" class="0">
@@ -13192,10 +13195,10 @@ WashU ESE Dept - Nov 2016</text>
 <pinref part="C6" gate="G$1" pin="2"/>
 <junction x="68.58" y="119.38"/>
 <wire x1="68.58" y1="119.38" x2="76.2" y2="119.38" width="0.1524" layer="91"/>
-<pinref part="U$4" gate="G$1" pin="A0"/>
-<pinref part="U$4" gate="G$1" pin="A1"/>
-<pinref part="U$4" gate="G$1" pin="A2"/>
-<pinref part="U$4" gate="G$1" pin="VSS"/>
+<pinref part="EEPROM" gate="G$1" pin="A0"/>
+<pinref part="EEPROM" gate="G$1" pin="A1"/>
+<pinref part="EEPROM" gate="G$1" pin="A2"/>
+<pinref part="EEPROM" gate="G$1" pin="VSS"/>
 </segment>
 <segment>
 <pinref part="GND13" gate="1" pin="GND"/>
@@ -13203,6 +13206,10 @@ WashU ESE Dept - Nov 2016</text>
 <pinref part="JP2" gate="A" pin="1"/>
 <wire x1="53.34" y1="119.38" x2="53.34" y2="116.84" width="0.1524" layer="91"/>
 <wire x1="48.26" y1="119.38" x2="53.34" y2="119.38" width="0.1524" layer="91"/>
+<junction x="53.34" y="119.38"/>
+<wire x1="22.86" y1="121.92" x2="53.34" y2="121.92" width="0.1524" layer="91"/>
+<pinref part="JP1" gate="G$1" pin="1"/>
+<junction x="53.34" y="121.92"/>
 </segment>
 <segment>
 <pinref part="BATT" gate="G$1" pin="P2"/>
@@ -13318,7 +13325,7 @@ WashU ESE Dept - Nov 2016</text>
 <wire x1="58.42" y1="142.24" x2="58.42" y2="154.94" width="0.1524" layer="91"/>
 <wire x1="76.2" y1="142.24" x2="58.42" y2="142.24" width="0.1524" layer="91"/>
 <junction x="58.42" y="142.24"/>
-<pinref part="U$4" gate="G$1" pin="VCC"/>
+<pinref part="EEPROM" gate="G$1" pin="VCC"/>
 </segment>
 </net>
 <net name="SDA3V3" class="0">
@@ -13438,16 +13445,17 @@ WashU ESE Dept - Nov 2016</text>
 <segment>
 <wire x1="111.76" y1="76.2" x2="127" y2="76.2" width="0.1524" layer="91"/>
 <wire x1="127" y1="76.2" x2="127" y2="40.64" width="0.1524" layer="91"/>
-<pinref part="U$1" gate="G$1" pin="G"/>
+<pinref part="DMG2305" gate="G$1" pin="G"/>
 <wire x1="127" y1="40.64" x2="127" y2="33.02" width="0.1524" layer="91"/>
 <wire x1="111.76" y1="76.2" x2="111.76" y2="83.82" width="0.1524" layer="91"/>
 <pinref part="R7" gate="G$1" pin="2"/>
-<pinref part="U$2" gate="G$1" pin="C1"/>
+<pinref part="MMDT5401" gate="G$1" pin="C1"/>
 <wire x1="121.92" y1="40.64" x2="127" y2="40.64" width="0.1524" layer="91"/>
 <junction x="127" y="40.64"/>
+<junction x="121.92" y="40.64"/>
 </segment>
 </net>
-<net name="+5V_SUPPLY" class="0">
+<net name="VOUT" class="0">
 <segment>
 <pinref part="U1" gate="G$1" pin="VOUT"/>
 <wire x1="71.12" y1="83.82" x2="76.2" y2="83.82" width="0.1524" layer="91"/>
@@ -13466,8 +13474,11 @@ WashU ESE Dept - Nov 2016</text>
 <wire x1="101.6" y1="88.9" x2="104.14" y2="88.9" width="0.1524" layer="91"/>
 <wire x1="101.6" y1="40.64" x2="101.6" y2="88.9" width="0.1524" layer="91"/>
 <junction x="101.6" y="88.9"/>
-<pinref part="U$2" gate="G$1" pin="E2"/>
+<pinref part="MMDT5401" gate="G$1" pin="E2"/>
 <wire x1="101.6" y1="40.64" x2="106.68" y2="40.64" width="0.1524" layer="91"/>
+<pinref part="DMG2305" gate="G$1" pin="D"/>
+<junction x="104.14" y="88.9"/>
+<junction x="106.68" y="40.64"/>
 </segment>
 </net>
 <net name="N$7" class="0">
@@ -13482,7 +13493,7 @@ WashU ESE Dept - Nov 2016</text>
 <pinref part="R9" gate="G$1" pin="1"/>
 <wire x1="121.92" y1="109.22" x2="121.92" y2="106.68" width="0.1524" layer="91"/>
 <junction x="121.92" y="106.68"/>
-<pinref part="U$4" gate="G$1" pin="SCL"/>
+<pinref part="EEPROM" gate="G$1" pin="SCL"/>
 </segment>
 </net>
 <net name="N$5" class="0">
@@ -13494,7 +13505,7 @@ WashU ESE Dept - Nov 2016</text>
 <pinref part="R8" gate="G$1" pin="1"/>
 <wire x1="116.84" y1="142.24" x2="116.84" y2="137.16" width="0.1524" layer="91"/>
 <junction x="116.84" y="137.16"/>
-<pinref part="U$4" gate="G$1" pin="SDA"/>
+<pinref part="EEPROM" gate="G$1" pin="SDA"/>
 </segment>
 </net>
 <net name="N$9" class="0">
@@ -13504,35 +13515,33 @@ WashU ESE Dept - Nov 2016</text>
 <wire x1="76.2" y1="124.46" x2="53.34" y2="124.46" width="0.1524" layer="91"/>
 <wire x1="53.34" y1="124.46" x2="33.02" y2="124.46" width="0.1524" layer="91"/>
 <junction x="53.34" y="124.46"/>
-<pinref part="U$4" gate="G$1" pin="WP"/>
+<pinref part="EEPROM" gate="G$1" pin="WP"/>
 <pinref part="JP1" gate="G$1" pin="2"/>
 <pinref part="JP2" gate="A" pin="2"/>
 <wire x1="33.02" y1="124.46" x2="22.86" y2="124.46" width="0.1524" layer="91"/>
 <wire x1="33.02" y1="119.38" x2="33.02" y2="124.46" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$8" class="0">
-<segment>
-<wire x1="22.86" y1="121.92" x2="53.34" y2="121.92" width="0.1524" layer="91"/>
-<pinref part="JP1" gate="G$1" pin="1"/>
+<junction x="33.02" y="124.46"/>
 </segment>
 </net>
 <net name="N$1" class="0">
 <segment>
 <wire x1="93.98" y1="58.42" x2="93.98" y2="35.56" width="0.1524" layer="91"/>
 <pinref part="R6" gate="G$1" pin="2"/>
-<pinref part="U$2" gate="G$1" pin="B2"/>
+<pinref part="MMDT5401" gate="G$1" pin="B2"/>
 <wire x1="93.98" y1="35.56" x2="93.98" y2="30.48" width="0.1524" layer="91"/>
 <wire x1="114.3" y1="40.64" x2="114.3" y2="35.56" width="0.1524" layer="91"/>
 <wire x1="114.3" y1="35.56" x2="93.98" y2="35.56" width="0.1524" layer="91"/>
 <junction x="93.98" y="35.56"/>
 <wire x1="93.98" y1="58.42" x2="106.68" y2="58.42" width="0.1524" layer="91"/>
-<pinref part="U$2" gate="G$1" pin="C2"/>
+<pinref part="MMDT5401" gate="G$1" pin="C2"/>
 <wire x1="106.68" y1="58.42" x2="106.68" y2="55.88" width="0.1524" layer="91"/>
-<pinref part="U$2" gate="G$1" pin="B1"/>
+<pinref part="MMDT5401" gate="G$1" pin="B1"/>
 <wire x1="116.84" y1="55.88" x2="116.84" y2="58.42" width="0.1524" layer="91"/>
 <wire x1="116.84" y1="58.42" x2="106.68" y2="58.42" width="0.1524" layer="91"/>
 <junction x="106.68" y="58.42"/>
+<junction x="114.3" y="40.64"/>
+<junction x="116.84" y="55.88"/>
+<junction x="106.68" y="55.88"/>
 </segment>
 </net>
 </nets>
