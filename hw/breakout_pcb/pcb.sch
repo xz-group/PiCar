@@ -12181,6 +12181,21 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <text x="-7.149996875" y="6.004" size="2.032" layer="25" font="vector" ratio="13" rot="SR0">&gt;NAME</text>
 <text x="-7.149996875" y="-8.22" size="2.032" layer="27" font="vector" ratio="13" rot="SR0">&gt;VALUE</text>
 </package>
+<package name="ULTRAFIT_3CIRC_RANGLE">
+<description>&lt;B&gt; ULTRAFIT 3CIRC RANGLE</description>
+<hole x="0" y="0" drill="3.2"/>
+<pad name="1" x="-3.51" y="7.91" drill="1.1" diameter="2.1844" shape="long" rot="R90"/>
+<wire x1="-5.76" y1="10.41" x2="5.76" y2="10.41" width="0.127" layer="21"/>
+<wire x1="5.76" y1="10.41" x2="5.76" y2="-5.25" width="0.127" layer="21"/>
+<wire x1="5.76" y1="-5.25" x2="-5.76" y2="-5.25" width="0.127" layer="21"/>
+<wire x1="-5.76" y1="-5.25" x2="-5.76" y2="10.41" width="0.127" layer="21"/>
+<text x="-3.51" y="4.5" size="1.27" layer="21" align="center">1</text>
+<text x="-0.01" y="4.5" size="1.27" layer="21" align="center">2</text>
+<text x="-1.76" y="10.74" size="1.016" layer="25" align="bottom-center">&gt;NAME</text>
+<text x="2.97" y="3.88" size="1.27" layer="21">3</text>
+<pad name="2" x="0" y="7.9" drill="1.1" diameter="2.1844" shape="long" rot="R90"/>
+<pad name="3" x="3.5" y="7.9" drill="1.1" diameter="2.1844" shape="long" rot="R90"/>
+</package>
 </packages>
 <symbols>
 <symbol name="HEADER_2CIRC">
@@ -12464,6 +12479,16 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <pin name="OUT1" x="22.86" y="-10.16" length="middle" direction="out" rot="R180"/>
 <pin name="OUT2" x="22.86" y="-12.7" length="middle" direction="out" rot="R180"/>
 </symbol>
+<symbol name="HEADER_3CIRC">
+<pin name="P1" x="0" y="0" visible="pad" length="short" direction="pwr" function="dot"/>
+<pin name="P2" x="0" y="-2.54" visible="pad" length="short" direction="pwr" function="dot"/>
+<wire x1="3.81" y1="2.54" x2="-3.81" y2="2.54" width="0.254" layer="94"/>
+<wire x1="-3.81" y1="2.54" x2="-3.81" y2="-7.48" width="0.254" layer="94"/>
+<wire x1="-3.81" y1="-7.48" x2="3.81" y2="-7.48" width="0.254" layer="94"/>
+<wire x1="3.81" y1="-7.48" x2="3.81" y2="2.54" width="0.254" layer="94"/>
+<text x="-3.81" y="3.81" size="1.27" layer="95">&gt;NAME</text>
+<pin name="P3" x="0" y="-5.08" visible="pad" length="short" direction="pwr" function="dot"/>
+</symbol>
 </symbols>
 <devicesets>
 <deviceset name="ULTRAFIT_2CIRC">
@@ -12718,6 +12743,23 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <connect gate="G$1" pin="OUT2" pad="8"/>
 <connect gate="G$1" pin="SR" pad="5"/>
 <connect gate="G$1" pin="VS" pad="7"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="ULTRAFIT_3CIRC">
+<gates>
+<gate name="G$1" symbol="HEADER_3CIRC" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="ULTRAFIT_3CIRC_RANGLE">
+<connects>
+<connect gate="G$1" pin="P1" pad="1"/>
+<connect gate="G$1" pin="P2" pad="2"/>
+<connect gate="G$1" pin="P3" pad="3"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -16312,6 +16354,8 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <part name="U4" library="rpibout" deviceset="BTN8982TA" device=""/>
 <part name="U5" library="rpibout" deviceset="BTN8982TA" device=""/>
 <part name="U6" library="rpibout" deviceset="BTN8982TA" device=""/>
+<part name="MOTOR_CONN1" library="rpibout" deviceset="ULTRAFIT_3CIRC" device=""/>
+<part name="MOTOR_CONN2" library="rpibout" deviceset="ULTRAFIT_3CIRC" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -16629,6 +16673,8 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <instance part="U4" gate="G$1" x="213.36" y="30.48"/>
 <instance part="U5" gate="G$1" x="213.36" y="-10.16"/>
 <instance part="U6" gate="G$1" x="213.36" y="-58.42"/>
+<instance part="MOTOR_CONN1" gate="G$1" x="137.16" y="-15.24"/>
+<instance part="MOTOR_CONN2" gate="G$1" x="304.8" y="-12.7"/>
 </instances>
 <busses>
 </busses>
@@ -17195,6 +17241,11 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <pinref part="U1" gate="G$1" pin="OUT1"/>
 <pinref part="U1" gate="G$1" pin="OUT2"/>
 </segment>
+<segment>
+<pinref part="MOTOR_CONN1" gate="G$1" pin="P1"/>
+<wire x1="137.16" y1="-15.24" x2="127" y2="-15.24" width="0.1524" layer="91"/>
+<label x="127" y="-15.24" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="OUT2" class="0">
 <segment>
@@ -17213,6 +17264,11 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <pinref part="U2" gate="G$1" pin="OUT1"/>
 <pinref part="U2" gate="G$1" pin="OUT2"/>
 </segment>
+<segment>
+<pinref part="MOTOR_CONN1" gate="G$1" pin="P2"/>
+<wire x1="137.16" y1="-17.78" x2="127" y2="-17.78" width="0.1524" layer="91"/>
+<label x="127" y="-17.78" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="OUT3" class="0">
 <segment>
@@ -17230,6 +17286,11 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <wire x1="73.66" y1="-76.2" x2="73.66" y2="-73.66" width="0.1524" layer="91"/>
 <pinref part="U3" gate="G$1" pin="OUT1"/>
 <pinref part="U3" gate="G$1" pin="OUT2"/>
+</segment>
+<segment>
+<pinref part="MOTOR_CONN1" gate="G$1" pin="P3"/>
+<wire x1="137.16" y1="-20.32" x2="127" y2="-20.32" width="0.1524" layer="91"/>
+<label x="127" y="-20.32" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$21" class="0">
@@ -17335,6 +17396,11 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <pinref part="U4" gate="G$1" pin="OUT1"/>
 <pinref part="U4" gate="G$1" pin="OUT2"/>
 </segment>
+<segment>
+<pinref part="MOTOR_CONN2" gate="G$1" pin="P1"/>
+<wire x1="304.8" y1="-12.7" x2="297.18" y2="-12.7" width="0.1524" layer="91"/>
+<label x="294.64" y="-12.7" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="OUT5" class="0">
 <segment>
@@ -17353,6 +17419,11 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <pinref part="U5" gate="G$1" pin="OUT1"/>
 <pinref part="U5" gate="G$1" pin="OUT2"/>
 </segment>
+<segment>
+<pinref part="MOTOR_CONN2" gate="G$1" pin="P2"/>
+<wire x1="304.8" y1="-15.24" x2="297.18" y2="-15.24" width="0.1524" layer="91"/>
+<label x="294.64" y="-15.24" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="OUT6" class="0">
 <segment>
@@ -17370,6 +17441,11 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <junction x="241.3" y="-68.58"/>
 <pinref part="U6" gate="G$1" pin="OUT1"/>
 <pinref part="U6" gate="G$1" pin="OUT2"/>
+</segment>
+<segment>
+<pinref part="MOTOR_CONN2" gate="G$1" pin="P3"/>
+<wire x1="304.8" y1="-17.78" x2="297.18" y2="-17.78" width="0.1524" layer="91"/>
+<label x="294.64" y="-17.78" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="+5V" class="0">
