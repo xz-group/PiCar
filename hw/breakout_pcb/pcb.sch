@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="8.0.1">
+<eagle version="7.7.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -16356,6 +16356,14 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <part name="MOTOR_CONN2" library="rpibout" deviceset="ULTRAFIT_3CIRC" device=""/>
 <part name="P+12" library="supply1" deviceset="+5V" device=""/>
 <part name="P+13" library="supply1" deviceset="+5V" device=""/>
+<part name="GND16" library="supply1" deviceset="GND" device=""/>
+<part name="GND38" library="supply1" deviceset="GND" device=""/>
+<part name="P+14" library="supply1" deviceset="+5V" device=""/>
+<part name="P+15" library="supply1" deviceset="+5V" device=""/>
+<part name="P+16" library="supply1" deviceset="+5V" device=""/>
+<part name="P+17" library="supply1" deviceset="+5V" device=""/>
+<part name="GND50" library="supply1" deviceset="GND" device=""/>
+<part name="GND51" library="supply1" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -16536,9 +16544,9 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <instance part="GND33" gate="1" x="246.38" y="-30.48"/>
 <instance part="C30" gate="G$1" x="279.4" y="-63.5"/>
 <instance part="GND34" gate="1" x="279.4" y="-71.12"/>
-<instance part="C31" gate="G$1" x="246.38" y="-71.12"/>
+<instance part="C31" gate="G$1" x="246.38" y="-73.66"/>
 <instance part="C32" gate="G$1" x="254" y="-63.5"/>
-<instance part="GND35" gate="1" x="246.38" y="-78.74"/>
+<instance part="GND35" gate="1" x="246.38" y="-83.82"/>
 <instance part="ENC1" gate="-1" x="238.76" y="147.32" smashed="yes">
 <attribute name="NAME" x="241.3" y="146.558" size="1.524" layer="95"/>
 <attribute name="VALUE" x="237.998" y="148.717" size="1.778" layer="96"/>
@@ -16609,23 +16617,23 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <instance part="HALL3" gate="-3" x="83.82" y="-124.46"/>
 <instance part="P+11" gate="1" x="17.78" y="-104.14"/>
 <instance part="GND49" gate="1" x="17.78" y="-134.62"/>
-<instance part="R39" gate="G$1" x="12.7" y="-119.38" rot="R90"/>
+<instance part="R39" gate="G$1" x="12.7" y="-116.84" rot="R90"/>
 <instance part="R40" gate="G$1" x="40.64" y="-116.84" rot="R90"/>
-<instance part="R41" gate="G$1" x="71.12" y="-116.84" rot="R90"/>
+<instance part="R41" gate="G$1" x="73.66" y="-116.84" rot="R90"/>
 <instance part="HALL4" gate="-1" x="185.42" y="-114.3"/>
 <instance part="HALL4" gate="-2" x="185.42" y="-116.84"/>
 <instance part="HALL4" gate="-3" x="185.42" y="-119.38"/>
-<instance part="HALL5" gate="-1" x="210.82" y="-114.3"/>
-<instance part="HALL5" gate="-2" x="210.82" y="-116.84"/>
-<instance part="HALL5" gate="-3" x="210.82" y="-119.38"/>
+<instance part="HALL5" gate="-1" x="213.36" y="-114.3"/>
+<instance part="HALL5" gate="-2" x="213.36" y="-116.84"/>
+<instance part="HALL5" gate="-3" x="213.36" y="-119.38"/>
 <instance part="HALL6" gate="-1" x="246.38" y="-114.3"/>
 <instance part="HALL6" gate="-2" x="246.38" y="-116.84"/>
 <instance part="HALL6" gate="-3" x="246.38" y="-119.38"/>
-<instance part="P+3" gate="1" x="180.34" y="-101.6"/>
+<instance part="P+3" gate="1" x="180.34" y="-99.06"/>
 <instance part="GND39" gate="1" x="180.34" y="-129.54"/>
-<instance part="R33" gate="G$1" x="175.26" y="-114.3" rot="R90"/>
+<instance part="R33" gate="G$1" x="175.26" y="-111.76" rot="R90"/>
 <instance part="R34" gate="G$1" x="203.2" y="-111.76" rot="R90"/>
-<instance part="R35" gate="G$1" x="233.68" y="-111.76" rot="R90"/>
+<instance part="R35" gate="G$1" x="236.22" y="-111.76" rot="R90"/>
 <instance part="R32" gate="G$1" x="27.94" y="139.7" smashed="yes" rot="R90">
 <attribute name="NAME" x="26.4414" y="135.89" size="1.778" layer="95" rot="R90"/>
 <attribute name="VALUE" x="26.162" y="140.97" size="1.778" layer="96" rot="R90"/>
@@ -16675,6 +16683,14 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <instance part="MOTOR_CONN2" gate="G$1" x="304.8" y="-12.7"/>
 <instance part="P+12" gate="1" x="220.98" y="162.56"/>
 <instance part="P+13" gate="1" x="220.98" y="132.08"/>
+<instance part="GND16" gate="1" x="43.18" y="-134.62"/>
+<instance part="GND38" gate="1" x="78.74" y="-134.62"/>
+<instance part="P+14" gate="1" x="45.72" y="-104.14"/>
+<instance part="P+15" gate="1" x="78.74" y="-104.14"/>
+<instance part="P+16" gate="1" x="208.28" y="-99.06"/>
+<instance part="P+17" gate="1" x="241.3" y="-99.06"/>
+<instance part="GND50" gate="1" x="208.28" y="-129.54"/>
+<instance part="GND51" gate="1" x="241.3" y="-129.54"/>
 </instances>
 <busses>
 </busses>
@@ -16928,6 +16944,7 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <segment>
 <pinref part="C31" gate="G$1" pin="2"/>
 <pinref part="GND35" gate="1" pin="GND"/>
+<wire x1="246.38" y1="-81.28" x2="246.38" y2="-78.74" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="ENC1" gate="-2" pin="S"/>
@@ -17055,37 +17072,39 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 </segment>
 <segment>
 <pinref part="GND49" gate="1" pin="GND"/>
-<wire x1="17.78" y1="-132.08" x2="17.78" y2="-127" width="0.1524" layer="91"/>
-<junction x="17.78" y="-127"/>
+<wire x1="17.78" y1="-121.92" x2="17.78" y2="-132.08" width="0.1524" layer="91"/>
 <pinref part="HALL1" gate="-2" pin="S"/>
-<wire x1="78.74" y1="-127" x2="43.18" y2="-127" width="0.1524" layer="91"/>
-<wire x1="43.18" y1="-127" x2="17.78" y2="-127" width="0.1524" layer="91"/>
 <wire x1="20.32" y1="-121.92" x2="17.78" y2="-121.92" width="0.1524" layer="91"/>
-<wire x1="17.78" y1="-121.92" x2="17.78" y2="-127" width="0.1524" layer="91"/>
-<pinref part="HALL2" gate="-2" pin="S"/>
-<wire x1="45.72" y1="-121.92" x2="43.18" y2="-121.92" width="0.1524" layer="91"/>
-<wire x1="43.18" y1="-121.92" x2="43.18" y2="-127" width="0.1524" layer="91"/>
-<pinref part="HALL3" gate="-2" pin="S"/>
-<wire x1="81.28" y1="-121.92" x2="78.74" y2="-121.92" width="0.1524" layer="91"/>
-<wire x1="78.74" y1="-121.92" x2="78.74" y2="-127" width="0.1524" layer="91"/>
-<junction x="43.18" y="-127"/>
 </segment>
 <segment>
 <pinref part="GND39" gate="1" pin="GND"/>
-<wire x1="180.34" y1="-127" x2="180.34" y2="-121.92" width="0.1524" layer="91"/>
-<junction x="180.34" y="-121.92"/>
 <pinref part="HALL4" gate="-2" pin="S"/>
-<wire x1="241.3" y1="-121.92" x2="205.74" y2="-121.92" width="0.1524" layer="91"/>
-<wire x1="205.74" y1="-121.92" x2="180.34" y2="-121.92" width="0.1524" layer="91"/>
 <wire x1="182.88" y1="-116.84" x2="180.34" y2="-116.84" width="0.1524" layer="91"/>
-<wire x1="180.34" y1="-116.84" x2="180.34" y2="-121.92" width="0.1524" layer="91"/>
+<wire x1="180.34" y1="-116.84" x2="180.34" y2="-127" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="HALL2" gate="-2" pin="S"/>
+<wire x1="45.72" y1="-121.92" x2="43.18" y2="-121.92" width="0.1524" layer="91"/>
+<pinref part="GND16" gate="1" pin="GND"/>
+<wire x1="43.18" y1="-132.08" x2="43.18" y2="-121.92" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="HALL3" gate="-2" pin="S"/>
+<wire x1="81.28" y1="-121.92" x2="78.74" y2="-121.92" width="0.1524" layer="91"/>
+<pinref part="GND38" gate="1" pin="GND"/>
+<wire x1="78.74" y1="-121.92" x2="78.74" y2="-132.08" width="0.1524" layer="91"/>
+</segment>
+<segment>
 <pinref part="HALL5" gate="-2" pin="S"/>
-<wire x1="208.28" y1="-116.84" x2="205.74" y2="-116.84" width="0.1524" layer="91"/>
-<wire x1="205.74" y1="-116.84" x2="205.74" y2="-121.92" width="0.1524" layer="91"/>
+<wire x1="210.82" y1="-116.84" x2="208.28" y2="-116.84" width="0.1524" layer="91"/>
+<pinref part="GND50" gate="1" pin="GND"/>
+<wire x1="208.28" y1="-127" x2="208.28" y2="-116.84" width="0.1524" layer="91"/>
+</segment>
+<segment>
 <pinref part="HALL6" gate="-2" pin="S"/>
 <wire x1="243.84" y1="-116.84" x2="241.3" y2="-116.84" width="0.1524" layer="91"/>
-<wire x1="241.3" y1="-116.84" x2="241.3" y2="-121.92" width="0.1524" layer="91"/>
-<junction x="205.74" y="-121.92"/>
+<pinref part="GND51" gate="1" pin="GND"/>
+<wire x1="241.3" y1="-127" x2="241.3" y2="-116.84" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="VS" class="0">
@@ -17136,9 +17155,9 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <junction x="-127" y="12.7"/>
 <wire x1="-139.7" y1="5.08" x2="-139.7" y2="12.7" width="0.1524" layer="91"/>
 <junction x="-139.7" y="12.7"/>
-<wire x1="-116.84" y1="12.7" x2="-111.76" y2="12.7" width="0.1524" layer="91"/>
+<wire x1="-116.84" y1="12.7" x2="-104.14" y2="12.7" width="0.1524" layer="91"/>
 <junction x="-116.84" y="12.7"/>
-<label x="-114.3" y="12.7" size="1.778" layer="95"/>
+<label x="-111.76" y="12.7" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="C20" gate="G$1" pin="1"/>
@@ -17428,19 +17447,20 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <net name="OUT6" class="0">
 <segment>
 <pinref part="C32" gate="G$1" pin="2"/>
-<wire x1="236.22" y1="-68.58" x2="241.3" y2="-68.58" width="0.1524" layer="91"/>
-<pinref part="C31" gate="G$1" pin="1"/>
-<wire x1="241.3" y1="-68.58" x2="246.38" y2="-68.58" width="0.1524" layer="91"/>
-<wire x1="246.38" y1="-68.58" x2="254" y2="-68.58" width="0.1524" layer="91"/>
-<junction x="246.38" y="-68.58"/>
 <wire x1="254" y1="-68.58" x2="269.24" y2="-68.58" width="0.1524" layer="91"/>
-<junction x="254" y="-68.58"/>
 <label x="269.24" y="-68.58" size="1.778" layer="95"/>
-<wire x1="236.22" y1="-71.12" x2="241.3" y2="-71.12" width="0.1524" layer="91"/>
-<wire x1="241.3" y1="-71.12" x2="241.3" y2="-68.58" width="0.1524" layer="91"/>
-<junction x="241.3" y="-68.58"/>
 <pinref part="U6" gate="G$1" pin="OUT1"/>
+<wire x1="236.22" y1="-68.58" x2="241.3" y2="-68.58" width="0.1524" layer="91"/>
+<wire x1="241.3" y1="-71.12" x2="241.3" y2="-68.58" width="0.1524" layer="91"/>
+<wire x1="236.22" y1="-71.12" x2="241.3" y2="-71.12" width="0.1524" layer="91"/>
 <pinref part="U6" gate="G$1" pin="OUT2"/>
+<wire x1="254" y1="-68.58" x2="246.38" y2="-68.58" width="0.1524" layer="91"/>
+<junction x="254" y="-68.58"/>
+<junction x="241.3" y="-68.58"/>
+<pinref part="C31" gate="G$1" pin="1"/>
+<wire x1="246.38" y1="-68.58" x2="241.3" y2="-68.58" width="0.1524" layer="91"/>
+<wire x1="246.38" y1="-71.12" x2="246.38" y2="-68.58" width="0.1524" layer="91"/>
+<junction x="246.38" y="-68.58"/>
 </segment>
 <segment>
 <pinref part="MOTOR_CONN2" gate="G$1" pin="P3"/>
@@ -17478,17 +17498,6 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <pinref part="LEDMATRIX" gate="G$1" pin="VCC"/>
 </segment>
 <segment>
-<wire x1="-116.84" y1="119.38" x2="-116.84" y2="152.4" width="0.1524" layer="91"/>
-<pinref part="P+9" gate="1" pin="+5V"/>
-<wire x1="-116.84" y1="152.4" x2="-116.84" y2="154.94" width="0.1524" layer="91"/>
-<wire x1="-124.46" y1="152.4" x2="-116.84" y2="152.4" width="0.1524" layer="91"/>
-<pinref part="MMDT5401" gate="G$1" pin="E1"/>
-<junction x="-116.84" y="152.4"/>
-<junction x="-124.46" y="152.4"/>
-<junction x="-116.84" y="119.38"/>
-<pinref part="DMG2305" gate="G$1" pin="S"/>
-</segment>
-<segment>
 <wire x1="104.14" y1="177.8" x2="127" y2="177.8" width="0.1524" layer="91"/>
 <pinref part="U$2" gate="G$1" pin="5V@0"/>
 <pinref part="P+10" gate="1" pin="+5V"/>
@@ -17504,56 +17513,27 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <junction x="104.14" y="172.72"/>
 </segment>
 <segment>
-<pinref part="P+11" gate="1" pin="+5V"/>
 <pinref part="HALL1" gate="-1" pin="S"/>
-<wire x1="17.78" y1="-106.68" x2="17.78" y2="-111.76" width="0.1524" layer="91"/>
-<wire x1="17.78" y1="-111.76" x2="17.78" y2="-114.3" width="0.1524" layer="91"/>
-<wire x1="17.78" y1="-114.3" x2="17.78" y2="-119.38" width="0.1524" layer="91"/>
 <wire x1="17.78" y1="-119.38" x2="20.32" y2="-119.38" width="0.1524" layer="91"/>
-<pinref part="HALL2" gate="-1" pin="S"/>
-<wire x1="45.72" y1="-119.38" x2="45.72" y2="-111.76" width="0.1524" layer="91"/>
-<wire x1="45.72" y1="-111.76" x2="40.64" y2="-111.76" width="0.1524" layer="91"/>
-<wire x1="40.64" y1="-111.76" x2="17.78" y2="-111.76" width="0.1524" layer="91"/>
-<junction x="17.78" y="-111.76"/>
-<junction x="45.72" y="-111.76"/>
+<wire x1="17.78" y1="-109.22" x2="17.78" y2="-119.38" width="0.1524" layer="91"/>
+<junction x="17.78" y="-109.22"/>
 <pinref part="R39" gate="G$1" pin="2"/>
-<wire x1="78.74" y1="-111.76" x2="71.12" y2="-111.76" width="0.1524" layer="91"/>
-<wire x1="71.12" y1="-111.76" x2="45.72" y2="-111.76" width="0.1524" layer="91"/>
-<wire x1="12.7" y1="-114.3" x2="17.78" y2="-114.3" width="0.1524" layer="91"/>
-<pinref part="R40" gate="G$1" pin="2"/>
-<pinref part="HALL3" gate="-1" pin="S"/>
-<wire x1="81.28" y1="-119.38" x2="78.74" y2="-119.38" width="0.1524" layer="91"/>
-<wire x1="78.74" y1="-119.38" x2="78.74" y2="-111.76" width="0.1524" layer="91"/>
-<pinref part="R41" gate="G$1" pin="2"/>
-<junction x="17.78" y="-114.3"/>
-<junction x="40.64" y="-111.76"/>
-<junction x="71.12" y="-111.76"/>
+<wire x1="12.7" y1="-111.76" x2="12.7" y2="-109.22" width="0.1524" layer="91"/>
+<wire x1="12.7" y1="-109.22" x2="17.78" y2="-109.22" width="0.1524" layer="91"/>
+<junction x="17.78" y="-109.22"/>
+<pinref part="P+11" gate="1" pin="+5V"/>
+<wire x1="17.78" y1="-106.68" x2="17.78" y2="-109.22" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="P+3" gate="1" pin="+5V"/>
 <pinref part="HALL4" gate="-1" pin="S"/>
-<wire x1="180.34" y1="-104.14" x2="180.34" y2="-106.68" width="0.1524" layer="91"/>
-<wire x1="180.34" y1="-106.68" x2="180.34" y2="-109.22" width="0.1524" layer="91"/>
-<wire x1="180.34" y1="-109.22" x2="180.34" y2="-114.3" width="0.1524" layer="91"/>
 <wire x1="180.34" y1="-114.3" x2="182.88" y2="-114.3" width="0.1524" layer="91"/>
-<pinref part="HALL5" gate="-1" pin="S"/>
-<wire x1="208.28" y1="-114.3" x2="208.28" y2="-106.68" width="0.1524" layer="91"/>
-<wire x1="208.28" y1="-106.68" x2="203.2" y2="-106.68" width="0.1524" layer="91"/>
-<wire x1="203.2" y1="-106.68" x2="180.34" y2="-106.68" width="0.1524" layer="91"/>
-<junction x="180.34" y="-106.68"/>
-<junction x="208.28" y="-106.68"/>
+<pinref part="P+3" gate="1" pin="+5V"/>
+<wire x1="180.34" y1="-101.6" x2="180.34" y2="-104.14" width="0.1524" layer="91"/>
 <pinref part="R33" gate="G$1" pin="2"/>
-<wire x1="241.3" y1="-106.68" x2="233.68" y2="-106.68" width="0.1524" layer="91"/>
-<wire x1="233.68" y1="-106.68" x2="208.28" y2="-106.68" width="0.1524" layer="91"/>
-<wire x1="175.26" y1="-109.22" x2="180.34" y2="-109.22" width="0.1524" layer="91"/>
-<pinref part="R34" gate="G$1" pin="2"/>
-<pinref part="HALL6" gate="-1" pin="S"/>
-<wire x1="243.84" y1="-114.3" x2="241.3" y2="-114.3" width="0.1524" layer="91"/>
-<wire x1="241.3" y1="-114.3" x2="241.3" y2="-106.68" width="0.1524" layer="91"/>
-<pinref part="R35" gate="G$1" pin="2"/>
-<junction x="180.34" y="-109.22"/>
-<junction x="203.2" y="-106.68"/>
-<junction x="233.68" y="-106.68"/>
+<wire x1="180.34" y1="-104.14" x2="180.34" y2="-114.3" width="0.1524" layer="91"/>
+<wire x1="175.26" y1="-106.68" x2="175.26" y2="-104.14" width="0.1524" layer="91"/>
+<wire x1="175.26" y1="-104.14" x2="180.34" y2="-104.14" width="0.1524" layer="91"/>
+<junction x="180.34" y="-104.14"/>
 </segment>
 <segment>
 <pinref part="R42" gate="G$1" pin="2"/>
@@ -17569,6 +17549,58 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <pinref part="R44" gate="G$1" pin="2"/>
 <pinref part="P+2" gate="1" pin="+5V"/>
 <wire x1="48.26" y1="104.14" x2="48.26" y2="99.06" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="DMG2305" gate="G$1" pin="S"/>
+<pinref part="P+9" gate="1" pin="+5V"/>
+<wire x1="-124.46" y1="152.4" x2="-116.84" y2="152.4" width="0.1524" layer="91"/>
+<wire x1="-116.84" y1="152.4" x2="-116.84" y2="154.94" width="0.1524" layer="91"/>
+<pinref part="MMDT5401" gate="G$1" pin="E1"/>
+<wire x1="-116.84" y1="119.38" x2="-116.84" y2="152.4" width="0.1524" layer="91"/>
+<junction x="-116.84" y="152.4"/>
+</segment>
+<segment>
+<pinref part="R40" gate="G$1" pin="2"/>
+<pinref part="HALL2" gate="-1" pin="S"/>
+<wire x1="45.72" y1="-119.38" x2="45.72" y2="-109.22" width="0.1524" layer="91"/>
+<wire x1="45.72" y1="-109.22" x2="40.64" y2="-109.22" width="0.1524" layer="91"/>
+<wire x1="40.64" y1="-109.22" x2="40.64" y2="-111.76" width="0.1524" layer="91"/>
+<pinref part="P+14" gate="1" pin="+5V"/>
+<wire x1="45.72" y1="-109.22" x2="45.72" y2="-106.68" width="0.1524" layer="91"/>
+<junction x="45.72" y="-109.22"/>
+</segment>
+<segment>
+<wire x1="78.74" y1="-109.22" x2="73.66" y2="-109.22" width="0.1524" layer="91"/>
+<wire x1="73.66" y1="-109.22" x2="73.66" y2="-111.76" width="0.1524" layer="91"/>
+<pinref part="HALL3" gate="-1" pin="S"/>
+<wire x1="81.28" y1="-119.38" x2="78.74" y2="-119.38" width="0.1524" layer="91"/>
+<wire x1="78.74" y1="-119.38" x2="78.74" y2="-109.22" width="0.1524" layer="91"/>
+<pinref part="R41" gate="G$1" pin="2"/>
+<pinref part="P+15" gate="1" pin="+5V"/>
+<wire x1="78.74" y1="-109.22" x2="78.74" y2="-106.68" width="0.1524" layer="91"/>
+<junction x="78.74" y="-109.22"/>
+</segment>
+<segment>
+<pinref part="R34" gate="G$1" pin="2"/>
+<wire x1="208.28" y1="-104.14" x2="203.2" y2="-104.14" width="0.1524" layer="91"/>
+<wire x1="203.2" y1="-104.14" x2="203.2" y2="-106.68" width="0.1524" layer="91"/>
+<pinref part="HALL5" gate="-1" pin="S"/>
+<wire x1="210.82" y1="-114.3" x2="208.28" y2="-114.3" width="0.1524" layer="91"/>
+<wire x1="208.28" y1="-114.3" x2="208.28" y2="-104.14" width="0.1524" layer="91"/>
+<pinref part="P+16" gate="1" pin="+5V"/>
+<wire x1="208.28" y1="-104.14" x2="208.28" y2="-101.6" width="0.1524" layer="91"/>
+<junction x="208.28" y="-104.14"/>
+</segment>
+<segment>
+<wire x1="241.3" y1="-104.14" x2="236.22" y2="-104.14" width="0.1524" layer="91"/>
+<wire x1="236.22" y1="-104.14" x2="236.22" y2="-106.68" width="0.1524" layer="91"/>
+<pinref part="HALL6" gate="-1" pin="S"/>
+<wire x1="243.84" y1="-114.3" x2="241.3" y2="-114.3" width="0.1524" layer="91"/>
+<wire x1="241.3" y1="-114.3" x2="241.3" y2="-104.14" width="0.1524" layer="91"/>
+<pinref part="R35" gate="G$1" pin="2"/>
+<pinref part="P+17" gate="1" pin="+5V"/>
+<wire x1="241.3" y1="-104.14" x2="241.3" y2="-101.6" width="0.1524" layer="91"/>
+<junction x="241.3" y="-104.14"/>
 </segment>
 </net>
 <net name="+3V3" class="0">
@@ -17675,36 +17707,31 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <wire x1="-154.94" y1="147.32" x2="-147.32" y2="147.32" width="0.1524" layer="91"/>
 <wire x1="-147.32" y1="147.32" x2="-147.32" y2="144.78" width="0.1524" layer="91"/>
 <junction x="-154.94" y="147.32"/>
-<wire x1="-162.56" y1="152.4" x2="-137.16" y2="152.4" width="0.1524" layer="91"/>
-<wire x1="-137.16" y1="152.4" x2="-134.62" y2="152.4" width="0.1524" layer="91"/>
-<wire x1="-137.16" y1="104.14" x2="-137.16" y2="152.4" width="0.1524" layer="91"/>
-<junction x="-137.16" y="152.4"/>
-<pinref part="MMDT5401" gate="G$1" pin="E2"/>
-<wire x1="-137.16" y1="104.14" x2="-132.08" y2="104.14" width="0.1524" layer="91"/>
-<junction x="-134.62" y="152.4"/>
-<junction x="-132.08" y="104.14"/>
+<wire x1="-162.56" y1="152.4" x2="-139.7" y2="152.4" width="0.1524" layer="91"/>
 <pinref part="DMG2305" gate="G$1" pin="D"/>
+<pinref part="MMDT5401" gate="G$1" pin="E2"/>
+<wire x1="-139.7" y1="152.4" x2="-134.62" y2="152.4" width="0.1524" layer="91"/>
+<wire x1="-132.08" y1="104.14" x2="-139.7" y2="104.14" width="0.1524" layer="91"/>
+<wire x1="-139.7" y1="104.14" x2="-139.7" y2="152.4" width="0.1524" layer="91"/>
+<junction x="-139.7" y="152.4"/>
 </segment>
 </net>
 <net name="N$43" class="0">
 <segment>
-<wire x1="-144.78" y1="121.92" x2="-144.78" y2="99.06" width="0.1524" layer="91"/>
+<wire x1="-144.78" y1="121.92" x2="-144.78" y2="96.52" width="0.1524" layer="91"/>
 <pinref part="R37" gate="G$1" pin="2"/>
-<pinref part="MMDT5401" gate="G$1" pin="B2"/>
-<wire x1="-144.78" y1="99.06" x2="-144.78" y2="93.98" width="0.1524" layer="91"/>
-<wire x1="-124.46" y1="104.14" x2="-124.46" y2="99.06" width="0.1524" layer="91"/>
-<wire x1="-124.46" y1="99.06" x2="-144.78" y2="99.06" width="0.1524" layer="91"/>
-<junction x="-144.78" y="99.06"/>
+<wire x1="-144.78" y1="96.52" x2="-144.78" y2="93.98" width="0.1524" layer="91"/>
 <wire x1="-144.78" y1="121.92" x2="-132.08" y2="121.92" width="0.1524" layer="91"/>
-<pinref part="MMDT5401" gate="G$1" pin="C2"/>
-<wire x1="-132.08" y1="121.92" x2="-132.08" y2="119.38" width="0.1524" layer="91"/>
+<pinref part="MMDT5401" gate="G$1" pin="B2"/>
+<wire x1="-132.08" y1="121.92" x2="-121.92" y2="121.92" width="0.1524" layer="91"/>
+<wire x1="-124.46" y1="104.14" x2="-124.46" y2="96.52" width="0.1524" layer="91"/>
+<wire x1="-124.46" y1="96.52" x2="-144.78" y2="96.52" width="0.1524" layer="91"/>
+<junction x="-144.78" y="96.52"/>
 <pinref part="MMDT5401" gate="G$1" pin="B1"/>
 <wire x1="-121.92" y1="119.38" x2="-121.92" y2="121.92" width="0.1524" layer="91"/>
-<wire x1="-121.92" y1="121.92" x2="-132.08" y2="121.92" width="0.1524" layer="91"/>
+<pinref part="MMDT5401" gate="G$1" pin="C2"/>
+<wire x1="-132.08" y1="119.38" x2="-132.08" y2="121.92" width="0.1524" layer="91"/>
 <junction x="-132.08" y="121.92"/>
-<junction x="-124.46" y="104.14"/>
-<junction x="-121.92" y="119.38"/>
-<junction x="-132.08" y="119.38"/>
 </segment>
 </net>
 <net name="MEGASDA" class="0">
@@ -18033,11 +18060,12 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <label x="182.88" y="142.24" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="HALL1" gate="-3" pin="S"/>
 <pinref part="R39" gate="G$1" pin="1"/>
-<wire x1="20.32" y1="-124.46" x2="12.7" y2="-124.46" width="0.1524" layer="91"/>
+<wire x1="12.7" y1="-121.92" x2="12.7" y2="-124.46" width="0.1524" layer="91"/>
 <wire x1="12.7" y1="-124.46" x2="7.62" y2="-124.46" width="0.1524" layer="91"/>
-<label x="7.62" y="-127" size="1.778" layer="95"/>
+<label x="7.62" y="-124.46" size="1.778" layer="95"/>
+<pinref part="HALL1" gate="-3" pin="S"/>
+<wire x1="12.7" y1="-124.46" x2="20.32" y2="-124.46" width="0.1524" layer="91"/>
 <junction x="12.7" y="-124.46"/>
 </segment>
 </net>
@@ -18065,12 +18093,12 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 </segment>
 <segment>
 <pinref part="HALL3" gate="-3" pin="S"/>
-<wire x1="81.28" y1="-124.46" x2="71.12" y2="-124.46" width="0.1524" layer="91"/>
+<wire x1="81.28" y1="-124.46" x2="73.66" y2="-124.46" width="0.1524" layer="91"/>
 <pinref part="R41" gate="G$1" pin="1"/>
-<wire x1="71.12" y1="-124.46" x2="68.58" y2="-124.46" width="0.1524" layer="91"/>
-<wire x1="71.12" y1="-121.92" x2="71.12" y2="-124.46" width="0.1524" layer="91"/>
-<junction x="71.12" y="-124.46"/>
-<label x="63.5" y="-124.46" size="1.778" layer="95"/>
+<wire x1="73.66" y1="-124.46" x2="68.58" y2="-124.46" width="0.1524" layer="91"/>
+<wire x1="73.66" y1="-121.92" x2="73.66" y2="-124.46" width="0.1524" layer="91"/>
+<junction x="73.66" y="-124.46"/>
+<label x="68.58" y="-124.46" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="PWM2" class="0">
@@ -18147,11 +18175,12 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 </net>
 <net name="D31" class="0">
 <segment>
-<pinref part="HALL4" gate="-3" pin="S"/>
 <pinref part="R33" gate="G$1" pin="1"/>
-<wire x1="182.88" y1="-119.38" x2="175.26" y2="-119.38" width="0.1524" layer="91"/>
+<wire x1="175.26" y1="-116.84" x2="175.26" y2="-119.38" width="0.1524" layer="91"/>
 <wire x1="175.26" y1="-119.38" x2="170.18" y2="-119.38" width="0.1524" layer="91"/>
-<label x="170.18" y="-121.92" size="1.778" layer="95"/>
+<label x="170.18" y="-119.38" size="1.778" layer="95"/>
+<pinref part="HALL4" gate="-3" pin="S"/>
+<wire x1="182.88" y1="-119.38" x2="175.26" y2="-119.38" width="0.1524" layer="91"/>
 <junction x="175.26" y="-119.38"/>
 </segment>
 <segment>
@@ -18163,9 +18192,9 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <net name="D32" class="0">
 <segment>
 <pinref part="HALL5" gate="-3" pin="S"/>
-<wire x1="208.28" y1="-119.38" x2="203.2" y2="-119.38" width="0.1524" layer="91"/>
+<wire x1="210.82" y1="-119.38" x2="203.2" y2="-119.38" width="0.1524" layer="91"/>
 <pinref part="R34" gate="G$1" pin="1"/>
-<wire x1="203.2" y1="-119.38" x2="198.12" y2="-119.38" width="0.1524" layer="91"/>
+<wire x1="203.2" y1="-119.38" x2="200.66" y2="-119.38" width="0.1524" layer="91"/>
 <wire x1="203.2" y1="-116.84" x2="203.2" y2="-119.38" width="0.1524" layer="91"/>
 <junction x="203.2" y="-119.38"/>
 <label x="198.12" y="-119.38" size="1.778" layer="95"/>
@@ -18179,12 +18208,12 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <net name="D33" class="0">
 <segment>
 <pinref part="HALL6" gate="-3" pin="S"/>
-<wire x1="243.84" y1="-119.38" x2="233.68" y2="-119.38" width="0.1524" layer="91"/>
+<wire x1="243.84" y1="-119.38" x2="236.22" y2="-119.38" width="0.1524" layer="91"/>
 <pinref part="R35" gate="G$1" pin="1"/>
-<wire x1="233.68" y1="-119.38" x2="231.14" y2="-119.38" width="0.1524" layer="91"/>
-<wire x1="233.68" y1="-116.84" x2="233.68" y2="-119.38" width="0.1524" layer="91"/>
-<junction x="233.68" y="-119.38"/>
-<label x="226.06" y="-119.38" size="1.778" layer="95"/>
+<wire x1="236.22" y1="-119.38" x2="231.14" y2="-119.38" width="0.1524" layer="91"/>
+<wire x1="236.22" y1="-116.84" x2="236.22" y2="-119.38" width="0.1524" layer="91"/>
+<junction x="236.22" y="-119.38"/>
+<label x="231.14" y="-119.38" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="U$2" gate="G$1" pin="33"/>
