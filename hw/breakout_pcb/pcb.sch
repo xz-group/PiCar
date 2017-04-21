@@ -15785,86 +15785,6 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <vertex x="1.27" y="-4.445"/>
 </polygon>
 </package>
-<package name="2X3P-2.54">
-<wire x1="-2.54" y1="3.81" x2="0" y2="3.81" width="0.127" layer="21"/>
-<wire x1="0" y1="3.81" x2="2.54" y2="3.81" width="0.127" layer="21"/>
-<wire x1="2.54" y1="3.81" x2="2.54" y2="-3.81" width="0.127" layer="21"/>
-<wire x1="2.54" y1="-3.81" x2="0" y2="-3.81" width="0.127" layer="21"/>
-<wire x1="0" y1="-3.81" x2="-2.54" y2="-3.81" width="0.127" layer="21"/>
-<wire x1="-2.54" y1="-3.81" x2="-2.54" y2="3.81" width="0.127" layer="21"/>
-<wire x1="-2.54" y1="3.81" x2="2.54" y2="3.81" width="0" layer="39"/>
-<wire x1="2.54" y1="3.81" x2="2.54" y2="-3.81" width="0" layer="39"/>
-<wire x1="2.54" y1="-3.81" x2="-2.54" y2="-3.81" width="0" layer="39"/>
-<wire x1="-2.54" y1="-3.81" x2="-2.54" y2="3.81" width="0" layer="39"/>
-<wire x1="0" y1="3.81" x2="0" y2="-3.81" width="0.127" layer="21"/>
-<pad name="1" x="-1.27" y="2.54" drill="0.889" diameter="1.651" shape="square"/>
-<pad name="2" x="-1.27" y="0" drill="0.889" diameter="1.651"/>
-<pad name="3" x="-1.27" y="-2.54" drill="0.889" diameter="1.651"/>
-<pad name="4" x="1.27" y="-2.54" drill="0.889" diameter="1.651"/>
-<pad name="5" x="1.27" y="0" drill="0.889" diameter="1.651"/>
-<pad name="6" x="1.27" y="2.54" drill="0.889" diameter="1.651"/>
-<text x="-2.54" y="4.445" size="1.27" layer="25">&gt;name</text>
-<text x="0.635" y="-2.54" size="1.27" layer="27" rot="R90">&gt;value</text>
-<text x="0.635" y="-2.54" size="1.27" layer="33" rot="R90">&gt;name</text>
-<rectangle x1="-2.54" y1="-3.81" x2="2.54" y2="3.81" layer="39"/>
-</package>
-<package name="2X3P-2.0">
-<wire x1="-2.032" y1="3.048" x2="2.032" y2="3.048" width="0.127" layer="21"/>
-<wire x1="2.032" y1="3.048" x2="2.032" y2="-3.048" width="0.127" layer="21"/>
-<wire x1="2.032" y1="-3.048" x2="-2.032" y2="-3.048" width="0.127" layer="21"/>
-<wire x1="-2.032" y1="-3.048" x2="-2.032" y2="3.048" width="0.127" layer="21"/>
-<pad name="1" x="-1.016" y="2.032" drill="0.8128" diameter="1.27" shape="octagon"/>
-<pad name="2" x="-1.016" y="0" drill="0.8128" diameter="1.27"/>
-<pad name="3" x="-1.016" y="-2.032" drill="0.8128" diameter="1.27"/>
-<pad name="4" x="1.016" y="-2.032" drill="0.8128" diameter="1.27"/>
-<pad name="5" x="1.016" y="0" drill="0.8128" diameter="1.27"/>
-<pad name="6" x="1.016" y="2.032" drill="0.8128" diameter="1.27"/>
-<text x="-2.032" y="3.048" size="0.8128" layer="25" ratio="10">&gt;name</text>
-<text x="0.635" y="-1.905" size="0.8128" layer="27" ratio="10" rot="R90">&gt;VALUE</text>
-<text x="0.127" y="-2.032" size="0.8128" layer="33" ratio="10" rot="R90">&gt;name</text>
-<rectangle x1="-2.032" y1="-3.048" x2="2.032" y2="3.048" layer="39"/>
-</package>
-<package name="2X3P-2.54-SMD">
-<wire x1="-2.54" y1="3.81" x2="0" y2="3.81" width="0.127" layer="21"/>
-<wire x1="0" y1="3.81" x2="2.54" y2="3.81" width="0.127" layer="21"/>
-<wire x1="2.54" y1="3.81" x2="2.54" y2="-3.81" width="0.127" layer="21"/>
-<wire x1="2.54" y1="-3.81" x2="0" y2="-3.81" width="0.127" layer="21"/>
-<wire x1="0" y1="-3.81" x2="-2.54" y2="-3.81" width="0.127" layer="21"/>
-<wire x1="-2.54" y1="-3.81" x2="-2.54" y2="3.81" width="0.127" layer="21"/>
-<smd name="1" x="-2.54" y="2.54" dx="3.048" dy="1.524" layer="1"/>
-<smd name="2" x="-2.54" y="0" dx="3.048" dy="1.524" layer="1" roundness="50"/>
-<smd name="3" x="-2.54" y="-2.54" dx="3.048" dy="1.524" layer="1" roundness="50"/>
-<smd name="4" x="2.54" y="-2.54" dx="3.048" dy="1.524" layer="1" roundness="50" rot="R180"/>
-<smd name="5" x="2.54" y="0" dx="3.048" dy="1.524" layer="1" roundness="50" rot="R180"/>
-<smd name="6" x="2.54" y="2.54" dx="3.048" dy="1.524" layer="1" roundness="50" rot="R180"/>
-<text x="-2.54" y="3.81" size="1.27" layer="25">&gt;name</text>
-<text x="1.27" y="-3.175" size="1.27" layer="27" rot="R90">&gt;value</text>
-<text x="-0.635" y="-3.175" size="1.27" layer="33" rot="R90">&gt;name</text>
-<rectangle x1="-2.54" y1="-3.81" x2="2.54" y2="3.81" layer="39"/>
-</package>
-<package name="2X3P-2.54-60/35MIL">
-<wire x1="-2.54" y1="3.81" x2="0" y2="3.81" width="0.127" layer="21"/>
-<wire x1="0" y1="3.81" x2="2.54" y2="3.81" width="0.127" layer="21"/>
-<wire x1="2.54" y1="3.81" x2="2.54" y2="-3.81" width="0.127" layer="21"/>
-<wire x1="2.54" y1="-3.81" x2="0" y2="-3.81" width="0.127" layer="21"/>
-<wire x1="0" y1="-3.81" x2="-2.54" y2="-3.81" width="0.127" layer="21"/>
-<wire x1="-2.54" y1="-3.81" x2="-2.54" y2="3.81" width="0.127" layer="21"/>
-<wire x1="-2.54" y1="3.81" x2="2.54" y2="3.81" width="0" layer="39"/>
-<wire x1="2.54" y1="3.81" x2="2.54" y2="-3.81" width="0" layer="39"/>
-<wire x1="2.54" y1="-3.81" x2="-2.54" y2="-3.81" width="0" layer="39"/>
-<wire x1="-2.54" y1="-3.81" x2="-2.54" y2="3.81" width="0" layer="39"/>
-<wire x1="0" y1="3.81" x2="0" y2="-3.81" width="0.127" layer="21"/>
-<pad name="1" x="-1.27" y="2.54" drill="0.889" diameter="1.524" shape="square"/>
-<pad name="2" x="-1.27" y="0" drill="0.889" diameter="1.524"/>
-<pad name="3" x="-1.27" y="-2.54" drill="0.889" diameter="1.524"/>
-<pad name="4" x="1.27" y="-2.54" drill="0.889" diameter="1.524"/>
-<pad name="5" x="1.27" y="0" drill="0.889" diameter="1.524"/>
-<pad name="6" x="1.27" y="2.54" drill="0.889" diameter="1.524"/>
-<text x="-2.54" y="3.81" size="0.8128" layer="25" ratio="10">&gt;name</text>
-<text x="1.27" y="-2.54" size="0.635" layer="27" ratio="10" rot="R90">&gt;value</text>
-<text x="0" y="-2.54" size="0.635" layer="33" ratio="10" rot="R90">&gt;name</text>
-<rectangle x1="-2.54" y1="-3.81" x2="2.54" y2="3.81" layer="39"/>
-</package>
 </packages>
 <symbols>
 <symbol name="CK_1X8">
@@ -15908,20 +15828,6 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <pin name="P$2" x="-5.08" y="1.27" visible="pad" length="middle" function="dot"/>
 <pin name="P$3" x="-5.08" y="-1.27" visible="pad" length="middle" function="dot"/>
 <pin name="P$4" x="-5.08" y="-3.81" visible="pad" length="middle" function="dot"/>
-</symbol>
-<symbol name="CK_2X3">
-<wire x1="-5.08" y1="-5.08" x2="-5.08" y2="5.08" width="0.254" layer="94"/>
-<wire x1="-5.08" y1="5.08" x2="5.08" y2="5.08" width="0.254" layer="94"/>
-<wire x1="5.08" y1="5.08" x2="5.08" y2="-5.08" width="0.254" layer="94"/>
-<wire x1="5.08" y1="-5.08" x2="-5.08" y2="-5.08" width="0.254" layer="94"/>
-<text x="-5.08" y="5.588" size="1.27" layer="95">&gt;name</text>
-<text x="-5.08" y="-6.858" size="1.27" layer="96">&gt;value</text>
-<pin name="1" x="-7.62" y="2.54" visible="pad" length="middle" function="dotclk"/>
-<pin name="2" x="-7.62" y="0" visible="pad" length="middle" function="dot"/>
-<pin name="3" x="-7.62" y="-2.54" visible="pad" length="middle" function="dot"/>
-<pin name="4" x="7.62" y="-2.54" visible="pad" length="middle" function="dot" rot="R180"/>
-<pin name="5" x="7.62" y="0" visible="pad" length="middle" function="dot" rot="R180"/>
-<pin name="6" x="7.62" y="2.54" visible="pad" length="middle" function="dot" rot="R180"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -16158,65 +16064,6 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="HEADER-2X3P" prefix="J" uservalue="yes">
-<gates>
-<gate name="J" symbol="CK_2X3" x="0" y="0"/>
-</gates>
-<devices>
-<device name="-2.54" package="2X3P-2.54">
-<connects>
-<connect gate="J" pin="1" pad="1"/>
-<connect gate="J" pin="2" pad="2"/>
-<connect gate="J" pin="3" pad="3"/>
-<connect gate="J" pin="4" pad="4"/>
-<connect gate="J" pin="5" pad="5"/>
-<connect gate="J" pin="6" pad="6"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-<device name="-2.0" package="2X3P-2.0">
-<connects>
-<connect gate="J" pin="1" pad="1"/>
-<connect gate="J" pin="2" pad="2"/>
-<connect gate="J" pin="3" pad="3"/>
-<connect gate="J" pin="4" pad="4"/>
-<connect gate="J" pin="5" pad="5"/>
-<connect gate="J" pin="6" pad="6"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-<device name="-SMD" package="2X3P-2.54-SMD">
-<connects>
-<connect gate="J" pin="1" pad="1"/>
-<connect gate="J" pin="2" pad="2"/>
-<connect gate="J" pin="3" pad="3"/>
-<connect gate="J" pin="4" pad="4"/>
-<connect gate="J" pin="5" pad="5"/>
-<connect gate="J" pin="6" pad="6"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-<device name="-60/35MIL" package="2X3P-2.54-60/35MIL">
-<connects>
-<connect gate="J" pin="1" pad="1"/>
-<connect gate="J" pin="2" pad="2"/>
-<connect gate="J" pin="3" pad="3"/>
-<connect gate="J" pin="4" pad="4"/>
-<connect gate="J" pin="5" pad="5"/>
-<connect gate="J" pin="6" pad="6"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
 </devicesets>
 </library>
 </libraries>
@@ -16402,7 +16249,6 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <part name="P+12" library="supply1" deviceset="+5V" device=""/>
 <part name="P+13" library="supply1" deviceset="+5V" device=""/>
 <part name="0~7" library="Connector" deviceset="HEADER-8P" device="-60/35MIL" value="2.54-8P-female"/>
-<part name="ISP" library="Connector" deviceset="HEADER-2X3P" device="-60/35MIL" value="CK_2X3"/>
 <part name="J11" library="Connector" deviceset="HEADER-6P" device="-60/35MIL" value="2.54-6P-female"/>
 <part name="D38~" library="Connector" deviceset="HEADER-8P" device="-60/35MIL" value="DNP"/>
 <part name="D46~" library="Connector" deviceset="HEADER-8P" device="-60/35MIL" value="DNP"/>
@@ -16772,7 +16618,6 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <instance part="P+12" gate="1" x="220.98" y="162.56"/>
 <instance part="P+13" gate="1" x="220.98" y="132.08"/>
 <instance part="0~7" gate="J" x="154.94" y="125.73" rot="R180"/>
-<instance part="ISP" gate="J" x="140.97" y="147.32"/>
 <instance part="J11" gate="J" x="102.87" y="130.81" rot="R180"/>
 <instance part="D38~" gate="J" x="154.94" y="100.33" rot="MR0"/>
 <instance part="D46~" gate="J" x="154.94" y="76.2" rot="MR0"/>
@@ -17164,11 +17009,6 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <label x="111.76" y="127" size="1.778" layer="95"/>
 <pinref part="J11" gate="J" pin="2"/>
 <junction x="127" y="127"/>
-</segment>
-<segment>
-<wire x1="165.1" y1="144.78" x2="148.59" y2="144.78" width="0.1524" layer="91"/>
-<label x="149.86" y="144.78" size="1.778" layer="95"/>
-<pinref part="ISP" gate="J" pin="4"/>
 </segment>
 <segment>
 <wire x1="107.95" y1="76.2" x2="132.08" y2="76.2" width="0.1524" layer="91"/>
@@ -17949,11 +17789,6 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <label x="162.56" y="72.39" size="1.778" layer="95"/>
 <pinref part="D46~" gate="J" pin="6"/>
 </segment>
-<segment>
-<wire x1="165.1" y1="147.32" x2="148.59" y2="147.32" width="0.1524" layer="91"/>
-<label x="149.86" y="147.32" size="1.778" layer="95"/>
-<pinref part="ISP" gate="J" pin="5"/>
-</segment>
 </net>
 <net name="MEGAMISO" class="0">
 <segment>
@@ -17968,11 +17803,6 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <wire x1="179.07" y1="74.93" x2="158.75" y2="74.93" width="0.1524" layer="91"/>
 <label x="162.56" y="74.93" size="1.778" layer="95"/>
 <pinref part="D46~" gate="J" pin="5"/>
-</segment>
-<segment>
-<wire x1="118.11" y1="149.86" x2="133.35" y2="149.86" width="0.1524" layer="91"/>
-<label x="119.38" y="149.86" size="1.778" layer="95"/>
-<pinref part="ISP" gate="J" pin="1"/>
 </segment>
 </net>
 <net name="MEGAA3" class="0">
@@ -18234,22 +18064,12 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <label x="111.76" y="137.16" size="1.778" layer="95"/>
 <pinref part="J11" gate="J" pin="6"/>
 </segment>
-<segment>
-<wire x1="118.11" y1="144.78" x2="133.35" y2="144.78" width="0.1524" layer="91"/>
-<label x="119.38" y="144.78" size="1.778" layer="95"/>
-<pinref part="ISP" gate="J" pin="3"/>
-</segment>
 </net>
 <net name="VCC" class="0">
 <segment>
 <wire x1="107.95" y1="73.66" x2="127" y2="73.66" width="0.1524" layer="91"/>
 <label x="113.03" y="73.66" size="1.778" layer="95"/>
 <pinref part="I2C" gate="G$1" pin="P$1"/>
-</segment>
-<segment>
-<wire x1="165.1" y1="149.86" x2="148.59" y2="149.86" width="0.1524" layer="91"/>
-<label x="149.86" y="149.86" size="1.778" layer="95"/>
-<pinref part="ISP" gate="J" pin="6"/>
 </segment>
 </net>
 <net name="D42" class="0">
@@ -18493,11 +18313,6 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <wire x1="179.07" y1="69.85" x2="158.75" y2="69.85" width="0.1524" layer="91"/>
 <label x="162.56" y="69.85" size="1.778" layer="95"/>
 <pinref part="D46~" gate="J" pin="7"/>
-</segment>
-<segment>
-<wire x1="118.11" y1="147.32" x2="133.35" y2="147.32" width="0.1524" layer="91"/>
-<label x="119.38" y="147.32" size="1.778" layer="95"/>
-<pinref part="ISP" gate="J" pin="2"/>
 </segment>
 </net>
 </nets>
