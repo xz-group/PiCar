@@ -15902,7 +15902,6 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <part name="U$2" library="rpibout" deviceset="ATMEGA32U4" device=""/>
 <part name="GND41" library="supply1" deviceset="GND" device=""/>
 <part name="GND42" library="supply1" deviceset="GND" device=""/>
-<part name="P+10" library="supply1" deviceset="+5V" device=""/>
 <part name="R48" library="resistor" deviceset="R-US_" device="R1206" value="10k"/>
 <part name="SERVO_MOTOR" library="rpibout" deviceset="ULTRAFIT_3CIRC" device=""/>
 <part name="GND16" library="supply1" deviceset="GND" device=""/>
@@ -15933,6 +15932,8 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <part name="P+2" library="supply1" deviceset="+5V" device=""/>
 <part name="GND25" library="supply1" deviceset="GND" device=""/>
 <part name="GND26" library="supply1" deviceset="GND" device=""/>
+<part name="U$6" library="rpibout" deviceset="SWITCH" device=""/>
+<part name="P+6" library="supply1" deviceset="+5V" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -16133,7 +16134,6 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <instance part="U$2" gate="G$1" x="55.88" y="106.68"/>
 <instance part="GND41" gate="1" x="27.94" y="63.5"/>
 <instance part="GND42" gate="1" x="88.9" y="124.46"/>
-<instance part="P+10" gate="1" x="25.4" y="149.86"/>
 <instance part="R48" gate="G$1" x="7.62" y="149.86" smashed="yes" rot="R90">
 <attribute name="NAME" x="6.1214" y="148.59" size="1.778" layer="95" rot="R90"/>
 <attribute name="VALUE" x="10.922" y="148.59" size="1.778" layer="96" rot="R90"/>
@@ -16170,6 +16170,8 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <instance part="P+2" gate="1" x="170.18" y="106.68"/>
 <instance part="GND25" gate="1" x="127" y="63.5"/>
 <instance part="GND26" gate="1" x="149.86" y="96.52"/>
+<instance part="U$6" gate="G$1" x="25.4" y="154.94" rot="R90"/>
+<instance part="P+6" gate="1" x="25.4" y="165.1"/>
 </instances>
 <busses>
 </busses>
@@ -16762,24 +16764,6 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <junction x="-17.78" y="157.48"/>
 </segment>
 <segment>
-<pinref part="U$2" gate="G$1" pin="VCC"/>
-<pinref part="P+10" gate="1" pin="+5V"/>
-<wire x1="30.48" y1="132.08" x2="25.4" y2="132.08" width="0.1524" layer="91"/>
-<wire x1="25.4" y1="132.08" x2="25.4" y2="147.32" width="0.1524" layer="91"/>
-<pinref part="U$2" gate="G$1" pin="VCC1"/>
-<wire x1="30.48" y1="129.54" x2="25.4" y2="129.54" width="0.1524" layer="91"/>
-<wire x1="25.4" y1="129.54" x2="25.4" y2="132.08" width="0.1524" layer="91"/>
-<junction x="25.4" y="132.08"/>
-<pinref part="U$2" gate="G$1" pin="AVCC"/>
-<wire x1="30.48" y1="124.46" x2="25.4" y2="124.46" width="0.1524" layer="91"/>
-<wire x1="25.4" y1="124.46" x2="25.4" y2="129.54" width="0.1524" layer="91"/>
-<junction x="25.4" y="129.54"/>
-<pinref part="U$2" gate="G$1" pin="AVCC1"/>
-<wire x1="30.48" y1="121.92" x2="25.4" y2="121.92" width="0.1524" layer="91"/>
-<wire x1="25.4" y1="121.92" x2="25.4" y2="124.46" width="0.1524" layer="91"/>
-<junction x="25.4" y="124.46"/>
-</segment>
-<segment>
 <pinref part="SERVO_MOTOR" gate="G$1" pin="P1"/>
 <wire x1="223.52" y1="157.48" x2="213.36" y2="157.48" width="0.1524" layer="91"/>
 <pinref part="P+3" gate="1" pin="+5V"/>
@@ -16843,6 +16827,11 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <pinref part="C24" gate="G$1" pin="1"/>
 <wire x1="165.1" y1="101.6" x2="170.18" y2="101.6" width="0.1524" layer="91"/>
 <junction x="170.18" y="101.6"/>
+</segment>
+<segment>
+<pinref part="U$6" gate="G$1" pin="2"/>
+<pinref part="P+6" gate="1" pin="+5V"/>
+<wire x1="25.4" y1="162.56" x2="25.4" y2="160.02" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="+3V3" class="0">
@@ -17493,6 +17482,26 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <net name="N$2" class="0">
 <segment>
 <junction x="129.54" y="101.6"/>
+</segment>
+</net>
+<net name="N$14" class="0">
+<segment>
+<pinref part="U$2" gate="G$1" pin="VCC"/>
+<wire x1="30.48" y1="132.08" x2="25.4" y2="132.08" width="0.1524" layer="91"/>
+<wire x1="25.4" y1="132.08" x2="25.4" y2="149.86" width="0.1524" layer="91"/>
+<pinref part="U$2" gate="G$1" pin="VCC1"/>
+<wire x1="30.48" y1="129.54" x2="25.4" y2="129.54" width="0.1524" layer="91"/>
+<wire x1="25.4" y1="129.54" x2="25.4" y2="132.08" width="0.1524" layer="91"/>
+<junction x="25.4" y="132.08"/>
+<pinref part="U$2" gate="G$1" pin="AVCC"/>
+<wire x1="30.48" y1="124.46" x2="25.4" y2="124.46" width="0.1524" layer="91"/>
+<wire x1="25.4" y1="124.46" x2="25.4" y2="129.54" width="0.1524" layer="91"/>
+<junction x="25.4" y="129.54"/>
+<pinref part="U$2" gate="G$1" pin="AVCC1"/>
+<wire x1="30.48" y1="121.92" x2="25.4" y2="121.92" width="0.1524" layer="91"/>
+<wire x1="25.4" y1="121.92" x2="25.4" y2="124.46" width="0.1524" layer="91"/>
+<junction x="25.4" y="124.46"/>
+<pinref part="U$6" gate="G$1" pin="1"/>
 </segment>
 </net>
 </nets>
