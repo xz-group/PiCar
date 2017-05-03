@@ -18535,13 +18535,6 @@ Source: www.kingbright.com</description>
 <label x="127" y="81.28" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="RPISCLK" class="0">
-<segment>
-<wire x1="-35.56" y1="129.54" x2="-53.34" y2="129.54" width="0.1524" layer="91"/>
-<label x="-53.34" y="129.54" size="1.778" layer="95"/>
-<pinref part="J2" gate="A" pin="23"/>
-</segment>
-</net>
 <net name="RPIMOSI" class="0">
 <segment>
 <wire x1="-35.56" y1="134.62" x2="-53.34" y2="134.62" width="0.1524" layer="91"/>
@@ -19008,10 +19001,10 @@ Source: www.kingbright.com</description>
 <wire x1="138.43" y1="78.74" x2="127" y2="78.74" width="0.1524" layer="91"/>
 <label x="127" y="78.74" size="1.778" layer="95"/>
 </segment>
-</net>
-<net name="N$2" class="0">
 <segment>
-<junction x="129.54" y="101.6"/>
+<wire x1="-35.56" y1="129.54" x2="-53.34" y2="129.54" width="0.1524" layer="91"/>
+<label x="-53.34" y="129.54" size="1.778" layer="95"/>
+<pinref part="J2" gate="A" pin="23"/>
 </segment>
 </net>
 <net name="N$22" class="0">
