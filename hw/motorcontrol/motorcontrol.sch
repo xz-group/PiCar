@@ -17370,6 +17370,239 @@ DIN A3, landscape with location and doc. field</description>
 </deviceset>
 </devicesets>
 </library>
+<library name="holes">
+<description>&lt;b&gt;Mounting Holes and Pads&lt;/b&gt;&lt;p&gt;
+&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
+<packages>
+<package name="2,8">
+<description>&lt;b&gt;MOUNTING HOLE&lt;/b&gt; 2.8 mm with drill center</description>
+<wire x1="-1.778" y1="0" x2="0" y2="-1.778" width="2.286" layer="51" curve="90" cap="flat"/>
+<wire x1="0" y1="1.778" x2="1.778" y2="0" width="2.286" layer="51" curve="-90" cap="flat"/>
+<circle x="0" y="0" radius="0.635" width="0.4572" layer="51"/>
+<circle x="0" y="0" radius="2.921" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="2.54" width="2.032" layer="40"/>
+<circle x="0" y="0" radius="2.54" width="2.032" layer="39"/>
+<circle x="0" y="0" radius="2.54" width="2.032" layer="41"/>
+<circle x="0" y="0" radius="2.54" width="2.032" layer="42"/>
+<circle x="0" y="0" radius="2.54" width="2.032" layer="43"/>
+<circle x="0" y="0" radius="1.5" width="0.2032" layer="21"/>
+<hole x="0" y="0" drill="2.8"/>
+</package>
+<package name="3,0">
+<description>&lt;b&gt;MOUNTING HOLE&lt;/b&gt; 3.0 mm with drill center</description>
+<wire x1="-2.159" y1="0" x2="0" y2="-2.159" width="2.4892" layer="51" curve="90" cap="flat"/>
+<wire x1="0" y1="2.159" x2="2.159" y2="0" width="2.4892" layer="51" curve="-90" cap="flat"/>
+<circle x="0" y="0" radius="3.429" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="0.762" width="0.4572" layer="51"/>
+<circle x="0" y="0" radius="3.048" width="2.032" layer="39"/>
+<circle x="0" y="0" radius="3.048" width="2.032" layer="43"/>
+<circle x="0" y="0" radius="3.048" width="2.032" layer="40"/>
+<circle x="0" y="0" radius="3.048" width="2.032" layer="41"/>
+<circle x="0" y="0" radius="3.048" width="2.032" layer="42"/>
+<circle x="0" y="0" radius="1.6" width="0.2032" layer="21"/>
+<text x="-1.27" y="-3.81" size="1.27" layer="48">3,0</text>
+<hole x="0" y="0" drill="3"/>
+</package>
+<package name="3,3">
+<description>&lt;b&gt;MOUNTING HOLE&lt;/b&gt; 3.3 mm with drill center</description>
+<wire x1="-2.159" y1="0" x2="0" y2="-2.159" width="2.4892" layer="51" curve="90" cap="flat"/>
+<wire x1="0" y1="2.159" x2="2.159" y2="0" width="2.4892" layer="51" curve="-90" cap="flat"/>
+<circle x="0" y="0" radius="3.429" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="0.762" width="0.4572" layer="51"/>
+<circle x="0" y="0" radius="3.048" width="2.54" layer="39"/>
+<circle x="0" y="0" radius="3.048" width="2.54" layer="40"/>
+<circle x="0" y="0" radius="3.048" width="2.032" layer="43"/>
+<circle x="0" y="0" radius="3.048" width="2.032" layer="41"/>
+<circle x="0" y="0" radius="3.048" width="2.032" layer="42"/>
+<circle x="0" y="0" radius="1.75" width="0.2032" layer="21"/>
+<hole x="0" y="0" drill="3.3"/>
+</package>
+<package name="3,6">
+<description>&lt;b&gt;MOUNTING HOLE&lt;/b&gt; 3.6 mm with drill center</description>
+<wire x1="-2.159" y1="0" x2="0" y2="-2.159" width="2.4892" layer="51" curve="90" cap="flat"/>
+<wire x1="0" y1="2.159" x2="2.159" y2="0" width="2.4892" layer="51" curve="-90" cap="flat"/>
+<circle x="0" y="0" radius="3.429" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="0.762" width="0.4572" layer="51"/>
+<circle x="0" y="0" radius="3.048" width="2.7686" layer="39"/>
+<circle x="0" y="0" radius="3.048" width="2.7686" layer="40"/>
+<circle x="0" y="0" radius="3.048" width="2.032" layer="43"/>
+<circle x="0" y="0" radius="3.048" width="2.032" layer="41"/>
+<circle x="0" y="0" radius="3.048" width="2.032" layer="42"/>
+<circle x="0" y="0" radius="1.9" width="0.2032" layer="21"/>
+<hole x="0" y="0" drill="3.6"/>
+</package>
+<package name="4,1">
+<description>&lt;b&gt;MOUNTING HOLE&lt;/b&gt; 4.1 mm with drill center</description>
+<wire x1="-2.54" y1="0" x2="0" y2="-2.54" width="3.9116" layer="51" curve="90" cap="flat"/>
+<wire x1="0" y1="2.54" x2="2.54" y2="0" width="3.9116" layer="51" curve="-90" cap="flat"/>
+<circle x="0" y="0" radius="4.4958" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="0.762" width="0.4572" layer="51"/>
+<circle x="0" y="0" radius="3.81" width="2.54" layer="39"/>
+<circle x="0" y="0" radius="3.81" width="2.54" layer="40"/>
+<circle x="0" y="0" radius="3.81" width="2.54" layer="41"/>
+<circle x="0" y="0" radius="3.81" width="2.54" layer="42"/>
+<circle x="0" y="0" radius="3.81" width="2.54" layer="43"/>
+<circle x="0" y="0" radius="2.15" width="0.1524" layer="21"/>
+<hole x="0" y="0" drill="4.1"/>
+</package>
+<package name="4,5">
+<description>&lt;b&gt;MOUNTING HOLE&lt;/b&gt; 4.5 mm with drill center</description>
+<wire x1="4.445" y1="0" x2="2.159" y2="0" width="0.0508" layer="21"/>
+<wire x1="0" y1="4.445" x2="0" y2="2.159" width="0.0508" layer="21"/>
+<wire x1="-2.159" y1="0" x2="-4.445" y2="0" width="0.0508" layer="21"/>
+<wire x1="0" y1="-2.159" x2="0" y2="-4.445" width="0.0508" layer="21"/>
+<wire x1="-2.54" y1="0" x2="0" y2="-2.54" width="3.9116" layer="51" curve="90" cap="flat"/>
+<wire x1="0" y1="2.54" x2="2.54" y2="0" width="3.9116" layer="51" curve="-90" cap="flat"/>
+<circle x="0" y="0" radius="4.4958" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="0.762" width="0.4572" layer="51"/>
+<circle x="0" y="0" radius="4.699" width="4.5466" layer="39"/>
+<circle x="0" y="0" radius="4.699" width="4.5466" layer="40"/>
+<circle x="0" y="0" radius="3.8184" width="2.54" layer="41"/>
+<circle x="0" y="0" radius="3.81" width="2.54" layer="42"/>
+<circle x="0" y="0" radius="3.81" width="2.54" layer="43"/>
+<circle x="0" y="0" radius="2.35" width="0.1524" layer="21"/>
+<text x="-1.27" y="-4.445" size="1.27" layer="48">4,5</text>
+<hole x="0" y="0" drill="4.5"/>
+</package>
+<package name="5,0">
+<description>&lt;b&gt;MOUNTING HOLE&lt;/b&gt; 5.0 mm with drill center</description>
+<wire x1="4.445" y1="0" x2="2.159" y2="0" width="0.0508" layer="21"/>
+<wire x1="0" y1="4.445" x2="0" y2="2.159" width="0.0508" layer="21"/>
+<wire x1="-2.159" y1="0" x2="-4.445" y2="0" width="0.0508" layer="21"/>
+<wire x1="0" y1="-2.159" x2="0" y2="-4.445" width="0.0508" layer="21"/>
+<wire x1="-2.54" y1="0" x2="0" y2="-2.54" width="3.9116" layer="51" curve="90" cap="flat"/>
+<wire x1="0" y1="2.54" x2="2.54" y2="0" width="3.9116" layer="51" curve="-90" cap="flat"/>
+<circle x="0" y="0" radius="4.4958" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="0.762" width="0.4572" layer="51"/>
+<circle x="0" y="0" radius="4.699" width="4.5466" layer="39"/>
+<circle x="0" y="0" radius="4.699" width="4.5466" layer="40"/>
+<circle x="0" y="0" radius="4.826" width="2.54" layer="43"/>
+<circle x="0" y="0" radius="4.826" width="2.54" layer="42"/>
+<circle x="0" y="0" radius="4.826" width="2.54" layer="41"/>
+<circle x="0" y="0" radius="2.6" width="0.1524" layer="21"/>
+<text x="-1.27" y="-4.445" size="1.27" layer="48">5,0</text>
+<hole x="0" y="0" drill="5"/>
+</package>
+<package name="3,2">
+<description>&lt;b&gt;MOUNTING HOLE&lt;/b&gt; 3.2 mm with drill center</description>
+<wire x1="-2.159" y1="0" x2="0" y2="-2.159" width="2.4892" layer="51" curve="90" cap="flat"/>
+<wire x1="0" y1="2.159" x2="2.159" y2="0" width="2.4892" layer="51" curve="-90" cap="flat"/>
+<circle x="0" y="0" radius="3.429" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="0.762" width="0.4572" layer="51"/>
+<circle x="0" y="0" radius="3.048" width="2.032" layer="39"/>
+<circle x="0" y="0" radius="3.048" width="2.032" layer="43"/>
+<circle x="0" y="0" radius="3.048" width="2.032" layer="40"/>
+<circle x="0" y="0" radius="3.048" width="2.032" layer="41"/>
+<circle x="0" y="0" radius="3.048" width="2.032" layer="42"/>
+<circle x="0" y="0" radius="1.7" width="0.2032" layer="21"/>
+<hole x="0" y="0" drill="3.2"/>
+</package>
+<package name="4,3">
+<description>&lt;b&gt;MOUNTING HOLE&lt;/b&gt; 4.3 mm with drill center</description>
+<wire x1="-2.54" y1="0" x2="0" y2="-2.54" width="3.9116" layer="51" curve="90" cap="flat"/>
+<wire x1="0" y1="2.54" x2="2.54" y2="0" width="3.9116" layer="51" curve="-90" cap="flat"/>
+<circle x="0" y="0" radius="4.4958" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="0.762" width="0.1524" layer="51"/>
+<circle x="0" y="0" radius="4.699" width="4.5466" layer="39"/>
+<circle x="0" y="0" radius="4.699" width="4.5466" layer="40"/>
+<circle x="0" y="0" radius="3.8184" width="2.54" layer="41"/>
+<circle x="0" y="0" radius="3.81" width="2.54" layer="42"/>
+<circle x="0" y="0" radius="3.81" width="2.54" layer="43"/>
+<circle x="0" y="0" radius="2.25" width="0.1524" layer="21"/>
+<hole x="0" y="0" drill="4.3"/>
+</package>
+<package name="5,5">
+<description>&lt;b&gt;MOUNTING HOLE&lt;/b&gt; 5.5 mm with drill center</description>
+<wire x1="4.445" y1="0" x2="2.159" y2="0" width="0.0508" layer="21"/>
+<wire x1="0" y1="4.445" x2="0" y2="2.159" width="0.0508" layer="21"/>
+<wire x1="-2.159" y1="0" x2="-4.445" y2="0" width="0.0508" layer="21"/>
+<wire x1="0" y1="-2.159" x2="0" y2="-4.445" width="0.0508" layer="21"/>
+<wire x1="-2.54" y1="0" x2="0" y2="-2.54" width="3.9116" layer="51" curve="90" cap="flat"/>
+<wire x1="0" y1="2.54" x2="2.54" y2="0" width="3.9116" layer="51" curve="-90" cap="flat"/>
+<circle x="0" y="0" radius="4.4958" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="0.762" width="0.4572" layer="51"/>
+<circle x="0" y="0" radius="4.699" width="4.5466" layer="39"/>
+<circle x="0" y="0" radius="4.699" width="4.5466" layer="40"/>
+<circle x="0" y="0" radius="4.826" width="2.54" layer="43"/>
+<circle x="0" y="0" radius="4.826" width="2.54" layer="42"/>
+<circle x="0" y="0" radius="4.826" width="2.54" layer="41"/>
+<circle x="0" y="0" radius="2.85" width="0.1524" layer="21"/>
+<hole x="0" y="0" drill="5.5"/>
+</package>
+</packages>
+<symbols>
+<symbol name="MOUNT-HOLE">
+<wire x1="0" y1="1.27" x2="1.27" y2="0" width="1.524" layer="94" curve="-90" cap="flat"/>
+<wire x1="-1.27" y1="0" x2="0" y2="-1.27" width="1.524" layer="94" curve="90" cap="flat"/>
+<wire x1="-0.508" y1="0" x2="0.508" y2="0" width="0.0508" layer="94"/>
+<wire x1="0" y1="0.508" x2="0" y2="-0.508" width="0.0508" layer="94"/>
+<circle x="0" y="0" radius="2.032" width="0.0508" layer="94"/>
+<circle x="0" y="0" radius="0.508" width="0.0508" layer="94"/>
+<text x="2.032" y="0.5842" size="1.778" layer="95">&gt;NAME</text>
+<text x="2.032" y="-2.4638" size="1.778" layer="96">&gt;VALUE</text>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="MOUNT-HOLE" prefix="H">
+<description>&lt;b&gt;MOUNTING HOLE&lt;/b&gt; with drill center marker</description>
+<gates>
+<gate name="G$1" symbol="MOUNT-HOLE" x="0" y="0"/>
+</gates>
+<devices>
+<device name="2.8" package="2,8">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="3.0" package="3,0">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="3.3" package="3,3">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="3.6" package="3,6">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="4.1" package="4,1">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="4.5" package="4,5">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="5.0" package="5,0">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="3.2" package="3,2">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="4.3" package="4,3">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="5.5" package="5,5">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -17543,6 +17776,16 @@ DIN A3, landscape with location and doc. field</description>
 <part name="P+17" library="supply1" deviceset="+5V" device=""/>
 <part name="GND4" library="supply1" deviceset="GND" device=""/>
 <part name="U8" library="rpibout" deviceset="IPD90P03P4L-04" device=""/>
+<part name="C30" library="resistor" deviceset="C-US" device="C1206" value="0.1u"/>
+<part name="C31" library="resistor" deviceset="C-US" device="C1206" value="0.1u"/>
+<part name="C32" library="resistor" deviceset="C-US" device="C1206" value="0.1u"/>
+<part name="C39" library="resistor" deviceset="C-US" device="C1206" value="0.1u"/>
+<part name="P+19" library="supply1" deviceset="+5V" device=""/>
+<part name="GND6" library="supply1" deviceset="GND" device=""/>
+<part name="H1" library="holes" deviceset="MOUNT-HOLE" device="2.8"/>
+<part name="H2" library="holes" deviceset="MOUNT-HOLE" device="2.8"/>
+<part name="H3" library="holes" deviceset="MOUNT-HOLE" device="2.8"/>
+<part name="H4" library="holes" deviceset="MOUNT-HOLE" device="2.8"/>
 </parts>
 <sheets>
 <sheet>
@@ -17742,13 +17985,19 @@ DIN A3, landscape with location and doc. field</description>
 <instance part="GND53" gate="1" x="71.12" y="119.38"/>
 <instance part="P+18" gate="1" x="73.66" y="180.34"/>
 <instance part="+3V3" gate="G$1" x="45.72" y="180.34"/>
-<instance part="R45" gate="G$1" x="71.12" y="231.14" rot="R90"/>
-<instance part="+3V4" gate="G$1" x="71.12" y="243.84"/>
-<instance part="R46" gate="G$1" x="78.74" y="231.14" rot="R90"/>
+<instance part="R45" gate="G$1" x="76.2" y="231.14" smashed="yes" rot="R90">
+<attribute name="NAME" x="77.2414" y="234.188" size="1.778" layer="95"/>
+<attribute name="VALUE" x="77.47" y="229.108" size="1.778" layer="96"/>
+</instance>
+<instance part="+3V4" gate="G$1" x="63.5" y="243.84"/>
+<instance part="R46" gate="G$1" x="83.82" y="231.14" smashed="yes" rot="R90">
+<attribute name="NAME" x="85.3694" y="234.188" size="1.778" layer="95"/>
+<attribute name="VALUE" x="85.344" y="228.6" size="1.778" layer="96"/>
+</instance>
 <instance part="GND54" gate="1" x="33.02" y="213.36"/>
 <instance part="R47" gate="G$1" x="27.94" y="226.06" rot="R90"/>
 <instance part="+3V6" gate="G$1" x="27.94" y="236.22"/>
-<instance part="C38" gate="G$1" x="86.36" y="231.14"/>
+<instance part="C38" gate="G$1" x="68.58" y="233.68"/>
 <instance part="GND55" gate="1" x="22.86" y="210.82"/>
 <instance part="U9" gate="G$1" x="175.26" y="187.96"/>
 <instance part="GND41" gate="1" x="147.32" y="144.78"/>
@@ -17818,7 +18067,7 @@ DIN A3, landscape with location and doc. field</description>
 <instance part="U4" gate="G$1" x="48.26" y="223.52"/>
 <instance part="J1" gate="G$1" x="17.78" y="215.9" rot="MR0"/>
 <instance part="GND28" gate="1" x="63.5" y="213.36"/>
-<instance part="GND29" gate="1" x="86.36" y="213.36"/>
+<instance part="GND29" gate="1" x="68.58" y="226.06"/>
 <instance part="GND30" gate="1" x="304.8" y="170.18"/>
 <instance part="P+10" gate="1" x="287.02" y="172.72"/>
 <instance part="SUPPLY1" gate="G$1" x="86.36" y="45.72"/>
@@ -17848,6 +18097,16 @@ DIN A3, landscape with location and doc. field</description>
 <attribute name="NAME" x="48.006" y="37.084" size="1.778" layer="95" rot="MR180"/>
 <attribute name="VALUE" x="48.26" y="44.958" size="1.778" layer="96" rot="MR180"/>
 </instance>
+<instance part="C30" gate="G$1" x="157.48" y="243.84"/>
+<instance part="C31" gate="G$1" x="165.1" y="243.84"/>
+<instance part="C32" gate="G$1" x="172.72" y="243.84"/>
+<instance part="C39" gate="G$1" x="180.34" y="243.84"/>
+<instance part="P+19" gate="1" x="157.48" y="248.92"/>
+<instance part="GND6" gate="1" x="157.48" y="236.22"/>
+<instance part="H1" gate="G$1" x="302.26" y="33.02"/>
+<instance part="H2" gate="G$1" x="314.96" y="33.02"/>
+<instance part="H3" gate="G$1" x="327.66" y="33.02"/>
+<instance part="H4" gate="G$1" x="340.36" y="33.02"/>
 </instances>
 <busses>
 </busses>
@@ -18183,7 +18442,6 @@ DIN A3, landscape with location and doc. field</description>
 <segment>
 <pinref part="C38" gate="G$1" pin="2"/>
 <pinref part="GND29" gate="1" pin="GND"/>
-<wire x1="86.36" y1="226.06" x2="86.36" y2="215.9" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="GND26" gate="1" pin="GND"/>
@@ -18221,6 +18479,19 @@ DIN A3, landscape with location and doc. field</description>
 <pinref part="C29" gate="G$1" pin="2"/>
 <wire x1="360.68" y1="50.8" x2="360.68" y2="48.26" width="0.1524" layer="91"/>
 <junction x="360.68" y="48.26"/>
+</segment>
+<segment>
+<pinref part="GND6" gate="1" pin="GND"/>
+<pinref part="C30" gate="G$1" pin="2"/>
+<pinref part="C39" gate="G$1" pin="2"/>
+<pinref part="C32" gate="G$1" pin="2"/>
+<wire x1="180.34" y1="238.76" x2="172.72" y2="238.76" width="0.1524" layer="91"/>
+<pinref part="C31" gate="G$1" pin="2"/>
+<wire x1="172.72" y1="238.76" x2="165.1" y2="238.76" width="0.1524" layer="91"/>
+<junction x="172.72" y="238.76"/>
+<wire x1="165.1" y1="238.76" x2="157.48" y2="238.76" width="0.1524" layer="91"/>
+<junction x="165.1" y="238.76"/>
+<junction x="157.48" y="238.76"/>
 </segment>
 </net>
 <net name="N$6" class="0">
@@ -18518,6 +18789,19 @@ DIN A3, landscape with location and doc. field</description>
 <wire x1="363.22" y1="60.96" x2="360.68" y2="60.96" width="0.1524" layer="91"/>
 <junction x="360.68" y="60.96"/>
 </segment>
+<segment>
+<pinref part="P+19" gate="1" pin="+5V"/>
+<pinref part="C30" gate="G$1" pin="1"/>
+<pinref part="C31" gate="G$1" pin="1"/>
+<wire x1="157.48" y1="246.38" x2="165.1" y2="246.38" width="0.1524" layer="91"/>
+<junction x="157.48" y="246.38"/>
+<pinref part="C32" gate="G$1" pin="1"/>
+<wire x1="165.1" y1="246.38" x2="172.72" y2="246.38" width="0.1524" layer="91"/>
+<junction x="165.1" y="246.38"/>
+<pinref part="C39" gate="G$1" pin="1"/>
+<wire x1="172.72" y1="246.38" x2="180.34" y2="246.38" width="0.1524" layer="91"/>
+<junction x="172.72" y="246.38"/>
+</segment>
 </net>
 <net name="+3V3" class="0">
 <segment>
@@ -18529,24 +18813,6 @@ DIN A3, landscape with location and doc. field</description>
 <wire x1="45.72" y1="175.26" x2="45.72" y2="177.8" width="0.1524" layer="91"/>
 <wire x1="55.88" y1="175.26" x2="45.72" y2="175.26" width="0.1524" layer="91"/>
 <junction x="45.72" y="175.26"/>
-</segment>
-<segment>
-<pinref part="+3V4" gate="G$1" pin="+3V3"/>
-<pinref part="R45" gate="G$1" pin="2"/>
-<wire x1="71.12" y1="241.3" x2="71.12" y2="238.76" width="0.1524" layer="91"/>
-<wire x1="71.12" y1="238.76" x2="71.12" y2="236.22" width="0.1524" layer="91"/>
-<wire x1="71.12" y1="238.76" x2="63.5" y2="238.76" width="0.1524" layer="91"/>
-<junction x="71.12" y="238.76"/>
-<wire x1="63.5" y1="238.76" x2="63.5" y2="226.06" width="0.1524" layer="91"/>
-<pinref part="U4" gate="G$1" pin="VCC"/>
-<wire x1="63.5" y1="226.06" x2="60.96" y2="226.06" width="0.1524" layer="91"/>
-<wire x1="71.12" y1="238.76" x2="78.74" y2="238.76" width="0.1524" layer="91"/>
-<pinref part="R46" gate="G$1" pin="2"/>
-<wire x1="78.74" y1="238.76" x2="78.74" y2="236.22" width="0.1524" layer="91"/>
-<pinref part="C38" gate="G$1" pin="1"/>
-<wire x1="78.74" y1="238.76" x2="86.36" y2="238.76" width="0.1524" layer="91"/>
-<wire x1="86.36" y1="238.76" x2="86.36" y2="233.68" width="0.1524" layer="91"/>
-<junction x="78.74" y="238.76"/>
 </segment>
 <segment>
 <pinref part="R47" gate="G$1" pin="2"/>
@@ -18580,6 +18846,25 @@ DIN A3, landscape with location and doc. field</description>
 <pinref part="C33" gate="G$1" pin="1"/>
 <wire x1="360.68" y1="165.1" x2="360.68" y2="162.56" width="0.1524" layer="91"/>
 <junction x="360.68" y="165.1"/>
+</segment>
+<segment>
+<pinref part="R45" gate="G$1" pin="2"/>
+<wire x1="76.2" y1="238.76" x2="76.2" y2="236.22" width="0.1524" layer="91"/>
+<wire x1="76.2" y1="238.76" x2="68.58" y2="238.76" width="0.1524" layer="91"/>
+<junction x="76.2" y="238.76"/>
+<wire x1="68.58" y1="238.76" x2="63.5" y2="238.76" width="0.1524" layer="91"/>
+<wire x1="63.5" y1="238.76" x2="63.5" y2="226.06" width="0.1524" layer="91"/>
+<pinref part="U4" gate="G$1" pin="VCC"/>
+<wire x1="63.5" y1="226.06" x2="60.96" y2="226.06" width="0.1524" layer="91"/>
+<wire x1="76.2" y1="238.76" x2="83.82" y2="238.76" width="0.1524" layer="91"/>
+<pinref part="R46" gate="G$1" pin="2"/>
+<wire x1="83.82" y1="238.76" x2="83.82" y2="236.22" width="0.1524" layer="91"/>
+<pinref part="+3V4" gate="G$1" pin="+3V3"/>
+<wire x1="63.5" y1="238.76" x2="63.5" y2="241.3" width="0.1524" layer="91"/>
+<junction x="63.5" y="238.76"/>
+<pinref part="C38" gate="G$1" pin="1"/>
+<wire x1="68.58" y1="236.22" x2="68.58" y2="238.76" width="0.1524" layer="91"/>
+<junction x="68.58" y="238.76"/>
 </segment>
 </net>
 <net name="VBATT" class="0">
@@ -18659,11 +18944,13 @@ DIN A3, landscape with location and doc. field</description>
 <net name="RPIROMSDA" class="0">
 <segment>
 <pinref part="R45" gate="G$1" pin="1"/>
-<wire x1="71.12" y1="226.06" x2="71.12" y2="223.52" width="0.1524" layer="91"/>
+<wire x1="76.2" y1="226.06" x2="76.2" y2="223.52" width="0.1524" layer="91"/>
 <label x="33.02" y="142.24" size="1.778" layer="95"/>
 <pinref part="U4" gate="G$1" pin="SDA"/>
-<wire x1="71.12" y1="223.52" x2="60.96" y2="223.52" width="0.1524" layer="91"/>
-<label x="60.96" y="223.52" size="1.778" layer="95"/>
+<wire x1="76.2" y1="223.52" x2="60.96" y2="223.52" width="0.1524" layer="91"/>
+<label x="86.36" y="223.52" size="1.778" layer="95"/>
+<wire x1="93.98" y1="223.52" x2="76.2" y2="223.52" width="0.1524" layer="91"/>
+<junction x="76.2" y="223.52"/>
 </segment>
 <segment>
 <pinref part="J2" gate="A" pin="27"/>
@@ -18788,10 +19075,10 @@ DIN A3, landscape with location and doc. field</description>
 <pinref part="ENCODER" gate="-4" pin="S"/>
 <wire x1="337.82" y1="193.04" x2="335.28" y2="193.04" width="0.1524" layer="91"/>
 <pinref part="R27" gate="G$1" pin="1"/>
-<wire x1="335.28" y1="193.04" x2="317.5" y2="193.04" width="0.1524" layer="91"/>
+<wire x1="335.28" y1="193.04" x2="325.12" y2="193.04" width="0.1524" layer="91"/>
 <wire x1="335.28" y1="198.12" x2="335.28" y2="193.04" width="0.1524" layer="91"/>
 <junction x="335.28" y="193.04"/>
-<label x="320.04" y="193.04" size="1.778" layer="95"/>
+<label x="325.12" y="193.04" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="D13" class="0">
@@ -18912,10 +19199,10 @@ DIN A3, landscape with location and doc. field</description>
 <pinref part="ENCODER" gate="-3" pin="S"/>
 <wire x1="337.82" y1="195.58" x2="330.2" y2="195.58" width="0.1524" layer="91"/>
 <pinref part="R26" gate="G$1" pin="1"/>
-<wire x1="330.2" y1="195.58" x2="317.5" y2="195.58" width="0.1524" layer="91"/>
+<wire x1="330.2" y1="195.58" x2="325.12" y2="195.58" width="0.1524" layer="91"/>
 <wire x1="330.2" y1="198.12" x2="330.2" y2="195.58" width="0.1524" layer="91"/>
 <junction x="330.2" y="195.58"/>
-<label x="320.04" y="195.58" size="1.778" layer="95"/>
+<label x="325.12" y="195.58" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="D1" class="0">
@@ -19224,10 +19511,12 @@ DIN A3, landscape with location and doc. field</description>
 </segment>
 <segment>
 <pinref part="R46" gate="G$1" pin="1"/>
-<wire x1="78.74" y1="226.06" x2="78.74" y2="220.98" width="0.1524" layer="91"/>
+<wire x1="83.82" y1="226.06" x2="83.82" y2="220.98" width="0.1524" layer="91"/>
 <pinref part="U4" gate="G$1" pin="SCL"/>
-<wire x1="78.74" y1="220.98" x2="60.96" y2="220.98" width="0.1524" layer="91"/>
-<label x="60.96" y="220.98" size="1.778" layer="95"/>
+<wire x1="83.82" y1="220.98" x2="60.96" y2="220.98" width="0.1524" layer="91"/>
+<label x="86.36" y="220.98" size="1.778" layer="95"/>
+<wire x1="93.98" y1="220.98" x2="83.82" y2="220.98" width="0.1524" layer="91"/>
+<junction x="83.82" y="220.98"/>
 </segment>
 </net>
 </nets>
