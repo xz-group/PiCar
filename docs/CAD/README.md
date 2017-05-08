@@ -6,7 +6,7 @@ to access the Pi Car Assembly.
 
 ![Alt text](/docs/CAD/onshape_assembly.png?raw=true "Onshape CAD Layout")
 
-4. Opening the link will take you to the Pi Car Assembly file as seen in the above image. If you are using the credentials provided, you have edit access to this assembly and all the part files. If you are using a new user account, you can create a copy of the assembly and edit it that way.
+4. Opening the link will take you to the Pi Car Assembly file as seen in the above image. If you are using the credentials provided, you will have 'edit' access to this assembly and all the part files. If you are using a new user account, you can create a copy of the assembly and edit it that way.
 
 5. To learn Onshape, go to https://www.onshape.com/learn/learn-cad.
 
@@ -14,6 +14,6 @@ to access the Pi Car Assembly.
 6. The above image shows how to access each part, assembly, sub-assembly or drawing.
 
 ![Alt text](/docs/CAD/onshape_drawing_dimensions.png?raw=true "Onshape Drawing Basics")
-7. The best way to check the dimensions is to go to the respective part or assembly's drawing like shown in the above figure. To check a particular dimension, use the point-to-point, point-to-line, line-to-line, angle, etc. dimension tool, and click on a pair of points/lines.
+7. The best way to check the dimensions (distance or angle between parts) is to go to the respective part or assembly's drawing like shown in the above figure. To check a particular dimension, use the point-to-point, point-to-line, line-to-line, angle, etc. dimension tool, and click on a pair of points/lines.
 
 
