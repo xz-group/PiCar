@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
@@ -1597,7 +1597,7 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <wire x1="-6.35" y1="2.54" x2="-6.35" y2="-5.08" width="0.254" layer="94"/>
 <wire x1="-6.35" y1="-5.08" x2="1.27" y2="-5.08" width="0.254" layer="94"/>
 <wire x1="1.27" y1="-5.08" x2="1.27" y2="2.54" width="0.254" layer="94"/>
-<text x="-6.35" y="3.81" size="1.27" layer="95">&gt;NAME</text>
+<text x="-6.35" y="3.81" size="1.6764" layer="95">&gt;NAME</text>
 </symbol>
 <symbol name="P-MOSFET">
 <description>&lt;B&gt;P-MOSFET&lt;/B&gt;</description>
@@ -1751,20 +1751,20 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <pin name="SDA1" x="20.32" y="-55.88" length="middle" rot="R180"/>
 </symbol>
 <symbol name="BTN89X2TA">
-<wire x1="0" y1="0" x2="17.78" y2="0" width="0.254" layer="94"/>
-<wire x1="17.78" y1="0" x2="17.78" y2="-22.86" width="0.254" layer="94"/>
-<wire x1="17.78" y1="-22.86" x2="0" y2="-22.86" width="0.254" layer="94"/>
-<wire x1="0" y1="-22.86" x2="0" y2="0" width="0.254" layer="94"/>
-<text x="0" y="1.27" size="1.778" layer="95">&gt;NAME</text>
-<text x="0" y="-26.035" size="1.778" layer="96">&gt;VALUE</text>
-<pin name="IS" x="-5.08" y="-5.08" length="middle" direction="out"/>
-<pin name="IN" x="-5.08" y="-10.16" length="middle" direction="in"/>
-<pin name="VS" x="22.86" y="-2.54" length="middle" direction="pwr" rot="R180"/>
-<pin name="INH" x="-5.08" y="-12.7" length="middle" direction="in"/>
-<pin name="SR" x="-5.08" y="-17.78" length="middle" direction="in"/>
-<pin name="GND" x="22.86" y="-20.32" length="middle" direction="pwr" rot="R180"/>
-<pin name="OUT1" x="22.86" y="-10.16" length="middle" direction="out" rot="R180"/>
-<pin name="OUT2" x="22.86" y="-12.7" length="middle" direction="out" rot="R180"/>
+<wire x1="-7.62" y1="10.16" x2="10.16" y2="10.16" width="0.254" layer="94"/>
+<wire x1="10.16" y1="10.16" x2="10.16" y2="-10.16" width="0.254" layer="94"/>
+<wire x1="10.16" y1="-10.16" x2="-7.62" y2="-10.16" width="0.254" layer="94"/>
+<wire x1="-7.62" y1="-10.16" x2="-7.62" y2="10.16" width="0.254" layer="94"/>
+<text x="-7.62" y="11.43" size="1.6764" layer="95">&gt;NAME</text>
+<text x="-7.62" y="-12.7" size="1.6764" layer="96">&gt;VALUE</text>
+<pin name="IS" x="-12.7" y="7.62" length="middle" direction="out"/>
+<pin name="IN" x="-12.7" y="2.54" length="middle" direction="in"/>
+<pin name="VS" x="15.24" y="7.62" length="middle" direction="pwr" rot="R180"/>
+<pin name="INH" x="-12.7" y="-2.54" length="middle" direction="in"/>
+<pin name="SR" x="-12.7" y="-7.62" length="middle" direction="in"/>
+<pin name="GND" x="15.24" y="-7.62" length="middle" direction="pwr" rot="R180"/>
+<pin name="OUT1" x="15.24" y="2.54" length="middle" direction="out" rot="R180"/>
+<pin name="OUT2" x="15.24" y="-2.54" length="middle" direction="out" rot="R180"/>
 </symbol>
 <symbol name="HEADER_3CIRC">
 <pin name="P1" x="0" y="0" visible="pad" length="short" direction="pwr" function="dot"/>
@@ -1773,7 +1773,7 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <wire x1="-3.81" y1="2.54" x2="-3.81" y2="-7.48" width="0.254" layer="94"/>
 <wire x1="-3.81" y1="-7.48" x2="3.81" y2="-7.48" width="0.254" layer="94"/>
 <wire x1="3.81" y1="-7.48" x2="3.81" y2="2.54" width="0.254" layer="94"/>
-<text x="-3.81" y="3.81" size="1.27" layer="95">&gt;NAME</text>
+<text x="-3.81" y="3.81" size="1.6764" layer="95">&gt;NAME</text>
 <pin name="P3" x="0" y="-5.08" visible="pad" length="short" direction="pwr" function="dot"/>
 </symbol>
 <symbol name="SEEEDUINO">
@@ -2083,23 +2083,24 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <pin name="EN" x="10.16" y="-7.62" length="short" direction="in" rot="R180"/>
 <pin name="NC" x="-12.7" y="-5.08" length="short" direction="nc"/>
 </symbol>
-<symbol name="NPN">
-<wire x1="2.54" y1="2.54" x2="0.508" y2="1.524" width="0.1524" layer="94"/>
-<wire x1="1.778" y1="-1.524" x2="2.54" y2="-2.54" width="0.1524" layer="94"/>
-<wire x1="2.54" y1="-2.54" x2="1.27" y2="-2.54" width="0.1524" layer="94"/>
-<wire x1="1.27" y1="-2.54" x2="1.778" y2="-1.524" width="0.1524" layer="94"/>
-<wire x1="1.54" y1="-2.04" x2="0.308" y2="-1.424" width="0.1524" layer="94"/>
-<wire x1="1.524" y1="-2.413" x2="2.286" y2="-2.413" width="0.254" layer="94"/>
-<wire x1="2.286" y1="-2.413" x2="1.778" y2="-1.778" width="0.254" layer="94"/>
-<wire x1="1.778" y1="-1.778" x2="1.524" y2="-2.286" width="0.254" layer="94"/>
-<wire x1="1.524" y1="-2.286" x2="1.905" y2="-2.286" width="0.254" layer="94"/>
-<wire x1="1.905" y1="-2.286" x2="1.778" y2="-2.032" width="0.254" layer="94"/>
-<text x="-10.16" y="7.62" size="1.778" layer="95">&gt;NAME</text>
-<text x="-10.16" y="5.08" size="1.778" layer="96">&gt;VALUE</text>
+<symbol name="PNP">
+<wire x1="2.0861" y1="1.6779" x2="1.5781" y2="2.5941" width="0.1524" layer="94"/>
+<wire x1="1.5781" y1="2.5941" x2="0.5159" y2="1.478" width="0.1524" layer="94"/>
+<wire x1="0.5159" y1="1.478" x2="2.0861" y2="1.6779" width="0.1524" layer="94"/>
+<wire x1="2.54" y1="2.54" x2="1.808" y2="2.1239" width="0.1524" layer="94"/>
+<wire x1="2.54" y1="-2.54" x2="0.508" y2="-1.524" width="0.1524" layer="94"/>
+<wire x1="1.905" y1="1.778" x2="1.524" y2="2.413" width="0.254" layer="94"/>
+<wire x1="1.524" y1="2.413" x2="0.762" y2="1.651" width="0.254" layer="94"/>
+<wire x1="0.762" y1="1.651" x2="1.778" y2="1.778" width="0.254" layer="94"/>
+<wire x1="1.778" y1="1.778" x2="1.524" y2="2.159" width="0.254" layer="94"/>
+<wire x1="1.524" y1="2.159" x2="1.143" y2="1.905" width="0.254" layer="94"/>
+<wire x1="1.143" y1="1.905" x2="1.524" y2="1.905" width="0.254" layer="94"/>
+<text x="-10.16" y="7.62" size="1.6764" layer="95">&gt;NAME</text>
+<text x="-10.16" y="5.08" size="1.6764" layer="96">&gt;VALUE</text>
 <rectangle x1="-0.254" y1="-2.54" x2="0.508" y2="2.54" layer="94"/>
-<pin name="B" x="-2.54" y="0" visible="off" length="short" direction="pas" swaplevel="1"/>
-<pin name="E" x="2.54" y="-5.08" visible="off" length="short" direction="pas" swaplevel="3" rot="R90"/>
-<pin name="C" x="2.54" y="5.08" visible="off" length="short" direction="pas" swaplevel="2" rot="R270"/>
+<pin name="B" x="-2.54" y="0" visible="off" length="short" direction="pas"/>
+<pin name="E" x="2.54" y="5.08" visible="off" length="short" direction="pas" rot="R270"/>
+<pin name="C" x="2.54" y="-5.08" visible="off" length="short" direction="pas" rot="R90"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -2244,18 +2245,18 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <deviceset name="MMDT5401">
 <description>&lt;B&gt;150V DUAL PNP SMALL SIGNAL TRANSISTOR IN SOT363</description>
 <gates>
-<gate name="G$1" symbol="NPN" x="0" y="-15.24"/>
-<gate name="G$2" symbol="NPN" x="17.78" y="-15.24"/>
+<gate name="T1" symbol="PNP" x="0" y="-15.24"/>
+<gate name="T2" symbol="PNP" x="17.78" y="-15.24"/>
 </gates>
 <devices>
 <device name="" package="SOT363">
 <connects>
-<connect gate="G$1" pin="B" pad="2"/>
-<connect gate="G$1" pin="C" pad="6"/>
-<connect gate="G$1" pin="E" pad="1"/>
-<connect gate="G$2" pin="B" pad="5"/>
-<connect gate="G$2" pin="C" pad="3"/>
-<connect gate="G$2" pin="E" pad="4"/>
+<connect gate="T1" pin="B" pad="2"/>
+<connect gate="T1" pin="C" pad="6"/>
+<connect gate="T1" pin="E" pad="1"/>
+<connect gate="T2" pin="B" pad="5"/>
+<connect gate="T2" pin="C" pad="3"/>
+<connect gate="T2" pin="E" pad="4"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -2286,7 +2287,7 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="IPD90P03P4L_04">
+<deviceset name="IPD90P03P4L-04">
 <description>&lt;B&gt;IPD90P03P4L_04&lt;/B&gt;&lt;P&gt;PG-TO-3-11&lt;P&gt;P-MOSFET&lt;P&gt;REVERSE BATTERY PROTECTION</description>
 <gates>
 <gate name="G$1" symbol="P-MOSFET" x="0" y="0"/>
