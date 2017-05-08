@@ -7,6 +7,9 @@ to accessthe Pi Car Assembly.
 ![Alt text](/docs/CAD/onshape_cad_basics.png?raw=true "Onshape CAD Layout")
 
 4. If you want to learn to use Onshape, go to https://www.onshape.com/learn/learn-cad.
-5. 
+
+[Alt text](/docs/CAD/onshape_assembly_details.png?raw=true "Onshape CAD Layout")
+
+[Alt text](/docs/CAD/onshape_drawing_dimensions.png?raw=true "Onshape CAD Layout")
 
 
