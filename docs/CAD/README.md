@@ -10,12 +10,10 @@ to access the Pi Car Assembly.
 
 5. To learn Onshape, go to https://www.onshape.com/learn/learn-cad.
 
-![Alt text](/docs/CAD/onshape_assembly_basics.png?raw=true "Onshape CAD Layout")
-
+![Alt text](/docs/CAD/onshape_assembly_basics.png?raw=true "Onshape Assembly Basics")
 6. The above image shows how to access each part, assembly, sub-assembly or drawing.
 
-![Alt text](/docs/CAD/onshape_drawing_dimensions.png?raw=true "Onshape CAD Layout")
-
+![Alt text](/docs/CAD/onshape_drawing_dimensions.png?raw=true "Onshape Drawing Basics")
 7. The best way to check the dimensions is to go to the respective part or assembly's drawing like shown in the above figure. To check a particular dimension, use the point-to-point, point-to-line, line-to-line, angle, etc. dimension tool, and click on a pair of points/lines.
 
 
