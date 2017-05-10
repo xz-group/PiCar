@@ -15890,8 +15890,8 @@ DIN A3, landscape with location and doc. field</description>
 <attribute name="VALUE" x="362.458" y="171.577" size="1.778" layer="96"/>
 </instance>
 <instance part="IMU" gate="-2" x="340.36" y="157.48"/>
-<instance part="IMU" gate="-3" x="365.76" y="152.4"/>
-<instance part="IMU" gate="-4" x="365.76" y="165.1"/>
+<instance part="IMU" gate="-3" x="365.76" y="165.1"/>
+<instance part="IMU" gate="-4" x="365.76" y="152.4"/>
 <instance part="GND40" gate="1" x="360.68" y="147.32"/>
 <instance part="+3V2" gate="G$1" x="360.68" y="170.18"/>
 <instance part="C33" gate="G$1" x="360.68" y="160.02"/>
@@ -16054,12 +16054,12 @@ DIN A3, landscape with location and doc. field</description>
 <instance part="FRAME1" gate="G$1" x="0" y="0"/>
 <instance part="C25" gate="G$1" x="360.68" y="195.58"/>
 <instance part="C26" gate="G$1" x="360.68" y="233.68"/>
-<instance part="SERVO" gate="-1" x="365.76" y="238.76" smashed="yes">
-<attribute name="NAME" x="368.3" y="237.998" size="1.524" layer="95"/>
+<instance part="SERVO" gate="-1" x="365.76" y="226.06" smashed="yes">
+<attribute name="NAME" x="368.3" y="225.298" size="1.524" layer="95"/>
 <attribute name="VALUE" x="362.458" y="245.237" size="1.778" layer="96"/>
 </instance>
-<instance part="SERVO" gate="-2" x="340.36" y="233.68"/>
-<instance part="SERVO" gate="-3" x="365.76" y="226.06"/>
+<instance part="SERVO" gate="-2" x="365.76" y="238.76"/>
+<instance part="SERVO" gate="-3" x="340.36" y="233.68"/>
 <instance part="C27" gate="G$1" x="360.68" y="121.92"/>
 <instance part="P+13" gate="1" x="335.28" y="137.16"/>
 <instance part="P+14" gate="1" x="360.68" y="99.06"/>
@@ -16391,12 +16391,12 @@ DIN A3, landscape with location and doc. field</description>
 <wire x1="160.02" y1="63.5" x2="160.02" y2="60.96" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<wire x1="360.68" y1="226.06" x2="360.68" y2="223.52" width="0.1524" layer="91"/>
 <pinref part="GND16" gate="1" pin="GND"/>
-<pinref part="SERVO" gate="-3" pin="S"/>
-<wire x1="363.22" y1="226.06" x2="360.68" y2="226.06" width="0.1524" layer="91"/>
 <pinref part="C26" gate="G$1" pin="2"/>
+<wire x1="360.68" y1="223.52" x2="360.68" y2="226.06" width="0.1524" layer="91"/>
+<pinref part="SERVO" gate="-1" pin="S"/>
 <wire x1="360.68" y1="226.06" x2="360.68" y2="228.6" width="0.1524" layer="91"/>
+<wire x1="363.22" y1="226.06" x2="360.68" y2="226.06" width="0.1524" layer="91"/>
 <junction x="360.68" y="226.06"/>
 </segment>
 <segment>
@@ -16441,11 +16441,11 @@ DIN A3, landscape with location and doc. field</description>
 </segment>
 <segment>
 <pinref part="C33" gate="G$1" pin="2"/>
-<wire x1="360.68" y1="154.94" x2="360.68" y2="152.4" width="0.1524" layer="91"/>
-<pinref part="IMU" gate="-3" pin="S"/>
-<wire x1="360.68" y1="152.4" x2="363.22" y2="152.4" width="0.1524" layer="91"/>
 <pinref part="GND40" gate="1" pin="GND"/>
+<wire x1="360.68" y1="154.94" x2="360.68" y2="152.4" width="0.1524" layer="91"/>
+<pinref part="IMU" gate="-4" pin="S"/>
 <wire x1="360.68" y1="152.4" x2="360.68" y2="149.86" width="0.1524" layer="91"/>
+<wire x1="363.22" y1="152.4" x2="360.68" y2="152.4" width="0.1524" layer="91"/>
 <junction x="360.68" y="152.4"/>
 </segment>
 <segment>
@@ -16641,7 +16641,7 @@ DIN A3, landscape with location and doc. field</description>
 <pinref part="P+3" gate="1" pin="+5V"/>
 <pinref part="C26" gate="G$1" pin="1"/>
 <wire x1="360.68" y1="241.3" x2="360.68" y2="238.76" width="0.1524" layer="91"/>
-<pinref part="SERVO" gate="-1" pin="S"/>
+<pinref part="SERVO" gate="-2" pin="S"/>
 <wire x1="360.68" y1="238.76" x2="360.68" y2="236.22" width="0.1524" layer="91"/>
 <wire x1="363.22" y1="238.76" x2="360.68" y2="238.76" width="0.1524" layer="91"/>
 <junction x="360.68" y="238.76"/>
@@ -16817,12 +16817,12 @@ DIN A3, landscape with location and doc. field</description>
 <junction x="238.76" y="185.42"/>
 </segment>
 <segment>
-<pinref part="IMU" gate="-4" pin="S"/>
 <pinref part="+3V2" gate="G$1" pin="+3V3"/>
-<wire x1="363.22" y1="165.1" x2="360.68" y2="165.1" width="0.1524" layer="91"/>
-<wire x1="360.68" y1="165.1" x2="360.68" y2="167.64" width="0.1524" layer="91"/>
 <pinref part="C33" gate="G$1" pin="1"/>
+<wire x1="360.68" y1="167.64" x2="360.68" y2="165.1" width="0.1524" layer="91"/>
+<pinref part="IMU" gate="-3" pin="S"/>
 <wire x1="360.68" y1="165.1" x2="360.68" y2="162.56" width="0.1524" layer="91"/>
+<wire x1="363.22" y1="165.1" x2="360.68" y2="165.1" width="0.1524" layer="91"/>
 <junction x="360.68" y="165.1"/>
 </segment>
 <segment>
@@ -17068,7 +17068,7 @@ DIN A3, landscape with location and doc. field</description>
 <segment>
 <wire x1="330.2" y1="233.68" x2="337.82" y2="233.68" width="0.1524" layer="91"/>
 <label x="330.2" y="233.68" size="1.778" layer="95"/>
-<pinref part="SERVO" gate="-2" pin="S"/>
+<pinref part="SERVO" gate="-3" pin="S"/>
 </segment>
 </net>
 <net name="D11" class="0">

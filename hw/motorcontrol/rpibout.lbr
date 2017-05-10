@@ -52,7 +52,7 @@
 <layer number="42" name="bRestrict" color="1" fill="10" visible="yes" active="yes"/>
 <layer number="43" name="vRestrict" color="2" fill="10" visible="yes" active="yes"/>
 <layer number="44" name="Drills" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="45" name="Holes" color="7" fill="1" visible="no" active="yes"/>
+<layer number="45" name="Holes" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="46" name="Milling" color="3" fill="1" visible="yes" active="yes"/>
 <layer number="47" name="Measures" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="48" name="Document" color="7" fill="1" visible="yes" active="yes"/>
@@ -440,30 +440,6 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <vertex x="-2.5" y="-1.6"/>
 </polygon>
 </package>
-<package name="SWITCH4.5MM">
-<wire x1="1.905" y1="1.27" x2="1.905" y2="0.445" width="0.127" layer="51"/>
-<wire x1="1.905" y1="0.445" x2="2.16" y2="-0.01" width="0.127" layer="51"/>
-<wire x1="1.905" y1="-0.23" x2="1.905" y2="-1.115" width="0.127" layer="51"/>
-<wire x1="-2.25" y1="2.25" x2="2.25" y2="2.25" width="0.127" layer="51"/>
-<wire x1="2.25" y1="2.25" x2="2.25" y2="-2.25" width="0.127" layer="51"/>
-<wire x1="2.25" y1="-2.25" x2="-2.25" y2="-2.25" width="0.127" layer="51"/>
-<wire x1="-2.25" y1="-2.25" x2="-2.25" y2="2.25" width="0.127" layer="51"/>
-<wire x1="-2.2" y1="0.8" x2="-2.2" y2="-0.8" width="0.2032" layer="21"/>
-<wire x1="1.3" y1="2.2" x2="-1.3" y2="2.2" width="0.2032" layer="21"/>
-<wire x1="2.2" y1="-0.8" x2="2.2" y2="0.8" width="0.2032" layer="21"/>
-<wire x1="-1.3" y1="-2.2" x2="1.3" y2="-2.2" width="0.2032" layer="21"/>
-<wire x1="2.2" y1="0.8" x2="1.8" y2="0.8" width="0.2032" layer="21"/>
-<wire x1="2.2" y1="-0.8" x2="1.8" y2="-0.8" width="0.2032" layer="21"/>
-<wire x1="-1.8" y1="0.8" x2="-2.2" y2="0.8" width="0.2032" layer="21"/>
-<wire x1="-1.8" y1="-0.8" x2="-2.2" y2="-0.8" width="0.2032" layer="21"/>
-<circle x="0" y="0" radius="1.27" width="0.2032" layer="21"/>
-<smd name="1" x="2.225" y="1.75" dx="1.1" dy="0.7" layer="1" rot="R90"/>
-<smd name="2" x="2.225" y="-1.75" dx="1.1" dy="0.7" layer="1" rot="R90"/>
-<smd name="3" x="-2.225" y="-1.75" dx="1.1" dy="0.7" layer="1" rot="R90"/>
-<smd name="4" x="-2.225" y="1.75" dx="1.1" dy="0.7" layer="1" rot="R90"/>
-<text x="0" y="2.413" size="0.6096" layer="25" font="vector" ratio="20" align="bottom-center">&gt;Name</text>
-<text x="0" y="-2.413" size="0.6096" layer="27" font="vector" ratio="20" align="top-center">&gt;Value</text>
-</package>
 <package name="TSSOP14">
 <wire x1="-0.6" y1="2.4484" x2="0.6" y2="2.4484" width="0.2032" layer="21" curve="180" cap="flat"/>
 <wire x1="-2.1484" y1="-2.4484" x2="2.1484" y2="-2.4484" width="0.2032" layer="21"/>
@@ -567,6 +543,39 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <text x="-1.5" y="-2.5" size="1.016" layer="25">&gt;NAME</text>
 <text x="-1.5" y="-3.75" size="1.016" layer="27">&gt;VALUE</text>
 </package>
+<package name="ULTRAFIT_2CIRC_VERTCLIP">
+<description>&lt;b&gt;Molex Ultra-Fit Vertical Header, Solder Clip, 3.50mm Pitch, Single Row, 2 Circuits</description>
+<hole x="-4.25" y="-0.63" drill="2.3"/>
+<pad name="1" x="-1.75" y="0" drill="1.02" diameter="2.1844" shape="long" rot="R90"/>
+<pad name="2" x="1.75" y="0" drill="1.02" diameter="2.1844" shape="long" rot="R90"/>
+<wire x1="-5.3" y1="2.42" x2="5.3" y2="2.42" width="0.127" layer="21"/>
+<wire x1="5.3" y1="2.42" x2="5.3" y2="-2.93" width="0.127" layer="21"/>
+<wire x1="5.3" y1="-2.93" x2="-5.3" y2="-2.93" width="0.127" layer="21"/>
+<wire x1="-5.3" y1="-2.93" x2="-5.3" y2="2.42" width="0.127" layer="21"/>
+<text x="-1.75" y="-3.5" size="1.27" layer="21" rot="SR90" align="center">1</text>
+<text x="5.75" y="0" size="1.016" layer="25" rot="R90" align="top-center">&gt;NAME</text>
+<wire x1="-3.645" y1="2.42" x2="-3.645" y2="5.48" width="0.127" layer="51"/>
+<wire x1="-3.645" y1="5.48" x2="3.645" y2="5.48" width="0.127" layer="51"/>
+<wire x1="3.645" y1="5.48" x2="3.645" y2="2.42" width="0.127" layer="51"/>
+<hole x="4.25" y="-0.63" drill="2.3"/>
+</package>
+<package name="ULTRAFIT_3CIRC_VERTCLIP">
+<description>&lt;b&gt;Molex Ultra-Fit Vertical Header, Solder Clip, 3.50mm Pitch, Single Row, 3 Circuits</description>
+<hole x="-6" y="-0.63" drill="2.3"/>
+<pad name="1" x="-3.5" y="0" drill="1.02" diameter="2.1844" shape="long" rot="R90"/>
+<pad name="2" x="0" y="0" drill="1.02" diameter="2.1844" shape="long" rot="R90"/>
+<wire x1="-7.05" y1="2.42" x2="7.05" y2="2.42" width="0.127" layer="21"/>
+<wire x1="7.05" y1="2.42" x2="7.05" y2="-2.93" width="0.127" layer="21"/>
+<wire x1="7.05" y1="-2.93" x2="-7.05" y2="-2.93" width="0.127" layer="21"/>
+<wire x1="-7.05" y1="-2.93" x2="-7.05" y2="2.42" width="0.127" layer="21"/>
+<text x="-3.5" y="-3.5" size="1.27" layer="21" rot="SR90" align="center">1</text>
+<text x="7.5" y="0" size="1.016" layer="25" rot="R90" align="top-center">&gt;NAME</text>
+<wire x1="-3.645" y1="2.42" x2="-3.645" y2="5.48" width="0.127" layer="51"/>
+<wire x1="-3.645" y1="5.48" x2="3.645" y2="5.48" width="0.127" layer="51"/>
+<wire x1="3.645" y1="5.48" x2="3.645" y2="2.42" width="0.127" layer="51"/>
+<hole x="6" y="-0.63" drill="2.3"/>
+<pad name="3" x="3.5" y="0" drill="1.02" diameter="2.1844" shape="long" rot="R90"/>
+</package>
 </packages>
 <symbols>
 <symbol name="PTN04050C">
@@ -639,7 +648,7 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <wire x1="-6.35" y1="2.54" x2="-6.35" y2="-5.08" width="0.254" layer="94"/>
 <wire x1="-6.35" y1="-5.08" x2="1.27" y2="-5.08" width="0.254" layer="94"/>
 <wire x1="1.27" y1="-5.08" x2="1.27" y2="2.54" width="0.254" layer="94"/>
-<text x="-6.35" y="3.81" size="1.6764" layer="95">&gt;NAME</text>
+<text x="-6.35" y="3.175" size="1.6764" layer="95">&gt;NAME</text>
 </symbol>
 <symbol name="P-MOSFET">
 <description>&lt;B&gt;P-MOSFET&lt;/B&gt;</description>
@@ -722,7 +731,7 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <wire x1="-3.81" y1="2.54" x2="-3.81" y2="-7.48" width="0.254" layer="94"/>
 <wire x1="-3.81" y1="-7.48" x2="3.81" y2="-7.48" width="0.254" layer="94"/>
 <wire x1="3.81" y1="-7.48" x2="3.81" y2="2.54" width="0.254" layer="94"/>
-<text x="-3.81" y="3.81" size="1.6764" layer="95">&gt;NAME</text>
+<text x="-3.81" y="3.175" size="1.6764" layer="95">&gt;NAME</text>
 <pin name="P3" x="0" y="-5.08" visible="pad" length="short" direction="pas" function="dot"/>
 </symbol>
 <symbol name="ATMEGA32U4">
@@ -787,8 +796,8 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <wire x1="1.27" y1="1.778" x2="-1.27" y2="1.778" width="0.254" layer="94"/>
 <wire x1="1.778" y1="1.778" x2="1.778" y2="-1.778" width="0.254" layer="94"/>
 <wire x1="-1.778" y1="1.778" x2="-1.778" y2="0" width="0.254" layer="94"/>
-<text x="-3.81" y="4.572" size="1.6764" layer="95">&gt;NAME</text>
-<text x="-3.81" y="2.54" size="1.6764" layer="96">&gt;VALUE</text>
+<text x="0" y="2.54" size="1.6764" layer="95" align="bottom-center">&gt;NAME</text>
+<text x="0" y="4.572" size="1.6764" layer="96" align="bottom-center">&gt;VALUE</text>
 <pin name="3" x="2.54" y="0" visible="off" length="point" direction="pas" swaplevel="1" rot="R180"/>
 <pin name="1" x="-2.54" y="0" visible="off" length="point" direction="pas" swaplevel="1"/>
 <wire x1="-1.778" y1="0" x2="-1.778" y2="-1.778" width="0.254" layer="94"/>
@@ -860,7 +869,7 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </symbol>
 </symbols>
 <devicesets>
-<deviceset name="PTR08060W">
+<deviceset name="PTR08060W" prefix="U">
 <description>PTR08060W Texas Instruments Buck Power Module</description>
 <gates>
 <gate name="G$1" symbol="PTR08060W" x="0" y="0"/>
@@ -880,7 +889,7 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="BSS138BKS">
+<deviceset name="BSS138BKS" prefix="U">
 <description>BSS138BKS Dual N-MOSFET</description>
 <gates>
 <gate name="T1" symbol="N-MOSFET" x="-2.54" y="0"/>
@@ -902,13 +911,22 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="ULTRAFIT_2CIRC">
-<description>Molex Ultra-Fit Right Angle Header, 3.50mm Pitch, Single Row, 2 Circuits</description>
+<deviceset name="ULTRAFIT_2CIRC" prefix="J">
+<description>&lt;b&gt;Molex Ultra-Fit Right Angle Header, 3.50mm Pitch, Single Row, 2 Circuits</description>
 <gates>
 <gate name="G$1" symbol="HEADER_2CIRC" x="0" y="0"/>
 </gates>
 <devices>
-<device name="" package="ULTRAFIT_2CIRC_RANGLE">
+<device name="RANGLE" package="ULTRAFIT_2CIRC_RANGLE">
+<connects>
+<connect gate="G$1" pin="P1" pad="1"/>
+<connect gate="G$1" pin="P2" pad="2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="VCLIP" package="ULTRAFIT_2CIRC_VERTCLIP">
 <connects>
 <connect gate="G$1" pin="P1" pad="1"/>
 <connect gate="G$1" pin="P2" pad="2"/>
@@ -919,9 +937,8 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="DMG2305UX">
-<description>&lt;B&gt;DMG2305&lt;/B&gt;&lt;P&gt;
-https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
+<deviceset name="DMG2305UX" prefix="U">
+<description>&lt;B&gt;DMG2305 P-Channel MOSFET</description>
 <gates>
 <gate name="G$1" symbol="P-MOSFET" x="12.7" y="0"/>
 </gates>
@@ -938,8 +955,8 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="MMDT5401">
-<description>&lt;B&gt;150V DUAL PNP SMALL SIGNAL TRANSISTOR IN SOT363</description>
+<deviceset name="MMDT5401" prefix="U">
+<description>&lt;B&gt;Dual PNP Small Signal Transistor</description>
 <gates>
 <gate name="T1" symbol="PNP" x="0" y="-15.24"/>
 <gate name="T2" symbol="PNP" x="17.78" y="-15.24"/>
@@ -960,8 +977,8 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="CAT24C32WI-GT3">
-<description>&lt;B&gt;CAT24C32WI-GT3&lt;/B&gt;&lt;P&gt;SOIC8&lt;P&gt;http://www.onsemi.cn/PowerSolutions/document/CAT24C32-D.PDF</description>
+<deviceset name="CAT24C32WI-GT3" prefix="U">
+<description>&lt;B&gt;CAT24C32 32Kb EEPROM, SOIC-8 package</description>
 <gates>
 <gate name="G$1" symbol="CAT24C32WI-GT3" x="0" y="0"/>
 </gates>
@@ -983,8 +1000,8 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="IPD90P03P4L-04">
-<description>&lt;B&gt;IPD90P03P4L_04&lt;/B&gt;&lt;P&gt;PG-TO-3-11&lt;P&gt;P-MOSFET&lt;P&gt;REVERSE BATTERY PROTECTION</description>
+<deviceset name="IPD90P03P4L-04" prefix="U">
+<description>&lt;B&gt;IPD90P03P4L-04 P-Channel MOSFET</description>
 <gates>
 <gate name="G$1" symbol="P-MOSFET" x="0" y="0"/>
 </gates>
@@ -1001,8 +1018,8 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="BTN8982TA">
-<description>&lt;B&gt;BTN8982TA</description>
+<deviceset name="BTN8982TA" prefix="U">
+<description>&lt;B&gt;BTN8982TA High Current PN Half Bridge</description>
 <gates>
 <gate name="G$1" symbol="BTN89X2TA" x="0" y="0"/>
 </gates>
@@ -1024,12 +1041,23 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="ULTRAFIT_3CIRC">
+<deviceset name="ULTRAFIT_3CIRC" prefix="J">
+<description>&lt;b&gt;Molex Ultra-Fit Right Angle Header, 3.50mm Pitch, Single Row, 3 Circuits</description>
 <gates>
 <gate name="G$1" symbol="HEADER_3CIRC" x="0" y="0"/>
 </gates>
 <devices>
-<device name="" package="ULTRAFIT_3CIRC_RANGLE">
+<device name="RANGLE" package="ULTRAFIT_3CIRC_RANGLE">
+<connects>
+<connect gate="G$1" pin="P1" pad="1"/>
+<connect gate="G$1" pin="P2" pad="2"/>
+<connect gate="G$1" pin="P3" pad="3"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="VCLIP" package="ULTRAFIT_3CIRC_VERTCLIP">
 <connects>
 <connect gate="G$1" pin="P1" pad="1"/>
 <connect gate="G$1" pin="P2" pad="2"/>
@@ -1041,7 +1069,8 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="ATMEGA32U4">
+<deviceset name="ATMEGA32U4" prefix="U">
+<description>&lt;b&gt;ATMEL Mega 32U4 Microcontroller</description>
 <gates>
 <gate name="G$1" symbol="ATMEGA32U4" x="0" y="0"/>
 </gates>
@@ -1099,7 +1128,8 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="CRYSTAL">
+<deviceset name="CRYSTAL" prefix="XTAL" uservalue="yes">
+<description>&lt;b&gt;ABM3B Ceramic SMD Crystal</description>
 <gates>
 <gate name="G$1" symbol="CRYSTAL" x="0" y="0"/>
 </gates>
@@ -1116,23 +1146,8 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="SWITCH">
-<gates>
-<gate name="G$1" symbol="SWITCH" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="SWITCH4.5MM">
-<connects>
-<connect gate="G$1" pin="1" pad="2 3"/>
-<connect gate="G$1" pin="2" pad="1 4"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-<deviceset name="ADG3304">
+<deviceset name="ADG3304" prefix="U">
+<description>&lt;b&gt;ADG3304 Analog Devices Bidirectional Voltage Level Translator</description>
 <gates>
 <gate name="G$1" symbol="ADG3304" x="0" y="0"/>
 </gates>
@@ -1160,7 +1175,8 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="SMAZX">
+<deviceset name="SMAZX" prefix="D" uservalue="yes">
+<description>&lt;b&gt;SMAZxx Zener Diode</description>
 <gates>
 <gate name="G$1" symbol="ZD" x="0" y="0"/>
 </gates>
@@ -1176,7 +1192,8 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="B3U-3000P-B">
+<deviceset name="B3U-3000P-B" prefix="J">
+<description>&lt;b&gt;B3U Ultra-small Switch, side actuated, with boss</description>
 <gates>
 <gate name="G$1" symbol="SWITCH" x="0" y="0"/>
 </gates>
