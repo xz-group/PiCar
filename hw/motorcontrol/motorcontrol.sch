@@ -11508,30 +11508,6 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <rectangle x1="-3.4" y1="4.95" x2="-3" y2="6.1001" layer="51"/>
 <rectangle x1="-4.1999" y1="4.95" x2="-3.8001" y2="6.1001" layer="51"/>
 </package>
-<package name="SWITCH4.5MM">
-<wire x1="1.905" y1="1.27" x2="1.905" y2="0.445" width="0.127" layer="51"/>
-<wire x1="1.905" y1="0.445" x2="2.16" y2="-0.01" width="0.127" layer="51"/>
-<wire x1="1.905" y1="-0.23" x2="1.905" y2="-1.115" width="0.127" layer="51"/>
-<wire x1="-2.25" y1="2.25" x2="2.25" y2="2.25" width="0.127" layer="51"/>
-<wire x1="2.25" y1="2.25" x2="2.25" y2="-2.25" width="0.127" layer="51"/>
-<wire x1="2.25" y1="-2.25" x2="-2.25" y2="-2.25" width="0.127" layer="51"/>
-<wire x1="-2.25" y1="-2.25" x2="-2.25" y2="2.25" width="0.127" layer="51"/>
-<wire x1="-2.2" y1="0.8" x2="-2.2" y2="-0.8" width="0.2032" layer="21"/>
-<wire x1="1.3" y1="2.2" x2="-1.3" y2="2.2" width="0.2032" layer="21"/>
-<wire x1="2.2" y1="-0.8" x2="2.2" y2="0.8" width="0.2032" layer="21"/>
-<wire x1="-1.3" y1="-2.2" x2="1.3" y2="-2.2" width="0.2032" layer="21"/>
-<wire x1="2.2" y1="0.8" x2="1.8" y2="0.8" width="0.2032" layer="21"/>
-<wire x1="2.2" y1="-0.8" x2="1.8" y2="-0.8" width="0.2032" layer="21"/>
-<wire x1="-1.8" y1="0.8" x2="-2.2" y2="0.8" width="0.2032" layer="21"/>
-<wire x1="-1.8" y1="-0.8" x2="-2.2" y2="-0.8" width="0.2032" layer="21"/>
-<circle x="0" y="0" radius="1.27" width="0.2032" layer="21"/>
-<smd name="1" x="2.225" y="1.75" dx="1.1" dy="0.7" layer="1" rot="R90"/>
-<smd name="2" x="2.225" y="-1.75" dx="1.1" dy="0.7" layer="1" rot="R90"/>
-<smd name="3" x="-2.225" y="-1.75" dx="1.1" dy="0.7" layer="1" rot="R90"/>
-<smd name="4" x="-2.225" y="1.75" dx="1.1" dy="0.7" layer="1" rot="R90"/>
-<text x="0" y="2.413" size="0.6096" layer="25" font="vector" ratio="20" align="bottom-center">&gt;Name</text>
-<text x="0" y="-2.413" size="0.6096" layer="27" font="vector" ratio="20" align="top-center">&gt;Value</text>
-</package>
 <package name="TSSOP14">
 <wire x1="-0.6" y1="2.4484" x2="0.6" y2="2.4484" width="0.2032" layer="21" curve="180" cap="flat"/>
 <wire x1="-2.1484" y1="-2.4484" x2="2.1484" y2="-2.4484" width="0.2032" layer="21"/>
@@ -11690,6 +11666,26 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <text x="-2.25" y="-2.75" size="1.016" layer="27">&gt;VALUE</text>
 <rectangle x1="-2.3" y1="-0.815" x2="-1.54" y2="0.815" layer="51"/>
 <rectangle x1="1.54" y1="-0.815" x2="2.3" y2="0.815" layer="51"/>
+</package>
+<package name="B3U-3000P-B">
+<smd name="1" x="-1.7" y="0" dx="0.8" dy="1.7" layer="1"/>
+<smd name="2" x="1.7" y="0" dx="0.8" dy="1.7" layer="1"/>
+<hole x="0" y="0" drill="0.75"/>
+<rectangle x1="-2" y1="-0.7" x2="-1.5" y2="0.7" layer="51"/>
+<rectangle x1="1.5" y1="-0.7" x2="2" y2="0.7" layer="51"/>
+<wire x1="-1.5" y1="-1.25" x2="-1.5" y2="1.25" width="0.127" layer="51"/>
+<wire x1="-1.5" y1="1.25" x2="-0.85" y2="1.25" width="0.127" layer="51"/>
+<wire x1="-0.85" y1="1.25" x2="0.85" y2="1.25" width="0.127" layer="51"/>
+<wire x1="0.85" y1="1.25" x2="1.5" y2="1.25" width="0.127" layer="51"/>
+<wire x1="1.5" y1="1.25" x2="1.5" y2="-1.25" width="0.127" layer="51"/>
+<wire x1="1.5" y1="-1.25" x2="-1.5" y2="-1.25" width="0.127" layer="51"/>
+<wire x1="-0.85" y1="1.25" x2="-0.85" y2="1.65" width="0.127" layer="51"/>
+<wire x1="-0.85" y1="1.65" x2="-0.45" y2="1.95" width="0.127" layer="51"/>
+<wire x1="-0.45" y1="1.95" x2="0.45" y2="1.95" width="0.127" layer="51"/>
+<wire x1="0.45" y1="1.95" x2="0.85" y2="1.65" width="0.127" layer="51"/>
+<wire x1="0.85" y1="1.65" x2="0.85" y2="1.25" width="0.127" layer="51"/>
+<text x="-1.5" y="-2.5" size="1.016" layer="25">&gt;NAME</text>
+<text x="-1.5" y="-3.75" size="1.016" layer="27">&gt;VALUE</text>
 </package>
 </packages>
 <symbols>
@@ -11858,16 +11854,6 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <pin name="GND2" x="-25.4" y="-33.02" length="middle"/>
 <pin name="GND3" x="-25.4" y="-35.56" length="middle"/>
 </symbol>
-<symbol name="SWITCH">
-<wire x1="1.905" y1="0" x2="2.54" y2="0" width="0.254" layer="94"/>
-<wire x1="-2.54" y1="0" x2="1.905" y2="1.27" width="0.254" layer="94"/>
-<circle x="-2.54" y="0" radius="0.127" width="0.4064" layer="94"/>
-<circle x="2.54" y="0" radius="0.127" width="0.4064" layer="94"/>
-<text x="0" y="1.524" size="1.778" layer="95" font="vector" align="bottom-center">&gt;NAME</text>
-<text x="0" y="-0.508" size="1.778" layer="96" font="vector" align="top-center">&gt;VALUE</text>
-<pin name="1" x="-5.08" y="0" visible="off" length="short" direction="pas" swaplevel="2"/>
-<pin name="2" x="5.08" y="0" visible="off" length="short" direction="pas" swaplevel="1" rot="R180"/>
-</symbol>
 <symbol name="ADG3304">
 <wire x1="-10.16" y1="10.16" x2="7.62" y2="10.16" width="0.254" layer="94"/>
 <wire x1="7.62" y1="10.16" x2="7.62" y2="-10.16" width="0.254" layer="94"/>
@@ -11970,6 +11956,16 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <text x="-1.778" y="-3.429" size="1.6764" layer="96">&gt;VALUE</text>
 <pin name="A" x="-2.54" y="0" visible="off" length="short" direction="pas"/>
 <pin name="C" x="2.54" y="0" visible="off" length="short" direction="pas" rot="R180"/>
+</symbol>
+<symbol name="SWITCH">
+<wire x1="1.905" y1="0" x2="2.54" y2="0" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="0" x2="1.905" y2="1.27" width="0.254" layer="94"/>
+<circle x="-2.54" y="0" radius="0.127" width="0.4064" layer="94"/>
+<circle x="2.54" y="0" radius="0.127" width="0.4064" layer="94"/>
+<text x="0" y="1.524" size="1.6764" layer="95" align="bottom-center">&gt;NAME</text>
+<text x="0" y="-0.508" size="1.6764" layer="96" align="top-center">&gt;VALUE</text>
+<pin name="1" x="-5.08" y="0" visible="off" length="short" direction="pas" swaplevel="2"/>
+<pin name="2" x="5.08" y="0" visible="off" length="short" direction="pas" swaplevel="1" rot="R180"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -12129,22 +12125,6 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="SWITCH">
-<gates>
-<gate name="G$1" symbol="SWITCH" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="SWITCH4.5MM">
-<connects>
-<connect gate="G$1" pin="1" pad="2 3"/>
-<connect gate="G$1" pin="2" pad="1 4"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
 <deviceset name="ADG3304">
 <gates>
 <gate name="G$1" symbol="ADG3304" x="0" y="0"/>
@@ -12282,6 +12262,22 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <connects>
 <connect gate="G$1" pin="A" pad="A"/>
 <connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="B3U-3000P-B">
+<gates>
+<gate name="G$1" symbol="SWITCH" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="B3U-3000P-B">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="2"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -15723,7 +15719,6 @@ DIN A3, landscape with location and doc. field</description>
 <part name="+3V1" library="supply1" deviceset="+3V3" device=""/>
 <part name="+3V7" library="supply1" deviceset="+3V3" device=""/>
 <part name="P+8" library="supply1" deviceset="+5V" device=""/>
-<part name="J3" library="rpibout" deviceset="SWITCH" device=""/>
 <part name="P+1" library="supply1" deviceset="+5V" device=""/>
 <part name="GND24" library="supply1" deviceset="GND" device=""/>
 <part name="C22" library="resistor" deviceset="C-US" device="C1206" value="0.1u"/>
@@ -15778,6 +15773,7 @@ DIN A3, landscape with location and doc. field</description>
 <part name="C16" library="resistor" deviceset="CPOL-US" device="E5-10.5" value="1000u"/>
 <part name="U12" library="rpibout" deviceset="CRYSTAL" device=""/>
 <part name="D2" library="rpibout" deviceset="SMAZX" device=""/>
+<part name="J3" library="rpibout" deviceset="B3U-3000P-B" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -16023,7 +16019,6 @@ DIN A3, landscape with location and doc. field</description>
 <instance part="+3V1" gate="G$1" x="281.94" y="241.3"/>
 <instance part="+3V7" gate="G$1" x="281.94" y="218.44"/>
 <instance part="P+8" gate="1" x="259.08" y="218.44"/>
-<instance part="J3" gate="G$1" x="121.92" y="218.44" rot="R90"/>
 <instance part="P+1" gate="1" x="121.92" y="246.38"/>
 <instance part="GND24" gate="1" x="121.92" y="208.28"/>
 <instance part="C22" gate="G$1" x="114.3" y="236.22"/>
@@ -16093,6 +16088,7 @@ DIN A3, landscape with location and doc. field</description>
 <instance part="C16" gate="G$1" x="81.28" y="35.56"/>
 <instance part="U12" gate="G$1" x="129.54" y="175.26" rot="R270"/>
 <instance part="D2" gate="G$1" x="71.12" y="33.02" rot="R90"/>
+<instance part="J3" gate="G$1" x="121.92" y="218.44" rot="R90"/>
 </instances>
 <busses>
 </busses>
@@ -16381,8 +16377,8 @@ DIN A3, landscape with location and doc. field</description>
 </segment>
 <segment>
 <pinref part="GND24" gate="1" pin="GND"/>
-<pinref part="J3" gate="G$1" pin="1"/>
 <wire x1="121.92" y1="210.82" x2="121.92" y2="213.36" width="0.1524" layer="91"/>
+<pinref part="J3" gate="G$1" pin="1"/>
 </segment>
 <segment>
 <pinref part="U5" gate="G$1" pin="GND"/>
@@ -17445,9 +17441,9 @@ DIN A3, landscape with location and doc. field</description>
 <pinref part="R48" gate="G$1" pin="1"/>
 <wire x1="121.92" y1="228.6" x2="121.92" y2="226.06" width="0.1524" layer="91"/>
 <junction x="121.92" y="226.06"/>
-<pinref part="J3" gate="G$1" pin="2"/>
 <wire x1="121.92" y1="226.06" x2="121.92" y2="223.52" width="0.1524" layer="91"/>
 <label x="124.46" y="226.06" size="1.778" layer="95"/>
+<pinref part="J3" gate="G$1" pin="2"/>
 </segment>
 <segment>
 <pinref part="U5" gate="G$1" pin="Y4"/>
