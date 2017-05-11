@@ -11301,6 +11301,22 @@ diameter 5 mm, grid 2.54 mm</description>
 <library name="rpibout">
 <description>Raspberry Pi Car Breakout Board specific components</description>
 <packages>
+<package name="ULTRAFIT_2CIRC_VERTCLIP">
+<description>&lt;b&gt;Molex Ultra-Fit Vertical Header, Solder Clip, 3.50mm Pitch, Single Row, 2 Circuits</description>
+<hole x="-4.25" y="-0.63" drill="2.3"/>
+<pad name="1" x="-1.75" y="0" drill="1.02" diameter="2.1844" shape="long" rot="R90"/>
+<pad name="2" x="1.75" y="0" drill="1.02" diameter="2.1844" shape="long" rot="R90"/>
+<wire x1="-5.3" y1="2.42" x2="5.3" y2="2.42" width="0.127" layer="21"/>
+<wire x1="5.3" y1="2.42" x2="5.3" y2="-2.93" width="0.127" layer="21"/>
+<wire x1="5.3" y1="-2.93" x2="-5.3" y2="-2.93" width="0.127" layer="21"/>
+<wire x1="-5.3" y1="-2.93" x2="-5.3" y2="2.42" width="0.127" layer="21"/>
+<text x="-1.75" y="-3.5" size="1.27" layer="21" rot="SR90" align="center">1</text>
+<text x="5.75" y="0" size="1.016" layer="25" rot="R90" align="top-center">&gt;NAME</text>
+<wire x1="-3.645" y1="2.42" x2="-3.645" y2="5.48" width="0.127" layer="51"/>
+<wire x1="-3.645" y1="5.48" x2="3.645" y2="5.48" width="0.127" layer="51"/>
+<wire x1="3.645" y1="5.48" x2="3.645" y2="2.42" width="0.127" layer="51"/>
+<hole x="4.25" y="-0.63" drill="2.3"/>
+</package>
 <package name="ULTRAFIT_2CIRC_RANGLE">
 <description>Molex Ultra-Fit Right Angle Header, 3.50mm Pitch, Single Row, 2 Circuits</description>
 <hole x="0" y="0" drill="3.05"/>
@@ -11386,6 +11402,23 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <rectangle x1="-7" y1="-1.57" x2="-5" y2="-0.97" layer="51"/>
 <rectangle x1="-7" y1="-2.84" x2="-5" y2="-2.24" layer="51"/>
 <rectangle x1="-7" y1="-4.11" x2="-5" y2="-3.51" layer="51"/>
+</package>
+<package name="ULTRAFIT_3CIRC_VERTCLIP">
+<description>&lt;b&gt;Molex Ultra-Fit Vertical Header, Solder Clip, 3.50mm Pitch, Single Row, 3 Circuits</description>
+<hole x="-6" y="-0.63" drill="2.3"/>
+<pad name="1" x="-3.5" y="0" drill="1.02" diameter="2.1844" shape="long" rot="R90"/>
+<pad name="2" x="0" y="0" drill="1.02" diameter="2.1844" shape="long" rot="R90"/>
+<wire x1="-7.05" y1="2.42" x2="7.05" y2="2.42" width="0.127" layer="21"/>
+<wire x1="7.05" y1="2.42" x2="7.05" y2="-2.93" width="0.127" layer="21"/>
+<wire x1="7.05" y1="-2.93" x2="-7.05" y2="-2.93" width="0.127" layer="21"/>
+<wire x1="-7.05" y1="-2.93" x2="-7.05" y2="2.42" width="0.127" layer="21"/>
+<text x="-3.5" y="-3.5" size="1.27" layer="21" rot="SR90" align="center">1</text>
+<text x="7.5" y="0" size="1.016" layer="25" rot="R90" align="top-center">&gt;NAME</text>
+<wire x1="-3.645" y1="2.42" x2="-3.645" y2="5.48" width="0.127" layer="51"/>
+<wire x1="-3.645" y1="5.48" x2="3.645" y2="5.48" width="0.127" layer="51"/>
+<wire x1="3.645" y1="5.48" x2="3.645" y2="2.42" width="0.127" layer="51"/>
+<hole x="6" y="-0.63" drill="2.3"/>
+<pad name="3" x="3.5" y="0" drill="1.02" diameter="2.1844" shape="long" rot="R90"/>
 </package>
 <package name="ULTRAFIT_3CIRC_RANGLE">
 <description>&lt;B&gt; ULTRAFIT 3CIRC RANGLE</description>
@@ -11696,7 +11729,7 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <wire x1="-6.35" y1="2.54" x2="-6.35" y2="-5.08" width="0.254" layer="94"/>
 <wire x1="-6.35" y1="-5.08" x2="1.27" y2="-5.08" width="0.254" layer="94"/>
 <wire x1="1.27" y1="-5.08" x2="1.27" y2="2.54" width="0.254" layer="94"/>
-<text x="-6.35" y="3.81" size="1.6764" layer="95">&gt;NAME</text>
+<text x="-6.35" y="3.175" size="1.6764" layer="95">&gt;NAME</text>
 </symbol>
 <symbol name="N-MOSFET">
 <wire x1="0.762" y1="0.762" x2="0.762" y2="0" width="0.254" layer="94"/>
@@ -11799,7 +11832,7 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <wire x1="-3.81" y1="2.54" x2="-3.81" y2="-7.48" width="0.254" layer="94"/>
 <wire x1="-3.81" y1="-7.48" x2="3.81" y2="-7.48" width="0.254" layer="94"/>
 <wire x1="3.81" y1="-7.48" x2="3.81" y2="2.54" width="0.254" layer="94"/>
-<text x="-3.81" y="3.81" size="1.6764" layer="95">&gt;NAME</text>
+<text x="-3.81" y="3.175" size="1.6764" layer="95">&gt;NAME</text>
 <pin name="P3" x="0" y="-5.08" visible="pad" length="short" direction="pas" function="dot"/>
 </symbol>
 <symbol name="ATMEGA32U4">
@@ -11937,8 +11970,8 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <wire x1="1.27" y1="1.778" x2="-1.27" y2="1.778" width="0.254" layer="94"/>
 <wire x1="1.778" y1="1.778" x2="1.778" y2="-1.778" width="0.254" layer="94"/>
 <wire x1="-1.778" y1="1.778" x2="-1.778" y2="0" width="0.254" layer="94"/>
-<text x="-3.81" y="4.572" size="1.6764" layer="95">&gt;NAME</text>
-<text x="-3.81" y="2.54" size="1.6764" layer="96">&gt;VALUE</text>
+<text x="0" y="2.54" size="1.6764" layer="95" align="bottom-center">&gt;NAME</text>
+<text x="0" y="4.572" size="1.6764" layer="96" align="bottom-center">&gt;VALUE</text>
 <pin name="3" x="2.54" y="0" visible="off" length="point" direction="pas" swaplevel="1" rot="R180"/>
 <pin name="1" x="-2.54" y="0" visible="off" length="point" direction="pas" swaplevel="1"/>
 <wire x1="-1.778" y1="0" x2="-1.778" y2="-1.778" width="0.254" layer="94"/>
@@ -11969,13 +12002,22 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </symbol>
 </symbols>
 <devicesets>
-<deviceset name="ULTRAFIT_2CIRC">
-<description>Molex Ultra-Fit Right Angle Header, 3.50mm Pitch, Single Row, 2 Circuits</description>
+<deviceset name="ULTRAFIT_2CIRC" prefix="J">
+<description>&lt;b&gt;Molex Ultra-Fit, 3.50mm Pitch, Single Row, 2 Circuits</description>
 <gates>
 <gate name="G$1" symbol="HEADER_2CIRC" x="0" y="0"/>
 </gates>
 <devices>
-<device name="" package="ULTRAFIT_2CIRC_RANGLE">
+<device name="RANGLE" package="ULTRAFIT_2CIRC_RANGLE">
+<connects>
+<connect gate="G$1" pin="P1" pad="1"/>
+<connect gate="G$1" pin="P2" pad="2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="VCLIP" package="ULTRAFIT_2CIRC_VERTCLIP">
 <connects>
 <connect gate="G$1" pin="P1" pad="1"/>
 <connect gate="G$1" pin="P2" pad="2"/>
@@ -11986,7 +12028,7 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="BSS138BKS">
+<deviceset name="BSS138BKS" prefix="U">
 <description>BSS138BKS Dual N-MOSFET</description>
 <gates>
 <gate name="T1" symbol="N-MOSFET" x="-2.54" y="0"/>
@@ -12008,9 +12050,8 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="DMG2305UX">
-<description>&lt;B&gt;DMG2305&lt;/B&gt;&lt;P&gt;
-https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
+<deviceset name="DMG2305UX" prefix="U">
+<description>&lt;B&gt;DMG2305 P-Channel MOSFET</description>
 <gates>
 <gate name="G$1" symbol="P-MOSFET" x="12.7" y="0"/>
 </gates>
@@ -12027,8 +12068,8 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="BTN8982TA">
-<description>&lt;B&gt;BTN8982TA</description>
+<deviceset name="BTN8982TA" prefix="U">
+<description>&lt;B&gt;BTN8982TA High Current PN Half Bridge</description>
 <gates>
 <gate name="G$1" symbol="BTN89X2TA" x="0" y="0"/>
 </gates>
@@ -12050,12 +12091,23 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="ULTRAFIT_3CIRC">
+<deviceset name="ULTRAFIT_3CIRC" prefix="J">
+<description>&lt;b&gt;Molex Ultra-Fit, 3.50mm Pitch, Single Row, 3 Circuits</description>
 <gates>
 <gate name="G$1" symbol="HEADER_3CIRC" x="0" y="0"/>
 </gates>
 <devices>
-<device name="" package="ULTRAFIT_3CIRC_RANGLE">
+<device name="RANGLE" package="ULTRAFIT_3CIRC_RANGLE">
+<connects>
+<connect gate="G$1" pin="P1" pad="1"/>
+<connect gate="G$1" pin="P2" pad="2"/>
+<connect gate="G$1" pin="P3" pad="3"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="VCLIP" package="ULTRAFIT_3CIRC_VERTCLIP">
 <connects>
 <connect gate="G$1" pin="P1" pad="1"/>
 <connect gate="G$1" pin="P2" pad="2"/>
@@ -12067,7 +12119,8 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="ATMEGA32U4">
+<deviceset name="ATMEGA32U4" prefix="U">
+<description>&lt;b&gt;ATMEL Mega 32U4 Microcontroller</description>
 <gates>
 <gate name="G$1" symbol="ATMEGA32U4" x="0" y="0"/>
 </gates>
@@ -12125,7 +12178,8 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="ADG3304">
+<deviceset name="ADG3304" prefix="U">
+<description>&lt;b&gt;ADG3304 Analog Devices Bidirectional Voltage Level Translator</description>
 <gates>
 <gate name="G$1" symbol="ADG3304" x="0" y="0"/>
 </gates>
@@ -12153,8 +12207,8 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="MMDT5401">
-<description>&lt;B&gt;150V DUAL PNP SMALL SIGNAL TRANSISTOR IN SOT363</description>
+<deviceset name="MMDT5401" prefix="U">
+<description>&lt;B&gt;Dual PNP Small Signal Transistor</description>
 <gates>
 <gate name="T1" symbol="PNP" x="0" y="-15.24"/>
 <gate name="T2" symbol="PNP" x="17.78" y="-15.24"/>
@@ -12175,8 +12229,8 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="CAT24C32WI-GT3">
-<description>&lt;B&gt;CAT24C32WI-GT3&lt;/B&gt;&lt;P&gt;SOIC8&lt;P&gt;http://www.onsemi.cn/PowerSolutions/document/CAT24C32-D.PDF</description>
+<deviceset name="CAT24C32WI-GT3" prefix="U">
+<description>&lt;B&gt;CAT24C32 32Kb EEPROM, SOIC-8 package</description>
 <gates>
 <gate name="G$1" symbol="CAT24C32WI-GT3" x="0" y="0"/>
 </gates>
@@ -12198,8 +12252,8 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="IPD90P03P4L-04">
-<description>&lt;B&gt;IPD90P03P4L_04&lt;/B&gt;&lt;P&gt;PG-TO-3-11&lt;P&gt;P-MOSFET&lt;P&gt;REVERSE BATTERY PROTECTION</description>
+<deviceset name="IPD90P03P4L-04" prefix="U">
+<description>&lt;B&gt;IPD90P03P4L-04 P-Channel MOSFET</description>
 <gates>
 <gate name="G$1" symbol="P-MOSFET" x="0" y="0"/>
 </gates>
@@ -12216,7 +12270,7 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="PTR08060W">
+<deviceset name="PTR08060W" prefix="U">
 <description>PTR08060W Texas Instruments Buck Power Module</description>
 <gates>
 <gate name="G$1" symbol="PTR08060W" x="0" y="0"/>
@@ -12236,7 +12290,8 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="CRYSTAL">
+<deviceset name="CRYSTAL" prefix="XTAL" uservalue="yes">
+<description>&lt;b&gt;ABM3B Ceramic SMD Crystal</description>
 <gates>
 <gate name="G$1" symbol="CRYSTAL" x="0" y="0"/>
 </gates>
@@ -12253,7 +12308,8 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="SMAZX">
+<deviceset name="SMAZX" prefix="D" uservalue="yes">
+<description>&lt;b&gt;SMAZxx Zener Diode</description>
 <gates>
 <gate name="G$1" symbol="ZD" x="0" y="0"/>
 </gates>
@@ -12269,7 +12325,8 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="B3U-3000P-B">
+<deviceset name="B3U-3000P-B" prefix="J">
+<description>&lt;b&gt;B3U Ultra-small Switch, side actuated, with boss</description>
 <gates>
 <gate name="G$1" symbol="SWITCH" x="0" y="0"/>
 </gates>
@@ -15661,7 +15718,7 @@ DIN A3, landscape with location and doc. field</description>
 <part name="C34" library="resistor" deviceset="C-US" device="C1206" value="1u"/>
 <part name="C35" library="resistor" deviceset="CPOL-US" device="E3.5-8" value="220u"/>
 <part name="C36" library="resistor" deviceset="CPOL-US" device="E3.5-8" value="220u"/>
-<part name="BATT" library="rpibout" deviceset="ULTRAFIT_2CIRC" device=""/>
+<part name="BATT" library="rpibout" deviceset="ULTRAFIT_2CIRC" device="VCLIP"/>
 <part name="GND45" library="supply1" deviceset="GND" device=""/>
 <part name="C37" library="resistor" deviceset="C-US" device="C1206" value="1u"/>
 <part name="R37" library="resistor" deviceset="R-US_" device="R1206" value="10k"/>
@@ -15686,7 +15743,7 @@ DIN A3, landscape with location and doc. field</description>
 <part name="U1" library="rpibout" deviceset="BTN8982TA" device=""/>
 <part name="U2" library="rpibout" deviceset="BTN8982TA" device=""/>
 <part name="U3" library="rpibout" deviceset="BTN8982TA" device=""/>
-<part name="MOTOR" library="rpibout" deviceset="ULTRAFIT_3CIRC" device=""/>
+<part name="MOTOR" library="rpibout" deviceset="ULTRAFIT_3CIRC" device="VCLIP"/>
 <part name="P+12" library="supply1" deviceset="+5V" device=""/>
 <part name="J2" library="pinhead" deviceset="PINHD-2X20" device=""/>
 <part name="GND52" library="supply1" deviceset="GND" device=""/>
@@ -15771,8 +15828,8 @@ DIN A3, landscape with location and doc. field</description>
 <part name="H4" library="holes" deviceset="MOUNT-HOLE" device="2.8"/>
 <part name="U7" library="rpibout" deviceset="PTR08060W" device=""/>
 <part name="C16" library="resistor" deviceset="CPOL-US" device="E5-10.5" value="1000u"/>
-<part name="U12" library="rpibout" deviceset="CRYSTAL" device=""/>
-<part name="D2" library="rpibout" deviceset="SMAZX" device=""/>
+<part name="XTAL1" library="rpibout" deviceset="CRYSTAL" device="" value="16MHz"/>
+<part name="D2" library="rpibout" deviceset="SMAZX" device="" value="33V"/>
 <part name="J3" library="rpibout" deviceset="B3U-3000P-B" device=""/>
 </parts>
 <sheets>
@@ -16086,7 +16143,7 @@ DIN A3, landscape with location and doc. field</description>
 <instance part="H4" gate="G$1" x="307.34" y="27.94"/>
 <instance part="U7" gate="G$1" x="63.5" y="83.82"/>
 <instance part="C16" gate="G$1" x="81.28" y="35.56"/>
-<instance part="U12" gate="G$1" x="129.54" y="175.26" rot="R270"/>
+<instance part="XTAL1" gate="G$1" x="129.54" y="175.26" rot="R270"/>
 <instance part="D2" gate="G$1" x="71.12" y="33.02" rot="R90"/>
 <instance part="J3" gate="G$1" x="121.92" y="218.44" rot="R90"/>
 </instances>
@@ -16361,7 +16418,7 @@ DIN A3, landscape with location and doc. field</description>
 <wire x1="114.3" y1="170.18" x2="114.3" y2="167.64" width="0.1524" layer="91"/>
 <wire x1="116.84" y1="170.18" x2="114.3" y2="170.18" width="0.1524" layer="91"/>
 <junction x="114.3" y="170.18"/>
-<pinref part="U12" gate="G$1" pin="2"/>
+<pinref part="XTAL1" gate="G$1" pin="2"/>
 <wire x1="127" y1="175.26" x2="114.3" y2="175.26" width="0.1524" layer="91"/>
 <junction x="114.3" y="175.26"/>
 </segment>
@@ -16534,17 +16591,11 @@ DIN A3, landscape with location and doc. field</description>
 <segment>
 <pinref part="C13" gate="G$1" pin="2"/>
 <pinref part="C4" gate="G$1" pin="1"/>
-<wire x1="251.46" y1="114.3" x2="254" y2="114.3" width="0.1524" layer="91"/>
 <junction x="259.08" y="114.3"/>
 <wire x1="254" y1="114.3" x2="259.08" y2="114.3" width="0.1524" layer="91"/>
 <wire x1="259.08" y1="114.3" x2="271.78" y2="114.3" width="0.1524" layer="91"/>
 <junction x="259.08" y="114.3"/>
 <label x="269.24" y="114.3" size="1.778" layer="95"/>
-<pinref part="U1" gate="G$1" pin="OUT2"/>
-<pinref part="U1" gate="G$1" pin="OUT1"/>
-<wire x1="251.46" y1="116.84" x2="254" y2="116.84" width="0.1524" layer="91"/>
-<wire x1="254" y1="116.84" x2="254" y2="114.3" width="0.1524" layer="91"/>
-<junction x="254" y="114.3"/>
 </segment>
 <segment>
 <pinref part="MOTOR" gate="G$1" pin="P1"/>
@@ -16556,17 +16607,11 @@ DIN A3, landscape with location and doc. field</description>
 <segment>
 <pinref part="C11" gate="G$1" pin="2"/>
 <pinref part="C8" gate="G$1" pin="1"/>
-<wire x1="251.46" y1="78.74" x2="254" y2="78.74" width="0.1524" layer="91"/>
 <junction x="259.08" y="78.74"/>
 <wire x1="254" y1="78.74" x2="259.08" y2="78.74" width="0.1524" layer="91"/>
 <wire x1="259.08" y1="78.74" x2="271.78" y2="78.74" width="0.1524" layer="91"/>
 <junction x="259.08" y="78.74"/>
 <label x="269.24" y="78.74" size="1.778" layer="95"/>
-<pinref part="U2" gate="G$1" pin="OUT2"/>
-<pinref part="U2" gate="G$1" pin="OUT1"/>
-<wire x1="251.46" y1="81.28" x2="254" y2="81.28" width="0.1524" layer="91"/>
-<wire x1="254" y1="81.28" x2="254" y2="78.74" width="0.1524" layer="91"/>
-<junction x="254" y="78.74"/>
 </segment>
 <segment>
 <pinref part="MOTOR" gate="G$1" pin="P2"/>
@@ -16578,17 +16623,10 @@ DIN A3, landscape with location and doc. field</description>
 <segment>
 <pinref part="C15" gate="G$1" pin="2"/>
 <pinref part="C14" gate="G$1" pin="1"/>
-<wire x1="251.46" y1="43.18" x2="254" y2="43.18" width="0.1524" layer="91"/>
 <junction x="259.08" y="43.18"/>
-<wire x1="254" y1="43.18" x2="259.08" y2="43.18" width="0.1524" layer="91"/>
 <wire x1="259.08" y1="43.18" x2="271.78" y2="43.18" width="0.1524" layer="91"/>
 <junction x="259.08" y="43.18"/>
 <label x="269.24" y="43.18" size="1.778" layer="95"/>
-<pinref part="U3" gate="G$1" pin="OUT2"/>
-<pinref part="U3" gate="G$1" pin="OUT1"/>
-<wire x1="251.46" y1="45.72" x2="254" y2="45.72" width="0.1524" layer="91"/>
-<wire x1="254" y1="45.72" x2="254" y2="43.18" width="0.1524" layer="91"/>
-<junction x="254" y="43.18"/>
 </segment>
 <segment>
 <pinref part="MOTOR" gate="G$1" pin="P3"/>
@@ -17470,7 +17508,7 @@ DIN A3, landscape with location and doc. field</description>
 <net name="N$7" class="0">
 <segment>
 <pinref part="U9" gate="G$1" pin="XTAL1"/>
-<pinref part="U12" gate="G$1" pin="1"/>
+<pinref part="XTAL1" gate="G$1" pin="1"/>
 <wire x1="129.54" y1="180.34" x2="142.24" y2="180.34" width="0.1524" layer="91"/>
 <wire x1="142.24" y1="180.34" x2="149.86" y2="180.34" width="0.1524" layer="91"/>
 <wire x1="129.54" y1="177.8" x2="129.54" y2="180.34" width="0.1524" layer="91"/>
@@ -17487,7 +17525,7 @@ DIN A3, landscape with location and doc. field</description>
 <wire x1="147.32" y1="172.72" x2="149.86" y2="172.72" width="0.1524" layer="91"/>
 <wire x1="147.32" y1="170.18" x2="147.32" y2="172.72" width="0.1524" layer="91"/>
 <wire x1="147.32" y1="170.18" x2="142.24" y2="170.18" width="0.1524" layer="91"/>
-<pinref part="U12" gate="G$1" pin="3"/>
+<pinref part="XTAL1" gate="G$1" pin="3"/>
 <wire x1="142.24" y1="170.18" x2="129.54" y2="170.18" width="0.1524" layer="91"/>
 <wire x1="129.54" y1="172.72" x2="129.54" y2="170.18" width="0.1524" layer="91"/>
 <pinref part="C18" gate="G$1" pin="1"/>

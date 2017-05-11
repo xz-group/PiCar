@@ -165,22 +165,21 @@
 <library name="rpibout">
 <description>Raspberry Pi Car Breakout Board specific components</description>
 <packages>
-<package name="ULTRAFIT_2CIRC_RANGLE">
-<description>Molex Ultra-Fit Right Angle Header, 3.50mm Pitch, Single Row, 2 Circuits</description>
-<hole x="0" y="0" drill="3.05"/>
-<pad name="1" x="-1.75" y="7.91" drill="1.1" diameter="2.1844" shape="long" rot="R90"/>
-<pad name="2" x="1.75" y="7.91" drill="1.1" diameter="2.1844" shape="long" rot="R90"/>
-<wire x1="-4" y1="5.95" x2="4" y2="5.95" width="0.127" layer="21"/>
-<wire x1="4" y1="5.95" x2="4" y2="-5.25" width="0.127" layer="21"/>
-<wire x1="4" y1="-5.25" x2="-4" y2="-5.25" width="0.127" layer="21"/>
-<wire x1="-4" y1="-5.25" x2="-4" y2="5.95" width="0.127" layer="21"/>
-<text x="-3.5" y="7.91" size="1.27" layer="21" rot="SR0" align="center">1</text>
-<text x="4" y="6.3" size="1.016" layer="25" rot="R90">&gt;NAME</text>
-<wire x1="-3.9" y1="-5.25" x2="-3.9" y2="-7.4" width="0.127" layer="51"/>
-<wire x1="-3.9" y1="-7.4" x2="3.9" y2="-7.4" width="0.127" layer="51"/>
-<wire x1="3.9" y1="-7.4" x2="3.9" y2="-5.25" width="0.127" layer="51"/>
-<rectangle x1="-4.2" y1="-5.25" x2="-4" y2="0" layer="51"/>
-<rectangle x1="4" y1="-5.25" x2="4.2" y2="0" layer="51"/>
+<package name="ULTRAFIT_2CIRC_VERTCLIP">
+<description>&lt;b&gt;Molex Ultra-Fit Vertical Header, Solder Clip, 3.50mm Pitch, Single Row, 2 Circuits</description>
+<hole x="-4.25" y="-0.63" drill="2.3"/>
+<pad name="1" x="-1.75" y="0" drill="1.02" diameter="2.1844" shape="long" rot="R90"/>
+<pad name="2" x="1.75" y="0" drill="1.02" diameter="2.1844" shape="long" rot="R90"/>
+<wire x1="-5.3" y1="2.42" x2="5.3" y2="2.42" width="0.127" layer="21"/>
+<wire x1="5.3" y1="2.42" x2="5.3" y2="-2.93" width="0.127" layer="21"/>
+<wire x1="5.3" y1="-2.93" x2="-5.3" y2="-2.93" width="0.127" layer="21"/>
+<wire x1="-5.3" y1="-2.93" x2="-5.3" y2="2.42" width="0.127" layer="21"/>
+<text x="-1.75" y="-3.5" size="1.27" layer="21" rot="SR90" align="center">1</text>
+<text x="5.75" y="0" size="1.016" layer="25" rot="R90" align="top-center">&gt;NAME</text>
+<wire x1="-3.645" y1="2.42" x2="-3.645" y2="5.48" width="0.127" layer="51"/>
+<wire x1="-3.645" y1="5.48" x2="3.645" y2="5.48" width="0.127" layer="51"/>
+<wire x1="3.645" y1="5.48" x2="3.645" y2="2.42" width="0.127" layer="51"/>
+<hole x="4.25" y="-0.63" drill="2.3"/>
 </package>
 <package name="SOT23-3">
 <description>&lt;B&gt;SOT23&lt;/B&gt;&lt;P&gt;
@@ -198,25 +197,22 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <rectangle x1="0.7112" y1="-1.2954" x2="1.1684" y2="-0.7112" layer="51"/>
 <rectangle x1="-1.1684" y1="-1.2954" x2="-0.7112" y2="-0.7112" layer="51"/>
 </package>
-<package name="ULTRAFIT_3CIRC_RANGLE">
-<description>&lt;B&gt; ULTRAFIT 3CIRC RANGLE</description>
-<hole x="0" y="0" drill="3.2"/>
-<pad name="1" x="-3.51" y="7.91" drill="1.1" diameter="2.1844" shape="long" rot="R90"/>
-<wire x1="-5.76" y1="5.95" x2="5.76" y2="5.95" width="0.127" layer="21"/>
-<wire x1="5.76" y1="5.95" x2="5.76" y2="-5.25" width="0.127" layer="21"/>
-<wire x1="5.76" y1="-5.25" x2="3.9" y2="-5.25" width="0.127" layer="21"/>
-<wire x1="3.9" y1="-5.25" x2="-3.9" y2="-5.25" width="0.127" layer="21"/>
-<wire x1="-3.9" y1="-5.25" x2="-5.76" y2="-5.25" width="0.127" layer="21"/>
-<wire x1="-5.76" y1="-5.25" x2="-5.76" y2="5.95" width="0.127" layer="21"/>
-<text x="-5.25" y="7.91" size="1.27" layer="21" rot="SR0" align="center">1</text>
-<text x="5.76" y="6.3" size="1.016" layer="25" rot="R90">&gt;NAME</text>
-<pad name="2" x="0" y="7.9" drill="1.1" diameter="2.1844" shape="long" rot="R90"/>
-<pad name="3" x="3.5" y="7.9" drill="1.1" diameter="2.1844" shape="long" rot="R90"/>
-<wire x1="-3.9" y1="-5.25" x2="-3.9" y2="-7.4" width="0.127" layer="51"/>
-<wire x1="-3.9" y1="-7.4" x2="3.9" y2="-7.4" width="0.127" layer="51"/>
-<wire x1="3.9" y1="-7.4" x2="3.9" y2="-5.25" width="0.127" layer="51"/>
-<rectangle x1="-5.96" y1="-5.25" x2="-5.76" y2="0" layer="51"/>
-<rectangle x1="5.76" y1="-5.25" x2="5.96" y2="0" layer="51"/>
+<package name="ULTRAFIT_3CIRC_VERTCLIP">
+<description>&lt;b&gt;Molex Ultra-Fit Vertical Header, Solder Clip, 3.50mm Pitch, Single Row, 3 Circuits</description>
+<hole x="-6" y="-0.63" drill="2.3"/>
+<pad name="1" x="-3.5" y="0" drill="1.02" diameter="2.1844" shape="long" rot="R90"/>
+<pad name="2" x="0" y="0" drill="1.02" diameter="2.1844" shape="long" rot="R90"/>
+<wire x1="-7.05" y1="2.42" x2="7.05" y2="2.42" width="0.127" layer="21"/>
+<wire x1="7.05" y1="2.42" x2="7.05" y2="-2.93" width="0.127" layer="21"/>
+<wire x1="7.05" y1="-2.93" x2="-7.05" y2="-2.93" width="0.127" layer="21"/>
+<wire x1="-7.05" y1="-2.93" x2="-7.05" y2="2.42" width="0.127" layer="21"/>
+<text x="-3.5" y="-3.5" size="1.27" layer="21" rot="SR90" align="center">1</text>
+<text x="7.5" y="0" size="1.016" layer="25" rot="R90" align="top-center">&gt;NAME</text>
+<wire x1="-3.645" y1="2.42" x2="-3.645" y2="5.48" width="0.127" layer="51"/>
+<wire x1="-3.645" y1="5.48" x2="3.645" y2="5.48" width="0.127" layer="51"/>
+<wire x1="3.645" y1="5.48" x2="3.645" y2="2.42" width="0.127" layer="51"/>
+<hole x="6" y="-0.63" drill="2.3"/>
+<pad name="3" x="3.5" y="0" drill="1.02" diameter="2.1844" shape="long" rot="R90"/>
 </package>
 <package name="TQFP44">
 <wire x1="-4.8" y1="4.4" x2="-4.4" y2="4.8" width="0.2032" layer="21"/>
@@ -2258,7 +2254,7 @@ Please make sure your boards conform to these design rules.</description>
 </pass>
 </autorouter>
 <elements>
-<element name="BATT" library="rpibout" package="ULTRAFIT_2CIRC_RANGLE" value="ULTRAFIT_2CIRC" x="50.292" y="5.08"/>
+<element name="BATT" library="rpibout" package="ULTRAFIT_2CIRC_VERTCLIP" value="ULTRAFIT_2CIRCVCLIP" x="49.53" y="7.366" rot="R270"/>
 <element name="C1" library="resistor" package="C1206" value="0.1u" x="9.398" y="41.656" rot="R180"/>
 <element name="C10" library="resistor" package="C1206" value="0.1u" x="34.29" y="41.656" rot="R180"/>
 <element name="C11" library="resistor" package="C1206" value="220n" x="16.256" y="37.846"/>
@@ -2276,7 +2272,7 @@ Please make sure your boards conform to these design rules.</description>
 <element name="C23" library="resistor" package="C1206" value="0.1u" x="70.612" y="94.488" rot="MR0"/>
 <element name="C24" library="resistor" package="C1206" value="0.1u" x="70.612" y="97.536" rot="MR0"/>
 <element name="C3" library="resistor" package="C1206" value="0.1u" x="12.192" y="33.02" rot="R270"/>
-<element name="C33" library="resistor" package="C1206" value="0.1u" x="56.896" y="8.128"/>
+<element name="C33" library="resistor" package="C1206" value="0.1u" x="60.706" y="8.89"/>
 <element name="C34" library="resistor" package="C1206" value="1u" x="51.308" y="40.894" rot="MR0"/>
 <element name="C35" library="resistor" package="E3,5-8" value="220u" x="51.054" y="45.212"/>
 <element name="C36" library="resistor" package="E3,5-8" value="220u" x="60.452" y="32.512"/>
@@ -2323,7 +2319,7 @@ Please make sure your boards conform to these design rules.</description>
 <element name="J1" library="pinhead" package="1X02" value="" x="8.89" y="2.794" rot="R90"/>
 <element name="J2" library="pinhead" package="2X20" value="" x="32.5" y="52.5"/>
 <element name="LED1" library="led" package="1206" value="" x="6.604" y="8.89"/>
-<element name="MOTOR" library="rpibout" package="ULTRAFIT_3CIRC_RANGLE" value="ULTRAFIT_3CIRC" x="17.272" y="5.08"/>
+<element name="MOTOR" library="rpibout" package="ULTRAFIT_3CIRC_VERTCLIP" value="ULTRAFIT_3CIRCVCLIP" x="17.272" y="5.08"/>
 <element name="R1" library="resistor" package="R1206" value="10k" x="20.574" y="58.674" rot="MR0"/>
 <element name="R10" library="resistor" package="R1206" value="1k" x="28.702" y="43.942"/>
 <element name="R11" library="resistor" package="R1206" value="10k" x="36.322" y="58.166" rot="MR0"/>
@@ -2385,8 +2381,8 @@ Please make sure your boards conform to these design rules.</description>
 <element name="H4" library="holes" package="2,8" value="MOUNT-HOLE2.8" x="61.5" y="3.5"/>
 <element name="U7" library="rpibout" package="EDP_MODULE" value="PTR08060W" x="61.468" y="42.672" rot="R270"/>
 <element name="C16" library="resistor" package="E5-10,5" value="1000u" x="41.91" y="43.688"/>
-<element name="U12" library="rpibout" package="ABM3B" value="CRYSTAL" x="34.798" y="20.574" rot="MR90"/>
-<element name="D2" library="rpibout" package="SMA" value="SMAZX" x="7.366" y="69.088"/>
+<element name="XTAL1" library="rpibout" package="ABM3B" value="16MHz" x="34.798" y="20.574" rot="MR90"/>
+<element name="D2" library="rpibout" package="SMA" value="33V" x="7.366" y="69.088"/>
 <element name="J3" library="rpibout" package="B3U-3000P-B" value="B3U-3000P-B" x="1.27" y="9.144" rot="R90"/>
 </elements>
 <signals>
@@ -2483,8 +2479,8 @@ Please make sure your boards conform to these design rules.</description>
 <contactref element="C31" pad="2"/>
 <contactref element="U7" pad="P3"/>
 <contactref element="C16" pad="-"/>
-<contactref element="U12" pad="GND4"/>
-<contactref element="U12" pad="GND2"/>
+<contactref element="XTAL1" pad="GND4"/>
+<contactref element="XTAL1" pad="GND2"/>
 <contactref element="D2" pad="A"/>
 <contactref element="J3" pad="1"/>
 <contactref element="IMU" pad="4"/>
@@ -2559,9 +2555,9 @@ Please make sure your boards conform to these design rules.</description>
 <wire x1="60.96" y1="24.384" x2="62.23" y2="32.512" width="0" layer="19" extent="1-1"/>
 <wire x1="55.88" y1="17.272" x2="60.96" y2="24.384" width="0" layer="19" extent="1-1"/>
 <wire x1="52.454" y1="18.542" x2="55.88" y2="17.272" width="0" layer="19" extent="1-1"/>
-<wire x1="52.042" y1="12.99" x2="52.454" y2="18.542" width="0" layer="19" extent="1-1"/>
+<wire x1="49.53" y1="5.616" x2="52.454" y2="18.542" width="0" layer="19" extent="1-1"/>
 <wire x1="52.2" y1="24.892" x2="52.454" y2="18.542" width="0" layer="19" extent="1-1"/>
-<wire x1="58.296" y1="8.128" x2="52.042" y2="12.99" width="0" layer="19" extent="1-1"/>
+<wire x1="62.106" y1="8.89" x2="49.53" y2="5.616" width="0" layer="19" extent="1-1"/>
 <wire x1="8.766" y1="62.738" x2="13.45" y2="53.77" width="0" layer="19" extent="1-1"/>
 <wire x1="9.366" y1="69.088" x2="8.766" y2="62.738" width="0" layer="19" extent="1-1"/>
 <wire x1="5.944" y1="75.438" x2="9.366" y2="69.088" width="0" layer="19" extent="1-1"/>
@@ -2607,35 +2603,23 @@ Please make sure your boards conform to these design rules.</description>
 <signal name="OUT1">
 <contactref element="C13" pad="2"/>
 <contactref element="C4" pad="1"/>
-<contactref element="U1" pad="8"/>
 <contactref element="MOTOR" pad="1"/>
-<contactref element="U1" pad="4"/>
 <wire x1="4.956" y1="37.846" x2="7.998" y2="37.846" width="0" layer="19" extent="1-1"/>
-<wire x1="6.096" y1="31.416" x2="4.956" y2="37.846" width="0" layer="19" extent="1-1"/>
-<wire x1="6.096" y1="22.266" x2="6.096" y2="31.416" width="0" layer="19" extent="1-1"/>
-<wire x1="13.762" y1="12.99" x2="6.096" y2="22.266" width="0" layer="19" extent="1-1"/>
+<wire x1="13.772" y1="5.08" x2="7.998" y2="37.846" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="OUT2">
 <contactref element="C11" pad="2"/>
 <contactref element="C8" pad="1"/>
-<contactref element="U2" pad="8"/>
 <contactref element="MOTOR" pad="2"/>
-<contactref element="U2" pad="4"/>
 <wire x1="17.656" y1="37.846" x2="20.698" y2="37.846" width="0" layer="19" extent="1-1"/>
-<wire x1="18.796" y1="31.416" x2="17.656" y2="37.846" width="0" layer="19" extent="1-1"/>
-<wire x1="18.796" y1="22.266" x2="18.796" y2="31.416" width="0" layer="19" extent="1-1"/>
-<wire x1="17.272" y1="12.98" x2="18.796" y2="22.266" width="0" layer="19" extent="1-1"/>
+<wire x1="17.272" y1="5.08" x2="17.656" y2="37.846" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="OUT3">
 <contactref element="C15" pad="2"/>
 <contactref element="C14" pad="1"/>
-<contactref element="U3" pad="8"/>
 <contactref element="MOTOR" pad="3"/>
-<contactref element="U3" pad="4"/>
 <wire x1="30.102" y1="37.846" x2="32.89" y2="37.846" width="0" layer="19" extent="1-1"/>
-<wire x1="31.496" y1="31.416" x2="32.89" y2="37.846" width="0" layer="19" extent="1-1"/>
-<wire x1="31.496" y1="22.266" x2="31.496" y2="31.416" width="0" layer="19" extent="1-1"/>
-<wire x1="20.772" y1="12.98" x2="31.496" y2="22.266" width="0" layer="19" extent="1-1"/>
+<wire x1="20.772" y1="5.08" x2="30.102" y2="37.846" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$21">
 <contactref element="R14" pad="2"/>
@@ -2746,7 +2730,7 @@ Please make sure your boards conform to these design rules.</description>
 <wire x1="35.433" y1="46.542" x2="28.69" y2="51.23" width="0" layer="19" extent="16-16"/>
 <wire x1="8.37" y1="51.23" x2="26.751" y2="45.13" width="0" layer="19" extent="16-16"/>
 <wire x1="58.42" y1="17.272" x2="35.433" y2="46.542" width="0" layer="19" extent="16-16"/>
-<wire x1="55.496" y1="8.128" x2="58.42" y2="17.272" width="0" layer="19" extent="1-1"/>
+<wire x1="59.306" y1="8.89" x2="58.42" y2="17.272" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="VBATT">
 <contactref element="C35" pad="+"/>
@@ -2756,7 +2740,7 @@ Please make sure your boards conform to these design rules.</description>
 <contactref element="BATT" pad="1"/>
 <wire x1="49.276" y1="45.212" x2="61.468" y2="40.9702" width="0" layer="19" extent="1-1"/>
 <wire x1="44.45" y1="26.264" x2="49.276" y2="45.212" width="0" layer="19" extent="1-1"/>
-<wire x1="48.542" y1="12.99" x2="44.45" y2="26.264" width="0" layer="19" extent="1-1"/>
+<wire x1="49.53" y1="9.116" x2="44.45" y2="26.264" width="0" layer="19" extent="1-1"/>
 <wire x1="5.966" y1="62.738" x2="49.276" y2="45.212" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$41">
@@ -3044,7 +3028,7 @@ Please make sure your boards conform to these design rules.</description>
 </signal>
 <signal name="N$7">
 <contactref element="U9" pad="17"/>
-<contactref element="U12" pad="P1"/>
+<contactref element="XTAL1" pad="P1"/>
 <contactref element="C19" pad="1"/>
 <contactref element="R13" pad="2"/>
 <wire x1="29.566" y1="14.478" x2="42.294" y2="14.224" width="0" layer="19" extent="16-16"/>
@@ -3053,7 +3037,7 @@ Please make sure your boards conform to these design rules.</description>
 </signal>
 <signal name="N$3">
 <contactref element="U9" pad="16"/>
-<contactref element="U12" pad="P3"/>
+<contactref element="XTAL1" pad="P3"/>
 <contactref element="C18" pad="1"/>
 <contactref element="R13" pad="1"/>
 <wire x1="32.41" y1="14.478" x2="37.468" y2="14.478" width="0" layer="19" extent="16-16"/>
