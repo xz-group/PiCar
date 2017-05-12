@@ -13,7 +13,10 @@ to access the Pi Car Assembly.
 ![Alt text](/docs/CAD/onshape_assembly_basics.png?raw=true "Onshape Assembly Basics")
 6. The above image shows how to access each part, assembly, sub-assembly or drawing.
 
+![Alt text](/docs/CAD/onshape_update_drawing.png?raw=true "Onshape Drawing Sync")
+7. The best way to check the dimensions (distance or angle between parts) is to go to the respective part or assembly's drawing. Before checking the dimensions, make sure you sync the drawing with its corresponsding assembly or part by clicking on the update button as seen in the above image.
+
 ![Alt text](/docs/CAD/onshape_drawing_dimensions.png?raw=true "Onshape Drawing Basics")
-7. The best way to check the dimensions (distance or angle between parts) is to go to the respective part or assembly's drawing like shown in the above figure. To check a particular dimension, use the point-to-point, point-to-line, line-to-line, angle, etc. dimension tool, and click on a pair of points/lines.
+To check a particular dimension, use the point-to-point, point-to-line, line-to-line, angle, etc. dimension tool, and click on a pair of points/lines, like shown in the above image.
 
 
