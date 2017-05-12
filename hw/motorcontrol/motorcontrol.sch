@@ -14496,7 +14496,7 @@ DIN A3, landscape with location and doc. field</description>
 <part name="SUPPLY2" library="supply2" deviceset="VPP" device=""/>
 <part name="SUPPLY3" library="supply2" deviceset="VPP" device=""/>
 <part name="SUPPLY4" library="supply2" deviceset="VPP" device=""/>
-<part name="FRAME1" library="frames" deviceset="A3L-LOC" device=""/>
+<part name="FRAME1" library="frames" deviceset="A3L-LOC" device="" value="PiCar Hat Motor Controller"/>
 <part name="C25" library="resistor" deviceset="C-US" device="C1206" value="0.1u"/>
 <part name="C26" library="resistor" deviceset="C-US" device="C1206" value="0.1u"/>
 <part name="SERVO" library="con-molex" deviceset="22-23-2031" device=""/>
@@ -14506,7 +14506,6 @@ DIN A3, landscape with location and doc. field</description>
 <part name="P+15" library="supply1" deviceset="+5V" device=""/>
 <part name="C28" library="resistor" deviceset="C-US" device="C1206" value="0.1u"/>
 <part name="GND2" library="supply1" deviceset="GND" device=""/>
-<part name="C29" library="resistor" deviceset="C-US" device="C1206" value="0.1u"/>
 <part name="P+16" library="supply1" deviceset="+5V" device=""/>
 <part name="P+17" library="supply1" deviceset="+5V" device=""/>
 <part name="GND4" library="supply1" deviceset="GND" device=""/>
@@ -14827,7 +14826,6 @@ DIN A3, landscape with location and doc. field</description>
 <instance part="P+15" gate="1" x="335.28" y="104.14"/>
 <instance part="C28" gate="G$1" x="360.68" y="88.9"/>
 <instance part="GND2" gate="1" x="360.68" y="76.2"/>
-<instance part="C29" gate="G$1" x="360.68" y="55.88"/>
 <instance part="P+16" gate="1" x="335.28" y="71.12"/>
 <instance part="P+17" gate="1" x="360.68" y="66.04"/>
 <instance part="GND4" gate="1" x="360.68" y="43.18"/>
@@ -15214,9 +15212,6 @@ DIN A3, landscape with location and doc. field</description>
 <wire x1="363.22" y1="48.26" x2="360.68" y2="48.26" width="0.1524" layer="91"/>
 <wire x1="360.68" y1="48.26" x2="360.68" y2="45.72" width="0.1524" layer="91"/>
 <pinref part="GND4" gate="1" pin="GND"/>
-<pinref part="C29" gate="G$1" pin="2"/>
-<wire x1="360.68" y1="50.8" x2="360.68" y2="48.26" width="0.1524" layer="91"/>
-<junction x="360.68" y="48.26"/>
 </segment>
 <segment>
 <pinref part="GND6" gate="1" pin="GND"/>
@@ -15520,12 +15515,9 @@ DIN A3, landscape with location and doc. field</description>
 </segment>
 <segment>
 <pinref part="P+17" gate="1" pin="+5V"/>
-<pinref part="C29" gate="G$1" pin="1"/>
 <wire x1="360.68" y1="63.5" x2="360.68" y2="60.96" width="0.1524" layer="91"/>
 <pinref part="HALL3" gate="-1" pin="S"/>
-<wire x1="360.68" y1="60.96" x2="360.68" y2="58.42" width="0.1524" layer="91"/>
 <wire x1="363.22" y1="60.96" x2="360.68" y2="60.96" width="0.1524" layer="91"/>
-<junction x="360.68" y="60.96"/>
 </segment>
 <segment>
 <pinref part="P+19" gate="1" pin="+5V"/>
