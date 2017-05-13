@@ -12284,8 +12284,8 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <smd name="38" x="21.59" y="2.54" dx="2.286" dy="0.9906" layer="16" rot="R270"/>
 <smd name="39" x="24.13" y="-2.54" dx="2.286" dy="0.9906" layer="16" rot="R270"/>
 <smd name="40" x="24.13" y="2.54" dx="2.286" dy="0.9906" layer="16" rot="R270"/>
-<text x="-25.4762" y="3.0988" size="1.27" layer="25" ratio="10" rot="MR0" align="bottom-right">&gt;NAME</text>
-<text x="-25.4" y="-4.445" size="1.27" layer="27" rot="MR0" align="bottom-right">&gt;VALUE</text>
+<text x="-25.4762" y="3.0988" size="1.27" layer="26" ratio="10" rot="MR0" align="bottom-right">&gt;NAME</text>
+<text x="-25.4" y="-4.445" size="1.27" layer="28" rot="MR0" align="bottom-right">&gt;VALUE</text>
 <rectangle x1="-24.384" y1="1.016" x2="-23.876" y2="1.524" layer="52"/>
 <rectangle x1="-24.384" y1="-1.524" x2="-23.876" y2="-1.016" layer="52"/>
 <rectangle x1="-21.844" y1="1.016" x2="-21.336" y2="1.524" layer="52"/>
