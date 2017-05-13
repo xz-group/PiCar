@@ -8,7 +8,7 @@
 </settings>
 <grid distance="10" unitdist="mil" unit="mil" style="dots" multiple="1" display="yes" altdistance="2.5" altunitdist="mil" altunit="mil"/>
 <layers>
-<layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
+<layer number="1" name="Top" color="4" fill="1" visible="no" active="yes"/>
 <layer number="2" name="Route2" color="6" fill="1" visible="no" active="yes"/>
 <layer number="3" name="Route3" color="4" fill="3" visible="no" active="no"/>
 <layer number="14" name="Route14" color="1" fill="6" visible="no" active="no"/>
@@ -3626,9 +3626,9 @@ Please make sure your boards conform to these design rules.</description>
 <wire x1="36.068" y1="22.99" x2="35.436" y2="23.622" width="0.3048" layer="1"/>
 <wire x1="35.436" y1="23.622" x2="35.436" y2="21.612" width="0.3048" layer="1"/>
 <wire x1="35.436" y1="21.612" x2="35.458" y2="21.59" width="0.3048" layer="1"/>
-<wire x1="31.75" y1="23.622" x2="34.036" y2="23.622" width="0.3048" layer="16"/>
-<wire x1="27.432" y1="27.94" x2="31.75" y2="23.622" width="0.3048" layer="16"/>
-<wire x1="26.67" y1="27.94" x2="27.432" y2="27.94" width="0.3048" layer="16"/>
+<wire x1="32.004" y1="23.622" x2="34.036" y2="23.622" width="0.3048" layer="16"/>
+<wire x1="27.686" y1="27.94" x2="32.004" y2="23.622" width="0.3048" layer="16"/>
+<wire x1="26.67" y1="27.94" x2="27.686" y2="27.94" width="0.3048" layer="16"/>
 <wire x1="26.67" y1="35.814" x2="26.67" y2="27.94" width="0.3048" layer="2"/>
 <wire x1="26.162" y1="36.322" x2="26.67" y2="35.814" width="0.3048" layer="2"/>
 <wire x1="24.384" y1="36.322" x2="26.162" y2="36.322" width="0.3048" layer="15"/>
@@ -3751,14 +3751,16 @@ Please make sure your boards conform to these design rules.</description>
 <signal name="D11">
 <contactref element="U9" pad="12"/>
 <contactref element="R11" pad="1"/>
-<wire x1="33.02" y1="21.59" x2="27.305" y2="27.305" width="0.3048" layer="16"/>
+<wire x1="33.02" y1="21.59" x2="27.432" y2="27.178" width="0.3048" layer="16"/>
 <wire x1="43.18" y1="21.59" x2="33.02" y2="21.59" width="0.3048" layer="16"/>
-<wire x1="27.305" y1="27.305" x2="25.759" y2="27.305" width="0.3048" layer="16"/>
-<wire x1="25.759" y1="27.305" x2="25.59" y2="27.474" width="0.3048" layer="16"/>
+<wire x1="27.432" y1="27.178" x2="26.416" y2="27.178" width="0.3048" layer="16"/>
+<wire x1="26.416" y1="27.178" x2="25.8225" y2="27.178" width="0.3048" layer="16"/>
 <wire x1="43.942" y1="22.708" x2="43.942" y2="22.606" width="0.3048" layer="16"/>
 <wire x1="43.942" y1="22.606" x2="43.434" y2="22.098" width="0.3048" layer="16"/>
 <wire x1="43.434" y1="22.098" x2="43.434" y2="21.844" width="0.3048" layer="16"/>
 <wire x1="43.434" y1="21.844" x2="43.18" y2="21.59" width="0.3048" layer="16"/>
+<wire x1="25.59" y1="27.474" x2="25.59" y2="27.178" width="0.3048" layer="16"/>
+<wire x1="25.59" y1="27.178" x2="25.8225" y2="27.178" width="0.3048" layer="16"/>
 </signal>
 <signal name="D10">
 <contactref element="U9" pad="30"/>
