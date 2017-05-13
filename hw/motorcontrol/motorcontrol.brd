@@ -162,7 +162,7 @@
 <wire x1="45" y1="20.5" x2="46" y2="19.5" width="0" layer="20" curve="-90"/>
 <text x="51.308" y="5.334" size="0.8128" layer="21" rot="R90">1: EEPROM WP Enable
 2: Bootloader Enable</text>
-<text x="13.208" y="20.828" size="0.8128" layer="21">Raspberry Pi Car Control Board
+<text x="13.208" y="20.828" size="0.8128" layer="21" font="vector">Pi Car Control Board
 v2.0
 WashU ESE Dept
 May 2017</text>
