@@ -14544,6 +14544,9 @@ DIN A3, landscape with location and doc. field</description>
 <sheets>
 <sheet>
 <plain>
+<text x="289.56" y="22.86" size="2.54" layer="94" align="top-left">Raspberry Pi Car Control Board
+WashU ESE Dept - May 2017</text>
+<text x="378.46" y="5.08" size="2.54" layer="94" align="bottom-center">v2.0</text>
 </plain>
 <instances>
 <instance part="R1" gate="G$1" x="215.9" y="111.76" smashed="yes">
@@ -16364,4 +16367,10 @@ DIN A3, landscape with location and doc. field</description>
 </sheets>
 </schematic>
 </drawing>
+<compatibility>
+<note version="6.3" minversion="6.2.2" severity="warning">
+Since Version 6.2.2 text objects can contain more than one line,
+which will not be processed correctly with this version.
+</note>
+</compatibility>
 </eagle>

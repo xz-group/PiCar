@@ -13,7 +13,7 @@
 <layer number="3" name="Route3" color="4" fill="3" visible="no" active="no"/>
 <layer number="14" name="Route14" color="1" fill="6" visible="no" active="no"/>
 <layer number="15" name="Route15" color="3" fill="1" visible="no" active="yes"/>
-<layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
+<layer number="16" name="Bottom" color="1" fill="1" visible="no" active="yes"/>
 <layer number="17" name="Pads" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="18" name="Vias" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="19" name="Unrouted" color="6" fill="1" visible="yes" active="yes"/>
@@ -162,6 +162,10 @@
 <wire x1="45" y1="20.5" x2="46" y2="19.5" width="0" layer="20" curve="-90"/>
 <text x="51.308" y="5.334" size="0.8128" layer="21" rot="R90">1: EEPROM WP Enable
 2: Bootloader Enable</text>
+<text x="13.208" y="20.828" size="0.8128" layer="21">Raspberry Pi Car Control Board
+v2.0
+WashU ESE Dept
+May 2017</text>
 </plain>
 <libraries>
 <library name="rpibout">
@@ -3241,10 +3245,9 @@ Please make sure your boards conform to these design rules.</description>
 <vertex x="47.244" y="54.864"/>
 <vertex x="56.642" y="54.864"/>
 <vertex x="64.77" y="46.736"/>
-<vertex x="64.77" y="40.386"/>
-<vertex x="64.262" y="39.878"/>
-<vertex x="60.96" y="39.878"/>
-<vertex x="56.642" y="44.196"/>
+<vertex x="64.77" y="39.878"/>
+<vertex x="60.706" y="39.878"/>
+<vertex x="56.388" y="44.196"/>
 <vertex x="47.244" y="44.196"/>
 </polygon>
 <wire x1="42.72" y1="49.53" x2="51.87" y2="49.53" width="0.8128" layer="1"/>
@@ -3260,14 +3263,12 @@ Please make sure your boards conform to these design rules.</description>
 <contactref element="U2" pad="4"/>
 <polygon width="0.4064" layer="1" thermals="no">
 <vertex x="47.244" y="42.926"/>
-<vertex x="56.388" y="42.926"/>
-<vertex x="60.452" y="38.862"/>
-<vertex x="64.262" y="38.862"/>
-<vertex x="64.77" y="38.354"/>
-<vertex x="64.77" y="36.83"/>
-<vertex x="64.262" y="36.322"/>
-<vertex x="60.452" y="36.322"/>
-<vertex x="56.388" y="32.258"/>
+<vertex x="56.642" y="42.926"/>
+<vertex x="60.452" y="39.116"/>
+<vertex x="64.77" y="39.116"/>
+<vertex x="64.77" y="36.068"/>
+<vertex x="60.452" y="36.068"/>
+<vertex x="56.642" y="32.258"/>
 <vertex x="47.244" y="32.258"/>
 </polygon>
 <wire x1="42.72" y1="37.592" x2="51.87" y2="37.592" width="0.8128" layer="1"/>
@@ -3283,10 +3284,9 @@ Please make sure your boards conform to these design rules.</description>
 <contactref element="U3" pad="4"/>
 <polygon width="0.4064" layer="1" thermals="no">
 <vertex x="47.244" y="30.988"/>
-<vertex x="56.642" y="30.988"/>
-<vertex x="60.96" y="35.306"/>
-<vertex x="64.262" y="35.306"/>
-<vertex x="64.77" y="34.798"/>
+<vertex x="56.388" y="30.988"/>
+<vertex x="60.706" y="35.306"/>
+<vertex x="64.77" y="35.306"/>
 <vertex x="64.77" y="28.702"/>
 <vertex x="56.388" y="20.32"/>
 <vertex x="47.244" y="20.32"/>
