@@ -15925,9 +15925,9 @@ WashU ESE Dept - May 2017</text>
 <label x="200.66" y="170.18" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="R9" gate="G$1" pin="1"/>
-<wire x1="210.82" y1="40.64" x2="205.74" y2="40.64" width="0.1524" layer="91"/>
-<label x="205.74" y="40.64" size="1.778" layer="95"/>
+<pinref part="R1" gate="G$1" pin="1"/>
+<wire x1="210.82" y1="111.76" x2="205.74" y2="111.76" width="0.1524" layer="91"/>
+<label x="205.74" y="111.76" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="D12" class="0">
@@ -15955,9 +15955,9 @@ WashU ESE Dept - May 2017</text>
 <label x="200.66" y="162.56" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="R1" gate="G$1" pin="1"/>
-<wire x1="210.82" y1="111.76" x2="205.74" y2="111.76" width="0.1524" layer="91"/>
-<label x="205.74" y="111.76" size="1.778" layer="95"/>
+<pinref part="R9" gate="G$1" pin="1"/>
+<wire x1="210.82" y1="40.64" x2="205.74" y2="40.64" width="0.1524" layer="91"/>
+<label x="205.74" y="40.64" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="D1" class="0">
