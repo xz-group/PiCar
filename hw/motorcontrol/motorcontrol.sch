@@ -15889,6 +15889,15 @@ WashU ESE Dept - May 2017</text>
 <pinref part="U9" gate="G$1" pin="PB4(ADC11)"/>
 <wire x1="198.12" y1="185.42" x2="203.2" y2="185.42" width="0.1524" layer="91"/>
 </segment>
+<segment>
+<pinref part="ENCODER" gate="-3" pin="S"/>
+<wire x1="337.82" y1="195.58" x2="330.2" y2="195.58" width="0.1524" layer="91"/>
+<pinref part="R26" gate="G$1" pin="1"/>
+<wire x1="330.2" y1="195.58" x2="325.12" y2="195.58" width="0.1524" layer="91"/>
+<wire x1="330.2" y1="198.12" x2="330.2" y2="195.58" width="0.1524" layer="91"/>
+<junction x="330.2" y="195.58"/>
+<label x="325.12" y="195.58" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="ATMEGASCK" class="0">
 <segment>
@@ -15915,6 +15924,11 @@ WashU ESE Dept - May 2017</text>
 <wire x1="198.12" y1="170.18" x2="203.2" y2="170.18" width="0.1524" layer="91"/>
 <label x="200.66" y="170.18" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="R9" gate="G$1" pin="1"/>
+<wire x1="210.82" y1="40.64" x2="205.74" y2="40.64" width="0.1524" layer="91"/>
+<label x="205.74" y="40.64" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="D12" class="0">
 <segment>
@@ -15926,16 +15940,6 @@ WashU ESE Dept - May 2017</text>
 <pinref part="R5" gate="G$1" pin="1"/>
 <wire x1="210.82" y1="76.2" x2="205.74" y2="76.2" width="0.1524" layer="91"/>
 <label x="205.74" y="76.2" size="1.778" layer="95"/>
-</segment>
-<segment>
-<pinref part="R1" gate="G$1" pin="1"/>
-<wire x1="210.82" y1="111.76" x2="205.74" y2="111.76" width="0.1524" layer="91"/>
-<label x="205.74" y="111.76" size="1.778" layer="95"/>
-</segment>
-<segment>
-<pinref part="R9" gate="G$1" pin="1"/>
-<wire x1="210.82" y1="40.64" x2="205.74" y2="40.64" width="0.1524" layer="91"/>
-<label x="205.74" y="40.64" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$48" class="0">
@@ -15951,13 +15955,9 @@ WashU ESE Dept - May 2017</text>
 <label x="200.66" y="162.56" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="ENCODER" gate="-3" pin="S"/>
-<wire x1="337.82" y1="195.58" x2="330.2" y2="195.58" width="0.1524" layer="91"/>
-<pinref part="R26" gate="G$1" pin="1"/>
-<wire x1="330.2" y1="195.58" x2="325.12" y2="195.58" width="0.1524" layer="91"/>
-<wire x1="330.2" y1="198.12" x2="330.2" y2="195.58" width="0.1524" layer="91"/>
-<junction x="330.2" y="195.58"/>
-<label x="325.12" y="195.58" size="1.778" layer="95"/>
+<pinref part="R1" gate="G$1" pin="1"/>
+<wire x1="210.82" y1="111.76" x2="205.74" y2="111.76" width="0.1524" layer="91"/>
+<label x="205.74" y="111.76" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="D1" class="0">
