@@ -1,0 +1,226 @@
+This API outlines the functions that the Atmega32u4 chip will run in an Arduino sketch. The chips main tasks include: 
+  Reading the hall effect sensors 
+  Outputting PWM and inhibit signals to drive the BLDC motor
+  Reading current data from the motor drivers
+  Turning the servo motor
+  Reading and manipulating IMU data
+  Communicating with the Raspberry Pi 
+  
+  the sketch will include a global data structure to store realtime data as referenced below
+  
+  
+Driving Functions:
+
+void moveForward(int pwm) 
+
+  Returns: void
+  
+  Parameters: pwm - value from global data structure
+
+  Summary: executes motor commutations based on hall effect sensor readings and pwm parameter to move car forward
+  
+  
+void moveBackward(int pwm)
+
+  Returns: void
+  
+  Parameters: pwm - value from global data structure
+
+  Summary: executes motor commutations based on hall effect sensor readings and pwm parametr to move car backward
+
+
+void turnServo(int angle)
+
+  Returns: void
+  
+  Parameters: angle - desired angle of servo motor received from raspberry pi
+  
+  Summary: changes servo angle value in global data structure
+ 
+void setPWM(int pwm)
+
+  Returns: void
+  
+  Parameters: pwm - desired angle of servo motor received from raspberry pi
+  
+  Summary: changes pwm value in global data structure
+
+SPI:
+  
+double[] spiHandler(double[] data) //most likely will need a few helper functions
+
+  Returns: a double[] with the current desired pwm value, servo angle, and type of movement (backwards or forwards)
+  
+  Parameters: data - an array storing IMU data
+  
+  Summary: tranfers and receives data to and from the Raspberry Pi when requested
+  
+  
+Get functions:
+  
+int getPWMValue()
+
+  Returns: the current pwm value being applied to the motor controller
+  
+  Parameters: none
+  
+  Summary: gets the current pwm value from global data structure which corresponds to the speed
+  
+  
+int getServoAngle()
+
+  Returns: the current angle of the servo motor
+  
+  Parameters: none
+  
+  Summary: gets the current angle of servo from global data structure
+  
+  
+int getHallValue()
+
+  Returns: integer corresponding to 3-bit hall value
+  
+  Parameters: none
+  
+  Summary: gets an integer that corresponds to the current state of the hall sensors from global data structure
+  
+  
+double[] getIMUValues()
+
+  Returns: an array of IMU values from global data structure
+  
+  Parameters: none
+  
+  Summary: gets an array of the current x and z acceleration and velocity from global data structure
+  
+
+double getXAccel()
+
+  Returns: most recent x direction acceleration readings 
+  
+  Parameters: none
+  
+  Summary: gets x direction acceleration
+
+double getZAccel()
+
+  Returns: most recent z direction acceleration readings 
+  
+  Parameters: none
+  
+  Summary: gets z direction acceleration
+  
+double getXVelocity()
+
+  Returns: most recent x direction velocity readings 
+  
+  Parameters: none
+  
+  Summary: gets x direction velocity
+
+double getZVelocity()
+
+  Returns: most recent z direction velocity readings 
+  
+  Parameters: none
+  
+  Summary: gets z direction velocity
+
+int[] getMCCurrentValues()
+
+  Returns: an array of current readings from the motor controllers
+  
+  Parameters: none
+  
+  Summary: gets an array of the most recent current readings from motor controller
+
+
+double getEncoderVelocity()
+
+  Returns: velocity reading from encoder 
+  
+  Parameters: none
+  
+  Summary: gets encoder velocity reading from global data structure
+
+
+Interrupts:
+
+ISR(interrupt hall) 
+
+  Returns: void
+  
+  Parameters: pin change interrupt corresponding to hall effect sensor value change
+  
+  Summary: calls function that reads hall sensors when interrupt triggered
+  
+  
+ISR(interrupt SPI)
+
+  Returns: void
+  
+  Parameters: spi interrupt that triggers spi interrupt service routine
+  
+  Summary: receives request from raspberry pi and then calls spiHandler function
+  
+  
+Sensor Reading:
+ 
+void readIMU() //will need to do more research on exactly how this works
+
+  Returns: void
+  
+  Parameters: none
+  
+  Summary: reads and filters raw IMU data and stores it in global data structure
+  
+  
+void readMCCurrents()
+
+  Returns: void
+  
+  Parameters: none
+  
+  Summary: reads currents from the motor controllers and stores them in global data structure
+  
+  
+void readHallSensors()
+
+  Returns: void
+  
+  Parameters: none
+  
+  Summary: reads hall effect sensors and stores them in global data structure
+  
+  
+void readEncoder()
+
+  Returns: void
+ 
+  Parameters: none
+  
+  Summary: reads encoder and stores value in global data structure
+ 
+  
+Helper Methods:
+  
+void calculateIMUVelocity(double x, double z)
+
+  Returns: void
+  
+  Parameters: x - instantaneous acceleration of car in x direction
+              z - instantaneous acceleration of car in z direction
+              
+  Summary: integrates over rolling list of previous accelerations to determine current velocity and updates global data                  structure
+  
+ void calculateEncoderVelocity(int time, int ticks)
+ 
+    Returns: void
+    
+    Parameters: time - the amount of time that has passed since last encoder reading
+                ticks - the amount of encoder ticks counted since last reading
+                
+    Summary: calculates the velocity of the car based on readings from encoder and stores in a global data structure
+  
+  
+  
