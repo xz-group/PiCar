@@ -51,25 +51,26 @@ feature_params = dict( maxCorners = 500,
                        minDistance = 7,
                        blockSize = 7 )
 
+    
 class App:
     def __init__(self):
         self.track_len = 10
         self.detect_interval = 5
         self.tracks = []
         self.frame_idx = 0
-
+    
     def run(self):
         for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
             #Read from camera
             img = frame.array
             
             #Convert to grayscale
-            frame_gray_old = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            #frame_gray_old = 
 
-            #Equalize Histogram
-            frame_gray = cv2.equalizeHist(frame_gray_old)
-
-            print(frame_gray.shape)
+            #Equalize
+            clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
+            frame_gray = clahe.apply(cv2.cvtColor(img, cv2.COLOR_BGR2GRAY))
+            
             vis = img.copy()
 
             
@@ -113,8 +114,8 @@ class App:
             self.frame_idx += 1
             self.prev_gray = frame_gray
             cv2.imshow('lk_track', vis)
-            cv2.imshow('Before Equalization', frame_gray_old)
-            cv2.imshow('After Equalization',frame_gray)
+           # cv2.imshow('Before Equalization', frame_gray_old)
+            cv2.imshow('CLAHE (8,8)',frame_gray)
 
             ch = cv2.waitKey(1)
             rawCapture.truncate(0)
