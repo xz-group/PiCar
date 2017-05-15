@@ -32,15 +32,30 @@ from picamera import PiCamera
 
 # initialize the camera and grab a reference to the raw camera capture
 camera = PiCamera()
-camera.resolution = (640, 480)
+camera.resolution = (224, 128)
 camera.framerate = 30
-rawCapture = PiRGBArray(camera, size=(640, 480))
+camera.shutter_speed = 5000
+rawCapture = PiRGBArray(camera, size=(200, 120))
+#camera.exposure_mode = 'off'
 
 # allow the camera to warmup
-time.sleep(0.1)
+time.sleep(2)
 
-lk_params = dict( winSize  = (15, 15),
-                  maxLevel = 2,
+#grab image
+camera.capture(rawCapture, format="bgr")
+frame = rawCapture.array
+height,width,layers = frame.shape
+
+#clear stream
+rawCapture.truncate(0)
+
+#initialize VideoWriter object
+fourcc = cv2.VideoWriter_fourcc('M','J','P','G')
+video1 = cv2.VideoWriter('TestElevatedFast.avi',fourcc, 20.0, (width,height))
+
+#Set parameters in optical flow
+lk_params = dict( winSize  = (23, 23),
+                  maxLevel = 3,
                   criteria = (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 0.03))
 
 feature_params = dict( maxCorners = 500,
@@ -58,15 +73,24 @@ class App:
 
     def run(self):
         for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+            #Read from camera
             img = frame.array
-            frame_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            
+            #Convert to grayscale
+            frame_gray_old = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+            #Equalize Histogram
+            frame_gray = cv2.equalizeHist(frame_gray_old)
+            
             vis = img.copy()
 
+            
             if len(self.tracks) > 0:
                 img0, img1 = self.prev_gray, frame_gray
                 p0 = np.float32([tr[-1] for tr in self.tracks]).reshape(-1, 1, 2)
                 p1, st, err = cv2.calcOpticalFlowPyrLK(img0, img1, p0, None, **lk_params)
                 p0r, st, err = cv2.calcOpticalFlowPyrLK(img1, img0, p1, None, **lk_params)
+
                 d = abs(p0-p0r).reshape(-1, 2).max(-1)
                 good = d < 1
                 new_tracks = []
@@ -80,7 +104,7 @@ class App:
                     cv2.circle(vis, (x, y), 2, (0, 255, 0), -1)
                 self.tracks = new_tracks
                 cv2.polylines(vis, [np.int32(tr) for tr in self.tracks], False, (0, 255, 0))
-                draw_str(vis, (20, 20), 'track count: %d' % len(self.tracks))
+                draw_str(vis, (20, 20), '%d' % len(self.tracks))
 
             if self.frame_idx % self.detect_interval == 0:
                 mask = np.zeros_like(frame_gray)
@@ -95,12 +119,22 @@ class App:
 
             self.frame_idx += 1
             self.prev_gray = frame_gray
-            cv2.imshow('lk_track', vis)
+            
+            #Display
+#            cv2.imshow('lk_track', vis)
+#            cv2.imshow('Before Equalization', frame_gray_old)
+#            cv2.imshow('After Equalization',frame_gray)
 
+            #Write frame to VideoWriter
+            video1.write(vis)
+            video1.write(vis)
+            #video1.write(vis)
+            
             ch = cv2.waitKey(1)
             rawCapture.truncate(0)
             
             if ch == 27:
+                video1.release()
                 break
 
 def main():
