@@ -52,8 +52,9 @@ feature_params = dict( maxCorners = 500,
                        qualityLevel = 0.3,
                        minDistance = 7,
                        blockSize = 7 )
-ttcAvg = np.arange(10)
-FILTER_COUNTS = 10
+
+ttcAvg = np.arange(6)
+FILTER_COUNTS = 6
 
 class App:
     def __init__(self):
@@ -70,6 +71,9 @@ class App:
         
     def run(self):
         for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+
+            #READ AND PREPROCESS IMAGE
+            
             #Read from camera
             img = frame.array
             
@@ -78,12 +82,19 @@ class App:
             frame_gray = clahe.apply(cv2.cvtColor(img, cv2.COLOR_BGR2GRAY))
             
             vis = img.copy()
-            
+
+
+
             if len(self.tracks) > 0:
                 img0, img1 = self.prev_gray, frame_gray
+                #puts in right data type and size
                 p0 = np.float32([tr[-1] for tr in self.tracks]).reshape(-1, 1, 2)
+                
+                #calculates optical flow
                 p1, st, err = cv2.calcOpticalFlowPyrLK(img0, img1, p0, None, **lk_params)
                 p0r, st, err = cv2.calcOpticalFlowPyrLK(img1, img0, p1, None, **lk_params)
+
+                #timestamp used for velocity in ttc
                 self.time = time.time()
                 
                 vec = abs(p0-p0r).reshape(-1, 2)
@@ -95,7 +106,10 @@ class App:
                 i = 0
                 ttcCount = 0
                 ttcSum = 0
-                
+                xSum = 0
+                ySum = 0
+
+                #Tracks are added, Focus of expansion is calculated, ttc calculated for each point
                 for tr, (x, y), (u,v), (x2,y2), good_flag in zip(self.tracks, p1.reshape(-1, 2), vec, p0r.reshape(-1,2), good):
                     if not good_flag:
                         continue
@@ -122,33 +136,57 @@ class App:
                     dDot = math.sqrt((x2-x)*(x2-x)+(y2-y)*(y2-y))/(self.time-self.prev_time)
                     ttc = d/dDot
 
-                    #Print TTC
+                    #Print TTC for relevant points
                     if ttc < 15:
                         cv2.putText(vis,'%.2f' % ttc, (x,y), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
                         ttcCount = ttcCount+1
                         ttcSum = ttc + ttcSum
+                        xSum = xSum + x
+                        ySum = ySum + y
                         
                 #ROLLING AVERAGE FILTER
                 ttcTotalAvg = 0
-
+                xAvg = 0
+                yAvg = 0
+                
                 if ttcCount > 0:
                     self.inc = self.inc + 1        
                     ttcAvg[self.inc % FILTER_COUNTS] = ttcSum/ttcCount
-                
+                    xAvg = xSum/ttcCount
+                    yAvg = ySum/ttcCount
+                    
                     for val in ttcAvg:
                         ttcTotalAvg = val + ttcTotalAvg
                     
                     ttcTotalAvg = ttcTotalAvg/FILTER_COUNTS
-                
+
+                if xAvg == 0:
+                    #draw_str(vis, (20, 20), 'STRAIGHT')
+                    cv2.putText(vis,'STRAIGHT', (5,100), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+                elif xAvg < 112:
+                    #draw_str(vis, (20, 20), 'RIGHT')
+                    cv2.putText(vis,'RIGHT', (5,100), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+                else:
+                    #draw_str(vis, (20, 20), 'LEFT')
+                    cv2.putText(vis,'LEFT', (5,100), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+                    
+                if ttcTotalAvg == 0:
+                    cv2.putText(vis,'NOTHING', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+                    #draw_str(vis, (20, 20), 'NOTHING')
+                elif ttcTotalAvg < 7:
+                    cv2.putText(vis,'MOVE BITCH', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+                    #draw_str(vis, (20, 20), 'MOVE BITCH')
+                else:
+                    cv2.putText(vis,'MOVE SLIGHTLY', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+                    #draw_str(vis, (20, 20), 'MOVE SLIGHTLY')
+                    
                 #Calculate new FOE
                 try:
-                        part1 = inv(np.matmul(A.transpose(),A))
-                except numpy.linalg.linalg.LinAlgErr as err:
-                    print('ERROROROROROR-------------------CAUGHT')
+                    part1 = inv(np.matmul(A.transpose(),A))
+                except:
                     self.foe = self.foe
                 else:
                     self.foe = np.matmul(part1,np.matmul(A.transpose(),b))
-
                 if ttcTotalAvg != 0:
                     self.data.append(ttcTotalAvg)
                     self.runCount.append(len(self.data))
@@ -156,16 +194,18 @@ class App:
                 self.tracks = new_tracks
                 #cv2.polylines(vis, [np.int32(tr) for tr in self.tracks], False, (0, 255, 0))
                 #draw_str(vis, (20, 20), '%d' % len(self.tracks))
-                draw_str(vis, (20, 20), '%.2f' % ttcTotalAvg)
+                #draw_str(vis, (20, 20), '%.2f' % ttcTotalAvg)
           
             if self.frame_idx % self.detect_interval == 0:
                 mask = np.zeros_like(frame_gray)
                 mask[:] = 255
                 for x, y in [np.int32(tr[-1]) for tr in self.tracks]:
                     cv2.circle(mask, (x, y), 5, 0, -1)
+                #get new features
                 p = cv2.goodFeaturesToTrack(frame_gray, mask = mask, **feature_params)
                 if p is not None:
                     for x, y in np.float32(p).reshape(-1, 2):
+                        #add features to tracked points
                         self.tracks.append([(x, y)])
 
 
