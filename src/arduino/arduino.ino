@@ -8,8 +8,8 @@
 //#include "stdint.h"
 //#include "servoDShare.h"
 #include "Servo.h"
-#include "dshare/dshare.h"
-#include "dshare/ddefs.h"
+#include "dshare.h"
+#include "ddefs.h"
 
 #define SERVO_PIN 5
 
