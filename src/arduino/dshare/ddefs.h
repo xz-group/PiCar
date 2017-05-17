@@ -35,6 +35,13 @@
 #define SPEED_PID_D      (uint8_t) 14
 #define SPEED_PID_DFILT  (uint8_t) 15
 
-// etc...
+// BLDC
+#define BLDC_DUTY_CYCLE  (uint8_t) 16
+#define BLDC_HALL_SPEED  (uint8_t) 17
+#define DIRECTION        (uint8_t) 18
+
+// Servo
+#define SERVO_ANGLE      (uint8_t) 19
+
 
 #endif
