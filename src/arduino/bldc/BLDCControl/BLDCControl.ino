@@ -33,94 +33,47 @@ void setup(){
   pinMode(HALL_2, INPUT);
   pinMode(HALL_3, INPUT);
   
-  // Set PWM for pins 9,10 to 3.921 kHz
+  // Set PWM for pins 9,10 to 490 Hz
   //First clear all three prescaler bits:
   int prescalerVal = 0x07; //create a variable called prescalerVal and set it equal to the binary number "00000111"                                                       number "00000111"                                                      number "00000111"
   TCCR1B &= ~prescalerVal; //AND the value in TCCR0B with binary number "11111000"
 
   //Now set the appropriate prescaler bits:
-  int prescalerVal2 = 2; //set prescalerVal equal to binary number "00000010"
-  TCCR1B |= prescalerVal2; //OR the value in TCCR0B with binary number "00000010"
+ // int prescalerVal2 = 1; //set prescalerVal equal to binary number "00000010"
+  TCCR1B |= B00000011; //OR the value in TCCR0B with binary number "00000010"
   
-  // Set PWM for pins 3,11 to 3.921 kHz (Only pin 11 is used in this program)
+  // Set PWM for pins 3,11 to 490 Hz (Only pin 11 is used in this program)
   //First clear all three prescaler bits:
   TCCR2B &= ~prescalerVal; //AND the value in TCCR0B with binary number "11111000"
 
   //Now set the appropriate prescaler bits:
  
-  TCCR2B |= prescalerVal2; //OR the value in TCCR0B with binary number "00000010"//First clear all three prescaler bits:
-
-
-
+  TCCR2B |= B00000100; //OR the value in TCCR0B with binary number "00000010"//First clear all three prescaler bits:
 }
 
 
-/*  
-int fwd(){
-//using analog inputs to motor commutation sequence 1
-if (one==1){
-    if (two==0){
-      if (three==1){
-        analogWrite(IN_1,0);
-        analogWrite(IN_2,127);
-        analogWrite(IN_3,pwm);//blue to yelloe
-         }
-      else {
-        analogWrite(IN_1,127);
-        analogWrite(IN_2,0);
-        analogWrite(IN_3,pwm);//blue to orange
-        }}
-
-        
-     if (two==1){
-      if (three==0){
-        analogWrite(IN_1,pwm);
-        analogWrite(IN_2,0);
-        analogWrite(IN_3,127);
-}}}
-  
- if (one==0){
-    if (two==1){
-      if (three==0){
-        analogWrite(IN_1,pwm);
-        analogWrite(IN_2,127);
-        analogWrite(IN_3,0);
-        }
-      else {
-       analogWrite(IN_1,127);
-        analogWrite(IN_2,pwm);
-        analogWrite(IN_3,0);
-        }}
-        
-     if (two==0){
-      if (three==1){
-        analogWrite(IN_1,0);
-        analogWrite(IN_2,pwm);
-        analogWrite(IN_3,127);
-        }}}
-
-}
-*/     
 void loop(){
   
 if(Serial.available()>0){
       a = Serial.read();
       Serial.println(a);
 }      
-      if(a == 48){
-            pwm = 45;
-            fwd(pwm);
-            
-       }else if (a == 49){
-            pwm = 50;
-            fwd(pwm);
-       }else if(a == 50){
-            pwm = 70;
-            fwd(pwm);
-       }else{
+      if(a == 48){//input 0 turns off
             digitalWrite(INH_1, LOW);
             digitalWrite(INH_2, LOW);
             digitalWrite(INH_3, LOW);
+            pwm = 20;
+            fwd(pwm);
+            
+       }else if (a == 53){//ingput 5, turns on
+            pwm = 40;
+            fwd(pwm);
+       }else if(a == 56){//input 8, increase pwm
+            pwm += 1;
+            fwd(pwm);
+       }else if(a == 50){//input 2, decrease pwm
+            pwm -= 1;
+            fwd(pwm);
             }
 
 /*      Serial.print("current 1: ");
