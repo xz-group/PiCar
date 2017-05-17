@@ -134,8 +134,11 @@ class App:
                     #TTC
                     d = math.sqrt((self.foe[0]-x)*(self.foe[0]-x)+(self.foe[1]-y)*(self.foe[1]-y))
                     dDot = math.sqrt((x2-x)*(x2-x)+(y2-y)*(y2-y))/(self.time-self.prev_time)
-                    ttc = d/dDot
-
+                    try:
+                        ttc = d/dDot
+                    except:
+                        ttc = 100
+                        
                     #Print TTC
                     if ttc < 15:
                         cv2.putText(vis,'%.2f' % ttc, (x,y), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
@@ -162,22 +165,22 @@ class App:
 
                 if xAvg == 0:
                     #draw_str(vis, (20, 20), 'STRAIGHT')
-                    cv2.putText(vis,'STRAIGHT', (5,100), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+                    cv2.putText(vis,'STRAIGHT', (5,100), cv2.FONT_HERSHEY_SIMPLEX,.5,(0,255,0))
                 elif xAvg < 112:
                     #draw_str(vis, (20, 20), 'RIGHT')
-                    cv2.putText(vis,'RIGHT', (5,100), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+                    cv2.putText(vis,'RIGHT', (5,100), cv2.FONT_HERSHEY_SIMPLEX,.5,(0,255,0))
                 else:
                     #draw_str(vis, (20, 20), 'LEFT')
-                    cv2.putText(vis,'LEFT', (5,100), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+                    cv2.putText(vis,'LEFT', (5,100), cv2.FONT_HERSHEY_SIMPLEX,.5,(0,255,0))
                     
                 if ttcTotalAvg == 0:
-                    cv2.putText(vis,'NOTHING', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+                    cv2.putText(vis,'NOTHING', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.5,(0,255,0))
                     #draw_str(vis, (20, 20), 'NOTHING')
                 elif ttcTotalAvg < 7:
-                    cv2.putText(vis,'MOVE BITCH', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+                    cv2.putText(vis,'MOVE BITCH', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.5,(0,255,0))
                     #draw_str(vis, (20, 20), 'MOVE BITCH')
                 else:
-                    cv2.putText(vis,'MOVE SLIGHTLY', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+                    cv2.putText(vis,'MOVE SLIGHTLY', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.5,(0,255,0))
                     #draw_str(vis, (20, 20), 'MOVE SLIGHTLY')
                     
                 #Calculate new FOE
@@ -196,7 +199,7 @@ class App:
                 self.tracks = new_tracks
                 #cv2.polylines(vis, [np.int32(tr) for tr in self.tracks], False, (0, 255, 0))
                 #draw_str(vis, (20, 20), '%d' % len(self.tracks))
-                draw_str(vis, (20, 20), '%.2f' % ttcTotalAvg)
+                #draw_str(vis, (20, 20), '%.2f' % ttcTotalAvg)
           
             if self.frame_idx % self.detect_interval == 0:
                 mask = np.zeros_like(frame_gray)
@@ -217,6 +220,9 @@ class App:
             #cv2.imshow('Before Equalization', frame_gray_old)
             #cv2.imshow('CLAHE (8,8)',frame_gray)
             #Write frame to VideoWriter
+            video1.write(vis)
+            video1.write(vis)
+            video1.write(vis)
             video1.write(vis)
             video1.write(vis)
             

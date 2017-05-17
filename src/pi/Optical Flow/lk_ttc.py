@@ -43,7 +43,6 @@ rawCapture = PiRGBArray(camera, size=(224, 128))
 # allow the camera to warmup
 time.sleep(2)
 
-#camera.exposure_mode = 'off'
 lk_params = dict( winSize  = (23, 23),
                   maxLevel = 3,
                   criteria = (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 0.03))
@@ -71,7 +70,6 @@ class App:
         
     def run(self):
         for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
-
             #READ AND PREPROCESS IMAGE
             
             #Read from camera
@@ -87,6 +85,7 @@ class App:
 
             if len(self.tracks) > 0:
                 img0, img1 = self.prev_gray, frame_gray
+                
                 #puts in right data type and size
                 p0 = np.float32([tr[-1] for tr in self.tracks]).reshape(-1, 1, 2)
                 
@@ -96,9 +95,12 @@ class App:
 
                 #timestamp used for velocity in ttc
                 self.time = time.time()
-                
+
+                #m=distance between points
                 vec = abs(p0-p0r).reshape(-1, 2)
                 d = vec.max(-1)
+
+                #make sure distance is valid
                 good = d < 1
                 
                 new_tracks = []
@@ -113,6 +115,8 @@ class App:
                 for tr, (x, y), (u,v), (x2,y2), good_flag in zip(self.tracks, p1.reshape(-1, 2), vec, p0r.reshape(-1,2), good):
                     if not good_flag:
                         continue
+                    
+                    #add feature to track
                     tr.append((x, y))
                     
                     #Calculate matrices for FOE
@@ -187,6 +191,9 @@ class App:
                     self.foe = self.foe
                 else:
                     self.foe = np.matmul(part1,np.matmul(A.transpose(),b))
+
+                cv2.circle(vis, (self.foe[0], self.foe[1]), 2, (0, 255, 255), -1)
+                print(self.foe)
                 if ttcTotalAvg != 0:
                     self.data.append(ttcTotalAvg)
                     self.runCount.append(len(self.data))
