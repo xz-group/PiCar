@@ -27,3 +27,4 @@ uint8_t setData( const uint8_t address, int16_t data )
 
   return DSHARE_OK;
 }
+

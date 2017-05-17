@@ -1,3 +1,5 @@
+#include <stdint.h>
+
 #ifndef DDEF_H_
 #define DDEF_H_
 
