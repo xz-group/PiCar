@@ -46,4 +46,6 @@ uint8_t setFilterB( int16_t filterB );
 //ISR
 ISR( ) // timer interrupt
 
+//Max Speed
+
 #endif /* IMU_h */
