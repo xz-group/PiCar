@@ -1,9 +1,10 @@
 #include <stdint.h>
-#include "avrfix.h"
+#include "fp.h"
 #include "pid.h"
 
 uint8_t initPID( pid *z )
 {
+  z->mode = NA;
   z->state = 0;
   z->errm = 0;
   z->errmm = 0;
@@ -11,7 +12,7 @@ uint8_t initPID( pid *z )
   return PID_OK;
 }
 
-uint8_t setPIDParams( pid *z, _sAccum Kp, _sAccum Ti, _sAccum Td )
+uint8_t setPIDParams( pid *z, fp_t Kp, fp_t Ti, fp_t Td )
 {
   if ( Kp == 0 )
     return PID_INVALID_PARAM;
@@ -37,9 +38,9 @@ uint8_t setPIDParams( pid *z, _sAccum Kp, _sAccum Ti, _sAccum Td )
   return PID_OK;
 }
 
-uint8_t updatePID( pid *z, _sAccum err, _sAccum dt )
+uint8_t updatePID( pid *z, fp_t err, fp_t dt )
 {
-  _sAccum itmp = 0, dtmp = 0;
+  fp_t itmp = 0, dtmp = 0;
 
   if ( z->mode == NA )
     return PID_INVALID_STRUCT;
@@ -47,12 +48,12 @@ uint8_t updatePID( pid *z, _sAccum err, _sAccum dt )
   // state += Kp * ( err - errm ) + Kp * dt / Ti * err + Kp * Td / dt * ( err - 2 * errm + errmm )
 
   if ( z->mode == PI || z->mode == PID )
-    itmp = sdivsk( smulsk( dt, err ), z->Ti );
+    itmp = fpdiv( fpmul( dt, err ), z->Ti );
 
   if ( z->mode == PD || z->mode == PID )
-    dtmp = sdivsk( smulsk( z->Td, err - z->errm - z->errm + z->errmm ), dt );
+    dtmp = fpdiv( fpmul( z->Td, err - z->errm - z->errm + z->errmm ), dt );
 
-  z->state += smulskD( z->Kp, err - z->errm + itmp + dtmp );
+  z->state += fpmul( z->Kp, err - z->errm + itmp + dtmp );
   z->errmm = z->errm;
   z->errm = err;
 }
