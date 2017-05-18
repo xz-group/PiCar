@@ -33,22 +33,22 @@ void setup(){
   pinMode(HALL_2, INPUT);
   pinMode(HALL_3, INPUT);
   
-  // Set PWM for pins 9,10 to 490 Hz
+  // Set PWM for pins 9,10 to 3.9kHz
   //First clear all three prescaler bits:
   int prescalerVal = 0x07; //create a variable called prescalerVal and set it equal to the binary number "00000111"                                                       number "00000111"                                                      number "00000111"
   TCCR1B &= ~prescalerVal; //AND the value in TCCR0B with binary number "11111000"
 
   //Now set the appropriate prescaler bits:
- // int prescalerVal2 = 1; //set prescalerVal equal to binary number "00000010"
-  TCCR1B |= B00000011; //OR the value in TCCR0B with binary number "00000010"
+ // int prescalerVal2 = 2; //set prescalerVal equal to binary number "00000010"
+  TCCR1B |= B00000010; //OR the value in TCCR0B with binary number "00000010"
   
-  // Set PWM for pins 3,11 to 490 Hz (Only pin 11 is used in this program)
+  // Set PWM for pins 3,11 to 3.9kHz (Only pin 11 is used in this program)
   //First clear all three prescaler bits:
   TCCR2B &= ~prescalerVal; //AND the value in TCCR0B with binary number "11111000"
 
   //Now set the appropriate prescaler bits:
  
-  TCCR2B |= B00000100; //OR the value in TCCR0B with binary number "00000010"//First clear all three prescaler bits:
+  TCCR2B |= B00000010; //OR the value in TCCR0B with binary number "00000010"//First clear all three prescaler bits:
 }
 
 
@@ -58,14 +58,7 @@ if(Serial.available()>0){
       a = Serial.read();
       Serial.println(a);
 }      
-      if(a == 48){//input 0 turns off
-            digitalWrite(INH_1, LOW);
-            digitalWrite(INH_2, LOW);
-            digitalWrite(INH_3, LOW);
-            pwm = 20;
-            fwd(pwm);
-            
-       }else if (a == 53){//ingput 5, turns on
+      if (a == 53){//ingput 5, turns on
             pwm = 40;
             fwd(pwm);
        }else if(a == 56){//input 8, increase pwm
@@ -74,7 +67,12 @@ if(Serial.available()>0){
        }else if(a == 50){//input 2, decrease pwm
             pwm -= 1;
             fwd(pwm);
-            }
+            }else{//other input turns off
+            digitalWrite(INH_1, LOW);
+            digitalWrite(INH_2, LOW);
+            digitalWrite(INH_3, LOW);
+            
+       }
 
 /*      Serial.print("current 1: ");
       Serial.println(analogRead(IS_1));
