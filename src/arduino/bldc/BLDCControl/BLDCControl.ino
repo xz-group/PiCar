@@ -178,5 +178,5 @@ int fwd(int pwm){
  void magnet_detect()
  {
    rpmcount++;
-   Serial.println("detect");
+   //Serial.println("detect");
  }
