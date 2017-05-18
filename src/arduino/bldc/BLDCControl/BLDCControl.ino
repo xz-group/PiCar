@@ -1,3 +1,7 @@
+/*http://playground.arduino.cc/Main/ReadingRPM
+http://elimelecsarduinoprojects.blogspot.com/2013/06/measure-rpms-arduino.html
+*/
+
 #include <PWM.h>
 #define  IN_1  9 //yellow
 #define  IN_2  10 //orange
@@ -19,9 +23,14 @@ int HallVal = 1; //binary value of all 3 hall sensors
 int pwm;
 int a;
 
+ volatile byte rpmcount = 0;
+ unsigned int rpm = 0;
+ unsigned long timeold = 0;
+ 
 void setup(){
 
   Serial.begin(115200);
+  attachInterrupt(0, magnet_detect,RISING);//pin 2, hall2
 
   pinMode(IN_1, OUTPUT);
   pinMode(IN_2, OUTPUT);
@@ -53,7 +62,28 @@ void setup(){
 
 
 void loop(){
-  
+  if (millis() - timeold == 1000){  /*Uptade every one second, this will be equal to reading frecuency (Hz).*/
+ 
+ detachInterrupt(0);    //Disable interrupt when calculating
+ rpm = rpmcount * 60;  /* Convert frecuency to RPM, note: this works for one interruption per full rotation. For two interrups per full rotation use rpmcount * 30.*/
+ Serial.print("RPM =\t"); //print the word "RPM" and tab.
+ Serial.print(rpm); // print the rpm value.
+ Serial.print("\t Hz=\t"); //print the word "Hz".
+ Serial.println(rpmcount); /*print revolutions per second or Hz. And print new line or enter.*/
+ 
+ rpmcount = 0; // Restart the RPM counter
+ timeold = millis(); // Uptade lasmillis
+ attachInterrupt(0, magnet_detect, RISING); //enable interrupt
+  }
+  /*
+     if (rpmcount >= 20) { 
+     rpm = 30*1000/(millis() - timeold)*rpmcount;
+     timeold = millis();
+     rpmcount = 0;
+     Serial.println(rpm,DEC);
+   }
+   */
+ /*  
 if(Serial.available()>0){
       a = Serial.read();
       Serial.println(a);
@@ -73,7 +103,7 @@ if(Serial.available()>0){
             digitalWrite(INH_3, LOW);
             
        }
-
+*/
 /*      Serial.print("current 1: ");
       Serial.println(analogRead(IS_1));
       Serial.print("current 2: ");
@@ -144,3 +174,9 @@ int fwd(int pwm){
         break;
     }
     }
+
+ void magnet_detect()
+ {
+   rpmcount++;
+   Serial.println("detect");
+ }
