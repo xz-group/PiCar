@@ -1,9 +1,19 @@
 #ifndef DSHARE_H_
 #define DSHARE_H_
 
-uint8_t initDataShare();
-uint8_t getData( const uint8_t address, int16_t *data );
-uint8_t setData( const uint8_t address, const int16_t data );
+#include <stdint.h>
 
+#ifdef __cplusplus
+extern "C"{
 #endif
 
+extern uint8_t initDataShare();
+extern uint8_t getData( const uint8_t, int16_t* );
+extern uint8_t setData( const uint8_t, const int16_t );
+
+#ifdef __cplusplus
+}
+#endif
+
+
+#endif

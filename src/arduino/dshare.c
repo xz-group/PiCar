@@ -1,6 +1,5 @@
-//#include "dshare/dshare.h"
+#include <stdint.h>
 #include "ddefs.h"
-#include "stdint.h"
 
 int16_t dataArr[ DSHARE_ARR_LENGTH ];
 

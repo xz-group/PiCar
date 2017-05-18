@@ -6,8 +6,8 @@
 //
 //
 
-#ifndef IMU_h
-#define IMU_h
+#ifndef IMU_H_
+#define IMU_H_
 
 //Acceleration
 uint8_t getAccelX( int16_t *accelX );

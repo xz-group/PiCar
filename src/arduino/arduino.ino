@@ -1,13 +1,9 @@
-//
-//  servoDShare.c
-//  
-//
 //  Created by Matt Kollada on 5/17/17.
 //
 //
-//#include "stdint.h"
-//#include "servoDShare.h"
-#include "Servo.h"
+
+#include <stdint.h>
+#include <Servo.h>
 #include "dshare.h"
 #include "ddefs.h"
 
@@ -19,8 +15,8 @@ unsigned char receiveBuffer[5];
 unsigned char dat;
 byte marker = 0;
 
-volatile int angle;
-volatile int pwm;
+int16_t angle;
+int16_t pwm;
 
 /*************************************************************
  Unions allow variables to occupy the same memory space a 
@@ -51,10 +47,10 @@ union
 
 ISR(TIMER0_COMPA_vect)
 {   
-    if(getData( SERVO_ANGLE, &angle) == 0) {
+    if( getData( SERVO_ANGLE, &angle ) == DSHARE_OK ) {
       servo.write( angle );
     }
-    if(getData( BLDC_DUTY_CYCLE, &pwm) == 0) {
+    if( getData( BLDC_DUTY_CYCLE, &pwm ) == DSHARE_OK ) {
       
     }
 }
