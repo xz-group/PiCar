@@ -162,9 +162,9 @@ void executeCommand(void)
  
  if(receiveBuffer[0] == 'a')
  {
-   Serial.println("before");
+   Serial.println("p1Int");
    resultBuffer.resultInt = p1Buffer.p1Int + p2Buffer.p2Int;
-   Serial.println("anything");
+   Serial.println(p1Buffer.p1Int);
   }
  else if (receiveBuffer[0] == 's')
  {
