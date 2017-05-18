@@ -1,3 +1,17 @@
+<<<<<<< HEAD
+ ////
+////  Created by Matt Kollada on 5/17/17.
+////
+////
+//#include "stdint.h"
+//#include "servoDShare.h"
+#include "Servo.h"
+#include "dshare/dshare.h"
+#include "dshare/ddefs.h"
+#include "dshare/dshare.c"
+#include "servo/servocontrol.h"
+#include "servo/servocontrol.c"
+=======
 //  Created by Matt Kollada on 5/17/17.
 //
 //
@@ -8,6 +22,7 @@
 #include "ddefs.h"
 
 #define SERVO_PIN 5
+>>>>>>> 0a52f8c6c254f7896ae8e7a82c822cf9b7d6db49
 
 Servo servo;
 
@@ -15,6 +30,19 @@ unsigned char receiveBuffer[5];
 unsigned char dat;
 byte marker = 0;
 
+<<<<<<< HEAD
+volatile int angle;
+volatile int pwm;
+//
+///*************************************************************
+// Unions allow variables to occupy the same memory space a 
+// convenient way to move back and forth between 8-bit and 
+// 16-bit values etc.  Here three unions are declared: 
+// two for parameters that are passed in commands to the Arduino 
+// and one to receive  the results 
+// ***************************************************************/
+//
+=======
 int16_t angle;
 int16_t pwm;
 
@@ -26,6 +54,7 @@ int16_t pwm;
  and one to receive  the results 
  ***************************************************************/
 
+>>>>>>> 0a52f8c6c254f7896ae8e7a82c822cf9b7d6db49
 union       
   {
   int p1Int;
@@ -57,7 +86,7 @@ ISR(TIMER0_COMPA_vect)
 
 void setup() {
     Serial.begin(115200);
-    digitalWrite(10,LOW);
+    pinMode(MISO, OUTPUT);
     SPCR |= _BV(SPE);
     // set up Timer 0
     TCCR0A = 0;          // normal operation
@@ -68,33 +97,33 @@ void setup() {
     servo.attach( SERVO_PIN );
     // interrupt on Compare A Match
 }  // end of setup
-
+//
+//
 void loop() {
-
-  if((SPSR & (1 << SPIF)) != 0) {
+  if((SPSR & (1 << SPIF)) != 0)
+  {
     spiHandler();
    }
-  
 }
-
-/***************************************************************  
- spiHandler
-   Uses the marker variable to keep track current position in the
-   incoming data packet and execute accordingly
-   0   - wait for to receive start byte - once received send
-         the acknowledge byte
-   1   - the command to add or subtract
-   2-5 - two integer parameters to be added or subtracted
-       - when the last byte (5) is received, call the
-         executeCommand function and load the first byte of the
-         result into SPDR
-   6   - transmit the first byte of the result and load the 
-         second byte into SPDR
-   7   - transmit the second byte of of the result and reset
-         the marker   
-****************************************************************/
-
-
+//
+///***************************************************************  
+// spiHandler
+//   Uses the marker variable to keep track current position in the
+//   incoming data packet and execute accordingly
+//   0   - wait for to receive start byte - once received send
+//         the acknowledge byte
+//   1   - the command to add or subtract
+//   2-5 - two integer parameters to be added or subtracted
+//       - when the last byte (5) is received, call the
+//         executeCommand function and load the first byte of the
+//         result into SPDR
+//   6   - transmit the first byte of the result and load the 
+//         second byte into SPDR
+//   7   - transmit the second byte of of the result and reset
+//         the marker   
+//****************************************************************/
+//
+//
 void spiHandler()
 {
   switch (marker)
@@ -156,15 +185,17 @@ void executeCommand(void)
  p1Buffer.p1Char[1]=receiveBuffer[2];
  p2Buffer.p2Char[0]=receiveBuffer[3];
  p2Buffer.p2Char[1]=receiveBuffer[4];
+
+   Serial.print("p1 Int ");
+   Serial.println( p1Buffer.p1Int);
+   Serial.print("p2 Int ");
+   Serial.println( p2Buffer.p2Int);
  
  if(receiveBuffer[0] == 'a')
  {
    setData( SERVO_ANGLE, p1Buffer.p1Int);
    setData( BLDC_DUTY_CYCLE, p2Buffer.p2Int );
-   Serial.print("p1 Int ");
-   Serial.println( p1Buffer.p1Int);
-   Serial.print("p2 Int ");
-   Serial.println( p2Buffer.p2Int);
+   
  }
  else if (receiveBuffer[0] == 's')
  {
@@ -172,3 +203,16 @@ void executeCommand(void)
  }
 
 }
+
+
+
+
+
+
+
+
+ 
+
+
+
+
