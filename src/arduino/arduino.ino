@@ -1,3 +1,4 @@
+<<<<<<< HEAD
  ////
 ////  Created by Matt Kollada on 5/17/17.
 ////
@@ -10,6 +11,18 @@
 #include "dshare/dshare.c"
 #include "servo/servocontrol.h"
 #include "servo/servocontrol.c"
+=======
+//  Created by Matt Kollada on 5/17/17.
+//
+//
+
+#include <stdint.h>
+#include <Servo.h>
+#include "dshare.h"
+#include "ddefs.h"
+
+#define SERVO_PIN 5
+>>>>>>> 0a52f8c6c254f7896ae8e7a82c822cf9b7d6db49
 
 Servo servo;
 
@@ -17,6 +30,7 @@ unsigned char receiveBuffer[5];
 unsigned char dat;
 byte marker = 0;
 
+<<<<<<< HEAD
 volatile int angle;
 volatile int pwm;
 //
@@ -28,6 +42,19 @@ volatile int pwm;
 // and one to receive  the results 
 // ***************************************************************/
 //
+=======
+int16_t angle;
+int16_t pwm;
+
+/*************************************************************
+ Unions allow variables to occupy the same memory space a 
+ convenient way to move back and forth between 8-bit and 
+ 16-bit values etc.  Here three unions are declared: 
+ two for parameters that are passed in commands to the Arduino 
+ and one to receive  the results 
+ ***************************************************************/
+
+>>>>>>> 0a52f8c6c254f7896ae8e7a82c822cf9b7d6db49
 union       
   {
   int p1Int;
@@ -49,10 +76,10 @@ union
 
 ISR(TIMER0_COMPA_vect)
 {   
-    if(getData( SERVO_ANGLE, &angle) == 0) {
+    if( getData( SERVO_ANGLE, &angle ) == DSHARE_OK ) {
       servo.write( angle );
     }
-    if(getData( BLDC_DUTY_CYCLE, &pwm) == 0) {
+    if( getData( BLDC_DUTY_CYCLE, &pwm ) == DSHARE_OK ) {
       
     }
 }
