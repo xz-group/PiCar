@@ -20,7 +20,7 @@ typedef struct
 
 
 #ifdef __cplusplus
-extern "C"{
+extern "C" {
 #endif
 
 uint8_t initPID( pid * );

@@ -1,6 +1,6 @@
 //
 //  IMU.h
-//  
+//
 //
 //  Created by Matt Kollada on 5/16/17.
 //

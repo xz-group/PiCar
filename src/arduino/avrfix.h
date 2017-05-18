@@ -1,21 +1,21 @@
 /****************************************************************
  *                                                              *
- *          __ ____  _________                                  *
- *         /_ \\\  \/   /|    \______                           *
- *        //   \\\     /|| D  /_    /.                          *
- *       //     \\\_  /.||    \ ___/.                           *
- *      /___/\___\\__/. |__|\__\__.___  ___                     *
- *       ....  .......   ...||  _/_\  \////.                    *
- *                          || |.| |\  ///.                     *
- *                          |__|.|_|///  \                      *
- *                           .... ./__/\__\                     *
- *                                  ........                    *
- * Fixed Point Library                                          *
- * according to                                                 *
- * ISO/IEC DTR 18037                                            *
+            __ ____  _________
+           /_ \\\  \/   /|    \______
+          //   \\\     /|| D  /_    /.
+         //     \\\_  /.||    \ ___/.
+        /___/\___\\__/. |__|\__\__.___  ___
+         ....  .......   ...||  _/_\  \////.
+                            || |.| |\  ///.
+                            |__|.|_|///  \
+                             .... ./__/\__\
+                                    ........
+   Fixed Point Library
+   according to
+   ISO/IEC DTR 18037
  *                                                              *
- * Version 1.0.1                                                *
- * Maximilan Rosenblattl, Andreas Wolf 2007-02-07               *
+   Version 1.0.1
+   Maximilan Rosenblattl, Andreas Wolf 2007-02-07
  ****************************************************************/
 
 #ifndef _AVRFIX_H
@@ -29,10 +29,10 @@
 #endif
 
 /* Only two datatypes are used from the ISO/IEC standard:
- * short _Accum with s7.8 bit format
- *       _Accum with s15.16 bit format
- * long  _Accum with  s7.24 bit format
- */
+   short _Accum with s7.8 bit format
+         _Accum with s15.16 bit format
+   long  _Accum with  s7.24 bit format
+*/
 
 typedef signed short _sAccum;
 typedef signed long  _Accum;
@@ -129,19 +129,19 @@ extern _Accum divkS(_Accum, _Accum);
 extern _lAccum ldivlkS(_lAccum, _lAccum);
 
 #if FX_ACCUM_OVERFLOW == DEFAULT
-  #define smulsk(a,b) smulskD((a),(b))
-  #define mulk(a,b) mulkD((a),(b))
-  #define lmullk(a,b) lmullkD((a), (b))
-  #define sdivsk(a,b) sdivskD((a), (b))
-  #define divk(a,b) divkD((a), (b))
-  #define ldivlk(a,b) ldivlkD((a), (b))
+#define smulsk(a,b) smulskD((a),(b))
+#define mulk(a,b) mulkD((a),(b))
+#define lmullk(a,b) lmullkD((a), (b))
+#define sdivsk(a,b) sdivskD((a), (b))
+#define divk(a,b) divkD((a), (b))
+#define ldivlk(a,b) ldivlkD((a), (b))
 #elif FX_ACCUM_OVERFLOW == SAT
-  #define smulsk(a,b) smulskS((a),(b))
-  #define mulk(a,b) mulkS((a),(b))
-  #define lmullk(a,b) lmullkS((a), (b))
-  #define sdivsk(a,b) sdivskS((a), (b))
-  #define divk(a,b) divkS((a), (b))
-  #define ldivlk(a,b) ldivlkS((a), (b))
+#define smulsk(a,b) smulskS((a),(b))
+#define mulk(a,b) mulkS((a),(b))
+#define lmullk(a,b) lmullkS((a), (b))
+#define sdivsk(a,b) sdivskS((a), (b))
+#define divk(a,b) divkS((a), (b))
+#define ldivlk(a,b) ldivlkS((a), (b))
 #endif
 
 /* Support Functions */
@@ -171,23 +171,23 @@ extern _lAccum ldivlkS(_lAccum, _lAccum);
 #define idivlkS(a,b) lktoi(ldivlkS((a),(b)))
 
 #if FX_ACCUM_OVERFLOW == DEFAULT
-  #define mulik(a,b) mulikD((a),(b))
-  #define mulilk(a,b) mulilkD((a),(b))
-  #define divik(a,b) divikD((a),(b))
-  #define divilk(a,b) divilkD((a),(b))
-  #define kdivi(a,b) kdiviD((a),(b))
-  #define lkdivi(a,b) lkdiviD((a),(b))
-  #define idivk(a,b) idivkD((a),(b))
-  #define idivlk(a,b) idivlkD((a),(b))
+#define mulik(a,b) mulikD((a),(b))
+#define mulilk(a,b) mulilkD((a),(b))
+#define divik(a,b) divikD((a),(b))
+#define divilk(a,b) divilkD((a),(b))
+#define kdivi(a,b) kdiviD((a),(b))
+#define lkdivi(a,b) lkdiviD((a),(b))
+#define idivk(a,b) idivkD((a),(b))
+#define idivlk(a,b) idivlkD((a),(b))
 #elif FX_ACCUM_OVERFLOW == SAT
-  #define mulik(a,b) mulikS((a),(b))
-  #define mulilk(a,b) mulilkS((a),(b))
-  #define divik(a,b) divikS((a),(b))
-  #define divilk(a,b) divilkS((a),(b))
-  #define kdivi(a,b) kdiviS((a),(b))
-  #define lkdivi(a,b) lkdiviS((a),(b))
-  #define idivk(a,b) idivkS((a),(b))
-  #define idivlk(a,b) idivlkS((a),(b))
+#define mulik(a,b) mulikS((a),(b))
+#define mulilk(a,b) mulilkS((a),(b))
+#define divik(a,b) divikS((a),(b))
+#define divilk(a,b) divilkS((a),(b))
+#define kdivi(a,b) kdiviS((a),(b))
+#define lkdivi(a,b) lkdiviS((a),(b))
+#define idivk(a,b) idivkS((a),(b))
+#define idivlk(a,b) idivlkS((a),(b))
 #endif
 
 /* Abs Functions */
@@ -207,13 +207,13 @@ extern _Accum roundkS(_Accum f, uint8_t n);
 extern _lAccum roundlkS(_lAccum f, uint8_t n);
 
 #if FX_ACCUM_OVERFLOW == DEFAULT
-  #define roundsk(f, n) roundskD((f), (n))
-  #define roundk(f, n) roundkD((f), (n))
-  #define roundlk(f, n) roundlkD((f), (n))
+#define roundsk(f, n) roundskD((f), (n))
+#define roundk(f, n) roundkD((f), (n))
+#define roundlk(f, n) roundlkD((f), (n))
 #elif FX_ACCUM_OVERFLOW == SAT
-  #define roundsk(f, n) roundskS((f), (n))
-  #define roundk(f, n) roundkS((f), (n))
-  #define roundlk(f, n) roundlkS((f), (n))
+#define roundsk(f, n) roundskS((f), (n))
+#define roundk(f, n) roundkS((f), (n))
+#define roundlk(f, n) roundlkS((f), (n))
 #endif
 
 /* countls Functions */
@@ -227,7 +227,7 @@ extern uint8_t countlsk(_Accum f);
 #define CORDICC_GAIN 10188012
 #define CORDICH_GAIN 20258445
 
-extern _Accum sqrtk_uncorrected(_Accum,int8_t,uint8_t);
+extern _Accum sqrtk_uncorrected(_Accum, int8_t, uint8_t);
 
 #define sqrtkD(a)   mulkD(sqrtk_uncorrected(a, -8, 17), CORDICH_GAIN/256)
 #define lsqrtlkD(a) lmullkD(sqrtk_uncorrected(a, 0, 24), CORDICH_GAIN)
@@ -236,11 +236,11 @@ extern _Accum sqrtk_uncorrected(_Accum,int8_t,uint8_t);
 #define lsqrtlkS(a) lmullkS(sqrtk_uncorrected(a, 0, 24), CORDICH_GAIN)
 
 #if FX_ACCUM_OVERFLOW == DEFAULT
-  #define sqrtk(a) sqrtkD(a)
-  #define lsqrtlk(a) lsqrtlkD(a)
+#define sqrtk(a) sqrtkD(a)
+#define lsqrtlk(a) lsqrtlkD(a)
 #else
-  #define sqrtk(a) sqrtkS(a)
-  #define lsqrtlk(a) lsqrtlkS(a)
+#define sqrtk(a) sqrtkS(a)
+#define lsqrtlk(a) lsqrtlkS(a)
 #endif
 
 extern _Accum sincosk(_Accum, _Accum*);
@@ -267,13 +267,13 @@ extern _lAccum ltanlkS(_lAccum);
 extern _lAccum ltankS(_Accum);
 
 #if FX_ACCUM_OVERFLOW == DEFAULT
-  #define tank(a) tankD((a))
-  #define ltanlk(a) ltanlkD((a))
-  #define ltank(a) ltankD((a))
+#define tank(a) tankD((a))
+#define ltanlk(a) ltanlkD((a))
+#define ltank(a) ltankD((a))
 #elif FX_ACCUM_OVERFLOW == SAT
-  #define tank(a) tankS((a))
-  #define ltanlk(a) ltanlkS((a))
-  #define ltank(a) ltankS((a))
+#define tank(a) tankS((a))
+#define ltanlk(a) ltanlkS((a))
+#define ltank(a) ltankS((a))
 #endif
 
 extern _Accum atan2k(_Accum, _Accum);

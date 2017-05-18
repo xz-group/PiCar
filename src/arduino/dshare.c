@@ -10,7 +10,7 @@ uint8_t initDataShare()
 
 uint8_t getData( const uint8_t address, int16_t *data )
 {
-  if( address >= DSHARE_ARR_LENGTH )
+  if ( address >= DSHARE_ARR_LENGTH )
     return DSHARE_INVALID;
 
   *data = dataArr[ address ];
@@ -20,7 +20,7 @@ uint8_t getData( const uint8_t address, int16_t *data )
 
 uint8_t setData( const uint8_t address, int16_t data )
 {
-  if( address >= DSHARE_ARR_LENGTH )
+  if ( address >= DSHARE_ARR_LENGTH )
     return DSHARE_INVALID;
 
   dataArr[ address ] = data;

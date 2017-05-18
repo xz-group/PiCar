@@ -1,6 +1,6 @@
 //
 //  servocontrol.h
-//  
+//
 //
 //  Created by Matt Kollada on 5/17/17.
 //
@@ -14,3 +14,4 @@
 #define SERVO_PIN 5
 
 #endif /* servocontrol_h */
+

@@ -5,7 +5,7 @@
 #define DSHARE_ARR_LENGTH 32
 
 /*************************
-* Error Codes            *
+  Error Codes
 *************************/
 #define DSHARE_OK        0
 #define DSHARE_INVALID   1
@@ -13,7 +13,7 @@
 
 
 /*************************
-* Addresses              *
+  Addresses
 *************************/
 // IMU
 #define IMU_ACCEL_X      0 // see figure in page 10 of LSM9DS1 datasheet
