@@ -77,20 +77,20 @@ ISR(PCINT1_vect)        // interrupt service routine
   //  Serial.println("pin changed");
   if(one==1 && two==0 && three==0){
     rpmcount++;
+//    Serial.println("add one");
     }
 }
 
-}
+
 void loop() {
-    if (rpmcount >= 20) { 
-     //Update RPM every 20 counts, increase this for better RPM resolution,
+    if (rpmcount >= 4) { 
+     //Update RPM every 4 counts, increase this for better RPM resolution,
      //decrease for faster update
-     rpm = 30*1000/(millis() - timeold)*rpmcount;
-     timeold = millis();
+     rpm = 30*1000000/(micros() - timeold)*rpmcount;
+     timeold = micros();
      rpmcount = 0;
      Serial.println(rpm);
    }
-
 
 //  fwd(75);
   /*
