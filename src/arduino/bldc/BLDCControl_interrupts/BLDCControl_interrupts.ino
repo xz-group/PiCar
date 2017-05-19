@@ -34,9 +34,11 @@ void setup() {
   pinMode(INH_1, OUTPUT);
   pinMode(INH_2, OUTPUT);
   pinMode(INH_3, OUTPUT);
+
   digitalWrite(INH_1, LOW);
   digitalWrite(INH_2, LOW);
   digitalWrite(INH_3, LOW);
+  
   one = digitalRead(hallOne);
   two = digitalRead(hallTwo);
   three = digitalRead(hallThree);
@@ -73,11 +75,24 @@ ISR(PCINT1_vect)        // interrupt service routine
   two = digitalRead(A2);
   three = digitalRead(A3);
   //  Serial.println("pin changed");
+  if(one==1 && two==0 && three==0){
+    rpmcount++;
+    }
 }
 
+}
 void loop() {
+    if (rpmcount >= 20) { 
+     //Update RPM every 20 counts, increase this for better RPM resolution,
+     //decrease for faster update
+     rpm = 30*1000/(millis() - timeold)*rpmcount;
+     timeold = millis();
+     rpmcount = 0;
+     Serial.println(rpm);
+   }
 
-  fwd(75);
+
+//  fwd(75);
   /*
     if (millis() - timeold == 1000){
     noInterrupts();2
@@ -89,11 +104,9 @@ void loop() {
     }
   */
 
-  /*      Serial.print("current 1: ");
+  /* 
         Serial.println(analogRead(IS_1));
-        Serial.print("current 2: ");
         Serial.println(analogRead(IS_2));
-        Serial.print("current 3: ");
         Serial.println(analogRead(IS_3));
   */
 
