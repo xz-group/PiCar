@@ -34,10 +34,14 @@ void setup() {
   pinMode(INH_1, OUTPUT);
   pinMode(INH_2, OUTPUT);
   pinMode(INH_3, OUTPUT);
-
+  digitalWrite(INH_1, LOW);
+  digitalWrite(INH_2, LOW);
+  digitalWrite(INH_3, LOW);
   one = digitalRead(hallOne);
   two = digitalRead(hallTwo);
   three = digitalRead(hallThree);
+
+
 
   noInterrupts();
 
@@ -68,21 +72,15 @@ ISR(PCINT1_vect)        // interrupt service routine
   one = digitalRead(A1);
   two = digitalRead(A2);
   three = digitalRead(A3);
-  Serial.print("hall sensor:  ");
-  Serial.print(one);
-  Serial.print("   ");
-  Serial.print(two);
-  Serial.print("   ");
-  Serial.println(three);
-  Serial.println("   ");
+  //  Serial.println("pin changed");
 }
 
 void loop() {
 
-  fwd(pwm);
+  fwd(75);
   /*
     if (millis() - timeold == 1000){
-    noInterrupts();
+    noInterrupts();2
     rpm = rpmcount * 30;
     Serial.print(rpm);
     rpmcount = 0; // Restart the RPM counter
@@ -102,6 +100,15 @@ void loop() {
 }
 
 int fwd(int pwm) {
+  /*
+    Serial.print("hall sensor:  ");
+    Serial.print(one);
+    Serial.print("   ");
+    Serial.print(two);
+    Serial.print("   ");
+    Serial.println(three);
+    Serial.println("   ");
+  */
   if (one == 0) {
     if (two == 1) {
       if (three == 0) { //010 CB Y-B h1=0,h2=1,h3=0
@@ -111,6 +118,7 @@ int fwd(int pwm) {
         analogWrite(IN_1, pwm); //high
         analogWrite(IN_2, 0); //off
         analogWrite(IN_3, 0); //low
+        //        Serial.println("CB");
       } else { // 011 AB O-B h1=0,h2=1,h3=1
         digitalWrite(INH_1, LOW);
         digitalWrite(INH_2, HIGH);
@@ -118,16 +126,18 @@ int fwd(int pwm) {
         analogWrite(IN_1, 0); //off
         analogWrite(IN_2, pwm); //high
         analogWrite(IN_3, 0); //low
+        //        Serial.println("AB");
       }
     }
     if (two == 0) {
-      if (three == 1) { //AC O-Y h1=0,h2=0,h3=1
+      if (three == 1) { //001 AC O-Y h1=0,h2=0,h3=1
         digitalWrite(INH_1, HIGH);
         digitalWrite(INH_2, HIGH);
         digitalWrite(INH_3, LOW);
         analogWrite(IN_1, 0); //low
         analogWrite(IN_2, pwm); //high
         analogWrite(IN_3, 0); //off
+        //       Serial.println("AC");
       }
     }
   }
@@ -141,6 +151,7 @@ int fwd(int pwm) {
         analogWrite(IN_1, 0); //low
         analogWrite(IN_2, 0); //off
         analogWrite(IN_3, pwm); //high
+        //        Serial.println("BC");
       } else { //100 BA B-O
         digitalWrite(INH_1, LOW);
         digitalWrite(INH_2, HIGH);
@@ -148,17 +159,19 @@ int fwd(int pwm) {
         analogWrite(IN_1, 0); //off
         analogWrite(IN_2, 0); //low
         analogWrite(IN_3, pwm); //high
+        //       Serial.println("BA");
       }
     }
-  }
-  if (two == 1) { //110 CA Y-O
-    if (three == 0) {
-      digitalWrite(INH_1, HIGH);
-      digitalWrite(INH_2, HIGH);
-      digitalWrite(INH_3, LOW);
-      analogWrite(IN_1, pwm); //high
-      analogWrite(IN_2, 0); //low
-      analogWrite(IN_3, 0); //off
+    if (two == 1) { //110 CA Y-O
+      if (three == 0) {
+        digitalWrite(INH_1, HIGH);
+        digitalWrite(INH_2, HIGH);
+        digitalWrite(INH_3, LOW);
+        analogWrite(IN_1, pwm); //high
+        analogWrite(IN_2, 0); //low
+        analogWrite(IN_3, 0); //off
+        //     Serial.println("CA");
+      }
     }
   }
 }
