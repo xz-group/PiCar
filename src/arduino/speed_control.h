@@ -8,7 +8,7 @@ $include "fp.h"
 extern "C" {
 #endif
 
-uint8_t toPWM( uint8_t, fp_t );
+uint16_t setPWM(uint16_t);
 
 #ifdef __cplusplus
 }
