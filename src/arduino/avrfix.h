@@ -40,11 +40,11 @@ typedef signed long  _lAccum;
 
 /* Pragmas for defining overflow behaviour */
 
-#define DEFAULT    0
+#define DEFAULT_1    0
 #define SAT        1
 
 #ifndef FX_ACCUM_OVERFLOW
-#define FX_ACCUM_OVERFLOW DEFAULT
+#define FX_ACCUM_OVERFLOW DEFAULT_1
 #endif
 
 /* Pragmas for internal use */
@@ -128,7 +128,7 @@ extern _sAccum sdivskS(_sAccum, _sAccum);
 extern _Accum divkS(_Accum, _Accum);
 extern _lAccum ldivlkS(_lAccum, _lAccum);
 
-#if FX_ACCUM_OVERFLOW == DEFAULT
+#if FX_ACCUM_OVERFLOW == DEFAULT_1
 #define smulsk(a,b) smulskD((a),(b))
 #define mulk(a,b) mulkD((a),(b))
 #define lmullk(a,b) lmullkD((a), (b))
@@ -170,7 +170,7 @@ extern _lAccum ldivlkS(_lAccum, _lAccum);
 #define idivkS(a,b) ktoi(divkS((a),(b)))
 #define idivlkS(a,b) lktoi(ldivlkS((a),(b)))
 
-#if FX_ACCUM_OVERFLOW == DEFAULT
+#if FX_ACCUM_OVERFLOW == DEFAULT_1
 #define mulik(a,b) mulikD((a),(b))
 #define mulilk(a,b) mulilkD((a),(b))
 #define divik(a,b) divikD((a),(b))
@@ -206,7 +206,7 @@ extern _sAccum roundskS(_sAccum f, uint8_t n);
 extern _Accum roundkS(_Accum f, uint8_t n);
 extern _lAccum roundlkS(_lAccum f, uint8_t n);
 
-#if FX_ACCUM_OVERFLOW == DEFAULT
+#if FX_ACCUM_OVERFLOW == DEFAULT_1
 #define roundsk(f, n) roundskD((f), (n))
 #define roundk(f, n) roundkD((f), (n))
 #define roundlk(f, n) roundlkD((f), (n))
@@ -235,7 +235,7 @@ extern _Accum sqrtk_uncorrected(_Accum, int8_t, uint8_t);
 #define sqrtkS(a)   mulkS(sqrtk_uncorrected(a, -8, 17), CORDICH_GAIN/256)
 #define lsqrtlkS(a) lmullkS(sqrtk_uncorrected(a, 0, 24), CORDICH_GAIN)
 
-#if FX_ACCUM_OVERFLOW == DEFAULT
+#if FX_ACCUM_OVERFLOW == DEFAULT_1
 #define sqrtk(a) sqrtkD(a)
 #define lsqrtlk(a) lsqrtlkD(a)
 #else
@@ -266,7 +266,7 @@ extern _Accum tankS(_Accum);
 extern _lAccum ltanlkS(_lAccum);
 extern _lAccum ltankS(_Accum);
 
-#if FX_ACCUM_OVERFLOW == DEFAULT
+#if FX_ACCUM_OVERFLOW == DEFAULT_1
 #define tank(a) tankD((a))
 #define ltanlk(a) ltanlkD((a))
 #define ltank(a) ltankD((a))
