@@ -5,6 +5,7 @@
 #include "dshare.h"
 #include "ddefs.h"
 #include "servocontrol.h"
+#include <SPI.h>
 
 Servo servo;
 
@@ -44,7 +45,7 @@ ISR(TIMER0_COMPA_vect)
   }
 }
 
-// SPI Interrupt
+// SPI Interrupt (dealing with issue with SPSR)
 ISR(SPI_STC_vect) {
   if ((SPSR & (1 << SPIF)) != 0)
   {
@@ -60,6 +61,7 @@ ISR(TIMER2_COMPA_vect) {
 
 void setup() {
   Serial.begin(115200);
+  SPI.attachInterrupt();
   pinMode(MISO, OUTPUT);
   SPCR |= _BV(SPE);
   // set up Timer 0
@@ -76,33 +78,33 @@ void setup() {
 
 void loop() {
 
-  getIMUData();
+//  getIMUData();
 
-  Serial.print( "accelX: ");
-  Serial.println( dataArr[ IMU_ACCEL_X ] );
-  Serial.print( "accelY: ");
-  Serial.println( dataArr[ IMU_ACCEL_Y ] );
-  Serial.print( "accelZ: ");
-  Serial.println( dataArr[ IMU_ACCEL_Z ] );
-
-  Serial.print( "GyroX: ");
-  Serial.println( dataArr[ IMU_GYRO_ZY ] );
-  Serial.print( "GyroY: ");
-  Serial.println( dataArr[ IMU_GYRO_XZ ] );
-  Serial.print( "GyroZ: ");
-  Serial.println( dataArr[ IMU_GYRO_YX ] );
-
-  Serial.print( "MagnetX: ");
-  Serial.println( dataArr[ IMU_MAGNET_X ] );
-  Serial.print( "MagnetY: ");
-  Serial.println( dataArr[ IMU_MAGNET_Y ] );
-  Serial.print( "MagnetZ: ");
-  Serial.println( dataArr[ IMU_MAGNET_Z ] );
-
-  Serial.print("Temp: ");
-  Serial.println( dataArr[ IMU_TEMP ] );
-
-  delay(50);
+//  Serial.print( "accelX: ");
+//  Serial.println( dataArr[ IMU_ACCEL_X ] );
+//  Serial.print( "accelY: ");
+//  Serial.println( dataArr[ IMU_ACCEL_Y ] );
+//  Serial.print( "accelZ: ");
+//  Serial.println( dataArr[ IMU_ACCEL_Z ] );
+//
+//  Serial.print( "GyroX: ");
+//  Serial.println( dataArr[ IMU_GYRO_ZY ] );
+//  Serial.print( "GyroY: ");
+//  Serial.println( dataArr[ IMU_GYRO_XZ ] );
+//  Serial.print( "GyroZ: ");
+//  Serial.println( dataArr[ IMU_GYRO_YX ] );
+//
+//  Serial.print( "MagnetX: ");
+//  Serial.println( dataArr[ IMU_MAGNET_X ] );
+//  Serial.print( "MagnetY: ");
+//  Serial.println( dataArr[ IMU_MAGNET_Y ] );
+//  Serial.print( "MagnetZ: ");
+//  Serial.println( dataArr[ IMU_MAGNET_Z ] );
+//
+//  Serial.print("Temp: ");
+//  Serial.println( dataArr[ IMU_TEMP ] );
+//
+//  delay(50);
 }
 
 
