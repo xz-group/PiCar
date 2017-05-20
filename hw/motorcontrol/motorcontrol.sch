@@ -11579,7 +11579,7 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <wire x1="3.56" y1="5.1" x2="3.56" y2="-1.1" width="0.127" layer="21"/>
 <wire x1="3.56" y1="-1.1" x2="-3.44" y2="-1.1" width="0.127" layer="21"/>
 <wire x1="-3.44" y1="-1.1" x2="-3.44" y2="5.1" width="0.127" layer="21"/>
-<text x="-4" y="-1" size="1.016" layer="21" rot="R90">&gt;Name</text>
+<text x="-4" y="-1" size="1.016" layer="25" rot="R90">&gt;Name</text>
 <text x="5" y="-1" size="1.016" layer="27" rot="R90">&gt;Value</text>
 <rectangle x1="1.905" y1="-3.9" x2="2.655" y2="-3.4" layer="21"/>
 <rectangle x1="-2.655" y1="-3.9" x2="-1.905" y2="-3.4" layer="21"/>
