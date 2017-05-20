@@ -9,7 +9,7 @@
 #define  hallOne A1
 #define  hallTwo A2
 #define  hallThree A3
-
+int hallstate;
 volatile int one;
 volatile int two;
 volatile int three;
@@ -89,7 +89,7 @@ void loop() {
      rpm = 30*1000000/(micros() - timeold)*rpmcount;
      timeold = micros();
      rpmcount = 0;
-     Serial.println(rpm);
+//     Serial.println(rpm);
    }
 
 //  fwd(75);
@@ -113,6 +113,8 @@ void loop() {
 }
 
 int fwd(int pwm) {
+  hallstate = 4*one+2*two+three;
+  Serial.println(hallstate);
   /*
     Serial.print("hall sensor:  ");
     Serial.print(one);
