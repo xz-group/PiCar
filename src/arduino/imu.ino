@@ -20,7 +20,7 @@ directly to the Arduino.
 // included BEFORE including the 9DS1 library.
 #include <Wire.h>
 #include <SPI.h>
-#include <SparkFunLSM9DS1.h>
+#include "SparkFunLSM9DS1.h"
 #include "imu.h"
 #include "ddefs.h"
 #include "dshare.h"
