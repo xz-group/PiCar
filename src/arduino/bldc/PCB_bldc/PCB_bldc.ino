@@ -15,7 +15,7 @@ volatile int one;
 volatile int two;
 volatile int three;
 int HALLSTATE;
-
+boolean DIRECTION;
 /*#define  IS_1  A2
   #define  IS_2  A3
   #define  IS_3  A4
@@ -62,14 +62,14 @@ void setup() {
   attachInterrupt(6, HALL3_FLAG, CHANGE);
 }
 
-void HALL1_FLAG {
+void HALL1_FLAG() {
   rpmcount++;
   one = !one;
 }
-void HALL2_FLAG {
+void HALL2_FLAG() {
   two = !two;
 }
-void HALL3_FLAG {
+void HALL3_FLAG() {
   three = !three;
 }
 
@@ -132,7 +132,7 @@ void CW(int HALLSTATE, int pwm) {
       analogWrite(IN_2, 0); //off
       analogWrite(IN_3, pwm); //high
       break;
-    case 3;//011 BA
+    case 3://011 BA
       digitalWrite(INH_1, LOW);
       digitalWrite(INH_2, HIGH);
       digitalWrite(INH_3, HIGH);
