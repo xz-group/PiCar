@@ -2,10 +2,13 @@
 #define DSHARE_H_
 
 #include <stdint.h>
+#include "ddefs.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+int16_t dataArr[ DSHARE_ARR_LENGTH ];
 
 extern uint8_t initDataShare();
 extern uint8_t getData( const uint8_t, int16_t* );

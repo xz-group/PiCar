@@ -33,15 +33,29 @@ union
   unsigned char  resultChar [2];
 } resultBuffer;
 
-
+// Servo Pwm Update interrupt
 ISR(TIMER0_COMPA_vect)
 {
   if ( getData( SERVO_ANGLE, &angle ) == DSHARE_OK ) {
     servo.write( angle );
   }
   if ( getData( BLDC_DUTY_CYCLE, &pwm ) == DSHARE_OK ) {
-
+      //run PID on PWM
   }
+}
+
+// SPI Interrupt
+ISR(SPI_STC_vect) {
+  if ((SPSR & (1 << SPIF)) != 0)
+  {
+    spiHandler();
+  }
+}
+
+// IMU Interrupt
+ISR(TIMER2_COMPA_vect) {
+  //read IMU and set global data structure
+  //getIMUData();
 }
 
 void setup() {
@@ -55,14 +69,40 @@ void setup() {
   TIMSK0 = bit (OCIE1A);
   setData( SERVO_ANGLE, 90 );
   servo.attach( SERVO_PIN );
+
+  imuSetup();
   // interrupt on Compare A Match
 }  // end of setup
 
 void loop() {
-  if ((SPSR & (1 << SPIF)) != 0)
-  {
-    spiHandler();
-  }
+
+  getIMUData();
+
+  Serial.print( "accelX: ");
+  Serial.println( dataArr[ IMU_ACCEL_X ] );
+  Serial.print( "accelY: ");
+  Serial.println( dataArr[ IMU_ACCEL_Y ] );
+  Serial.print( "accelZ: ");
+  Serial.println( dataArr[ IMU_ACCEL_Z ] );
+
+  Serial.print( "GyroX: ");
+  Serial.println( dataArr[ IMU_GYRO_ZY ] );
+  Serial.print( "GyroY: ");
+  Serial.println( dataArr[ IMU_GYRO_XZ ] );
+  Serial.print( "GyroZ: ");
+  Serial.println( dataArr[ IMU_GYRO_YX ] );
+
+  Serial.print( "MagnetX: ");
+  Serial.println( dataArr[ IMU_MAGNET_X ] );
+  Serial.print( "MagnetY: ");
+  Serial.println( dataArr[ IMU_MAGNET_Y ] );
+  Serial.print( "MagnetZ: ");
+  Serial.println( dataArr[ IMU_MAGNET_Z ] );
+
+  Serial.print("Temp: ");
+  Serial.println( dataArr[ IMU_TEMP ] );
+
+  delay(50);
 }
 
 

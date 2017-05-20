@@ -43,5 +43,9 @@
 // Servo
 #define SERVO_ANGLE      19
 
+// Max Speed/Angle
+#define MAX_SPEED        20
+#define MAX_SERVO_ANGLE  21
+
 
 #endif
