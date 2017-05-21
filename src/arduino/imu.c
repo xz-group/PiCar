@@ -18,7 +18,7 @@ directly to the Arduino.
 *****************************************************************/
 // The SFE_LSM9DS1 library requires both Wire and SPI be
 // included BEFORE including the 9DS1 library.
-#include <Wire.h>
+//#include <Wire.h>
 #include "SparkFunLSM9DS1.h"
 #include "imu.h"
 #include "ddefs.h"

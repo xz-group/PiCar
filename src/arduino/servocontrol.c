@@ -7,17 +7,16 @@
 //
 
 #include "servocontrol.h"
-#include <Servo.h>
 
-Servo servo;
+//Servo servo;
 
 void attachServoToPin() {
-  servo.attach( SERVO_PIN );
+//  servo.attach( SERVO_PIN );
 }
 
-void setServoAngle(int8_t angle) {
-  if( angle > 0 & angle <180) {
-    servo.write(angle);
+void setServoAngle(int16_t angle) {
+  if( angle > 0 & angle < 180) {
+//    servo.write(angle);
   }
 }
 

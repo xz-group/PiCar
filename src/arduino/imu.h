@@ -9,10 +9,15 @@
 #ifndef IMU_H_
 #define IMU_H_
 
-// Setup IMU
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 bool imuSetup();
 
-//get all IMU data
-void getIMUData();
+#ifdef __cplusplus
+}
+#endif
 
-#endif /* IMU_h */
+
+#endif

@@ -1,17 +1,14 @@
 //  Created by Matt Kollada on 5/17/17.
 
 #include <stdint.h>
-//#include <Servo.h>
+#include <Servo.h>
 #include "dshare.h"
 #include "ddefs.h"
 #include "servocontrol.h"
 #include "spi_comm.h"
+#include "timers.h"
 
 Servo servo;
-
-//unsigned char receiveBuffer[5];
-//unsigned char dat;
-//byte marker = 0;
 
 int16_t angle;
 int16_t pwm;
@@ -20,7 +17,7 @@ int16_t pwm;
 ISR(TIMER0_COMPA_vect)
 {
   if ( getData( SERVO_ANGLE, &angle ) == DSHARE_OK ) {
-//    servo.write( angle );
+    servo.write( angle );
   }
   if ( getData( BLDC_DUTY_CYCLE, &pwm ) == DSHARE_OK ) {
       //run PID on PWM
@@ -36,9 +33,9 @@ ISR(SPI_STC_vect) {
 }
 
 // IMU Interrupt
-ISR(TIMER2_COMPA_vect) {
+ISR(TIMER3_COMPA_vect) {
   //read IMU and set global data structure
-  //getIMUData();
+  getIMUData();
 }
 
 void setup() {
@@ -46,11 +43,8 @@ void setup() {
 //  SPI.attachInterrupt();
   pinMode(MISO, OUTPUT);
   SPCR |= _BV(SPE);
-  // set up Timer 0
-  TCCR0A = 0;          // normal operation
-  TCCR0B = bit(WGM12) | bit(CS10) | bit (CS12);   // pre-scaling
-  OCR0A =  999;       // compare A register value (1000 * clock speed)
-  TIMSK0 = bit (OCIE1A);
+
+  initTimers();
   
   setData( SERVO_ANGLE, 90 );
   servo.attach( SERVO_PIN );
