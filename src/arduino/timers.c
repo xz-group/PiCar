@@ -13,16 +13,16 @@ void initTimers() {
   OCR1A =  999;       // compare A register value (1000 * clock speed)
   TIMSK1 = bit (OCIE1A);
 
-  // set up Timer 3
-  TCCR3A = 0;          // normal operation
-  TCCR3B = bit(WGM12) | bit(CS10) | bit (CS12);   // pre-scaling
-  OCR3A =  999;       // compare A register value (1000 * clock speed)
-  TIMSK3 = bit (OCIE1A);
-
-  // set up Timer 4
-  TCCR4A = 0;          // normal operation
-  TCCR4B = bit(WGM12) | bit(CS10) | bit (CS12);   // pre-scaling
-  OCR4A =  999;       // compare A register value (1000 * clock speed)
-  TIMSK4 = bit (OCIE1A);
+//  // set up Timer 3
+//  TCCR3A = 0;          // normal operation
+//  TCCR3B = bit(WGM12) | bit(CS10) | bit (CS12);   // pre-scaling
+//  OCR3A =  999;       // compare A register value (1000 * clock speed)
+//  TIMSK3 = bit (OCIE1A);
+//
+//  // set up Timer 4
+//  TCCR4A = 0;          // normal operation
+//  TCCR4B = bit(WGM12) | bit(CS10) | bit (CS12);   // pre-scaling
+//  OCR4A =  999;       // compare A register value (1000 * clock speed)
+//  TIMSK4 = bit (OCIE1A);
 }
 

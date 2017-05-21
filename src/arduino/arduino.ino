@@ -2,7 +2,7 @@
 
 #include <stdint.h>
 #include <Servo.h>
-#include "dshare.h"
+#include "dshare.c"
 #include "ddefs.h"
 #include "servocontrol.h"
 #include "spi_comm.h"
@@ -33,11 +33,11 @@ ISR(SPI_STC_vect) {
   }
 }
 
-// IMU Interrupt
-ISR(TIMER3_COMPA_vect) {
-  //read IMU and set global data structure
-  getIMUData();
-}
+//// IMU Interrupt
+//ISR(TIMER3_COMPA_vect) {
+//  //read IMU and set global data structure
+//  getIMUData();
+//}
 
 void setup() {
   Serial.begin(115200);
@@ -55,37 +55,37 @@ void setup() {
 }  // end of setup
 
 void loop() {
-
+  testIMU();
 }
 
 void testIMU() {
-  //  getIMUData();
+    getIMUData();
 
-//  Serial.print( "accelX: ");
-//  Serial.println( dataArr[ IMU_ACCEL_X ] );
-//  Serial.print( "accelY: ");
-//  Serial.println( dataArr[ IMU_ACCEL_Y ] );
-//  Serial.print( "accelZ: ");
-//  Serial.println( dataArr[ IMU_ACCEL_Z ] );
-//
-//  Serial.print( "GyroX: ");
-//  Serial.println( dataArr[ IMU_GYRO_ZY ] );
-//  Serial.print( "GyroY: ");
-//  Serial.println( dataArr[ IMU_GYRO_XZ ] );
-//  Serial.print( "GyroZ: ");
-//  Serial.println( dataArr[ IMU_GYRO_YX ] );
-//
-//  Serial.print( "MagnetX: ");
-//  Serial.println( dataArr[ IMU_MAGNET_X ] );
-//  Serial.print( "MagnetY: ");
-//  Serial.println( dataArr[ IMU_MAGNET_Y ] );
-//  Serial.print( "MagnetZ: ");
-//  Serial.println( dataArr[ IMU_MAGNET_Z ] );
-//
-//  Serial.print("Temp: ");
-//  Serial.println( dataArr[ IMU_TEMP ] );
-//
-//  delay(50);
+  Serial.print( "accelX: ");
+  Serial.println( dataArr[ IMU_ACCEL_X ] );
+  Serial.print( "accelY: ");
+  Serial.println( dataArr[ IMU_ACCEL_Y ] );
+  Serial.print( "accelZ: ");
+  Serial.println( dataArr[ IMU_ACCEL_Z ] );
+
+  Serial.print( "GyroX: ");
+  Serial.println( dataArr[ IMU_GYRO_ZY ] );
+  Serial.print( "GyroY: ");
+  Serial.println( dataArr[ IMU_GYRO_XZ ] );
+  Serial.print( "GyroZ: ");
+  Serial.println( dataArr[ IMU_GYRO_YX ] );
+
+  Serial.print( "MagnetX: ");
+  Serial.println( dataArr[ IMU_MAGNET_X ] );
+  Serial.print( "MagnetY: ");
+  Serial.println( dataArr[ IMU_MAGNET_Y ] );
+  Serial.print( "MagnetZ: ");
+  Serial.println( dataArr[ IMU_MAGNET_Z ] );
+
+  Serial.print("Temp: ");
+  Serial.println( dataArr[ IMU_TEMP ] );
+
+  delay(50);
 }
 
 

@@ -10,7 +10,7 @@
 
 typedef struct
 {
-  bool enabled;
+  _Bool enabled;
   fp_t state;
   fp_t errm;
   fp_t errmm;
@@ -45,7 +45,7 @@ typedef struct
 extern "C" {
 #endif
 
-uint8_t initPID( pid *z, fp_t, fp_t, fp_t, fp_t );
+uint8_t initPID( pid *z, fp_t, fp_t, fp_t, fp_t, fp_t, fp_t );
 uint8_t updatePID( pid *, fp_t );
 fp_t getPIDValue( pid * );
 uint8_t disablePID( pid * );

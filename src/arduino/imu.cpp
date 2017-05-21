@@ -159,9 +159,9 @@ uint16_t LSM9DS1::begin()
 	constrainScales();
 	// Once we have the scale values, we can calculate the resolution
 	// of each sensor. That's what these functions are for. One for each sensor
-	calcgRes(); // Calculate DPS / ADC tick, stored in gRes variable
-	calcmRes(); // Calculate Gs / ADC tick, stored in mRes variable
-	calcaRes(); // Calculate g / ADC tick, stored in aRes variable
+//	calcgRes(); // Calculate DPS / ADC tick, stored in gRes variable
+//	calcmRes(); // Calculate Gs / ADC tick, stored in mRes variable
+//	calcaRes(); // Calculate g / ADC tick, stored in aRes variable
 
 	// Now, initialize our hardware interface.
 	if (settings.device.commInterface == IMU_MODE_I2C)	// If we're using I2C
@@ -610,23 +610,23 @@ int16_t LSM9DS1::readGyro(lsm9ds1_axis axis)
 	return 0;
 }
 
-float LSM9DS1::calcGyro(int16_t gyro)
-{
-	// Return the gyro raw reading times our pre-calculated DPS / (ADC tick):
-	return gRes * gyro;
-}
-
-float LSM9DS1::calcAccel(int16_t accel)
-{
-	// Return the accel raw reading times our pre-calculated g's / (ADC tick):
-	return aRes * accel;
-}
-
-float LSM9DS1::calcMag(int16_t mag)
-{
-	// Return the mag raw reading times our pre-calculated Gs / (ADC tick):
-	return mRes * mag;
-}
+//float LSM9DS1::calcGyro(int16_t gyro)
+//{
+//	// Return the gyro raw reading times our pre-calculated DPS / (ADC tick):
+//	return gRes * gyro;
+//}
+//
+//float LSM9DS1::calcAccel(int16_t accel)
+//{
+//	// Return the accel raw reading times our pre-calculated g's / (ADC tick):
+//	return aRes * accel;
+//}
+//
+//float LSM9DS1::calcMag(int16_t mag)
+//{
+//	// Return the mag raw reading times our pre-calculated Gs / (ADC tick):
+//	return mRes * mag;
+//}
 
 void LSM9DS1::setGyroScale(uint16_t gScl)
 {
@@ -767,63 +767,63 @@ void LSM9DS1::setMagODR(uint8_t mRate)
 	mWriteByte(CTRL_REG1_M, temp);
 }
 
-void LSM9DS1::calcgRes()
-{
-	switch (settings.gyro.scale)
-	{
-	case 245:
-		gRes = SENSITIVITY_GYROSCOPE_245;
-		break;
-	case 500:
-		gRes = SENSITIVITY_GYROSCOPE_500;
-		break;
-	case 2000:
-		gRes = SENSITIVITY_GYROSCOPE_2000;
-		break;
-	default:
-		break;
-	}
-}
-
-void LSM9DS1::calcaRes()
-{
-	switch (settings.accel.scale)
-	{
-	case 2:
-		aRes = SENSITIVITY_ACCELEROMETER_2;
-		break;
-	case 4:
-		aRes = SENSITIVITY_ACCELEROMETER_4;
-		break;
-	case 8:
-		aRes = SENSITIVITY_ACCELEROMETER_8;
-		break;
-	case 16:
-		aRes = SENSITIVITY_ACCELEROMETER_16;
-		break;
-	default:
-		break;
-	}
-}
-
-void LSM9DS1::calcmRes()
-{
-	switch (settings.mag.scale)
-	{
-	case 4:
-		mRes = SENSITIVITY_MAGNETOMETER_4;
-		break;
-	case 8:
-		mRes = SENSITIVITY_MAGNETOMETER_8;
-		break;
-	case 12:
-		mRes = SENSITIVITY_MAGNETOMETER_12;
-		break;
-	case 16:
-		mRes = SENSITIVITY_MAGNETOMETER_16;
-		break;
-	}
-}
+//void LSM9DS1::calcgRes()
+//{
+//	switch (settings.gyro.scale)
+//	{
+//	case 245:
+//		gRes = SENSITIVITY_GYROSCOPE_245;
+//		break;
+//	case 500:
+//		gRes = SENSITIVITY_GYROSCOPE_500;
+//		break;
+//	case 2000:
+//		gRes = SENSITIVITY_GYROSCOPE_2000;
+//		break;
+//	default:
+//		break;
+//	}
+//}
+//
+//void LSM9DS1::calcaRes()
+//{
+//	switch (settings.accel.scale)
+//	{
+//	case 2:
+//		aRes = SENSITIVITY_ACCELEROMETER_2;
+//		break;
+//	case 4:
+//		aRes = SENSITIVITY_ACCELEROMETER_4;
+//		break;
+//	case 8:
+//		aRes = SENSITIVITY_ACCELEROMETER_8;
+//		break;
+//	case 16:
+//		aRes = SENSITIVITY_ACCELEROMETER_16;
+//		break;
+//	default:
+//		break;
+//	}
+//}
+//
+//void LSM9DS1::calcmRes()
+//{
+//	switch (settings.mag.scale)
+//	{
+//	case 4:
+//		mRes = SENSITIVITY_MAGNETOMETER_4;
+//		break;
+//	case 8:
+//		mRes = SENSITIVITY_MAGNETOMETER_8;
+//		break;
+//	case 12:
+//		mRes = SENSITIVITY_MAGNETOMETER_12;
+//		break;
+//	case 16:
+//		mRes = SENSITIVITY_MAGNETOMETER_16;
+//		break;
+//	}
+//}
 
 void LSM9DS1::configInt(interrupt_select interrupt, uint8_t generator,
 	                     h_lactive activeLow, pp_od pushPull)
