@@ -358,7 +358,7 @@ void LSM9DS1::calibrate(bool autoCalc)
 		readAccel();
 		aBiasRawTemp[0] += ax;
 		aBiasRawTemp[1] += ay;
-		aBiasRawTemp[2] += az - (int16_t)(1./aRes); // Assumes sensor facing up!
+		aBiasRawTemp[2] += az;// - (int16_t)(1./aRes); // Assumes sensor facing up!
 	}
 	for (ii = 0; ii < 3; ii++)
 	{
