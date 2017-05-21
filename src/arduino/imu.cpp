@@ -21,7 +21,7 @@ local, and you've found our code helpful, please buy us a round!
 Distributed as-is; no warranty is given.
 ******************************************************************************/
 
-#include "SparkFunLSM9DS1.h"
+#include "imu.h"
 #include "LSM9DS1_Registers.h"
 #include "LSM9DS1_Types.h"
 #include <Wire.h> // Wire library is used for I2C
