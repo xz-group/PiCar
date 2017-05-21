@@ -139,9 +139,9 @@ void LSM9DS1::init(interface_mode interface, uint8_t xgAddr, uint8_t mAddr)
 	settings.temp.enabled = true;
 	for (int i=0; i<3; i++)
 	{
-		gBias[i] = 0;
-		aBias[i] = 0;
-		mBias[i] = 0;
+		// gBias[i] = 0;
+		// aBias[i] = 0;
+		// mBias[i] = 0;
 		gBiasRaw[i] = 0;
 		aBiasRaw[i] = 0;
 		mBiasRaw[i] = 0;
@@ -363,9 +363,9 @@ void LSM9DS1::calibrate(bool autoCalc)
 	for (ii = 0; ii < 3; ii++)
 	{
 		gBiasRaw[ii] = gBiasRawTemp[ii] / samples;
-		gBias[ii] = calcGyro(gBiasRaw[ii]);
+		// gBias[ii] = calcGyro(gBiasRaw[ii]);
 		aBiasRaw[ii] = aBiasRawTemp[ii] / samples;
-		aBias[ii] = calcAccel(aBiasRaw[ii]);
+		// aBias[ii] = calcAccel(aBiasRaw[ii]);
 	}
 
 	enableFIFO(false);
@@ -398,7 +398,7 @@ void LSM9DS1::calibrateMag(bool loadIn)
 	for (j = 0; j < 3; j++)
 	{
 		mBiasRaw[j] = (magMax[j] + magMin[j]) / 2;
-		mBias[j] = calcMag(mBiasRaw[j]);
+		// mBias[j] = calcMag(mBiasRaw[j]);
 		if (loadIn)
 			magOffset(j, mBiasRaw[j]);
 	}
