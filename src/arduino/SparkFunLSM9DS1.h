@@ -56,7 +56,7 @@ public:
 	int16_t ax, ay, az; // x, y, and z axis readings of the accelerometer
 	int16_t mx, my, mz; // x, y, and z axis readings of the magnetometer
     int16_t temperature; // Chip temperature
-	float gBias[3], aBias[3], mBias[3];
+  // float gBias[3], aBias[3], mBias[3];
 	int16_t gBiasRaw[3], aBiasRaw[3], mBiasRaw[3];
 
 	// LSM9DS1 -- LSM9DS1 class constructor
@@ -338,7 +338,7 @@ protected:
 	// gRes, aRes, and mRes store the current resolution for each sensor.
 	// Units of these values would be DPS (or g's or Gs's) per ADC tick.
 	// This value is calculated as (sensor scale) / (2^15).
-	float gRes, aRes, mRes;
+	// float gRes, aRes, mRes;
 
 	// _autoCalc keeps track of whether we're automatically subtracting off
 	// accelerometer and gyroscope bias calculated in calibrate().
@@ -520,5 +520,16 @@ protected:
 	// 		all stored in the *dest array given.
 	uint8_t I2CreadBytes(uint8_t address, uint8_t subAddress, uint8_t * dest, uint8_t count);
 };
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+bool imuSetup();
+void getIMUData();
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // SFE_LSM9DS1_H //
