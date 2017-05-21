@@ -86,10 +86,6 @@ void getIMUData() {
   }
   if ( imu.tempAvailable() ) {
     setData ( IMU_TEMP, imu.temperature );
-  }
-
-
-  
-  
+  }  
 }
 

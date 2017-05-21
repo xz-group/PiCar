@@ -7,6 +7,7 @@
 #include "servocontrol.h"
 #include "spi_comm.h"
 #include "timers.h"
+#include "imu.h"
 
 Servo servo;
 

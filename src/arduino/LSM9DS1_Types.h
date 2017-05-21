@@ -174,7 +174,7 @@ enum fifoMode_type
 	FIFO_CONT = 5
 };
 
-struct gyroSettings
+typedef struct
 {
 	// Gyroscope settings:
 	uint8_t enabled;
@@ -193,7 +193,7 @@ struct gyroSettings
 	uint8_t enableY;
 	uint8_t enableZ;
 	uint8_t latchInterrupt;
-};
+} gyroSettings;
 
 typedef struct
 {

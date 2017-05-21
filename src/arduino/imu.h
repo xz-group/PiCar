@@ -14,6 +14,7 @@ extern "C" {
 #endif
 
 bool imuSetup();
+void getIMUData();
 
 #ifdef __cplusplus
 }
