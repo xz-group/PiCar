@@ -44,6 +44,10 @@ rawCapture = PiRGBArray(camera, size=(width, height))
 # allow the camera to warmup
 time.sleep(2)
 
+#initialize VideoWriter object
+fourcc = cv2.VideoWriter_fourcc('M','J','P','G')
+video1 = cv2.VideoWriter('constFOE.avi',fourcc, 20.0, (224,96))
+
 lk_params = dict( winSize  = (23, 23),
                   maxLevel = 3,
                   criteria = (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 0.03))
@@ -64,11 +68,11 @@ class App:
         self.frame_idx = 0
         self.prev_time = 0
         self.time = 0
-        self.foe = np.matrix([0,0]).reshape(2,1)
+        self.foe = np.matrix([112,48]).reshape(2,1)
         self.data = list()
         self.runCount = list()
         self.inc = 0
-        
+
     def run(self):
         for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
             #------------------------READ AND PREPROCESS IMAGE-------------------------------------------------
@@ -126,14 +130,6 @@ class App:
                     tr.append((x, y))
                     
                     #Calculate matrices for FOE (see paper for calculations)
-                    b0 = x*v-y*u
-                    if i == 0:
-                        A = np.matrix([[v,u]])
-                        b = np.matrix([[b0]])
-                        i = i + 1
-                    else:
-                        A = np.vstack((A,(v,u)))
-                        b = np.vstack((b,b0))
 
                     if len(tr) > self.track_len:
                         del tr[0]
@@ -144,9 +140,6 @@ class App:
                     #cv2.circle(vis, (x, y), 2, (0, 255, 0), -1)
 
                     #TTC (magnitude of displacement)/(velocity of displacement)
-                    self.foe[0] = 112
-                    self.foe[1] = 64
-
                     d = math.sqrt((self.foe[0]-x)*(self.foe[0]-x)+(self.foe[1]-y)*(self.foe[1]-y))
                     dDot = math.sqrt(u*u+v*v)/(self.time-self.prev_time)
 
@@ -205,16 +198,7 @@ class App:
                     cv2.putText(vis,'MOVE SLIGHTLY', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
                     #draw_str(vis, (20, 20), 'MOVE SLIGHTLY')
                     
-                #Calculate new FOE, inverse may throw error so check for that
-                try:
-                    part1 = inv(np.matmul(A.transpose(),A))
-                except:
-                    self.foe = self.foe
-                else:
-                    self.foe = np.matmul(part1,np.matmul(A.transpose(),b))
-                    
-                self.foe[0] = 112
-                self.foe[1] = 54
+
                 #Draw the FOE (not necessary)
                 cv2.circle(vis, (self.foe[0], self.foe[1]), 2, (0, 0, 255), -1)
 
@@ -251,6 +235,11 @@ class App:
             cv2.imshow('lk_track', vis)
             #cv2.imshow('Before Equalization', frame_gray_old)
             #cv2.imshow('CLAHE (8,8)',frame_gray)
+
+            video1.write(vis)
+            video1.write(vis)
+            video1.write(vis)
+            
             ch = cv2.waitKey(1)
 
             #Necessary to clear the camera stream before next image is read in
@@ -258,6 +247,7 @@ class App:
 
             #plot when escape key is called
             if ch == 27:
+                video1.release()
                 plt.axis([0 , self.inc,0, 15])
                 plt.ylabel('Time to Contact (s)')
                 plt.xlabel('time')
