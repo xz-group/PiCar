@@ -16,6 +16,10 @@ g++ -o SPI_Raspi_Arduino SPI_Raspi_Arduino.cpp
 #include <fcntl.h>
 #include <iostream>
 #include <cstring>
+#include <wiringPi.h>
+
+
+#define SLAVE_SELECT 3
 
 
 using namespace std;
@@ -52,6 +56,15 @@ Configure transfer speed (1MkHz)
 
    unsigned int speed = 1000000;
    ioctl (fd, SPI_IOC_WR_MAX_SPEED_HZ, &speed);
+   
+/**********************************************************
+Setup WiringPi to enable use of GPIO pins for SS
+***********************************************************/
+
+	wiringPiSetup();
+	pinMode(SLAVE_SELECT, OUTPUT);
+	digitalWrite(SLAVE_SELECT, 0);
+	
 
 /**********************************************************
 An endless loop that repeatedly sends the demonstration
@@ -60,7 +73,7 @@ commands to the Arduino and displays the results
 
    while (1)
    {
-
+	  
       results = sendCommand('a', 60, 655);
 
 
@@ -101,8 +114,10 @@ int spiTxRx(unsigned char txDat)
   spi.tx_buf        = (unsigned long)&txDat;
   spi.rx_buf        = (unsigned long)&rxDat;
   spi.len           = 1;
-
+  
+  digitalWrite(SLAVE_SELECT, 0);
   ioctl (fd, SPI_IOC_MESSAGE(1), &spi);
+  digitalWrite(SLAVE_SELECT, 1);
 
   return rxDat;
 }
