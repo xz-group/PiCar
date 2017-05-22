@@ -2,7 +2,7 @@
   http://elimelecsarduinoprojects.blogspot.com/2013/06/measure-rpms-arduino.html
 */
 
-#include <PWM.h>
+#include "PWM.h"
 #define  IN_1  9 //yellow
 #define  IN_2  10 //orange
 #define  IN_3  11//blue
@@ -22,6 +22,7 @@ int HallState3;
 int HallVal = 1; //binary value of all 3 hall sensors
 int pwm = 50;
 int a;
+int PID = 1;
 
 volatile byte rpmcount = 0;
 unsigned int rpm = 0;
@@ -88,6 +89,7 @@ void loop() {
     Serial.println(rpm);
   }
   
+  fwd(setRPM(60,rpm));
 //  detachInterrupt(0);
 //  fwd(pwm);
 //  attachInterrupt(0, magnet_detect, RISING);
@@ -173,6 +175,22 @@ int fwd(int pwm) {
       analogWrite(IN_3, 0); //off
       break;
   }
+}
+
+// using PID to drive motor to desired RPM
+int setRPM(int RPM_des, int RPM_curr){
+  int RPM_err;
+  int PWM_new;
+  RPM_err = RPM_des - RPM_curr;
+  PWM_new = PID*RPM_err;
+
+  // Saturation between 0 and 255
+  if(PWM_new > 255)
+    PWM_new = 255;
+  else if(PWM_new < 0)
+    PWM_new = 0;
+    
+  return PWM_new;
 }
 
 void magnet_detect()

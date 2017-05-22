@@ -4,19 +4,21 @@
 #include "fp.h"
 
 #define PID_OK 0
-#define PID_INVALID_PARAM 1
-#define PID_INVALID_STRUCT 2
+#define PID_DISABLED 1
 
 #define FILTER_OK 0
 
 typedef struct
 {
+  _Bool enabled;
   fp_t state;
   fp_t errm;
   fp_t errmm;
   fp_t c;
   fp_t cm;
   fp_t cmm;
+  fp_t max;
+  fp_t min;
 } pid;
 
 typedef struct
@@ -43,11 +45,15 @@ typedef struct
 extern "C" {
 #endif
 
-uint8_t initPID( pid *z, fp_t, fp_t, fp_t, fp_t );
+uint8_t initPID( pid *z, fp_t, fp_t, fp_t, fp_t, fp_t, fp_t );
 uint8_t updatePID( pid *, fp_t );
+fp_t getPIDValue( pid * );
+uint8_t disablePID( pid * );
+uint8_t enablePID( pid * );
 
 uint8_t initFilter( filter *, fp_t, fp_t );
 uint8_t updateFilter( filter *, fp_t );
+fp_t getFilterValue( filter * );
 
 #ifdef __cplusplus
 }

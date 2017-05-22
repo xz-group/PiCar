@@ -31,6 +31,8 @@ from picamera import PiCamera
 from numpy.linalg import inv
 import math
 import matplotlib.pyplot as plt
+#from scipy.cluster.hierarchy import linkage
+from sklearn.cluster import MeanShift
 
 width = 224
 height = 128
@@ -40,7 +42,7 @@ camera.resolution = (width, height)
 camera.framerate = 30
 camera.shutter_speed = 5000
 rawCapture = PiRGBArray(camera, size=(width, height))
-
+ms = MeanShift()
 # allow the camera to warmup
 time.sleep(2)
 
@@ -53,9 +55,8 @@ feature_params = dict( maxCorners = 500,
                        minDistance = 7,
                        blockSize = 7 )
 
-ttcAvg = np.arange(10)
-FILTER_COUNTS = 10
 ttcMin = 15
+
 class App:
     def __init__(self):
         self.track_len = 10
@@ -64,7 +65,7 @@ class App:
         self.frame_idx = 0
         self.prev_time = 0
         self.time = 0
-        self.foe = np.matrix([0,0]).reshape(2,1)
+        self.foe = np.matrix([112,48]).reshape(2,1)
         self.data = list()
         self.runCount = list()
         self.inc = 0
@@ -115,7 +116,8 @@ class App:
                 ttcSum = 0
                 xSum = 0
                 ySum = 0
-
+                
+                self.cluster = np.matrix([0,0]).reshape(-1,2)
                 #Tracks are added, Focus of expansion is calculated, ttc calculated for each point
                 for tr, (x, y), (u,v), good_flag in zip(self.tracks, p1.reshape(-1, 2), vec.reshape(-1,2), good):
                     #If not valid, break from loop
@@ -126,15 +128,6 @@ class App:
                     tr.append((x, y))
                     
                     #Calculate matrices for FOE (see paper for calculations)
-                    b0 = x*v-y*u
-                    if i == 0:
-                        A = np.matrix([[v,u]])
-                        b = np.matrix([[b0]])
-                        i = i + 1
-                    else:
-                        A = np.vstack((A,(v,u)))
-                        b = np.vstack((b,b0))
-
                     if len(tr) > self.track_len:
                         del tr[0]
                         
@@ -144,9 +137,6 @@ class App:
                     #cv2.circle(vis, (x, y), 2, (0, 255, 0), -1)
 
                     #TTC (magnitude of displacement)/(velocity of displacement)
-                    self.foe[0] = 112
-                    self.foe[1] = 64
-
                     d = math.sqrt((self.foe[0]-x)*(self.foe[0]-x)+(self.foe[1]-y)*(self.foe[1]-y))
                     dDot = math.sqrt(u*u+v*v)/(self.time-self.prev_time)
 
@@ -159,77 +149,24 @@ class App:
                     #Print TTC for relevant points (ttcMin instantiated at beginning of program)
                     if ttc < ttcMin:
                         cv2.putText(vis,'%.2f' % ttc, (x,y), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-                        
                         ttcCount = ttcCount+1
                         ttcSum = ttc + ttcSum
                         xSum = xSum + x
                         ySum = ySum + y
-                        
-                #ROLLING AVERAGE FILTER
-                #Each entry in rolling average array is the average of all points with small time to contact
-                ttcTotalAvg = 0
-                xAvg = 0
-                yAvg = 0
-                
-                if ttcCount > 0:
-                    self.inc = self.inc + 1        
-                    ttcAvg[self.inc % FILTER_COUNTS] = ttcSum/ttcCount
-                    xAvg = xSum/ttcCount
-                    yAvg = ySum/ttcCount
-                    
-                    for val in ttcAvg:
-                        ttcTotalAvg = val + ttcTotalAvg
-                    
-                    ttcTotalAvg = ttcTotalAvg/FILTER_COUNTS
-
-                #-----------------------------A PRETEND CONTROL OUTPUT---------------------------------------
-                #Decides which direction to turn based on location of the center of each point
-                #Tells how quickly to turn based on magnitude of the ttc average
-                if xAvg == 0:
-                    #draw_str(vis, (20, 20), 'STRAIGHT')
-                    cv2.putText(vis,'STRAIGHT', (5,80), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-                elif xAvg < 112:
-                    #draw_str(vis, (20, 20), 'RIGHT')
-                    cv2.putText(vis,'RIGHT', (5,80), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-                else:
-                    #draw_str(vis, (20, 20), 'LEFT')
-                    cv2.putText(vis,'LEFT', (5,80), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-                    
-                if ttcTotalAvg == 0:
-                    cv2.putText(vis,'NOTHING', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-                    #draw_str(vis, (20, 20), 'NOTHING')
-                elif ttcTotalAvg < 7:
-                    cv2.putText(vis,'MOVE QUICKLY', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-                    #draw_str(vis, (20, 20), 'MOVE BITCH')
-                else:
-                    cv2.putText(vis,'MOVE SLIGHTLY', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-                    #draw_str(vis, (20, 20), 'MOVE SLIGHTLY')
-                    
-                #Calculate new FOE, inverse may throw error so check for that
-                try:
-                    part1 = inv(np.matmul(A.transpose(),A))
-                except:
-                    self.foe = self.foe
-                else:
-                    self.foe = np.matmul(part1,np.matmul(A.transpose(),b))
-                    
-                self.foe[0] = 112
-                self.foe[1] = 54
+                        if i == 0:
+                            clusterDataX = np.matrix([[x]])
+                            clusterDataY = np.matrix([[x]])
+                            clusterData = np.matrix([[x,y]])
+                            i = i + 1
+                        else:
+                            clusterData = np.vstack((clusterData,(x,y)))
+                            clusterDataX = np.vstack((clusterDataX,x))
+                            clusterDataY = np.vstack((clusterDataY,y))
                 #Draw the FOE (not necessary)
-                cv2.circle(vis, (self.foe[0], self.foe[1]), 2, (0, 0, 255), -1)
-
-                #Create data for the plot
-                #!= 0 filters out data when there is nothing to track
-                if ttcTotalAvg != 0:
-                    self.data.append(ttcTotalAvg)
-                    self.runCount.append(len(self.data))
+                cv2.circle(vis, (self.foe[0], self.foe[1]), 2, (0, 255, 0), -1)
                 
                 self.tracks = new_tracks
-
-                #Draws the lines and the track count (unnecessary)
-                #cv2.polylines(vis, [np.int32(tr) for tr in self.tracks], False, (0, 255, 0))
-                #draw_str(vis, (20, 20), '%d' % len(self.tracks))
-          
+            
             if self.frame_idx % self.detect_interval == 0:
                 mask = np.zeros_like(frame_gray)
                 mask[:] = 255
@@ -242,7 +179,7 @@ class App:
                         #add features to tracked points
                         self.tracks.append([(x, y)])
 
-
+            z = linkage
             self.frame_idx += 1
             self.prev_gray = frame_gray
             self.prev_time = self.time
@@ -251,19 +188,40 @@ class App:
             cv2.imshow('lk_track', vis)
             #cv2.imshow('Before Equalization', frame_gray_old)
             #cv2.imshow('CLAHE (8,8)',frame_gray)
+            
+            
             ch = cv2.waitKey(1)
 
             #Necessary to clear the camera stream before next image is read in
             rawCapture.truncate(0)
-
+            
             #plot when escape key is called
             if ch == 27:
-                plt.axis([0 , self.inc,0, 15])
-                plt.ylabel('Time to Contact (s)')
-                plt.xlabel('time')
-                plt.title('Time to Contact')
-                plt.plot(self.runCount,self.data)
+                #z = linkage(clusterData)
+                #print(z)
+                plt.axis([0 , 224,0, 96])
+                plt.ylabel('y')
+                plt.xlabel('x')
+                plt.title('tracked Points with relevant TTC')
+                plt.scatter(clusterDataX,clusterDataY)
                 plt.show()
+
+                ms.fit(clusterData)
+                labels = ms.labels_
+                cluster_centers = ms.cluster_centers_
+                n_clusters_ = len(np.unique(labels))
+                print("number of estimated clusters:", n_clusters_)
+                
+                colors = 10*['r.','g.','b.','c.','k.','y.','m.']
+                for i in range(len(clusterData)):
+                    plt.plot(clusterData[i][0], clusterData[i],[1], colors[labels[i]],markersize = 10)
+                plt.scatter(cluster_centers[:,0], cluster_centers[:,1],marker="x", color='k',linewidths = 5, zorder=10)
+                plt.axis([0 , 224,0, 96])
+                plt.ylabel('y')
+                plt.xlabel('x')
+                plt.title('tracked Points with relevant TTC')
+                plt.show()
+                
                 break
 
 def main():

@@ -4,9 +4,12 @@
 #include "avrfix.h"
 
 // set resolution: SK=7.8 (16bit), K=15.16 (32bit)
-// mutually exclusive macros!
 #define FPSK 1
 #define FPK 0
+
+#if FPSK && FPK
+#error FPSK and FPK are mutually exclusive!
+#endif
 
 #ifdef FPSK
 typedef _sAccum fp_t;

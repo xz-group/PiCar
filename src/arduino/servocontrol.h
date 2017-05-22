@@ -9,9 +9,24 @@
 #ifndef SERVOCONTROL_H_
 #define SERVOCONTROL_H_
 
-#include <stdio.h>
+#include <stdint.h>
+#include "ddefs.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define SERVO_PIN 5
 
-#endif /* servocontrol_h */
+//#include <Servo.h>
+
+void attachServoToPin();
+void setServoAngle( int16_t );
+
+#ifdef __cplusplus
+}
+#endif
+
+
+#endif
 

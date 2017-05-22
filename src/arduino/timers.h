@@ -1,14 +1,15 @@
-#ifndef RPMtoPWM_H_
-#define RPMtoPWM_H_
+#ifndef TIMERS_H_
+#define TIMERS_H_
 
 #include <stdint.h>
-$include "fp.h"
+#include "ddefs.h"
+#include "Arduino.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-uint8_t toPWM( uint8_t, fp_t );
+void initTimers();
 
 #ifdef __cplusplus
 }

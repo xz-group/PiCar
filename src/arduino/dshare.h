@@ -8,8 +8,6 @@
 extern "C" {
 #endif
 
-int16_t dataArr[ DSHARE_ARR_LENGTH ];
-
 extern uint8_t initDataShare();
 extern uint8_t getData( const uint8_t, int16_t* );
 extern uint8_t setData( const uint8_t, const int16_t );
