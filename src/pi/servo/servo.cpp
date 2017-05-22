@@ -64,11 +64,6 @@ commands to the Arduino and displays the results
       results = sendCommand('a', 60, 655);
 
 
-
-      //results = sendCommand('s', 1000, 250);
-
-
-
       sleep(1);
       
       results = sendCommand('a', 120, 655);
