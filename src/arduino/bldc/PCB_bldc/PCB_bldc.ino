@@ -83,6 +83,7 @@ void loop() {
     timeold = micros();
     rpmcount = 0;
 //    Serial.println(rpm);
+    interrupts();
   }
   
   HALLSTATE = (4 * one) + (2 * two) + (three);
