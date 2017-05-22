@@ -14546,7 +14546,7 @@ DIN A3, landscape with location and doc. field</description>
 <plain>
 <text x="289.56" y="22.86" size="1.9304" layer="94" align="top-left">Raspberry Pi Car Control Board
 WashU ESE Dept - May 2017</text>
-<text x="378.46" y="5.08" size="2.54" layer="94" align="bottom-center">v2.0</text>
+<text x="378.46" y="5.08" size="2.54" layer="94" align="bottom-center">v2.1</text>
 </plain>
 <instances>
 <instance part="R1" gate="G$1" x="215.9" y="111.76" smashed="yes">
