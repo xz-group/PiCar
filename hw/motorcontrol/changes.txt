@@ -1,5 +1,5 @@
-1. Crystal: https://www.digikey.com/product-detail/en/epson/MA-505-16.0000M-C0-ROHS/SER2508CT-ND/1532008
+1. Crystal: https://www.digikey.com/product-detail/en/abracon-llc/ABLS7M2-16.000MHZ-D-2Y-T/535-12830-1-ND/5135076
 2. ADG3308: https://www.digikey.com/product-detail/en/analog-devices-inc/ADG3308BRUZ/ADG3308BRUZ-ND/997722
-3. Switch: https://www.digikey.com/product-detail/en/e-switch/TL3360AF185Q/EG5356CT-ND/5816201
+3. Switch: https://www.digikey.com/product-detail/en/omron-electronics-inc-emc-div/B3F-3120/SW407-ND/38364
 4. USB: https://www.digikey.com/product-detail/en/jae-electronics/DX4R005JJ2R1800/670-2675-1-ND/3903235
 5. 10V zener: https://www.digikey.com/product-detail/en/diodes-incorporated/BZT52C10-7-F/BZT52C10-FDICT-ND/717846
