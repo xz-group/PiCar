@@ -9,9 +9,9 @@
 #define  INH_1 5
 #define  INH_2 6
 #define  INH_3 7
-#define  HALL_1 4
-#define  HALL_2 2
-#define  HALL_3 3
+#define  HALL_1 4 // 4 -> HE2
+#define  HALL_2 2 // 2 -> HE3
+#define  HALL_3 3 // 3 -> HE1
 /*#define  IS_1  A1
   #define  IS_2  A2
   #define  IS_3  A3
@@ -20,13 +20,22 @@ int HallState1; //Variables for the three hall sensors (3,2,1)
 int HallState2;
 int HallState3;
 int HallVal = 1; //binary value of all 3 hall sensors
-int pwm = 50;
+double PWM = 50;
+int pwm_max = 100;
 int a;
-int PID = 1;
+int Kp = 6;
+int Ki = 1;
+int Kd = 0;
+
 
 volatile byte rpmcount = 0;
-unsigned int rpm = 0;
+volatile byte rpmcount2 = 0;
+float rpm = 0;
+float rpm2 = 0;
+double rpm_avg = 0;
 unsigned long timeold = 0;
+unsigned long timeold2 = 0;
+float RPM_set = 3000;
 
 void setup() {
 
@@ -61,7 +70,11 @@ void setup() {
   TCCR2B |= B00000010; //OR the value in TCCR0B with binary number "00000010"//First clear all three prescaler bits:
 
   attachInterrupt(0, magnet_detect, RISING); //enable interrupt
-
+  attachInterrupt(1, magnet_detect_2, RISING); //enable interrupt
+  
+  Serial.println("Waiting 3 seconds...");
+  delay(3*1000);
+  Serial.println("Ready");
 }
 
 
@@ -80,19 +93,37 @@ void loop() {
     attachInterrupt(0, magnet_detect, RISING); //enable interrupt
     }
   */
-
-  if (rpmcount >= 4) { //Update RPM every 4 counts, increase this for better RPM resolution,
-    //decrease for faster update
-    rpm = 30 * 1000000 / (micros() - timeold) * rpmcount;
-    timeold = micros();
-    rpmcount = 0;
-    Serial.println(rpm);
-  }
   
-  fwd(setRPM(60,rpm));
-//  detachInterrupt(0);
-//  fwd(pwm);
-//  attachInterrupt(0, magnet_detect, RISING);
+  if (rpmcount >= 1) { //Update RPM every 4 counts, increase this for better RPM resolution,
+    //decrease for faster update
+    rpm = 30.0 * 1000 / (millis() - timeold) * rpmcount;
+    timeold = millis();
+    rpmcount = 0;
+    //Serial.print(int(rpm));
+    
+    //fwd(40);
+  }
+  if (rpmcount2 >= 1) { //Update RPM every 4 counts, increase this for better RPM resolution,
+    //decrease for faster update
+    rpm2 = 30.0 * 1000 / (millis() - timeold2) * rpmcount2;
+    timeold2 = millis();
+    rpmcount2 = 0;
+    //Serial.print("\t");
+    //Serial.println(int(rpm2));
+    
+    //fwd(40);
+  }
+  rpm_avg = (rpm + rpm2)/2;
+
+  
+  //Serial.println(int(rpm_avg));
+  
+  //Serial.println(PWM);
+  fwd(PWM);
+  PWM = setRPM(PWM, RPM_set, abs(rpm_avg));
+  //fwd(PWM);
+  //rpm_old = rpm;
+  //attachInterrupt(0, magnet_detect, RISING);
   /*
     if(Serial.available()>0){
        a = Serial.read();
@@ -178,23 +209,36 @@ int fwd(int pwm) {
 }
 
 // using PID to drive motor to desired RPM
-int setRPM(int RPM_des, int RPM_curr){
-  int RPM_err;
-  int PWM_new;
-  RPM_err = RPM_des - RPM_curr;
-  PWM_new = PID*RPM_err;
-
+int setRPM(float PWM, float RPM_des, float RPM_curr){
+  float RPM_err;
+  float PWM_new;
+  float PWM_err;
+  static float last_error=0; 
+  RPM_err = (abs(RPM_des) - abs(RPM_curr))/100;
+  PWM_err = Kp*RPM_err + Kd*(RPM_err - last_error);
+  PWM_new = PWM+PWM_err;
+  last_error = RPM_err;
   // Saturation between 0 and 255
-  if(PWM_new > 255)
-    PWM_new = 255;
-  else if(PWM_new < 0)
-    PWM_new = 0;
+  if(PWM_new > pwm_max)
+    PWM_new = pwm_max;
+  else if(PWM_new < 20)
+    PWM_new = 20;
+  //Serial.println(int(PWM_new));
+  //Serial.print("RPM: "); Serial.print(abs(RPM_curr)); 
+  //Serial.print(" RPM_err: "); Serial.print(RPM_err); 
+  //Serial.print(" PWM_new: "); Serial.println(PWM_new);
     
-  return PWM_new;
+  return int(PWM_new);
 }
 
 void magnet_detect()
 {
   rpmcount++;
+//  Serial.println("detect");
+}
+
+void magnet_detect_2()
+{
+  rpmcount2++;
 //  Serial.println("detect");
 }
