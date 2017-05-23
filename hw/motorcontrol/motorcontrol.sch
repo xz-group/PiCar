@@ -11549,11 +11549,11 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </package>
 <package name="EDP_MODULE">
 <description>EDP (R-PDSS-T5) Texas Instruments Module</description>
-<pad name="P3" x="0" y="0" drill="1" diameter="1.27" shape="offset" rot="R270"/>
-<pad name="P4" x="-1.7018" y="0" drill="1" diameter="1.27" shape="offset" rot="R270"/>
-<pad name="P5" x="-3.4036" y="0" drill="1" diameter="1.27" shape="offset" rot="R270"/>
-<pad name="P2" x="1.7018" y="0" drill="1" diameter="1.27" shape="offset" rot="R270"/>
-<pad name="P1" x="3.4036" y="0" drill="1" diameter="1.27" shape="offset" rot="R270"/>
+<pad name="P3" x="0" y="0" drill="0.9" shape="offset" rot="R270"/>
+<pad name="P4" x="-1.7018" y="0" drill="0.9" shape="offset" rot="R270"/>
+<pad name="P5" x="-3.4036" y="0" drill="0.9" shape="offset" rot="R270"/>
+<pad name="P2" x="1.7018" y="0" drill="0.9" shape="offset" rot="R270"/>
+<pad name="P1" x="3.4036" y="0" drill="0.9" shape="offset" rot="R270"/>
 <wire x1="-5.3" y1="4.4" x2="5.3" y2="4.4" width="0.127" layer="39"/>
 <wire x1="5.3" y1="4.4" x2="5.3" y2="-5.04" width="0.127" layer="39"/>
 <wire x1="5.3" y1="-5.04" x2="-5.3" y2="-5.04" width="0.127" layer="39"/>
@@ -11622,21 +11622,6 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <rectangle x1="0.335" y1="-4.06" x2="0.935" y2="-3.49" layer="51"/>
 <text x="-2" y="-3.1" size="1.016" layer="25" rot="R90">&gt;NAME</text>
 <text x="2" y="-3.1" size="1.016" layer="27" rot="R90" align="top-left">&gt;VALUE</text>
-</package>
-<package name="MSL0201RGB">
-<smd name="G" x="1.35" y="0.6" dx="0.6" dy="0.9" layer="1"/>
-<smd name="A" x="-1.35" y="0.6" dx="0.6" dy="0.9" layer="1"/>
-<smd name="R" x="0.4" y="0.3" dx="0.5" dy="0.6" layer="1"/>
-<smd name="B" x="-0.4" y="0.3" dx="0.5" dy="0.6" layer="1"/>
-<wire x1="-1.525" y1="0.35" x2="-1.525" y2="0.85" width="0.127" layer="21"/>
-<wire x1="-1.525" y1="0.85" x2="-1.125" y2="0.85" width="0.127" layer="21"/>
-<wire x1="-1.125" y1="0.85" x2="-1" y2="1.65" width="0.127" layer="21"/>
-<wire x1="-1" y1="1.65" x2="1" y2="1.65" width="0.127" layer="21"/>
-<wire x1="1" y1="1.65" x2="1.125" y2="0.85" width="0.127" layer="21"/>
-<wire x1="1.125" y1="0.85" x2="1.525" y2="0.85" width="0.127" layer="21"/>
-<wire x1="1.525" y1="0.85" x2="1.525" y2="0.35" width="0.127" layer="21"/>
-<wire x1="1.525" y1="0.35" x2="-1.525" y2="0.35" width="0.127" layer="21"/>
-<text x="0" y="-0.2" size="1.016" layer="25" align="top-center">&gt;NAME</text>
 </package>
 <package name="RPI_THRUHOLE">
 <description>&lt;b&gt;PIN HEADER&lt;/b&gt; - 2.54</description>
@@ -12372,6 +12357,40 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <text x="-2.54" y="1.27" size="1.016" layer="25" font="vector">&gt;NAME</text>
 <text x="-2.54" y="-1.27" size="1.016" layer="27" font="vector" align="top-left">&gt;VALUE</text>
 </package>
+<package name="MSL0201RGB">
+<smd name="G" x="1.35" y="0.6" dx="0.6" dy="0.9" layer="1"/>
+<smd name="A" x="-1.35" y="0.6" dx="0.6" dy="0.9" layer="1"/>
+<smd name="R" x="0.4" y="0.3" dx="0.5" dy="0.6" layer="1"/>
+<smd name="B" x="-0.4" y="0.3" dx="0.5" dy="0.6" layer="1"/>
+<wire x1="-1.525" y1="0.35" x2="-1.525" y2="0.85" width="0.127" layer="21"/>
+<wire x1="-1.525" y1="0.85" x2="-1.125" y2="0.85" width="0.127" layer="21"/>
+<wire x1="-1.125" y1="0.85" x2="-1" y2="1.65" width="0.127" layer="21"/>
+<wire x1="-1" y1="1.65" x2="1" y2="1.65" width="0.127" layer="21"/>
+<wire x1="1" y1="1.65" x2="1.125" y2="0.85" width="0.127" layer="21"/>
+<wire x1="1.125" y1="0.85" x2="1.525" y2="0.85" width="0.127" layer="21"/>
+<wire x1="1.525" y1="0.85" x2="1.525" y2="0.35" width="0.127" layer="21"/>
+<wire x1="1.525" y1="0.35" x2="-1.525" y2="0.35" width="0.127" layer="21"/>
+<text x="0" y="-0.2" size="1.016" layer="25" align="top-center">&gt;NAME</text>
+</package>
+<package name="150141M173100">
+<description>&lt;b&gt;150141M173100 1411 SMD RGB LED</description>
+<smd name="A" x="1.55" y="0.85" dx="1.5" dy="0.9" layer="1"/>
+<smd name="B" x="1.55" y="-0.85" dx="1.5" dy="0.9" layer="1"/>
+<smd name="G" x="-1.55" y="-0.85" dx="1.5" dy="0.9" layer="1"/>
+<smd name="R" x="-1.55" y="0.85" dx="1.5" dy="0.9" layer="1"/>
+<wire x1="-1.6" y1="1.4" x2="0" y2="1.4" width="0.127" layer="21"/>
+<wire x1="0" y1="1.4" x2="1.6" y2="1.4" width="0.127" layer="21"/>
+<wire x1="-1.6" y1="-1.4" x2="1.6" y2="-1.4" width="0.127" layer="21"/>
+<circle x="0" y="0" radius="1.2" width="0.127" layer="51"/>
+<wire x1="-1.6" y1="1.4" x2="-1.6" y2="-1.4" width="0.127" layer="51"/>
+<wire x1="1.6" y1="1.4" x2="1.6" y2="-1.4" width="0.127" layer="51"/>
+<rectangle x1="0.95" y1="0.315" x2="1.75" y2="1.1" layer="51"/>
+<rectangle x1="0.95" y1="-1.1" x2="1.75" y2="-0.315" layer="51"/>
+<rectangle x1="-1.75" y1="0.315" x2="-0.95" y2="1.1" layer="51"/>
+<rectangle x1="-1.75" y1="-1.1" x2="-0.95" y2="-0.315" layer="51"/>
+<wire x1="0" y1="1.4" x2="-1.6" y2="-0.2" width="0.127" layer="21"/>
+<text x="-2" y="1.75" size="1.016" layer="21" font="vector">&gt;NAME</text>
+</package>
 </packages>
 <symbols>
 <symbol name="HEADER_2CIRC">
@@ -12599,38 +12618,6 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <pin name="1" x="-5.08" y="0" visible="off" length="short" direction="pas" swaplevel="2"/>
 <pin name="2" x="5.08" y="0" visible="off" length="short" direction="pas" swaplevel="1" rot="R180"/>
 </symbol>
-<symbol name="MSL0201RGB">
-<description>&lt;b&gt;MSL0201RGB Right Angle SMD RGB LED</description>
-<pin name="A" x="-2.54" y="7.62" visible="pad" length="short" direction="pas" rot="R270"/>
-<pin name="G" x="5.08" y="2.54" visible="pad" length="short" direction="pas" rot="R180"/>
-<pin name="R" x="5.08" y="0" visible="pad" length="short" direction="pas" rot="R180"/>
-<pin name="B" x="5.08" y="-2.54" visible="pad" length="short" direction="pas" rot="R180"/>
-<wire x1="0.508" y1="3.556" x2="0.508" y2="2.54" width="0.254" layer="94"/>
-<wire x1="0.508" y1="2.54" x2="0.508" y2="1.524" width="0.254" layer="94"/>
-<wire x1="0.508" y1="1.524" x2="2.54" y2="2.54" width="0.254" layer="94"/>
-<wire x1="2.54" y1="2.54" x2="0.508" y2="3.556" width="0.254" layer="94"/>
-<wire x1="2.54" y1="3.556" x2="2.54" y2="2.54" width="0.254" layer="94"/>
-<wire x1="2.54" y1="2.54" x2="2.54" y2="1.524" width="0.254" layer="94"/>
-<wire x1="0.508" y1="1.016" x2="0.508" y2="0" width="0.254" layer="94"/>
-<wire x1="0.508" y1="0" x2="0.508" y2="-1.016" width="0.254" layer="94"/>
-<wire x1="0.508" y1="-1.016" x2="2.54" y2="0" width="0.254" layer="94"/>
-<wire x1="2.54" y1="0" x2="0.508" y2="1.016" width="0.254" layer="94"/>
-<wire x1="2.54" y1="1.016" x2="2.54" y2="0" width="0.254" layer="94"/>
-<wire x1="2.54" y1="0" x2="2.54" y2="-1.016" width="0.254" layer="94"/>
-<wire x1="0.508" y1="-1.524" x2="0.508" y2="-2.54" width="0.254" layer="94"/>
-<wire x1="0.508" y1="-2.54" x2="0.508" y2="-3.556" width="0.254" layer="94"/>
-<wire x1="0.508" y1="-3.556" x2="2.54" y2="-2.54" width="0.254" layer="94"/>
-<wire x1="2.54" y1="-2.54" x2="0.508" y2="-1.524" width="0.254" layer="94"/>
-<wire x1="2.54" y1="-1.524" x2="2.54" y2="-2.54" width="0.254" layer="94"/>
-<wire x1="2.54" y1="-2.54" x2="2.54" y2="-3.556" width="0.254" layer="94"/>
-<wire x1="-2.54" y1="5.08" x2="-2.54" y2="2.54" width="0.1524" layer="94"/>
-<wire x1="-2.54" y1="2.54" x2="-2.54" y2="0" width="0.1524" layer="94"/>
-<wire x1="-2.54" y1="0" x2="-2.54" y2="-2.54" width="0.1524" layer="94"/>
-<wire x1="-2.54" y1="-2.54" x2="0.508" y2="-2.54" width="0.1524" layer="94"/>
-<wire x1="-2.54" y1="0" x2="0.508" y2="0" width="0.1524" layer="94"/>
-<wire x1="-2.54" y1="2.54" x2="0.508" y2="2.54" width="0.1524" layer="94"/>
-<text x="0" y="5.08" size="1.6764" layer="95">&gt;NAME</text>
-</symbol>
 <symbol name="RPIHEADER">
 <description>&lt;b&gt;Raspberry Pi 40 Pin Connector</description>
 <wire x1="-6.35" y1="-27.94" x2="8.89" y2="-27.94" width="0.4064" layer="94"/>
@@ -12766,6 +12753,38 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <text x="-1.778" y="-3.429" size="1.6764" layer="96">&gt;VALUE</text>
 <pin name="A" x="-2.54" y="0" visible="off" length="short" direction="pas"/>
 <pin name="C" x="2.54" y="0" visible="off" length="short" direction="pas" rot="R180"/>
+</symbol>
+<symbol name="LED_3COLOR_COMMONA">
+<description>&lt;b&gt;MSL0201RGB Right Angle SMD RGB LED</description>
+<pin name="A" x="-2.54" y="7.62" visible="pad" length="short" direction="pas" rot="R270"/>
+<pin name="G" x="5.08" y="2.54" visible="pad" length="short" direction="pas" rot="R180"/>
+<pin name="R" x="5.08" y="0" visible="pad" length="short" direction="pas" rot="R180"/>
+<pin name="B" x="5.08" y="-2.54" visible="pad" length="short" direction="pas" rot="R180"/>
+<wire x1="0.508" y1="3.556" x2="0.508" y2="2.54" width="0.254" layer="94"/>
+<wire x1="0.508" y1="2.54" x2="0.508" y2="1.524" width="0.254" layer="94"/>
+<wire x1="0.508" y1="1.524" x2="2.54" y2="2.54" width="0.254" layer="94"/>
+<wire x1="2.54" y1="2.54" x2="0.508" y2="3.556" width="0.254" layer="94"/>
+<wire x1="2.54" y1="3.556" x2="2.54" y2="2.54" width="0.254" layer="94"/>
+<wire x1="2.54" y1="2.54" x2="2.54" y2="1.524" width="0.254" layer="94"/>
+<wire x1="0.508" y1="1.016" x2="0.508" y2="0" width="0.254" layer="94"/>
+<wire x1="0.508" y1="0" x2="0.508" y2="-1.016" width="0.254" layer="94"/>
+<wire x1="0.508" y1="-1.016" x2="2.54" y2="0" width="0.254" layer="94"/>
+<wire x1="2.54" y1="0" x2="0.508" y2="1.016" width="0.254" layer="94"/>
+<wire x1="2.54" y1="1.016" x2="2.54" y2="0" width="0.254" layer="94"/>
+<wire x1="2.54" y1="0" x2="2.54" y2="-1.016" width="0.254" layer="94"/>
+<wire x1="0.508" y1="-1.524" x2="0.508" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="0.508" y1="-2.54" x2="0.508" y2="-3.556" width="0.254" layer="94"/>
+<wire x1="0.508" y1="-3.556" x2="2.54" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="2.54" y1="-2.54" x2="0.508" y2="-1.524" width="0.254" layer="94"/>
+<wire x1="2.54" y1="-1.524" x2="2.54" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="2.54" y1="-2.54" x2="2.54" y2="-3.556" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="5.08" x2="-2.54" y2="2.54" width="0.1524" layer="94"/>
+<wire x1="-2.54" y1="2.54" x2="-2.54" y2="0" width="0.1524" layer="94"/>
+<wire x1="-2.54" y1="0" x2="-2.54" y2="-2.54" width="0.1524" layer="94"/>
+<wire x1="-2.54" y1="-2.54" x2="0.508" y2="-2.54" width="0.1524" layer="94"/>
+<wire x1="-2.54" y1="0" x2="0.508" y2="0" width="0.1524" layer="94"/>
+<wire x1="-2.54" y1="2.54" x2="0.508" y2="2.54" width="0.1524" layer="94"/>
+<text x="0" y="5.08" size="1.6764" layer="95">&gt;NAME</text>
 </symbol>
 </symbols>
 <devicesets>
@@ -13047,25 +13066,6 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="MSL0201RGB" prefix="LED">
-<description>&lt;b&gt;MSL0201RGB Right Angle SMD RGB LED</description>
-<gates>
-<gate name="G$1" symbol="MSL0201RGB" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="MSL0201RGB">
-<connects>
-<connect gate="G$1" pin="A" pad="A"/>
-<connect gate="G$1" pin="B" pad="B"/>
-<connect gate="G$1" pin="G" pad="G"/>
-<connect gate="G$1" pin="R" pad="R"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
 <deviceset name="RPIHEADER" prefix="J" uservalue="yes">
 <description>&lt;b&gt;PIN HEADER&lt;/b&gt;</description>
 <gates>
@@ -13178,7 +13178,7 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <connects>
 <connect gate="G$1" pin="D+" pad="3"/>
 <connect gate="G$1" pin="D-" pad="2"/>
-<connect gate="G$1" pin="GND" pad="5 GND1 GND2"/>
+<connect gate="G$1" pin="GND" pad="5 GND1 GND2 GND3 GND4"/>
 <connect gate="G$1" pin="ID" pad="4"/>
 <connect gate="G$1" pin="VCC" pad="1"/>
 </connects>
@@ -13286,6 +13286,36 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <connects>
 <connect gate="G$1" pin="A" pad="A"/>
 <connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="LED_3COLOR_COMMONA" prefix="LED">
+<description>&lt;b&gt;MSL0201RGB Right Angle SMD RGB LED</description>
+<gates>
+<gate name="G$1" symbol="LED_3COLOR_COMMONA" x="0" y="0"/>
+</gates>
+<devices>
+<device name="MSL" package="MSL0201RGB">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="B" pad="B"/>
+<connect gate="G$1" pin="G" pad="G"/>
+<connect gate="G$1" pin="R" pad="R"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="1411" package="150141M173100">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="B" pad="B"/>
+<connect gate="G$1" pin="G" pad="G"/>
+<connect gate="G$1" pin="R" pad="R"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -13843,7 +13873,7 @@ DIN A3, landscape with location and doc. field</description>
 <part name="GND26" library="supply1" deviceset="GND" device=""/>
 <part name="P+6" library="supply1" deviceset="+5V" device=""/>
 <part name="GND27" library="supply1" deviceset="GND" device=""/>
-<part name="R15" library="resistor" deviceset="R-US_" device="R1206" value="0.51k"/>
+<part name="R15" library="resistor" deviceset="R-US_" device="R1206" value="267"/>
 <part name="U6" library="rpibout" deviceset="MMDT5401" device=""/>
 <part name="U4" library="rpibout" deviceset="CAT24C32WI-GT3" device=""/>
 <part name="GND28" library="supply1" deviceset="GND" device=""/>
@@ -13883,7 +13913,6 @@ DIN A3, landscape with location and doc. field</description>
 <part name="R16" library="resistor" deviceset="R-US_" device="R1206" value="10k"/>
 <part name="P+5" library="supply1" deviceset="+5V" device=""/>
 <part name="S2" library="rpibout" deviceset="A6HF-2DIP" device=""/>
-<part name="LED1" library="rpibout" deviceset="MSL0201RGB" device=""/>
 <part name="+3V5" library="supply1" deviceset="+3V3" device=""/>
 <part name="U12" library="rpibout" deviceset="BSS138BKS" device=""/>
 <part name="J1" library="rpibout" deviceset="RPIHEADER" device="_2.54-SMD"/>
@@ -13900,6 +13929,7 @@ DIN A3, landscape with location and doc. field</description>
 <part name="S1" library="rpibout" deviceset="SWITCH-GND" device=""/>
 <part name="D1" library="rpibout" deviceset="ZENER_DIODE" device="SOD123" value="10V"/>
 <part name="D2" library="rpibout" deviceset="ZENER_DIODE" device="SMA" value="33V"/>
+<part name="LED1" library="rpibout" deviceset="LED_3COLOR_COMMONA" device="1411"/>
 </parts>
 <sheets>
 <sheet>
@@ -14196,7 +14226,6 @@ WashU ESE Dept - May 2017</text>
 <instance part="P+5" gate="1" x="210.82" y="223.52"/>
 <instance part="S2" gate="P1" x="25.4" y="218.44"/>
 <instance part="S2" gate="P2" x="218.44" y="208.28"/>
-<instance part="LED1" gate="G$1" x="81.28" y="127"/>
 <instance part="+3V5" gate="G$1" x="78.74" y="152.4"/>
 <instance part="U12" gate="T1" x="86.36" y="119.38"/>
 <instance part="U12" gate="T2" x="109.22" y="119.38"/>
@@ -14220,6 +14249,7 @@ WashU ESE Dept - May 2017</text>
 <instance part="S1" gate="G$1" x="121.92" y="218.44" rot="R270"/>
 <instance part="D1" gate="G$1" x="60.96" y="35.56" rot="R90"/>
 <instance part="D2" gate="G$1" x="71.12" y="33.02" rot="R90"/>
+<instance part="LED1" gate="G$1" x="81.28" y="127"/>
 </instances>
 <busses>
 </busses>
@@ -14582,7 +14612,6 @@ WashU ESE Dept - May 2017</text>
 </segment>
 <segment>
 <pinref part="GND27" gate="1" pin="GND"/>
-<pinref part="LED1" gate="G$1" pin="R"/>
 <wire x1="86.36" y1="127" x2="93.98" y2="127" width="0.1524" layer="91"/>
 <wire x1="93.98" y1="127" x2="93.98" y2="114.3" width="0.1524" layer="91"/>
 <pinref part="U12" gate="T1" pin="S"/>
@@ -14591,6 +14620,7 @@ WashU ESE Dept - May 2017</text>
 <junction x="93.98" y="114.3"/>
 <pinref part="U12" gate="T2" pin="S"/>
 <wire x1="93.98" y1="114.3" x2="111.76" y2="114.3" width="0.1524" layer="91"/>
+<pinref part="LED1" gate="G$1" pin="R"/>
 </segment>
 <segment>
 <pinref part="J2" gate="G$1" pin="GND"/>
@@ -15600,23 +15630,23 @@ WashU ESE Dept - May 2017</text>
 <net name="N$10" class="0">
 <segment>
 <pinref part="R15" gate="G$1" pin="1"/>
-<pinref part="LED1" gate="G$1" pin="A"/>
 <wire x1="78.74" y1="137.16" x2="78.74" y2="134.62" width="0.1524" layer="91"/>
+<pinref part="LED1" gate="G$1" pin="A"/>
 </segment>
 </net>
 <net name="N$14" class="0">
 <segment>
-<pinref part="LED1" gate="G$1" pin="B"/>
 <pinref part="U12" gate="T1" pin="D"/>
 <wire x1="86.36" y1="124.46" x2="88.9" y2="124.46" width="0.1524" layer="91"/>
+<pinref part="LED1" gate="G$1" pin="B"/>
 </segment>
 </net>
 <net name="N$22" class="0">
 <segment>
-<pinref part="LED1" gate="G$1" pin="G"/>
 <pinref part="U12" gate="T2" pin="D"/>
 <wire x1="86.36" y1="129.54" x2="111.76" y2="129.54" width="0.1524" layer="91"/>
 <wire x1="111.76" y1="129.54" x2="111.76" y2="124.46" width="0.1524" layer="91"/>
+<pinref part="LED1" gate="G$1" pin="G"/>
 </segment>
 </net>
 <net name="RPILEDG" class="0">
