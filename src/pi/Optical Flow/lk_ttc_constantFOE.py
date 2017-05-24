@@ -30,7 +30,7 @@ from picamera.array import PiRGBArray
 from picamera import PiCamera
 from numpy.linalg import inv
 import math
-import matplotlib.pyplot as plt
+##import matplotlib.pyplot as plt
 
 width = 224
 height = 128

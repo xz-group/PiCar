@@ -12,7 +12,7 @@ SEND_PWM = [1]
 SEND_SERVO = [2]
 
 spi = spidev.SpiDev()
-spi.open(0,0)
+##spi.open(0,0)
 to_send = [-1]
 something = [-1]
 pwm = [30]
