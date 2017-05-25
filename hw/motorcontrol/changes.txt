@@ -3,3 +3,4 @@
 3. Switch: https://www.digikey.com/product-detail/en/omron-electronics-inc-emc-div/B3F-3120/SW407-ND/38364
 4. 10V zener: https://www.digikey.com/product-detail/en/diodes-incorporated/BZT52C10-7-F/BZT52C10-FDICT-ND/717846
 5. LED: https://www.digikey.com/product-detail/en/wurth-electronics-inc/150141M173100/732-4998-1-ND/4489958
+6. Backpower P-MOSFET: https://www.digikey.com/product-detail/en/vishay-siliconix/SI2333CDS-T1-GE3/SI2333CDS-T1-GE3CT-ND/2441904

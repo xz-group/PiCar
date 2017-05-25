@@ -11340,22 +11340,6 @@ diameter 5 mm, grid 2.54 mm</description>
 <rectangle x1="-0.15" y1="0.6" x2="0.15" y2="1.1" layer="51"/>
 <rectangle x1="-0.8" y1="0.6" x2="-0.5" y2="1.1" layer="51"/>
 </package>
-<package name="SOT23-3">
-<description>&lt;B&gt;SOT23&lt;/B&gt;&lt;P&gt;
-https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
-<wire x1="1.4224" y1="0.6604" x2="1.4224" y2="-0.6604" width="0.1524" layer="51"/>
-<wire x1="1.4224" y1="-0.6604" x2="-1.4224" y2="-0.6604" width="0.1524" layer="51"/>
-<wire x1="-1.4224" y1="-0.6604" x2="-1.4224" y2="0.6604" width="0.1524" layer="51"/>
-<wire x1="-1.4224" y1="0.6604" x2="1.4224" y2="0.6604" width="0.1524" layer="51"/>
-<smd name="3" x="0" y="1.1" dx="1" dy="1.4" layer="1"/>
-<smd name="2" x="0.95" y="-1.1" dx="1" dy="1.4" layer="1"/>
-<smd name="1" x="-0.95" y="-1.1" dx="1" dy="1.4" layer="1"/>
-<text x="-1.905" y="1.905" size="1.27" layer="25">&gt;NAME</text>
-<text x="-1.905" y="-3.175" size="1.27" layer="27">&gt;VALUE</text>
-<rectangle x1="-0.2286" y1="0.7112" x2="0.2286" y2="1.2954" layer="51"/>
-<rectangle x1="0.7112" y1="-1.2954" x2="1.1684" y2="-0.7112" layer="51"/>
-<rectangle x1="-1.1684" y1="-1.2954" x2="-0.7112" y2="-0.7112" layer="51"/>
-</package>
 <package name="TO263-7">
 <description>&lt;B&gt;TO263-7</description>
 <smd name="1" x="-3" y="3.81" dx="4.6" dy="0.8" layer="1"/>
@@ -12378,6 +12362,22 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <rectangle x1="2.25" y1="1.8" x2="3.2" y2="2.1" layer="51"/>
 <circle x="-1.651" y="1.95" radius="0.254" width="0.127" layer="21"/>
 </package>
+<package name="SOT23-3">
+<description>&lt;B&gt;SOT23&lt;/B&gt;&lt;P&gt;
+https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
+<wire x1="1.4224" y1="0.6604" x2="1.4224" y2="-0.6604" width="0.1524" layer="51"/>
+<wire x1="1.4224" y1="-0.6604" x2="-1.4224" y2="-0.6604" width="0.1524" layer="51"/>
+<wire x1="-1.4224" y1="-0.6604" x2="-1.4224" y2="0.6604" width="0.1524" layer="51"/>
+<wire x1="-1.4224" y1="0.6604" x2="1.4224" y2="0.6604" width="0.1524" layer="51"/>
+<smd name="3" x="0" y="1.1" dx="1" dy="1.4" layer="1"/>
+<smd name="2" x="0.95" y="-1.1" dx="1" dy="1.4" layer="1"/>
+<smd name="1" x="-0.95" y="-1.1" dx="1" dy="1.4" layer="1"/>
+<text x="-1.905" y="1.905" size="1.27" layer="25">&gt;NAME</text>
+<text x="-1.905" y="-3.175" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-0.2286" y1="0.7112" x2="0.2286" y2="1.2954" layer="51"/>
+<rectangle x1="0.7112" y1="-1.2954" x2="1.1684" y2="-0.7112" layer="51"/>
+<rectangle x1="-1.1684" y1="-1.2954" x2="-0.7112" y2="-0.7112" layer="51"/>
+</package>
 </packages>
 <symbols>
 <symbol name="HEADER_2CIRC">
@@ -12808,24 +12808,6 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <connect gate="T2" pin="D" pad="3"/>
 <connect gate="T2" pin="G" pad="5"/>
 <connect gate="T2" pin="S" pad="4"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-<deviceset name="DMG2305UX" prefix="U">
-<description>&lt;B&gt;DMG2305 P-Channel MOSFET</description>
-<gates>
-<gate name="G$1" symbol="P-MOSFET" x="12.7" y="0"/>
-</gates>
-<devices>
-<device name="" package="SOT23-3">
-<connects>
-<connect gate="G$1" pin="D" pad="3"/>
-<connect gate="G$1" pin="G" pad="1"/>
-<connect gate="G$1" pin="S" pad="2"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -13293,6 +13275,24 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <connect gate="G4" pin="OE" pad="13"/>
 <connect gate="PWR" pin="GND" pad="7"/>
 <connect gate="PWR" pin="VCC" pad="14"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="SI2333CDS-T1-GE3" prefix="U">
+<description>&lt;B&gt;SI2333CDS-T1-GE3 P-Channel MOSFET</description>
+<gates>
+<gate name="G$1" symbol="P-MOSFET" x="12.7" y="0"/>
+</gates>
+<devices>
+<device name="" package="SOT23-3">
+<connects>
+<connect gate="G$1" pin="D" pad="3"/>
+<connect gate="G$1" pin="G" pad="1"/>
+<connect gate="G$1" pin="S" pad="2"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -13791,13 +13791,11 @@ DIN A3, landscape with location and doc. field</description>
 <part name="C36" library="resistor" deviceset="CPOL-US" device="E3.5-8" value="220u"/>
 <part name="BATT" library="rpibout" deviceset="ULTRAFIT_2CIRC" device="VCLIP"/>
 <part name="GND45" library="supply1" deviceset="GND" device=""/>
-<part name="C37" library="resistor" deviceset="C-US" device="C1206" value="1u"/>
 <part name="R37" library="resistor" deviceset="R-US_" device="R1206" value="10k"/>
 <part name="R38" library="resistor" deviceset="R-US_" device="R1206" value="47k"/>
 <part name="GND46" library="supply1" deviceset="GND" device=""/>
 <part name="GND47" library="supply1" deviceset="GND" device=""/>
 <part name="P+9" library="supply1" deviceset="+5V" device=""/>
-<part name="U11" library="rpibout" deviceset="DMG2305UX" device=""/>
 <part name="HALL1" library="con-molex" deviceset="22-23-2031" device=""/>
 <part name="HALL2" library="con-molex" deviceset="22-23-2031" device=""/>
 <part name="HALL3" library="con-molex" deviceset="22-23-2031" device=""/>
@@ -13911,6 +13909,7 @@ DIN A3, landscape with location and doc. field</description>
 <part name="P+1" library="supply1" deviceset="+5V" device=""/>
 <part name="P+8" library="supply1" deviceset="+5V" device=""/>
 <part name="+3V6" library="supply1" deviceset="+3V3" device=""/>
+<part name="U11" library="rpibout" deviceset="SI2333CDS-T1-GE3" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -14041,16 +14040,11 @@ WashU ESE Dept - May 2017</text>
 <instance part="C36" gate="G$1" x="88.9" y="81.28"/>
 <instance part="BATT" gate="G$1" x="20.32" y="86.36" rot="MR0"/>
 <instance part="GND45" gate="1" x="27.94" y="76.2"/>
-<instance part="C37" gate="G$1" x="104.14" y="81.28"/>
 <instance part="R37" gate="G$1" x="119.38" y="58.42" rot="R90"/>
 <instance part="R38" gate="G$1" x="139.7" y="58.42" rot="R90"/>
 <instance part="GND46" gate="1" x="119.38" y="48.26"/>
 <instance part="GND47" gate="1" x="139.7" y="48.26"/>
 <instance part="P+9" gate="1" x="139.7" y="99.06"/>
-<instance part="U11" gate="G$1" x="129.54" y="86.36" smashed="yes" rot="MR90">
-<attribute name="NAME" x="125.73" y="82.804" size="1.778" layer="95" rot="MR180"/>
-<attribute name="VALUE" x="122.682" y="90.678" size="1.778" layer="96" rot="MR180"/>
-</instance>
 <instance part="HALL1" gate="-1" x="365.76" y="165.1" smashed="yes">
 <attribute name="NAME" x="368.3" y="164.338" size="1.524" layer="95"/>
 <attribute name="VALUE" x="362.458" y="171.577" size="1.778" layer="96"/>
@@ -14259,6 +14253,7 @@ WashU ESE Dept - May 2017</text>
 <instance part="P+1" gate="1" x="248.92" y="203.2"/>
 <instance part="P+8" gate="1" x="124.46" y="243.84"/>
 <instance part="+3V6" gate="G$1" x="17.78" y="241.3"/>
+<instance part="U11" gate="G$1" x="129.54" y="86.36" rot="MR90"/>
 </instances>
 <busses>
 </busses>
@@ -14415,10 +14410,6 @@ WashU ESE Dept - May 2017</text>
 <junction x="88.9" y="68.58"/>
 <pinref part="C35" gate="G$1" pin="-"/>
 <pinref part="C36" gate="G$1" pin="-"/>
-<pinref part="C37" gate="G$1" pin="2"/>
-<wire x1="96.52" y1="68.58" x2="104.14" y2="68.58" width="0.1524" layer="91"/>
-<wire x1="104.14" y1="68.58" x2="104.14" y2="76.2" width="0.1524" layer="91"/>
-<junction x="96.52" y="68.58"/>
 <pinref part="U7" gate="G$1" pin="GND"/>
 </segment>
 <segment>
@@ -14855,13 +14846,13 @@ WashU ESE Dept - May 2017</text>
 <junction x="144.78" y="208.28"/>
 </segment>
 <segment>
-<pinref part="U11" gate="G$1" pin="S"/>
 <wire x1="134.62" y1="86.36" x2="139.7" y2="86.36" width="0.1524" layer="91"/>
 <pinref part="P+9" gate="1" pin="+5V"/>
 <wire x1="139.7" y1="86.36" x2="139.7" y2="96.52" width="0.1524" layer="91"/>
 <pinref part="U6" gate="T2" pin="E"/>
 <wire x1="139.7" y1="78.74" x2="139.7" y2="86.36" width="0.1524" layer="91"/>
 <junction x="139.7" y="86.36"/>
+<pinref part="U11" gate="G$1" pin="S"/>
 </segment>
 <segment>
 <pinref part="R39" gate="G$1" pin="2"/>
@@ -15055,19 +15046,15 @@ WashU ESE Dept - May 2017</text>
 <wire x1="96.52" y1="83.82" x2="96.52" y2="86.36" width="0.1524" layer="91"/>
 <wire x1="96.52" y1="86.36" x2="88.9" y2="86.36" width="0.1524" layer="91"/>
 <pinref part="C36" gate="G$1" pin="+"/>
-<pinref part="C37" gate="G$1" pin="1"/>
-<wire x1="96.52" y1="86.36" x2="104.14" y2="86.36" width="0.1524" layer="91"/>
-<wire x1="104.14" y1="86.36" x2="104.14" y2="83.82" width="0.1524" layer="91"/>
 <junction x="96.52" y="86.36"/>
-<pinref part="U11" gate="G$1" pin="D"/>
 <wire x1="124.46" y1="86.36" x2="119.38" y2="86.36" width="0.1524" layer="91"/>
-<junction x="104.14" y="86.36"/>
 <pinref part="U6" gate="T1" pin="E"/>
-<wire x1="119.38" y1="86.36" x2="104.14" y2="86.36" width="0.1524" layer="91"/>
+<wire x1="119.38" y1="86.36" x2="96.52" y2="86.36" width="0.1524" layer="91"/>
 <wire x1="119.38" y1="78.74" x2="119.38" y2="86.36" width="0.1524" layer="91"/>
 <junction x="119.38" y="86.36"/>
 <pinref part="U7" gate="G$1" pin="VOUT"/>
 <label x="106.68" y="86.36" size="1.778" layer="95"/>
+<pinref part="U11" gate="G$1" pin="D"/>
 </segment>
 </net>
 <net name="RPIMISO" class="0">
@@ -15525,7 +15512,6 @@ WashU ESE Dept - May 2017</text>
 </net>
 <net name="N$2" class="0">
 <segment>
-<pinref part="U11" gate="G$1" pin="G"/>
 <wire x1="132.08" y1="81.28" x2="132.08" y2="66.04" width="0.1524" layer="91"/>
 <wire x1="132.08" y1="66.04" x2="139.7" y2="66.04" width="0.1524" layer="91"/>
 <pinref part="U6" gate="T2" pin="C"/>
@@ -15533,6 +15519,7 @@ WashU ESE Dept - May 2017</text>
 <pinref part="R38" gate="G$1" pin="2"/>
 <wire x1="139.7" y1="63.5" x2="139.7" y2="66.04" width="0.1524" layer="91"/>
 <junction x="139.7" y="66.04"/>
+<pinref part="U11" gate="G$1" pin="G"/>
 </segment>
 </net>
 <net name="VPP" class="0">
