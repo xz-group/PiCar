@@ -45,6 +45,7 @@ GPIO.setup(CS,GPIO.OUT)
 
 SEND_PWM = [1]
 SEND_SERVO = [2]
+SEND_KILL = [3]
 
 width = 224
 height = 128
@@ -91,6 +92,12 @@ def sendServoAngle(servo):
     val2 = spi.xfer(servo)
     print(val1)
     print(val2)
+    GPIO.output(CS,GPIO.HIGH)
+
+def sendKill():
+    GPIO.output(CS,GPIO.LOW);
+    val1 = spi.xfer(SEND_KILL)
+    print("Kill")
     GPIO.output(CS,GPIO.HIGH)
 
 class App:  
@@ -222,41 +229,46 @@ class App:
                 elif xAvg < 112:
                     #draw_str(vis, (20, 20), 'RIGHT')
                     cv2.putText(vis,'RIGHT', (5,80), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-                    temp = int((xAvg/2 + 90))
+                    temp = int((90*(xAvg/112) + 90))
                 else:
                     #draw_str(vis, (20, 20), 'LEFT')
                     cv2.putText(vis,'LEFT', (5,80), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-                    temp = int((90 + (xAvg-224)/2))
+##                    temp = int((90 + (xAvg-224)/2))
+                    temp = int(90*(xAvg - 112)/112)
+                    
 
                 if temp > 130: 
                     temp = 130
                 elif temp < 50:
                     temp = 50
-
                 angle = [temp]
+##                angle = [int(xAvg)]
 
-##                if time.clock() > 2:
-##                    pwm = [int(ttcTotalAvg*255/5)]
-##                else:
-##                    pwm = 0
-##                    print("not yet")
+
                 
-   
-                if ttcTotalAvg == 0:
-                    cv2.putText(vis,'NOTHING', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-                    #draw_str(vis, (20, 20), 'NOTHING')
-                    pwm = [34]
-                elif ttcTotalAvg < 3:
-                    cv2.putText(vis,'MOVE NORMALLY', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-                    #draw_str(vis, (20, 20), 'MOVE BITCH')
-                    pwm = [30]
-                else:
-                    cv2.putText(vis,'MOVE QUICKLY', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-                    #draw_str(vis, (20, 20), 'MOVE SLIGHTLY')
-                    pwm = [32]
 
-                if time.clock() < 2:
-                    pwm = [0]
+                temp1 = int(164*ttcTotalAvg/10)
+                if ttcTotalAvg == 0:
+                    temp1 = 164
+                if temp1 < 4:
+                    temp1 = 4
+
+
+                pwm = [temp1]
+                
+##                if ttcTotalAvg == 0:
+##                    cv2.putText(vis,'NOTHING', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+##                    #draw_str(vis, (20, 20), 'NOTHING')
+##                    pwm = [34]
+##                elif ttcTotalAvg < 3:
+##                    cv2.putText(vis,'MOVE NORMALLY', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+##                    #draw_str(vis, (20, 20), 'MOVE BITCH')
+##                    pwm = [30]
+##                else:
+##                    cv2.putText(vis,'MOVE QUICKLY', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+##                    #draw_str(vis, (20, 20), 'MOVE SLIGHTLY')
+##                    pwm = [32]
+
 
                 sendPWM(pwm)
                 sendServoAngle(angle)
@@ -315,11 +327,8 @@ class App:
 
             #plot when escape key is called
             if ch == 27:
-                pwm = [28]
-                angle = [90]
                 for i in range(0,10):
-                    sendPWM(pwm);
-                    sendServoAngle(angle);
+                    sendKill()
                 #video1.release()
                 plt.axis([0 , self.inc,0, 15])
                 plt.ylabel('Time to Contact (s)')
