@@ -6,16 +6,9 @@ Servo esc;
 
 int pwm;
 int servoAngle;
-byte marker;
+int marker;
 unsigned char dat;
 byte receive;
-
-unsigned long time1;
-
-bool kill = true;
-int switchVal = 1500;
-
-#define KILL_SWITCH A0
 
 //ISR(SPI_STC_vect) {
 //  switchVal = pulseIn(KILL_SWITCH, HIGH);
@@ -23,17 +16,20 @@ int switchVal = 1500;
 
 void setup() {
   // put your setup code here, to run once:
-    //  SPI.begin();
-  SPCR |= _BV(SPE);
-  Serial.begin(115200);
-  pinMode(MISO, OUTPUT);
-//  pinMode(KILL_SWITCH, INPUT);
-//  SPI.attachInterrupt();
   
+  //Setup SPI
+  SPCR |= _BV(SPE);
+  pinMode(MISO, OUTPUT);
+
+
+  //attach servo and ESC to pins
   servo.attach(3);
   esc.attach(5);
+
+  //Servo starts at 90 degrees
   servo.write(90);
-  
+
+  //Uncomment to calibrate the ESC
 //  while(millis() < 6000) {
 //    esc.writeMicroseconds(2000);
 //    Serial.println("high");
@@ -50,12 +46,13 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:   
-    if((SPSR & (1 << SPIF)) != 0)
-    { 
-      spiHandler();
-      time1 = millis();
-   }
    
+   //receive SPI and handle it
+   if((SPSR & (1 << SPIF)) != 0) { 
+      spiHandler();
+   }
+
+   //Servo angle saturation
    if(servoAngle < 50) {
       servoAngle = 50;
    }
@@ -63,19 +60,10 @@ void loop() {
       servoAngle = 130;
    }
 
-//    if((time1 - millis()) > 100) {
-//      pwm = 28;
-//   }
-  
-//  if(kill) {
-       esc.writeMicroseconds(pwm*50);
-       servo.write(servoAngle);
-//   }
-//   else {
-//        esc.writeMicroseconds(1500);
-//        servo.write(90);
-//   }
-//   Serial.println(servoAngle);
+   //write values to servo and esc
+   esc.writeMicroseconds(pwm*50);
+   servo.write(servoAngle);
+
 }
 
 void spiHandler()
@@ -100,11 +88,8 @@ void spiHandler()
     else {
 //      Serial.println("dat is wrong 1");
     }
-//    Serial.println(dat);
     break;    
   case 1:
-//      Serial.println(receive);
-//    Serial.println(receive + "a");
     if(receive == 1) {
       pwm = SPDR;
       SPDR = pwm;
@@ -117,12 +102,10 @@ void spiHandler()
       SPDR = servoAngle;
 //      Serial.print(servoAngle);
 //      Serial.print("servo: ");
-//      Serial.println(servoAngle);
       marker = 0;
     }
     else {
-//      Serial.println("dat is wrong 2");
-      
+//      Serial.println("dat is wrong 2"); 
     }
     break;
   }

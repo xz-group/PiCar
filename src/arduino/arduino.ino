@@ -2,6 +2,7 @@
 
 #include <stdint.h>
 #include <Servo.h>
+#include <SPI.h>
 #include "dshare.c"
 #include "ddefs.h"
 #include "servocontrol.h"
@@ -10,6 +11,7 @@
 #include "imu.h"
 
 Servo servo;
+Servo esc;
 
 int16_t angle;
 int16_t pwm;
@@ -40,16 +42,21 @@ ISR(SPI_STC_vect) {
 //}
 
 void setup() {
+  //open serial port for debugging
   Serial.begin(115200);
-//  SPI.attachInterrupt();
+  
+  //setup SPI
+  SPI.attachInterrupt();
   pinMode(MISO, OUTPUT);
   SPCR |= _BV(SPE);
 
+  //Initialize timers
   initTimers();
   
   setData( SERVO_ANGLE, 90 );
   servo.attach( SERVO_PIN );
 
+  //setup IMU
   imuSetup();
   // interrupt on Compare A Match
 }  // end of setup
@@ -60,32 +67,6 @@ void loop() {
 
 void testIMU() {
     getIMUData();
-
-  Serial.print( "accelX: ");
-  Serial.println( dataArr[ IMU_ACCEL_X ] );
-  Serial.print( "accelY: ");
-  Serial.println( dataArr[ IMU_ACCEL_Y ] );
-  Serial.print( "accelZ: ");
-  Serial.println( dataArr[ IMU_ACCEL_Z ] );
-
-  Serial.print( "GyroX: ");
-  Serial.println( dataArr[ IMU_GYRO_ZY ] );
-  Serial.print( "GyroY: ");
-  Serial.println( dataArr[ IMU_GYRO_XZ ] );
-  Serial.print( "GyroZ: ");
-  Serial.println( dataArr[ IMU_GYRO_YX ] );
-
-  Serial.print( "MagnetX: ");
-  Serial.println( dataArr[ IMU_MAGNET_X ] );
-  Serial.print( "MagnetY: ");
-  Serial.println( dataArr[ IMU_MAGNET_Y ] );
-  Serial.print( "MagnetZ: ");
-  Serial.println( dataArr[ IMU_MAGNET_Z ] );
-
-  Serial.print("Temp: ");
-  Serial.println( dataArr[ IMU_TEMP ] );
-
-  delay(50);
 }
 
 

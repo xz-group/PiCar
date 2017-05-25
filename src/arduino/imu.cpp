@@ -1256,3 +1256,32 @@ void getIMUData() {
     setData ( IMU_TEMP, imu.temperature );
   }
 }
+
+//void testIMU() {
+//  getIMUData();
+//  
+//  Serial.print( "accelX: ");
+//  Serial.println( dataArr[ IMU_ACCEL_X ] );
+//  Serial.print( "accelY: ");
+//  Serial.println( dataArr[ IMU_ACCEL_Y ] );
+//  Serial.print( "accelZ: ");
+//  Serial.println( dataArr[ IMU_ACCEL_Z ] );
+//
+//  Serial.print( "GyroX: ");
+//  Serial.println( dataArr[ IMU_GYRO_ZY ] );
+//  Serial.print( "GyroY: ");
+//  Serial.println( dataArr[ IMU_GYRO_XZ ] );
+//  Serial.print( "GyroZ: ");
+//  Serial.println( dataArr[ IMU_GYRO_YX ] );
+//
+//  Serial.print( "MagnetX: ");
+//  Serial.println( dataArr[ IMU_MAGNET_X ] );
+//  Serial.print( "MagnetY: ");
+//  Serial.println( dataArr[ IMU_MAGNET_Y ] );
+//  Serial.print( "MagnetZ: ");
+//  Serial.println( dataArr[ IMU_MAGNET_Z ] );
+//
+//  Serial.print("Temp: ");
+//  Serial.println( dataArr[ IMU_TEMP ] );
+//}
+
