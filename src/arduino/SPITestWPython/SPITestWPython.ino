@@ -1,17 +1,51 @@
+#include <Servo.h>
+#include <SPI.h>
+
+Servo servo;
+Servo esc;
+
 int pwm;
-int servo;
+int servoAngle;
 byte marker;
 unsigned char dat;
 byte receive;
+
+unsigned long time1;
+
+bool kill = true;
+int switchVal = 1500;
+
+#define KILL_SWITCH A0
+
+//ISR(SPI_STC_vect) {
+//  switchVal = pulseIn(KILL_SWITCH, HIGH);
+//}
 
 void setup() {
   // put your setup code here, to run once:
     //  SPI.begin();
   SPCR |= _BV(SPE);
   Serial.begin(115200);
-//  pinMode(10,INPUT);
-//  digitalWrite(10,LOW);
   pinMode(MISO, OUTPUT);
+//  pinMode(KILL_SWITCH, INPUT);
+//  SPI.attachInterrupt();
+  
+  servo.attach(3);
+  esc.attach(5);
+  servo.write(90);
+  
+//  while(millis() < 6000) {
+//    esc.writeMicroseconds(2000);
+//    Serial.println("high");
+//  }
+//  while(millis() < 12000) {
+//    esc.writeMicroseconds(1000);
+//    Serial.println("low");
+//  }
+//  while(millis() < 18000) {
+//    esc.writeMicroseconds(1500);
+//    Serial.println("middle");
+//  }
 }
 
 void loop() {
@@ -19,7 +53,29 @@ void loop() {
     if((SPSR & (1 << SPIF)) != 0)
     { 
       spiHandler();
+      time1 = millis();
    }
+   
+   if(servoAngle < 50) {
+      servoAngle = 50;
+   }
+   if(servoAngle > 130) {
+      servoAngle = 130;
+   }
+
+//    if((time1 - millis()) > 100) {
+//      pwm = 28;
+//   }
+  
+//  if(kill) {
+       esc.writeMicroseconds(pwm*50);
+       servo.write(servoAngle);
+//   }
+//   else {
+//        esc.writeMicroseconds(1500);
+//        servo.write(90);
+//   }
+//   Serial.println(servoAngle);
 }
 
 void spiHandler()
@@ -27,8 +83,11 @@ void spiHandler()
   switch (marker)
   {
   case 0:
+//    Serial.print(receive);
     dat = SPDR;
     receive = dat;
+    Serial.println(dat);
+//    Serial.print(dat);
     if (dat == 1)
     {
       SPDR = 1;
@@ -39,85 +98,32 @@ void spiHandler()
       marker++; 
     }
     else {
-      Serial.println("dat is wrong 1");
+//      Serial.println("dat is wrong 1");
     }
-    Serial.println(dat);
+//    Serial.println(dat);
     break;    
   case 1:
+//      Serial.println(receive);
+//    Serial.println(receive + "a");
     if(receive == 1) {
       pwm = SPDR;
       SPDR = pwm;
-      Serial.print("pwm: ");
-      Serial.println(pwm);
+//      Serial.print("pwm: ");
+//      Serial.println(pwm);
       marker = 0;
     }
     else if (receive == 2) {
-      servo = SPDR;
-      SPDR = servo;
-      Serial.print("servo: ");
-      Serial.println(servo);
+      servoAngle = SPDR;
+      SPDR = servoAngle;
+//      Serial.print(servoAngle);
+//      Serial.print("servo: ");
+//      Serial.println(servoAngle);
       marker = 0;
     }
     else {
-      Serial.println("dat is wrong 2");
+//      Serial.println("dat is wrong 2");
+      
     }
     break;
   }
-//  case 2:
-//    receiveBuffer[marker-1] = SPDR;
-//    Serial.println(receiveBuffer[marker-1]);
-//    marker++;
-//    break;
-//  case 3:
-//    receiveBuffer[marker-1] = SPDR;
-//    Serial.println(receiveBuffer[marker-1]);
-//    marker++;
-//    break;
-//  case 4:
-//    receiveBuffer[marker-1] = SPDR;
-//    Serial.println(receiveBuffer[marker-1]);
-//    marker++;
-//    break;
-//  case 5:
-//    receiveBuffer[marker-1] = SPDR;
-//    Serial.println(receiveBuffer[marker-1]);
-//    marker++;
-//    executeCommand();
-//    SPDR = resultBuffer.resultChar[0];    
-//    break;    
-//  case 6:
-//    marker++;
-//    Serial.println(receiveBuffer[marker-1]);
-//    SPDR = resultBuffer.resultChar[1]; 
-//    break;   
-//  case 7:
-//    dat = SPDR;
-//    Serial.println(receiveBuffer[marker-1]);
-//    marker=0;
-//  }
-
 }
-
-/***************************************************************  
- executeCommand
-   When the complete 5 byte command sequence has been received
-   reconstitute the byte variables from the receiveBuffer
-   into integers, parse the command (add or subtract) and perform
-   the indicated operation - the result will be in resultBuffer
-****************************************************************/
-
-  
-//void executeCommand(void)
-//{
-//
-//
-//
-// p1Buffer.p1Char[0]=receiveBuffer[1];
-// p1Buffer.p1Char[1]=receiveBuffer[2];
-// p2Buffer.p2Char[0]=receiveBuffer[3];
-// p2Buffer.p2Char[1]=receiveBuffer[4];
-// 
-//  resultBuffer.resultInt = 1;
-//
-//
-//} 
