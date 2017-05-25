@@ -245,15 +245,15 @@ class App:
                 if ttcTotalAvg == 0:
                     cv2.putText(vis,'NOTHING', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
                     #draw_str(vis, (20, 20), 'NOTHING')
-                    pwm = [17]
+                    pwm = [34]
                 elif ttcTotalAvg < 3:
                     cv2.putText(vis,'MOVE NORMALLY', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
                     #draw_str(vis, (20, 20), 'MOVE BITCH')
-                    pwm = [15]
+                    pwm = [30]
                 else:
                     cv2.putText(vis,'MOVE QUICKLY', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
                     #draw_str(vis, (20, 20), 'MOVE SLIGHTLY')
-                    pwm = [16]
+                    pwm = [32]
 
                 if time.clock() < 2:
                     pwm = [0]
@@ -315,6 +315,11 @@ class App:
 
             #plot when escape key is called
             if ch == 27:
+                pwm = [28]
+                angle = [90]
+                for i in range(0,10):
+                    sendPWM(pwm);
+                    sendServoAngle(angle);
                 #video1.release()
                 plt.axis([0 , self.inc,0, 15])
                 plt.ylabel('Time to Contact (s)')
