@@ -11371,14 +11371,14 @@ diameter 5 mm, grid 2.54 mm</description>
 <wire x1="0" y1="5" x2="9.25" y2="5" width="0.254" layer="21"/>
 <wire x1="9.25" y1="5" x2="9.25" y2="-5" width="0.254" layer="21"/>
 <wire x1="9.25" y1="-5" x2="0" y2="-5" width="0.254" layer="21"/>
-<wire x1="-5.842" y1="4.699" x2="-1.778" y2="4.699" width="0.127" layer="39"/>
-<wire x1="-1.778" y1="4.699" x2="-1.778" y2="-4.699" width="0.127" layer="39"/>
-<wire x1="-1.778" y1="-4.699" x2="-5.842" y2="-4.699" width="0.127" layer="39"/>
+<wire x1="-5.842" y1="4.699" x2="-0.254" y2="4.699" width="0.127" layer="39"/>
+<wire x1="-0.254" y1="-4.699" x2="-5.842" y2="-4.699" width="0.127" layer="39"/>
 <wire x1="-5.842" y1="-4.699" x2="-5.842" y2="4.699" width="0.127" layer="39"/>
-<wire x1="8.89" y1="5.842" x2="11.43" y2="5.842" width="0.127" layer="39"/>
+<wire x1="-0.254" y1="5.842" x2="11.43" y2="5.842" width="0.127" layer="39"/>
 <wire x1="11.43" y1="5.842" x2="11.43" y2="-5.842" width="0.127" layer="39"/>
-<wire x1="11.43" y1="-5.842" x2="8.89" y2="-5.842" width="0.127" layer="39"/>
-<wire x1="8.89" y1="-5.842" x2="8.89" y2="5.842" width="0.127" layer="39"/>
+<wire x1="11.43" y1="-5.842" x2="-0.254" y2="-5.842" width="0.127" layer="39"/>
+<wire x1="-0.254" y1="-5.842" x2="-0.254" y2="-4.699" width="0.127" layer="39"/>
+<wire x1="-0.254" y1="4.699" x2="-0.254" y2="5.842" width="0.127" layer="39"/>
 </package>
 <package name="ULTRAFIT_3CIRC_VERTCLIP">
 <description>&lt;b&gt;Molex Ultra-Fit Vertical Header, Solder Clip, 3.50mm Pitch, Single Row, 3 Circuits</description>
@@ -11497,6 +11497,10 @@ diameter 5 mm, grid 2.54 mm</description>
 <rectangle x1="-2.5999" y1="4.95" x2="-2.1999" y2="6.1001" layer="51"/>
 <rectangle x1="-3.4" y1="4.95" x2="-3" y2="6.1001" layer="51"/>
 <rectangle x1="-4.1999" y1="4.95" x2="-3.8001" y2="6.1001" layer="51"/>
+<wire x1="-7.112" y1="7.112" x2="7.112" y2="7.112" width="0.127" layer="39"/>
+<wire x1="7.112" y1="7.112" x2="7.112" y2="-7.112" width="0.127" layer="39"/>
+<wire x1="7.112" y1="-7.112" x2="-7.112" y2="-7.112" width="0.127" layer="39"/>
+<wire x1="-7.112" y1="-7.112" x2="-7.112" y2="7.112" width="0.127" layer="39"/>
 </package>
 <package name="SOIC8">
 <description>&lt;b&gt;Small Outline IC - SOIC8&lt;/b&gt;</description>
@@ -11526,6 +11530,10 @@ diameter 5 mm, grid 2.54 mm</description>
 <rectangle x1="-0.88" y1="2" x2="-0.39" y2="3.1" layer="51"/>
 <rectangle x1="-2.15" y1="2" x2="-1.66" y2="3.1" layer="51"/>
 <circle x="-1.905" y="-0.889" radius="0.254" width="0.127" layer="21"/>
+<wire x1="-2.54" y1="4.318" x2="2.54" y2="4.318" width="0.127" layer="39"/>
+<wire x1="2.54" y1="4.318" x2="2.54" y2="-4.318" width="0.127" layer="39"/>
+<wire x1="2.54" y1="-4.318" x2="-2.54" y2="-4.318" width="0.127" layer="39"/>
+<wire x1="-2.54" y1="-4.318" x2="-2.54" y2="4.318" width="0.127" layer="39"/>
 </package>
 <package name="TO252-3-11">
 <description>&lt;B&gt;TO252-3-11</description>
@@ -11541,14 +11549,14 @@ diameter 5 mm, grid 2.54 mm</description>
 <rectangle x1="1.905" y1="-3.9" x2="2.655" y2="-3.4" layer="21"/>
 <rectangle x1="-2.655" y1="-3.9" x2="-1.905" y2="-3.4" layer="21"/>
 <rectangle x1="-2.7" y1="0.85" x2="2.7" y2="6.1" layer="51"/>
-<wire x1="-3.302" y1="-3.048" x2="3.302" y2="-3.048" width="0.127" layer="39"/>
-<wire x1="3.302" y1="-3.048" x2="3.302" y2="-4.826" width="0.127" layer="39"/>
+<wire x1="3.302" y1="-1.524" x2="3.302" y2="-4.826" width="0.127" layer="39"/>
 <wire x1="3.302" y1="-4.826" x2="-3.302" y2="-4.826" width="0.127" layer="39"/>
-<wire x1="-3.302" y1="-4.826" x2="-3.302" y2="-3.048" width="0.127" layer="39"/>
+<wire x1="-3.302" y1="-4.826" x2="-3.302" y2="-1.524" width="0.127" layer="39"/>
 <wire x1="-3.556" y1="6.858" x2="3.556" y2="6.858" width="0.127" layer="39"/>
-<wire x1="3.556" y1="6.858" x2="3.556" y2="5.588" width="0.127" layer="39"/>
-<wire x1="3.556" y1="5.588" x2="-3.556" y2="5.588" width="0.127" layer="39"/>
-<wire x1="-3.556" y1="5.588" x2="-3.556" y2="6.858" width="0.127" layer="39"/>
+<wire x1="3.556" y1="6.858" x2="3.556" y2="-1.524" width="0.127" layer="39"/>
+<wire x1="3.556" y1="-1.524" x2="3.302" y2="-1.524" width="0.127" layer="39"/>
+<wire x1="-3.302" y1="-1.524" x2="-3.556" y2="-1.524" width="0.127" layer="39"/>
+<wire x1="-3.556" y1="-1.524" x2="-3.556" y2="6.858" width="0.127" layer="39"/>
 </package>
 <package name="EDP_MODULE">
 <description>EDP (R-PDSS-T5) Texas Instruments Module</description>
@@ -11625,6 +11633,10 @@ diameter 5 mm, grid 2.54 mm</description>
 <rectangle x1="0.335" y1="-4.06" x2="0.935" y2="-3.49" layer="51"/>
 <text x="-2" y="-3.1" size="1.016" layer="25" rot="R90">&gt;NAME</text>
 <text x="2" y="-3.1" size="1.016" layer="27" rot="R90" align="top-left">&gt;VALUE</text>
+<wire x1="-2.032" y1="5.08" x2="2.032" y2="5.08" width="0.127" layer="39"/>
+<wire x1="2.032" y1="5.08" x2="2.032" y2="-5.08" width="0.127" layer="39"/>
+<wire x1="2.032" y1="-5.08" x2="-2.032" y2="-5.08" width="0.127" layer="39"/>
+<wire x1="-2.032" y1="-5.08" x2="-2.032" y2="5.08" width="0.127" layer="39"/>
 </package>
 <package name="RPI_THRUHOLE">
 <description>&lt;b&gt;PIN HEADER&lt;/b&gt; - 2.54</description>
@@ -12198,6 +12210,10 @@ diameter 5 mm, grid 2.54 mm</description>
 <rectangle x1="21.336" y1="-1.524" x2="21.844" y2="-1.016" layer="52"/>
 <rectangle x1="23.876" y1="1.016" x2="24.384" y2="1.524" layer="52"/>
 <rectangle x1="23.876" y1="-1.524" x2="24.384" y2="-1.016" layer="52"/>
+<wire x1="-25.4" y1="4.064" x2="25.4" y2="4.064" width="0.0508" layer="40"/>
+<wire x1="25.4" y1="4.064" x2="25.4" y2="-4.064" width="0.0508" layer="40"/>
+<wire x1="25.4" y1="-4.064" x2="-25.4" y2="-4.064" width="0.0508" layer="40"/>
+<wire x1="-25.4" y1="-4.064" x2="-25.4" y2="4.064" width="0.0508" layer="40"/>
 </package>
 <package name="FCI-10103594-0001LF">
 <description>&lt;b&gt;FCI 10103594-0001LF RA SMD USB Micro Type B Receptable</description>
@@ -12231,10 +12247,18 @@ diameter 5 mm, grid 2.54 mm</description>
 <wire x1="-3.5" y1="-2.05" x2="-3.5" y2="2.05" width="0.127" layer="21"/>
 <rectangle x1="-3.8" y1="-0.3" x2="-3.5" y2="0.3" layer="51"/>
 <rectangle x1="3.5" y1="-0.3" x2="3.8" y2="0.3" layer="51"/>
-<wire x1="-4" y1="2.55" x2="4" y2="2.55" width="0.127" layer="39"/>
-<wire x1="4" y1="2.55" x2="4" y2="-2.55" width="0.127" layer="39"/>
-<wire x1="4" y1="-2.55" x2="-4" y2="-2.55" width="0.127" layer="39"/>
-<wire x1="-4" y1="-2.55" x2="-4" y2="2.55" width="0.127" layer="39"/>
+<wire x1="-3.556" y1="2.55" x2="3.556" y2="2.55" width="0.127" layer="39"/>
+<wire x1="3.556" y1="2.55" x2="3.556" y2="1.016" width="0.127" layer="39"/>
+<wire x1="3.556" y1="1.016" x2="5.08" y2="1.016" width="0.127" layer="39"/>
+<wire x1="5.08" y1="1.016" x2="5.08" y2="-1.016" width="0.127" layer="39"/>
+<wire x1="5.08" y1="-1.016" x2="3.556" y2="-1.016" width="0.127" layer="39"/>
+<wire x1="3.556" y1="-1.016" x2="3.556" y2="-2.55" width="0.127" layer="39"/>
+<wire x1="3.556" y1="-2.55" x2="-3.556" y2="-2.55" width="0.127" layer="39"/>
+<wire x1="-3.556" y1="-2.55" x2="-3.556" y2="-1.016" width="0.127" layer="39"/>
+<wire x1="-3.556" y1="-1.016" x2="-5.08" y2="-1.016" width="0.127" layer="39"/>
+<wire x1="-5.08" y1="-1.016" x2="-5.08" y2="1.016" width="0.127" layer="39"/>
+<wire x1="-5.08" y1="1.016" x2="-3.556" y2="1.016" width="0.127" layer="39"/>
+<wire x1="-3.556" y1="1.016" x2="-3.556" y2="2.55" width="0.127" layer="39"/>
 </package>
 <package name="MA-505">
 <smd name="1" x="-5.55" y="0" dx="4.1" dy="5.6" layer="1"/>
@@ -12282,10 +12306,10 @@ diameter 5 mm, grid 2.54 mm</description>
 <text x="-2.25" y="-2.75" size="1.016" layer="27" font="vector">&gt;VALUE</text>
 <rectangle x1="-2.3" y1="-0.815" x2="-1.54" y2="0.815" layer="51"/>
 <rectangle x1="1.54" y1="-0.815" x2="2.3" y2="0.815" layer="51"/>
-<wire x1="-3.5" y1="1.5" x2="3.5" y2="1.5" width="0.127" layer="39"/>
-<wire x1="3.5" y1="1.5" x2="3.5" y2="-1.5" width="0.127" layer="39"/>
-<wire x1="3.5" y1="-1.5" x2="-3.5" y2="-1.5" width="0.127" layer="39"/>
-<wire x1="-3.5" y1="-1.5" x2="-3.5" y2="1.5" width="0.127" layer="39"/>
+<wire x1="-3.754" y1="1.5" x2="3.754" y2="1.5" width="0.127" layer="39"/>
+<wire x1="3.754" y1="1.5" x2="3.754" y2="-1.5" width="0.127" layer="39"/>
+<wire x1="3.754" y1="-1.5" x2="-3.754" y2="-1.5" width="0.127" layer="39"/>
+<wire x1="-3.754" y1="-1.5" x2="-3.754" y2="1.5" width="0.127" layer="39"/>
 </package>
 <package name="SOD123">
 <description>&lt;b&gt;SOD123</description>
@@ -12302,10 +12326,10 @@ diameter 5 mm, grid 2.54 mm</description>
 <wire x1="0.6" y1="0.6" x2="0.6" y2="-0.6" width="0.254" layer="21"/>
 <wire x1="0.6" y1="0.6" x2="-0.6" y2="0" width="0.254" layer="21"/>
 <wire x1="0.6" y1="-0.6" x2="-0.6" y2="0" width="0.254" layer="21"/>
-<wire x1="-2.3" y1="0.9" x2="2.3" y2="0.9" width="0.127" layer="39"/>
-<wire x1="2.3" y1="0.9" x2="2.3" y2="-0.9" width="0.127" layer="39"/>
-<wire x1="2.3" y1="-0.9" x2="-2.3" y2="-0.9" width="0.127" layer="39"/>
-<wire x1="-2.3" y1="-0.9" x2="-2.3" y2="0.9" width="0.127" layer="39"/>
+<wire x1="-2.808" y1="0.9" x2="2.808" y2="0.9" width="0.127" layer="39"/>
+<wire x1="2.808" y1="0.9" x2="2.808" y2="-0.9" width="0.127" layer="39"/>
+<wire x1="2.808" y1="-0.9" x2="-2.808" y2="-0.9" width="0.127" layer="39"/>
+<wire x1="-2.808" y1="-0.9" x2="-2.808" y2="0.9" width="0.127" layer="39"/>
 <text x="-2.54" y="1.27" size="1.016" layer="25" font="vector">&gt;NAME</text>
 <text x="-2.54" y="-1.27" size="1.016" layer="27" font="vector" align="top-left">&gt;VALUE</text>
 </package>
@@ -12342,8 +12366,13 @@ diameter 5 mm, grid 2.54 mm</description>
 <rectangle x1="-1.75" y1="-1.1" x2="-0.95" y2="-0.315" layer="51"/>
 <wire x1="0" y1="1.4" x2="-1.6" y2="-0.2" width="0.127" layer="21"/>
 <text x="-2" y="1.75" size="1.016" layer="21" font="vector">&gt;NAME</text>
+<wire x1="-2.794" y1="1.524" x2="2.794" y2="1.524" width="0.127" layer="39"/>
+<wire x1="2.794" y1="1.524" x2="2.794" y2="-1.524" width="0.127" layer="39"/>
+<wire x1="2.794" y1="-1.524" x2="-2.794" y2="-1.524" width="0.127" layer="39"/>
+<wire x1="-2.794" y1="-1.524" x2="-2.794" y2="1.524" width="0.127" layer="39"/>
 </package>
 <package name="TSSOP14">
+<description>&lt;b&gt;TSSOP14</description>
 <wire x1="-0.6" y1="2.4484" x2="0.6" y2="2.4484" width="0.2032" layer="21" curve="180" cap="flat"/>
 <wire x1="-2.1484" y1="-2.4484" x2="2.1484" y2="-2.4484" width="0.2032" layer="21"/>
 <wire x1="2.1484" y1="-2.4484" x2="2.1484" y2="2.4484" width="0.2032" layer="21"/>
@@ -12380,13 +12409,9 @@ diameter 5 mm, grid 2.54 mm</description>
 <rectangle x1="2.25" y1="1.15" x2="3.2" y2="1.45" layer="51"/>
 <rectangle x1="2.25" y1="1.8" x2="3.2" y2="2.1" layer="51"/>
 <circle x="-1.651" y="1.95" radius="0.254" width="0.127" layer="21"/>
-<wire x1="-3.81" y1="2.54" x2="-2.032" y2="2.54" width="0.127" layer="39"/>
-<wire x1="-2.032" y1="2.54" x2="-2.032" y2="-2.54" width="0.127" layer="39"/>
-<wire x1="-2.032" y1="-2.54" x2="-3.81" y2="-2.54" width="0.127" layer="39"/>
+<wire x1="-3.81" y1="2.54" x2="3.81" y2="2.54" width="0.127" layer="39"/>
+<wire x1="3.81" y1="-2.54" x2="-3.81" y2="-2.54" width="0.127" layer="39"/>
 <wire x1="-3.81" y1="-2.54" x2="-3.81" y2="2.54" width="0.127" layer="39"/>
-<wire x1="3.81" y1="2.54" x2="2.032" y2="2.54" width="0.127" layer="39"/>
-<wire x1="2.032" y1="2.54" x2="2.032" y2="-2.54" width="0.127" layer="39"/>
-<wire x1="2.032" y1="-2.54" x2="3.81" y2="-2.54" width="0.127" layer="39"/>
 <wire x1="3.81" y1="-2.54" x2="3.81" y2="2.54" width="0.127" layer="39"/>
 </package>
 <package name="SOT23-3">
