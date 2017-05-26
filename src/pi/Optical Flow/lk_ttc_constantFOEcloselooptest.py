@@ -25,6 +25,7 @@ import spidev
 import cv2
 from common import anorm2, draw_str
 from time import clock
+from time import sleep
 import video
 import imutils
 from picamera.array import PiRGBArray
@@ -34,6 +35,8 @@ import math
 ##import matplotlib.pyplot as plt
 import RPi.GPIO as GPIO
 import sys
+import pypid
+import atexit
 
 CS = 18
 
@@ -46,6 +49,8 @@ GPIO.setup(CS,GPIO.OUT)
 SEND_PWM = [1]
 SEND_SERVO = [2]
 SEND_KILL = [3]
+
+DELAY = .001
 
 width = 224
 height = 128
@@ -81,24 +86,34 @@ ttcMin = 7
 def sendPWM(pwm):
     GPIO.output(CS,GPIO.LOW)
     val1 = spi.xfer(SEND_PWM)
+    sleep(DELAY)
+    GPIO.output(CS,GPIO.HIGH)
+    GPIO.output(CS,GPIO.LOW)
     val2 = spi.xfer(pwm)
+    sleep(DELAY)
+    GPIO.output(CS,GPIO.HIGH)
     print(val1)
     print(val2)
-    GPIO.output(CS,GPIO.HIGH)
 
 def sendServoAngle(servo):
-    GPIO.output(CS,GPIO.LOW);
+    GPIO.output(CS,GPIO.LOW)
     val1 = spi.xfer(SEND_SERVO)
+    sleep(DELAY)
+    GPIO.output(CS,GPIO.HIGH) 
+    GPIO.output(CS,GPIO.LOW)
     val2 = spi.xfer(servo)
+    sleep(DELAY)
+    GPIO.output(CS,GPIO.HIGH)
     print(val1)
     print(val2)
-    GPIO.output(CS,GPIO.HIGH)
-
+    
 def sendKill():
     GPIO.output(CS,GPIO.LOW);
     val1 = spi.xfer(SEND_KILL)
-    print("Kill")
     GPIO.output(CS,GPIO.HIGH)
+    print("Kill")
+
+
 
 class App:  
 
@@ -180,7 +195,7 @@ class App:
                     new_tracks.append(tr)
                     
                     #can be used to draw circles at each tracked point
-                    #cv2.circle(vis, (x, y), 2, (0, 255, 0), -1)
+##                    cv2.circle(vis, (x, y), 2, (0, 255, 0), -1)
 
                     #TTC (magnitude of displacement)/(velocity of displacement)
                     d = math.sqrt((self.foe[0]-x)*(self.foe[0]-x)+(self.foe[1]-y)*(self.foe[1]-y))
@@ -229,53 +244,34 @@ class App:
                 elif xAvg < 112:
                     #draw_str(vis, (20, 20), 'RIGHT')
                     cv2.putText(vis,'RIGHT', (5,80), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-                    temp = int((90*(xAvg/112) + 90))
+                    ##in this elif desired xAvg is 0
+                    xDes = 0
+                    xErr = xAvg - xDes
+                    temp = int(((90.0*(xErr/224.0) + 90)))
                 else:
                     #draw_str(vis, (20, 20), 'LEFT')
                     cv2.putText(vis,'LEFT', (5,80), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-##                    temp = int((90 + (xAvg-224)/2))
-                    temp = int(90*(xAvg - 112)/112)
+                    ##in this elif desired xAvg is 224
+                    xDes = 224
+                    xErr = xAvg - xDes                     
+                    temp = int((90 + 90.0*xErr/224.0))
                     
-
                 if temp > 130: 
                     temp = 130
                 elif temp < 50:
                     temp = 50
                 angle = [temp]
-##                angle = [int(xAvg)]
-
-
-                
 
                 temp1 = int(164*ttcTotalAvg/10)
                 if ttcTotalAvg == 0:
-                    temp1 = 164
-                if temp1 < 4:
-                    temp1 = 4
-
+                    temp1 = 100
+                elif temp1 < 20:
+                    temp1 = 20
 
                 pwm = [temp1]
                 
-##                if ttcTotalAvg == 0:
-##                    cv2.putText(vis,'NOTHING', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-##                    #draw_str(vis, (20, 20), 'NOTHING')
-##                    pwm = [34]
-##                elif ttcTotalAvg < 3:
-##                    cv2.putText(vis,'MOVE NORMALLY', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-##                    #draw_str(vis, (20, 20), 'MOVE BITCH')
-##                    pwm = [30]
-##                else:
-##                    cv2.putText(vis,'MOVE QUICKLY', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-##                    #draw_str(vis, (20, 20), 'MOVE SLIGHTLY')
-##                    pwm = [32]
-
-
                 sendPWM(pwm)
                 sendServoAngle(angle)
-                    
-
-                #Draw the FOE (not necessary)
-                cv2.circle(vis, (self.foe[0], self.foe[1]), 2, (0, 0, 255), -1)
 
                 #Create data for the plot
                 #!= 0 filters out data when there is nothing to track
@@ -297,7 +293,7 @@ class App:
                     cv2.circle(mask, (x, y), 5, 0, -1)
                     
                 #get new features
-                cv2.imshow('mask',mask)
+##                cv2.imshow('mask',mask)
                 p = cv2.goodFeaturesToTrack(frame_gray, mask = mask, **feature_params)
                 
                 if p is not None:
@@ -312,8 +308,8 @@ class App:
             self.prev_time = self.time
 
             #Display the video
-            cv2.imshow('lk_track', vis)
-            cv2.imshow('CLAHE (8,8)',frame_gray)
+##            cv2.imshow('lk_track', vis)
+##            cv2.imshow('CLAHE (8,8)',frame_gray)
 
             #UNCOMMENT TO WRITE FRAME TO VIDEO
             video1.write(vis)
@@ -330,12 +326,12 @@ class App:
                 for i in range(0,10):
                     sendKill()
                 #video1.release()
-                plt.axis([0 , self.inc,0, 15])
-                plt.ylabel('Time to Contact (s)')
-                plt.xlabel('time')
-                plt.title('Time to Contact')
-                plt.plot(self.runCount,self.data)
-                plt.show()
+                    plt.axis([0 , self.inc,0, 15])
+                    plt.ylabel('Time to Contact (s)')
+                    plt.xlabel('time')
+                    plt.title('Time to Contact')
+                    plt.plot(self.runCount,self.data)
+                    plt.show()
                 break
 
 def main():
