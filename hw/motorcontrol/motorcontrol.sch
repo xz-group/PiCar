@@ -11310,8 +11310,8 @@ diameter 5 mm, grid 2.54 mm</description>
 <wire x1="5.3" y1="2.42" x2="5.3" y2="-2.93" width="0.254" layer="21"/>
 <wire x1="5.3" y1="-2.93" x2="-5.3" y2="-2.93" width="0.254" layer="21"/>
 <wire x1="-5.3" y1="-2.93" x2="-5.3" y2="2.42" width="0.254" layer="21"/>
-<text x="-1.75" y="-3.5" size="1.27" layer="21" rot="SR90" align="center">1</text>
-<text x="5.75" y="0" size="1.016" layer="25" rot="R90" align="top-center">&gt;NAME</text>
+<text x="-1.75" y="-3.5" size="1.27" layer="21" font="vector" rot="SR90" align="center">1</text>
+<text x="5.75" y="0" size="1.016" layer="25" font="vector" rot="R90" align="top-center">&gt;NAME</text>
 <wire x1="-3.645" y1="2.42" x2="-3.645" y2="5.48" width="0.254" layer="51"/>
 <wire x1="-3.645" y1="5.48" x2="3.645" y2="5.48" width="0.254" layer="51"/>
 <wire x1="3.645" y1="5.48" x2="3.645" y2="2.42" width="0.254" layer="51"/>
@@ -11389,8 +11389,8 @@ diameter 5 mm, grid 2.54 mm</description>
 <wire x1="7.05" y1="2.42" x2="7.05" y2="-2.93" width="0.254" layer="21"/>
 <wire x1="7.05" y1="-2.93" x2="-7.05" y2="-2.93" width="0.254" layer="21"/>
 <wire x1="-7.05" y1="-2.93" x2="-7.05" y2="2.42" width="0.254" layer="21"/>
-<text x="-3.5" y="-3.5" size="1.27" layer="21" rot="SR90" align="center">1</text>
-<text x="7.5" y="0" size="1.016" layer="25" rot="R90" align="top-center">&gt;NAME</text>
+<text x="-3.5" y="-3.5" size="1.27" layer="21" font="vector" rot="SR90" align="center">1</text>
+<text x="7.5" y="0" size="1.016" layer="25" font="vector" rot="R90" align="top-center">&gt;NAME</text>
 <wire x1="-3.645" y1="2.42" x2="-3.645" y2="5.48" width="0.254" layer="51"/>
 <wire x1="-3.645" y1="5.48" x2="3.645" y2="5.48" width="0.254" layer="51"/>
 <wire x1="3.645" y1="5.48" x2="3.645" y2="2.42" width="0.254" layer="51"/>
@@ -11544,8 +11544,8 @@ diameter 5 mm, grid 2.54 mm</description>
 <wire x1="3.56" y1="5.1" x2="3.56" y2="-1.1" width="0.127" layer="21"/>
 <wire x1="3.56" y1="-1.1" x2="-3.44" y2="-1.1" width="0.127" layer="21"/>
 <wire x1="-3.44" y1="-1.1" x2="-3.44" y2="5.1" width="0.127" layer="21"/>
-<text x="-4" y="-1" size="1.016" layer="25" rot="R90">&gt;Name</text>
-<text x="5" y="-1" size="1.016" layer="27" rot="R90">&gt;Value</text>
+<text x="-4" y="-1" size="1.016" layer="25" font="vector" rot="R90">&gt;Name</text>
+<text x="5" y="-1" size="1.016" layer="27" font="vector" rot="R90">&gt;Value</text>
 <rectangle x1="1.905" y1="-3.9" x2="2.655" y2="-3.4" layer="21"/>
 <rectangle x1="-2.655" y1="-3.9" x2="-1.905" y2="-3.4" layer="21"/>
 <rectangle x1="-2.7" y1="0.85" x2="2.7" y2="6.1" layer="51"/>
@@ -11569,9 +11569,9 @@ diameter 5 mm, grid 2.54 mm</description>
 <wire x1="5.3" y1="4.4" x2="5.3" y2="-5.04" width="0.127" layer="39"/>
 <wire x1="5.3" y1="-5.04" x2="-5.3" y2="-5.04" width="0.127" layer="39"/>
 <wire x1="-5.3" y1="-5.04" x2="-5.3" y2="4.4" width="0.127" layer="39"/>
-<text x="-5.08" y="3.302" size="1.016" layer="25">&gt;NAME</text>
-<text x="-5.08" y="-3.81" size="1.016" layer="27">&gt;VALUE</text>
-<text x="4.826" y="0" size="1.016" layer="21" align="center">1</text>
+<text x="-5.08" y="3.302" size="1.016" layer="25" font="vector">&gt;NAME</text>
+<text x="-5.08" y="-3.81" size="1.016" layer="27" font="vector">&gt;VALUE</text>
+<text x="4.826" y="0" size="1.016" layer="21" font="vector" align="center">1</text>
 <wire x1="-5.205" y1="2.86" x2="5.205" y2="2.86" width="0.127" layer="21"/>
 <wire x1="5.205" y1="2.86" x2="5.205" y2="1.27" width="0.127" layer="21"/>
 <wire x1="5.205" y1="1.27" x2="-5.205" y2="1.27" width="0.127" layer="21"/>
@@ -11624,15 +11624,15 @@ diameter 5 mm, grid 2.54 mm</description>
 <wire x1="1.835" y1="-3.1" x2="-1.135" y2="-3.1" width="0.127" layer="21"/>
 <wire x1="-1.135" y1="-3.1" x2="-1.835" y2="-3.1" width="0.127" layer="21"/>
 <wire x1="-1.835" y1="-3.1" x2="-1.835" y2="-2.4" width="0.127" layer="21"/>
-<text x="-0.635" y="-2.8" size="0.8128" layer="21" align="bottom-center">1</text>
+<text x="-0.635" y="-2.8" size="0.8128" layer="21" font="vector" align="bottom-center">1</text>
 <wire x1="-1.835" y1="-2.4" x2="-1.835" y2="3.1" width="0.127" layer="21"/>
 <wire x1="-1.835" y1="-2.4" x2="-1.135" y2="-3.1" width="0.127" layer="21"/>
 <rectangle x1="0.335" y1="3.49" x2="0.935" y2="4.06" layer="51"/>
 <rectangle x1="-0.935" y1="3.49" x2="-0.335" y2="4.06" layer="51"/>
 <rectangle x1="-0.935" y1="-4.06" x2="-0.335" y2="-3.49" layer="51"/>
 <rectangle x1="0.335" y1="-4.06" x2="0.935" y2="-3.49" layer="51"/>
-<text x="-2" y="-3.1" size="1.016" layer="25" rot="R90">&gt;NAME</text>
-<text x="2" y="-3.1" size="1.016" layer="27" rot="R90" align="top-left">&gt;VALUE</text>
+<text x="-2" y="-3.1" size="1.016" layer="25" font="vector" rot="R90">&gt;NAME</text>
+<text x="2" y="-3.1" size="1.016" layer="27" font="vector" rot="R90" align="top-left">&gt;VALUE</text>
 <wire x1="-2.032" y1="5.08" x2="2.032" y2="5.08" width="0.127" layer="39"/>
 <wire x1="2.032" y1="5.08" x2="2.032" y2="-5.08" width="0.127" layer="39"/>
 <wire x1="2.032" y1="-5.08" x2="-2.032" y2="-5.08" width="0.127" layer="39"/>
@@ -12365,7 +12365,7 @@ diameter 5 mm, grid 2.54 mm</description>
 <rectangle x1="-1.75" y1="0.315" x2="-0.95" y2="1.1" layer="51"/>
 <rectangle x1="-1.75" y1="-1.1" x2="-0.95" y2="-0.315" layer="51"/>
 <wire x1="0" y1="1.4" x2="-1.6" y2="-0.2" width="0.127" layer="21"/>
-<text x="-2" y="1.75" size="1.016" layer="21" font="vector">&gt;NAME</text>
+<text x="-2" y="1.75" size="1.016" layer="25" font="vector">&gt;NAME</text>
 <wire x1="-2.794" y1="1.524" x2="2.794" y2="1.524" width="0.127" layer="39"/>
 <wire x1="2.794" y1="1.524" x2="2.794" y2="-1.524" width="0.127" layer="39"/>
 <wire x1="2.794" y1="-1.524" x2="-2.794" y2="-1.524" width="0.127" layer="39"/>
@@ -14499,27 +14499,27 @@ WashU ESE Dept - May 2017</text>
 <wire x1="35.56" y1="119.38" x2="27.94" y2="119.38" width="0.1524" layer="91"/>
 <junction x="27.94" y="119.38"/>
 <wire x1="35.56" y1="157.48" x2="27.94" y2="157.48" width="0.1524" layer="91"/>
-<wire x1="27.94" y1="157.48" x2="27.94" y2="119.38" width="0.1524" layer="91"/>
+<wire x1="27.94" y1="157.48" x2="27.94" y2="137.16" width="0.1524" layer="91"/>
 <pinref part="J1" gate="A" pin="9"/>
 <pinref part="J1" gate="A" pin="39"/>
+<pinref part="J1" gate="A" pin="25"/>
+<wire x1="27.94" y1="137.16" x2="27.94" y2="119.38" width="0.1524" layer="91"/>
+<wire x1="35.56" y1="137.16" x2="27.94" y2="137.16" width="0.1524" layer="91"/>
+<junction x="27.94" y="137.16"/>
 </segment>
 <segment>
 <pinref part="GND53" gate="1" pin="GND"/>
-<wire x1="43.18" y1="162.56" x2="50.8" y2="162.56" width="0.1524" layer="91"/>
-<wire x1="50.8" y1="162.56" x2="50.8" y2="152.4" width="0.1524" layer="91"/>
 <wire x1="50.8" y1="152.4" x2="50.8" y2="144.78" width="0.1524" layer="91"/>
 <wire x1="50.8" y1="144.78" x2="50.8" y2="132.08" width="0.1524" layer="91"/>
 <wire x1="50.8" y1="132.08" x2="50.8" y2="127" width="0.1524" layer="91"/>
 <wire x1="50.8" y1="127" x2="50.8" y2="114.3" width="0.1524" layer="91"/>
 <wire x1="43.18" y1="152.4" x2="50.8" y2="152.4" width="0.1524" layer="91"/>
-<junction x="50.8" y="152.4"/>
 <wire x1="43.18" y1="144.78" x2="50.8" y2="144.78" width="0.1524" layer="91"/>
 <junction x="50.8" y="144.78"/>
 <wire x1="43.18" y1="132.08" x2="50.8" y2="132.08" width="0.1524" layer="91"/>
 <junction x="50.8" y="132.08"/>
 <wire x1="43.18" y1="127" x2="50.8" y2="127" width="0.1524" layer="91"/>
 <junction x="50.8" y="127"/>
-<pinref part="J1" gate="A" pin="6"/>
 <pinref part="J1" gate="A" pin="14"/>
 <pinref part="J1" gate="A" pin="20"/>
 <pinref part="J1" gate="A" pin="30"/>
@@ -15836,9 +15836,9 @@ WashU ESE Dept - May 2017</text>
 <junction x="248.92" y="185.42"/>
 </segment>
 <segment>
-<pinref part="J1" gate="A" pin="25"/>
-<wire x1="35.56" y1="137.16" x2="12.7" y2="137.16" width="0.1524" layer="91"/>
-<label x="12.7" y="137.16" size="1.778" layer="95"/>
+<pinref part="J1" gate="A" pin="6"/>
+<wire x1="43.18" y1="162.56" x2="60.96" y2="162.56" width="0.1524" layer="91"/>
+<label x="53.34" y="162.56" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="ATMEGAD-" class="0">
