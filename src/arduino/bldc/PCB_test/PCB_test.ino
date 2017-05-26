@@ -1,6 +1,6 @@
-#define IN_1  OCR1A//PWM9 yellow
-#define IN_2  OCR1B//PWM10 orange
-#define IN_3  OCR1C//PWM11 blue
+//#define IN_1  OCR1A//PWM9 yellow
+//#define IN_2  OCR1B//PWM10 orange
+//#define IN_3  OCR1C//PWM11 blue
 
 #define  INH_1 6
 #define  INH_2 12
@@ -17,11 +17,10 @@
 volatile boolean one;
 volatile boolean two;
 volatile boolean three;
-volatile int pwm;
+volatile int pwm=40;
 volatile byte rpmcount = 0;
 volatile boolean DIRECTION;
-
-int HALLSTATE = 0;
+volatile int HALLSTATE;
 
 void pwm91011configure()
 {
@@ -31,7 +30,7 @@ void pwm91011configure()
   //  00 : Channel C disabled D11
   //  01 : Fast PWM 8 bit
   TCCR1A = 1;
-  TCCR1B = 0x02; // Clock mode 8khz and Fast PWM 8 bit. 1:62500Hz  2:7812Hz  3:976Hz 4:244Hz
+  TCCR1B = 0x02; // Clock mode 8khz and Fast PWM 8 bit. 3.9khz
   TCCR1C = 0; // TCCR1C configuration
 }
 
@@ -67,166 +66,170 @@ void pwmSet11(int value)// Set PWM to D11
 void HALL1_FLAG() {
   rpmcount++;
   one = !one;
-  HALLSTATE = (one << 2) & (two << 1) & three;
+  HALLSTATE = one*4 + two *2 + three;
+ // HALLSTATE = (one << 2) & (two << 1) & three;
   switch (HALLSTATE)
   {
     case 1://AC O-Y
       digitalWrite(INH_1, HIGH);
       digitalWrite(INH_2, HIGH);
       digitalWrite(INH_3, LOW);
-      IN_1 = 0;//low
-      IN_2 = pwm;//high
-      IN_3 = 0;//off
+      OCR1A = 0;//low
+      OCR1B = pwm;//high
+      OCR1C = 0;//off
       break;
     case 2:// CB Y-B
       digitalWrite(INH_1, HIGH);
       digitalWrite(INH_2, LOW);
       digitalWrite(INH_3, HIGH);
-      IN_1 = pwm;//high
-      IN_2 = 0;//off
-      IN_3 = 0;//low
+      OCR1A = pwm;//high
+      OCR1B = 0;//off
+      OCR1C = 0;//low
       break;
     case 3://AB O-B
       digitalWrite(INH_1, LOW);
       digitalWrite(INH_2, HIGH);
       digitalWrite(INH_3, HIGH);
-      IN_1 = 0;//off
-      IN_2 = pwm;//high
-      IN_3 = 0;//low
+      OCR1A = 0;//off
+      OCR1B = pwm;//high
+      OCR1C = 0;//low
       break;
     case 4://BA B-O
       digitalWrite(INH_1, LOW);
       digitalWrite(INH_2, HIGH);
       digitalWrite(INH_3, HIGH);
-      IN_1 = 0;//off
-      IN_2 = 0;//low
-      IN_3 = pwm;//high
+      OCR1A = 0;//off
+      OCR1B = 0;//low
+      OCR1C = pwm;//high
       break;
     case 5://BC B-Y
       digitalWrite(INH_1, HIGH);
       digitalWrite(INH_2, LOW);
       digitalWrite(INH_3, HIGH);
-      IN_1 = 0;//low
-      IN_2 = 0;//off
-      IN_3 = pwm;//high
+      OCR1A = 0;//low
+      OCR1B = 0;//off
+      OCR1C = pwm;//high
       break;
     case 6://CA Y-O
       digitalWrite(INH_1, HIGH);
       digitalWrite(INH_2, HIGH);
       digitalWrite(INH_3, LOW);
-      IN_1 = pwm;//high
-      IN_2 = 0;//low
-      IN_3 = 0;//off
+      OCR1A = pwm;//high
+      OCR1B = 0;//low
+      OCR1C = 0;//off
       break;
   }
+  
 }
 void HALL2_FLAG() {
   two = !two;
-  HALLSTATE = (one << 2) & (two << 1) & three;
+  HALLSTATE = one*4 + two *2 + three;
+ // HALLSTATE = (one << 2) & (two << 1) & three;
   switch (HALLSTATE)
   {
     case 1://AC O-Y
       digitalWrite(INH_1, HIGH);
       digitalWrite(INH_2, HIGH);
       digitalWrite(INH_3, LOW);
-      IN_1 = 0;//low
-      IN_2 = pwm;//high
-      IN_3 = 0;//off
+      OCR1A = 0;//low
+      OCR1B = pwm;//high
+      OCR1C = 0;//off
       break;
     case 2:// CB Y-B
       digitalWrite(INH_1, HIGH);
       digitalWrite(INH_2, LOW);
       digitalWrite(INH_3, HIGH);
-      IN_1 = pwm;//high
-      IN_2 = 0;//off
-      IN_3 = 0;//low
+      OCR1A = pwm;//high
+      OCR1B = 0;//off
+      OCR1C = 0;//low
       break;
     case 3://AB O-B
       digitalWrite(INH_1, LOW);
       digitalWrite(INH_2, HIGH);
       digitalWrite(INH_3, HIGH);
-      IN_1 = 0;//off
-      IN_2 = pwm;//high
-      IN_3 = 0;//low
+      OCR1A = 0;//off
+      OCR1B = pwm;//high
+      OCR1C = 0;//low
       break;
     case 4://BA B-O
       digitalWrite(INH_1, LOW);
       digitalWrite(INH_2, HIGH);
       digitalWrite(INH_3, HIGH);
-      IN_1 = 0;//off
-      IN_2 = 0;//low
-      IN_3 = pwm;//high
+      OCR1A = 0;//off
+      OCR1B = 0;//low
+      OCR1C = pwm;//high
       break;
     case 5://BC B-Y
       digitalWrite(INH_1, HIGH);
       digitalWrite(INH_2, LOW);
       digitalWrite(INH_3, HIGH);
-      IN_1 = 0;//low
-      IN_2 = 0;//off
-      IN_3 = pwm;//high
+      OCR1A = 0;//low
+      OCR1B = 0;//off
+      OCR1C = pwm;//high
       break;
     case 6://CA Y-O
       digitalWrite(INH_1, HIGH);
       digitalWrite(INH_2, HIGH);
       digitalWrite(INH_3, LOW);
-      IN_1 = pwm;//high
-      IN_2 = 0;//low
-      IN_3 = 0;//off
+      OCR1A = pwm;//high
+      OCR1B = 0;//low
+      OCR1C = 0;//off
       break;
   }
 }
 void HALL3_FLAG() {
   three = !three;
-  HALLSTATE = (one << 2) & (two << 1) & three;
+  HALLSTATE = one*4 + two *2 + three;
+ // HALLSTATE = (one << 2) & (two << 1) & three;
   switch (HALLSTATE)
   {
     case 1://AC O-Y
       digitalWrite(INH_1, HIGH);
       digitalWrite(INH_2, HIGH);
       digitalWrite(INH_3, LOW);
-      IN_1 = 0;//low
-      IN_2 = pwm;//high
-      IN_3 = 0;//off
+      OCR1A = 0;//low
+      OCR1B = pwm;//high
+      OCR1C = 0;//off
       break;
     case 2:// CB Y-B
       digitalWrite(INH_1, HIGH);
       digitalWrite(INH_2, LOW);
       digitalWrite(INH_3, HIGH);
-      IN_1 = pwm;//high
-      IN_2 = 0;//off
-      IN_3 = 0;//low
+      OCR1A = pwm;//high
+      OCR1B = 0;//off
+      OCR1C = 0;//low
       break;
     case 3://AB O-B
       digitalWrite(INH_1, LOW);
       digitalWrite(INH_2, HIGH);
       digitalWrite(INH_3, HIGH);
-      IN_1 = 0;//off
-      IN_2 = pwm;//high
-      IN_3 = 0;//low
+      OCR1A = 0;//off
+      OCR1B = pwm;//high
+      OCR1C = 0;//low
       break;
     case 4://BA B-O
       digitalWrite(INH_1, LOW);
       digitalWrite(INH_2, HIGH);
       digitalWrite(INH_3, HIGH);
-      IN_1 = 0;//off
-      IN_2 = 0;//low
-      IN_3 = pwm;//high
+      OCR1A = 0;//off
+      OCR1B = 0;//low
+      OCR1C = pwm;//high
       break;
     case 5://BC B-Y
       digitalWrite(INH_1, HIGH);
       digitalWrite(INH_2, LOW);
       digitalWrite(INH_3, HIGH);
-      IN_1 = 0;//low
-      IN_2 = 0;//off
-      IN_3 = pwm;//high
+      OCR1A = 0;//low
+      OCR1B = 0;//off
+      OCR1C = pwm;//high
       break;
     case 6://CA Y-O
       digitalWrite(INH_1, HIGH);
       digitalWrite(INH_2, HIGH);
       digitalWrite(INH_3, LOW);
-      IN_1 = pwm;//high
-      IN_2 = 0;//low
-      IN_3 = 0;//off
+      OCR1A = pwm;//high
+      OCR1B = 0;//low
+      OCR1C = 0;//off
       break;
   }
 }
@@ -253,11 +256,64 @@ void setup() {
   pwmSet9(0);
   pwmSet10(0);
   pwmSet11(0);
+  HALLSTATE = one*4 + two *2 + three;
+ // HALLSTATE = (one << 2) & (two << 1) & three;
+  switch (HALLSTATE)
+  {
+    case 1://AC O-Y
+      digitalWrite(INH_1, HIGH);
+      digitalWrite(INH_2, HIGH);
+      digitalWrite(INH_3, LOW);
+      OCR1A = 0;//low
+      OCR1B = pwm;//high
+      OCR1C = 0;//off
+      break;
+    case 2:// CB Y-B
+      digitalWrite(INH_1, HIGH);
+      digitalWrite(INH_2, LOW);
+      digitalWrite(INH_3, HIGH);
+      OCR1A = pwm;//high
+      OCR1B = 0;//off
+      OCR1C = 0;//low
+      break;
+    case 3://AB O-B
+      digitalWrite(INH_1, LOW);
+      digitalWrite(INH_2, HIGH);
+      digitalWrite(INH_3, HIGH);
+      OCR1A = 0;//off
+      OCR1B = pwm;//high
+      OCR1C = 0;//low
+      break;
+    case 4://BA B-O
+      digitalWrite(INH_1, LOW);
+      digitalWrite(INH_2, HIGH);
+      digitalWrite(INH_3, HIGH);
+      OCR1A = 0;//off
+      OCR1B = 0;//low
+      OCR1C = pwm;//high
+      break;
+    case 5://BC B-Y
+      digitalWrite(INH_1, HIGH);
+      digitalWrite(INH_2, LOW);
+      digitalWrite(INH_3, HIGH);
+      OCR1A = 0;//low
+      OCR1B = 0;//off
+      OCR1C = pwm;//high
+      break;
+    case 6://CA Y-O
+      digitalWrite(INH_1, HIGH);
+      digitalWrite(INH_2, HIGH);
+      digitalWrite(INH_3, LOW);
+      OCR1A = pwm;//high
+      OCR1B = 0;//low
+      OCR1C = 0;//off
+      break;
+  }
+  interrupts();
+  attachInterrupt(digitalPinToInterrupt(0), HALL1_FLAG, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(1), HALL2_FLAG, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(7), HALL3_FLAG, CHANGE);
 
-//  interrupts();
-//  attachInterrupt(digitalPinToInterrupt(0), HALL1_FLAG, CHANGE);
-//  attachInterrupt(digitalPinToInterrupt(1), HALL2_FLAG, CHANGE);
-//  attachInterrupt(digitalPinToInterrupt(7), HALL3_FLAG, CHANGE);
 }
 
 void loop() {
@@ -268,15 +324,18 @@ void loop() {
   //  Serial.print(analogRead(IS_2));
   //  Serial.print("\t");
   //  Serial.println(analogRead(IS_3));
-
-  Serial.print(one);
-  Serial.print(two);
-  Serial.println(three);
-  Serial.println("################");
-
-//  if (millis() > 5000) {
-//    digitalWrite(INH_1, LOW);
-//    digitalWrite(INH_2, LOW);
-//    digitalWrite(INH_3, LOW);
-//  }
+//Serial.println(HALLSTATE);
+//  Serial.print(one);
+//  Serial.print(two);
+//  Serial.println(three);
+//  Serial.println("################");
+//  delay(100);
+  if (millis() > 10000) {
+    digitalWrite(INH_1, LOW);
+    digitalWrite(INH_2, LOW);
+    digitalWrite(INH_3, LOW);
+  }
 }
+
+
+
