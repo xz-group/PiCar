@@ -10,7 +10,7 @@ Usage
 -----
 lk_ttc.py
 ESC to exit
-'X' out plot
+'X' out plo  t
 
 Keys
 ----
@@ -36,7 +36,6 @@ import math
 import RPi.GPIO as GPIO
 import sys
 import pypid
-import atexit
 
 CS = 18
 
@@ -48,9 +47,10 @@ GPIO.setup(CS,GPIO.OUT)
 
 SEND_PWM = [1]
 SEND_SERVO = [2]
-SEND_KILL = [3]
+SEND_BACK = [3]
+SEND_KILL = [4]
 
-DELAY = .001
+DELAY = .0001
 
 width = 224
 height = 128
@@ -83,9 +83,22 @@ FILTER_COUNTS = 10
 ttcAvg = np.arange(FILTER_COUNTS)
 ttcMin = 7
 
+#SPI Methods
 def sendPWM(pwm):
-    GPIO.output(CS,GPIO.LOW)
+    GPIO.output(CS,GPIO.LOW) 
     val1 = spi.xfer(SEND_PWM)
+    sleep(DELAY)
+    GPIO.output(CS,GPIO.HIGH)
+    GPIO.output(CS,GPIO.LOW)
+    val2 = spi.xfer(pwm)
+    sleep(DELAY)
+    GPIO.output(CS,GPIO.HIGH)
+    print(val1)
+    print(val2)
+
+def sendBackPWM(pwm):
+    GPIO.output(CS,GPIO.LOW)
+    val1 = spi.xfer(SEND_BACK)
     sleep(DELAY)
     GPIO.output(CS,GPIO.HIGH)
     GPIO.output(CS,GPIO.LOW)
@@ -112,7 +125,6 @@ def sendKill():
     val1 = spi.xfer(SEND_KILL)
     GPIO.output(CS,GPIO.HIGH)
     print("Kill")
-
 
 
 class App:  
@@ -235,9 +247,11 @@ class App:
                     ttcTotalAvg = ttcTotalAvg/FILTER_COUNTS
 
                 #-----------------------------A PRETEND CONTROL OUTPUT---------------------------------------
-                #Decides which direction to turn based on location of the center of each point
-                #Tells how quickly to turn based on magnitude of the ttc average
+                #Decides which direction to turn based on location of the center of each point                #Tells how quickly to turn based on magnitude of the ttc average
                 temp = 90
+                pVal = 0.75
+                iVal = 0
+                dVal = 0
                 if xAvg == 0:
                     #draw_str(vis, (20, 20), 'STRAIGHT')
                     cv2.putText(vis,'STRAIGHT', (5,80), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
@@ -247,13 +261,15 @@ class App:
                     ##in this elif desired xAvg is 0
                     xDes = 0
                     xErr = xAvg - xDes
+                    xErr = pVal*xErr
                     temp = int(((90.0*(xErr/224.0) + 90)))
                 else:
                     #draw_str(vis, (20, 20), 'LEFT')
                     cv2.putText(vis,'LEFT', (5,80), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
                     ##in this elif desired xAvg is 224
                     xDes = 224
-                    xErr = xAvg - xDes                     
+                    xErr = xAvg - xDes
+                    xErr = pVal*xErr
                     temp = int((90 + 90.0*xErr/224.0))
                     
                 if temp > 130: 
@@ -262,15 +278,20 @@ class App:
                     temp = 50
                 angle = [temp]
 
-                temp1 = int(164*ttcTotalAvg/10)
+                temp1 = int(16*ttcTotalAvg)
                 if ttcTotalAvg == 0:
                     temp1 = 100
                 elif temp1 < 20:
                     temp1 = 20
 
-                pwm = [temp1]
+                pwm = [temp1]                
+                backupVal = 0
+                if ttcTotalAvg > 0.5 or ttcTotalAvg == 0:
+                    sendPWM(pwm)
+                else:
+                    sendBackPWM(pwm)
                 
-                sendPWM(pwm)
+                sendPWM(pwm)                                     
                 sendServoAngle(angle)
 
                 #Create data for the plot
