@@ -43,14 +43,14 @@ spi.open(0,0)
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(SLAVE_SELECT,GPIO.OUT)
+GPIO.setwarnings(False)
 
 SEND_PWM = [1]
 SEND_SERVO = [2]
 SEND_BACK = [3]
 SEND_KILL = [4]
 
-DEFAULT_ANGLE = 75
-
+DEFAULT_ANGLE = 90
 
 DELAY = .0001
 
@@ -261,7 +261,7 @@ class App:
                     new_tracks.append(tr)
                     
                     #can be used to draw circles at each tracked point
-##                    cv2.circle(vis, (x, y), 2, (0, 255, 0), -1)
+                    #cv2.circle(vis, (x, y), 2, (0, 255, 0), -1)
 
                     #TTC (magnitude of displacement)/(velocity of displacement)
                     d = math.sqrt((self.foe[0]-x)*(self.foe[0]-x)+(self.foe[1]-y)*(self.foe[1]-y))
@@ -312,19 +312,15 @@ class App:
                 elif xAvg < 112:
                     #draw_str(vis, (20, 20), 'RIGHT')
                     cv2.putText(vis,'RIGHT', (5,80), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-                    ##in this elif desired xAvg is 0
                     xDes = 0
                     xErr = xAvg - xDes
-##                    xErr = pVal*xErr
                     xErr = updatePID(self,xErr)
                     temp = int(((90.0*(xErr/224.0) + DEFAULT_ANGLE)))
                 else:
                     #draw_str(vis, (20, 20), 'LEFT')
                     cv2.putText(vis,'LEFT', (5,80), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-                    ##in this elif desired xAvg is 224
                     xDes = 224
                     xErr = xAvg - xDes
-##                    xErr = pVal*xErr
                     xErr = updatePID(self,xErr)
                     temp = int((DEFAULT_ANGLE + 90.0*xErr/224.0))
 
