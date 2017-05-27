@@ -102,11 +102,11 @@ void spiHandler()
   {
   case 0:
     dat = SPDR;
-    if (dat == 'c')
-    {
+//    if (dat == 'c')
+//    {
       SPDR = 'a';
       marker++;
-    } 
+//    } 
     break;    
   case 1:
     receiveBuffer[marker-1] = SPDR;

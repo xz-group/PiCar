@@ -47,5 +47,13 @@
 #define MAX_SPEED        20
 #define MAX_SERVO_ANGLE  21
 
+// Current sensing from motor drivers
+#define CURRENT_ONE      22
+#define CURRENT_TWO      23
+#define CURRENT_THREE    24
+
+// Kill Switch
+#define KILL_SWITCH      25
+
 
 #endif
