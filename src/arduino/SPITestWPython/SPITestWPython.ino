@@ -29,18 +29,18 @@ void setup() {
   servo.write(90);
 
   //Uncomment to calibrate the ESC
-//  while(millis() < 6000) {
-//    esc.writeMicroseconds(2000);
-//    Serial.println("high");
-//  }
-//  while(millis() < 12000) {
-//    esc.writeMicroseconds(1000);
-//    Serial.println("low");
-//  }
-//  while(millis() < 18000) {
-//    esc.writeMicroseconds(1500);
-//    Serial.println("middle");
-//  }
+  while(millis() < 6000) {
+    esc.writeMicroseconds(2000);
+    Serial.println("high");
+  }
+  while(millis() < 12000) {
+    esc.writeMicroseconds(1000);
+    Serial.println("low");
+  }
+  while(millis() < 18000) {
+    esc.writeMicroseconds(1500);
+    Serial.println("middle");
+  }
 }
 
 void loop() {
@@ -123,16 +123,16 @@ void spiHandler()
     if(receive == 1) {
       pwm = SPDR;
       SPDR = 6;
-//      Serial.print("pwm: ");
-//      Serial.println(pwm);
+      Serial.print("pwm: ");
+      Serial.println(pwm);
       marker = 0;
       break;
     }
     else if (receive == 2) {
       servoAngle = SPDR;
       SPDR = 7;
-//      Serial.print("servo: ");
-//      Serial.println(servoAngle);
+      Serial.print("servo: ");
+      Serial.println(servoAngle);
       marker = 0;
       break;
     }

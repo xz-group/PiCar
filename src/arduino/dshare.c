@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include "ddefs.h"
 
-int16_t dataArr[ DSHARE_ARR_LENGTH ];
+volatile int16_t dataArr[ DSHARE_ARR_LENGTH ];
 
 uint8_t initDataShare()
 {
