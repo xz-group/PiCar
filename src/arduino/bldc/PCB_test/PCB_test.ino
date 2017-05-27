@@ -146,25 +146,31 @@ void loop()
   uint16_t motorfreq;
 
 #if DEBUG
-  Serial.print(analogRead(IS_1));
-  Serial.print("\t");
-  Serial.print(analogRead(IS_2));
-  Serial.print("\t");
-  Serial.println(analogRead(IS_3));
-  Serial.println(HALLSTATE);
-  Serial.print(one);
-  Serial.print(two);
-  Serial.println(three);
-  Serial.println("################");
-  delay(100);
+  //Serial.print(analogRead(IS_A));
+//  Serial.print("\t");
+//  Serial.print(analogRead(IS_B));
+//  Serial.print("\t");
+//  Serial.println(analogRead(IS_C));
+  //Serial.println(HALLSTATE);
+  //Serial.print(one);
+  //Serial.print(two);
+  //Serial.println(three);
+  Serial.print(OCR1A);
+  Serial.print(" ");
+  Serial.println(TCNT1);
+  //Serial.println("################");
+  //delay(100);
 #endif
 
-  if( currmillis < 8000 )
+  if( currmillis < 30000 )
+  {
+    pwm = 100;
     if( dt > 62 ) // 1/16 s = 62.5 ms
     {
       motorfreq = revcount >> 4; // divide by 16
       revcount = 0;
     }
+  }
   else
     pwm = 0;
 
