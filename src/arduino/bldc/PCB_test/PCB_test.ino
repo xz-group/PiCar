@@ -22,23 +22,16 @@
   C - Yellow
 */
 
-#define setPWMA( value ) ( OCR1A = (uint8_t) value )
-#define setPWMB( value ) ( OCR1B = (uint8_t) value )
-#define setPWMC( value ) ( OCR1C = (uint8_t) value )
+#define setPWMA( value ) ( bitSet( TCCR1A, COM1A1 ); OCR1A = (uint8_t) value )
+#define setPWMB( value ) ( bitSet( TCCR1A, COM1B1 ); OCR1B = (uint8_t) value )
+#define setPWMC( value ) ( bitSet( TCCR1A, COM1C1 ); OCR1C = (uint8_t) value )
+#define stopPWMA()       ( bitClear( TCCR1A, COM1A1 ) )
+#define stopPWMB()       ( bitClear( TCCR1A, COM1B1 ) )
+#define stopPWMC()       ( bitClear( TCCR1A, COM1C1 ) )
 
 
 volatile uint8_t pwm = 0;
 volatile uint16_t revcount = 0;
-
-/*
-  void UPDATE_PWM(){
-
-  //analogRead(IS); Calculate current
-  //if current over limits, shut down; if current ok, update PWM
-  //Calculate  RPM
-  //APPLY PID (REFERNENCE RPM)
-  }
-*/
 
 
 void isrHallSeq()
@@ -52,52 +45,52 @@ void isrHallSeq()
   switch( hallstate )
   {
   case 1: // A->C
-    digitalWrite( INH_A, HIGH );
     digitalWrite( INH_B, LOW );
+    stopPWMB();
+    stopPWMC();
     digitalWrite( INH_C, HIGH );
     setPWMA( pwm );
-    setPWMB( 0 );
-    setPWMC( 0 );
+    digitalWrite( INH_A, HIGH );
     break;
   case 2: // C->B
     digitalWrite( INH_A, LOW );
+    stopPWMA();
+    stopPWMB();
     digitalWrite( INH_B, HIGH );
-    digitalWrite( INH_C, HIGH );
-    setPWMA( 0 );
-    setPWMB( 0 );
     setPWMC( pwm );
+    digitalWrite( INH_C, HIGH );
     break;
   case 3: // A->B
-    digitalWrite( INH_A, HIGH );
-    digitalWrite( INH_B, HIGH );
     digitalWrite( INH_C, LOW );
+    stopPWMC();
+    stopPWMB();
+    digitalWrite( INH_B, HIGH );
     setPWMA( pwm );
-    setPWMB( 0 );
-    setPWMC( 0 );
+    digitalWrite( INH_A, HIGH );
     break;
   case 4: // B->A
-    digitalWrite( INH_A, HIGH );
-    digitalWrite( INH_B, HIGH );
     digitalWrite( INH_C, LOW );
-    setPWMA( 0 );
+    stopPWMC();
+    stopPWMA();
+    digitalWrite( INH_A, HIGH );
     setPWMB( pwm );
-    setPWMC( 0 );
+    digitalWrite( INH_B, HIGH );
     break;
   case 5: // B->C
     digitalWrite( INH_A, LOW );
-    digitalWrite( INH_B, HIGH );
+    stopPWMA();
+    stopPWMC();
     digitalWrite( INH_C, HIGH );
-    setPWMA( 0 );
     setPWMB( pwm );
-    setPWMC( 0 );
+    digitalWrite( INH_B, HIGH );
     break;
   case 6: // C->A
-    digitalWrite( INH_A, HIGH );
     digitalWrite( INH_B, LOW );
-    digitalWrite( INH_C, HIGH );
-    setPWMA( 0 );
-    setPWMB( 0 );
+    stopPWMB();
+    stopPWMA();
+    digitalWrite( INH_A, HIGH );
     setPWMC( pwm );
+    digitalWrite( INH_C, HIGH );
     break;
   }
 }
@@ -111,28 +104,28 @@ void setup()
   Serial.begin( 57600 );
 #endif
 
-  setPWMA( 0 );
-  setPWMB( 0 );
-  setPWMC( 0 );
-
-  // Enable all compare outputs, Fast PWM 8 bit
-  TCCR1A = bit( COM1A1 ) | bit( COM1B1 ) | bit( COM1C1 ) | bit( WGM10 ); // Sec. 14.10.1, Table 14.2
+  // Disable all compare outputs, Fast PWM 8 bit
+  TCCR1A = bit( WGM10 ); // Sec. 14.10.1, Table 14.2
   // Prescaler clock/8, Fast PWM 8 bit -> 7.8KHz PWM
   TCCR1B = bit( WGM12 ) | bit( CS11 ); // Sec. 14.10.3, Tables 14.4-5
   TCCR1C = 0; // Sec. 14.10.5
 
   // Set port B compare pins as output
+  digitalWrite( IN_A, LOW );
+  digitalWrite( IN_B, LOW );
+  digitalWrite( IN_C, LOW );
+
   pinMode( IN_A, OUTPUT );
   pinMode( IN_B, OUTPUT );
   pinMode( IN_C, OUTPUT );
 
-  pinMode( INH_A, OUTPUT );
-  pinMode( INH_B, OUTPUT );
-  pinMode( INH_C, OUTPUT );
-
   digitalWrite( INH_A, LOW );
   digitalWrite( INH_B, LOW );
   digitalWrite( INH_C, LOW );
+
+  pinMode( INH_A, OUTPUT );
+  pinMode( INH_B, OUTPUT );
+  pinMode( INH_C, OUTPUT );
 
   pinMode( HALL_1, INPUT );
   pinMode( HALL_2, INPUT );
