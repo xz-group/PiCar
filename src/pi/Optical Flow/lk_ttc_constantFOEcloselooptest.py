@@ -35,7 +35,6 @@ import math
 ##import matplotlib.pyplot as plt
 import RPi.GPIO as GPIO
 import sys
-import pypid
 
 CS = 18
 
@@ -126,6 +125,48 @@ def sendKill():
     GPIO.output(CS,GPIO.HIGH)
     print("Kill")
 
+#PID Controller
+def updatePID(self, err):
+        """Calculates PID value for given reference feedback
+
+        .. math::
+            u(t) = K_p e(t) + K_i \int_{0}^{t} e(t)dt + K_d {de}/{dt}
+
+        .. figure:: images/pid_1.png
+           :align:   center
+
+           Test PID with Kp=1.2, Ki=1, Kd=0.001 (test_pid.py)
+
+        """
+
+        self.current_time = time.time()
+        delta_time = self.current_time - self.last_time
+        delta_error = err - self.last_error
+
+        iterm = 0
+        
+        sample_time = 0
+
+        if (delta_time >= sample_time):
+            pterm = self.Kp * err
+            iterm += err * delta_time
+
+            if (iterm < -self.windup_guard):
+                iterm = -self.windup_guard
+            elif (iterm > self.windup_guard):
+                iterm = self.windup_guard
+
+            dterm = 0.0
+            if delta_time > 0:
+                dterm = delta_error / delta_time
+
+            # Remember last time and last error for next calculation
+            self.last_time = self.current_time
+            self.last_error = err
+
+            output = pterm + (self.Ki * iterm) + (self.Kd * dterm)
+
+            return output
 
 class App:  
 
@@ -140,6 +181,15 @@ class App:
         self.data = list()
         self.runCount = list()
         self.inc = 0
+
+        #PID Variables
+        self.current_time = 0
+        self.last_time = 0
+        self.Kp = 0.75
+        self.Ki = 0.1
+        self.Kd = 0
+        self.last_error = 0
+        self.windup_guard = 20
 
     def run(self):
         for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
@@ -261,7 +311,8 @@ class App:
                     ##in this elif desired xAvg is 0
                     xDes = 0
                     xErr = xAvg - xDes
-                    xErr = pVal*xErr
+##                    xErr = pVal*xErr
+                    xErr = updatePID(self,xErr)
                     temp = int(((90.0*(xErr/224.0) + 90)))
                 else:
                     #draw_str(vis, (20, 20), 'LEFT')
@@ -269,7 +320,8 @@ class App:
                     ##in this elif desired xAvg is 224
                     xDes = 224
                     xErr = xAvg - xDes
-                    xErr = pVal*xErr
+##                    xErr = pVal*xErr
+                    xErr = updatePID(self,xErr)
                     temp = int((90 + 90.0*xErr/224.0))
                     
                 if temp > 130: 
