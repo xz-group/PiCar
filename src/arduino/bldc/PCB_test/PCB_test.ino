@@ -1,4 +1,4 @@
-#define DEBUG 0
+#define DEBUG 1
 
 #define IN_A 9
 #define IN_B 10
@@ -16,23 +16,19 @@
 #define IS_B A3
 #define IS_C A4
 
-/*
-  A - Orange
-  B - Blue
-  C - Yellow
-*/
-
-#define setPWMA( value ) ( bitSet( TCCR1A, COM1A1 ); OCR1A = (uint8_t) value )
-#define setPWMB( value ) ( bitSet( TCCR1A, COM1B1 ); OCR1B = (uint8_t) value )
-#define setPWMC( value ) ( bitSet( TCCR1A, COM1C1 ); OCR1C = (uint8_t) value )
-#define stopPWMA()       ( bitClear( TCCR1A, COM1A1 ) )
-#define stopPWMB()       ( bitClear( TCCR1A, COM1B1 ) )
-#define stopPWMC()       ( bitClear( TCCR1A, COM1C1 ) )
-
+#define setPWMA( value ) { bitSet( TCCR1A, COM1A1 ); OCR1A = (uint8_t) value; digitalWrite( INH_A, HIGH ); }
+#define setPWMB( value ) { bitSet( TCCR1A, COM1B1 ); OCR1B = (uint8_t) value; digitalWrite( INH_B, HIGH ); }
+#define setPWMC( value ) { bitSet( TCCR1A, COM1C1 ); OCR1C = (uint8_t) value; digitalWrite( INH_C, HIGH ); }
+#define stopPWMA()       { bitClear( TCCR1A, COM1A1 ); digitalWrite( INH_A, HIGH ); }
+#define stopPWMB()       { bitClear( TCCR1A, COM1B1 ); digitalWrite( INH_B, HIGH ); }
+#define stopPWMC()       { bitClear( TCCR1A, COM1C1 ); digitalWrite( INH_C, HIGH ); }
+#define inhibitA()       { digitalWrite( INH_A, LOW ); }
+#define inhibitB()       { digitalWrite( INH_B, LOW ); }
+#define inhibitC()       { digitalWrite( INH_C, LOW ); }
 
 volatile uint8_t pwm = 0;
 volatile uint16_t revcount = 0;
-
+volatile uint8_t motorccw = 1;
 
 void isrHallSeq()
 {
@@ -40,69 +36,75 @@ void isrHallSeq()
     ( digitalRead( HALL_2 ) << 1 ) |
     ( digitalRead( HALL_1 ) << 2 );
 
-  revcount++;
+  if( !motorccw )
+    hallstate = ~hallstate;
 
   switch( hallstate )
   {
   case 1: // A->C
-    digitalWrite( INH_B, LOW );
-    stopPWMB();
+    inhibitB();
     stopPWMC();
-    digitalWrite( INH_C, HIGH );
     setPWMA( pwm );
-    digitalWrite( INH_A, HIGH );
     break;
   case 2: // C->B
-    digitalWrite( INH_A, LOW );
-    stopPWMA();
+    inhibitA();
     stopPWMB();
-    digitalWrite( INH_B, HIGH );
     setPWMC( pwm );
-    digitalWrite( INH_C, HIGH );
     break;
   case 3: // A->B
-    digitalWrite( INH_C, LOW );
-    stopPWMC();
+    inhibitC();
     stopPWMB();
-    digitalWrite( INH_B, HIGH );
     setPWMA( pwm );
-    digitalWrite( INH_A, HIGH );
     break;
   case 4: // B->A
-    digitalWrite( INH_C, LOW );
-    stopPWMC();
+    inhibitC();
     stopPWMA();
-    digitalWrite( INH_A, HIGH );
     setPWMB( pwm );
-    digitalWrite( INH_B, HIGH );
     break;
   case 5: // B->C
-    digitalWrite( INH_A, LOW );
-    stopPWMA();
+    inhibitA();
     stopPWMC();
-    digitalWrite( INH_C, HIGH );
     setPWMB( pwm );
-    digitalWrite( INH_B, HIGH );
     break;
   case 6: // C->A
-    digitalWrite( INH_B, LOW );
-    stopPWMB();
+    inhibitB();
     stopPWMA();
-    digitalWrite( INH_A, HIGH );
     setPWMC( pwm );
-    digitalWrite( INH_C, HIGH );
     break;
   }
+
+  revcount++;
 }
 
 
 void setup()
 {
-  noInterrupts();
-
 #if DEBUG
   Serial.begin( 57600 );
 #endif
+
+  PWMsetup();
+}
+
+void loop()
+{
+  uint64_t currmillis = millis();
+  PWMloop( currmillis );
+}
+
+void PWMsetup()
+{
+  noInterrupts();
+
+  // Initialize global pwm sequence variables
+  pwm = 0;
+  motorccw = 1;
+  revcount = 0;
+
+  // Initialize compare modules. Sec. 14.10.9-11
+  OCR1A = 0;
+  OCR1B = 0;
+  OCR1C = 0;
 
   // Disable all compare outputs, Fast PWM 8 bit
   TCCR1A = bit( WGM10 ); // Sec. 14.10.1, Table 14.2
@@ -138,41 +140,71 @@ void setup()
 }
 
 uint64_t prevmillis;
+int32_t motorfreq = 0;
+int32_t setpoint = 0;
 
-void loop()
+void PWMloop( uint64_t currmillis )
 {
-  uint64_t currmillis = millis();
-  uint64_t dt = currmillis - prevmillis;
-  uint16_t motorfreq;
+  int32_t dt = currmillis - prevmillis;
 
-#if DEBUG
-  //Serial.print(analogRead(IS_A));
-//  Serial.print("\t");
-//  Serial.print(analogRead(IS_B));
-//  Serial.print("\t");
-//  Serial.println(analogRead(IS_C));
-  //Serial.println(HALLSTATE);
-  //Serial.print(one);
-  //Serial.print(two);
-  //Serial.println(three);
-  Serial.print(OCR1A);
-  Serial.print(" ");
-  Serial.println(TCNT1);
-  //Serial.println("################");
-  //delay(100);
-#endif
+  const int32_t accum_max = 20000;
+  const int32_t Kp = 3;
+  const int32_t Ti = 10;
+  int32_t accum = 0;
+  int32_t err = 0;
+  int32_t mypwm = 0;
 
-  if( currmillis < 30000 )
+  // read setpoint from dshare
+  // FIXME
+  if( currmillis < 8000 )
+    setpoint = 150;
+  else
+    setpoint = 0;
+
+  // update motorfreq every 50ms
+  if( dt > 50 )
   {
-    pwm = 100;
-    if( dt > 62 ) // 1/16 s = 62.5 ms
-    {
-      motorfreq = revcount >> 4; // divide by 16
-      revcount = 0;
-    }
+    // revcount increments 12 times per revolution, dt is in milliseconds => motorfreq in Hz
+    noInterrupts();
+    motorfreq = ( revcount * 1000 ) / dt / 12;
+    revcount = 0;
+    interrupts();
+  }
+
+  // update pwm and motorccw using PI controller
+  // FIXME
+  err = setpoint - motorfreq;
+  accum += err;
+  if( accum > accum_max )
+    accum = accum_max;
+  else if( accum < -accum_max )
+    accum = -accum_max;
+
+  mypwm = Kp * ( err + ( accum * dt ) / Ti / 1000 );
+  noInterrupts();
+  if( mypwm < 0 )
+  {
+    mypwm = -mypwm;
+    motorccw = 0;
   }
   else
-    pwm = 0;
+    motorccw = 1;
+  if( mypwm > 255 )
+    pwm = 255;
+  pwm = (uint8_t) mypwm;
+  interrupts();
+
+  // motor is not moving, but it should be, hence hand-trigger sequence switch
+  if( setpoint != 0 && motorfreq == 0 )
+  {
+    noInterrupts();
+    isrHallSeq();
+    interrupts();
+  }
 
   prevmillis = currmillis;
+
+#if DEBUG
+  Serial.print( OCR1A );
+#endif
 }
