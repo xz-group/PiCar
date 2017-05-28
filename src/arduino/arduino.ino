@@ -5,19 +5,15 @@
 #include <SPI.h>
 #include "dshare.h"
 #include "ddefs.h"
-#include "servocontrol.h"
 #include "spi_comm.h"
 #include "timers.h"
 #include "imu.h"
+#include "fp.h"
 
 Servo servo;
 Servo esc;
 
-int SPEED_SCALE = 2.5;
-
-//uint8_t servoAngle;
-//uint8_t pwm;
-
+float SPEED_SCALE = 1;
 int tempAngle = 90;
 int tempPWM = 0;
 
@@ -30,7 +26,7 @@ ISR(TIMER0_COMPA_vect)
   }
   if ( getData( BLDC_DUTY_CYCLE, &tempPWM ) == DSHARE_OK ) {
       //run PID on PWM
-      esc.writeMicroseconds(1500 + SPEED_SCALE*tempPWM);
+      esc.writeMicroseconds(1500 + SPEED_SCALE*(float)tempPWM);
   }
 }
 
@@ -73,8 +69,8 @@ void setup() {
 } 
 
 void loop() {
-  Serial.println(tempAngle);
-  Serial.println(1500 + SPEED_SCALE*tempPWM);
+//  Serial.println(tempAngle);
+  Serial.println(SPEED_SCALE*tempPWM);
 }
 
 
