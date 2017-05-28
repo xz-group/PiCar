@@ -25,13 +25,17 @@ import spidev
 import cv2
 from common import anorm2, draw_str
 from time import clock
+<<<<<<< HEAD
 from time import sleep
+=======
+>>>>>>> f2443c011df13822b67eb927f54238ea22376538
 import video
 import imutils
 from picamera.array import PiRGBArray
 from picamera import PiCamera
 from numpy.linalg import inv
 import math
+<<<<<<< HEAD
 import matplotlib.pyplot as plt
 import RPi.GPIO as GPIO
 import sys
@@ -39,11 +43,19 @@ from sklearn.cluster import DBSCAN
 
 
 SLAVE_SELECT = 18
+=======
+##import matplotlib.pyplot as plt
+import RPi.GPIO as GPIO
+import sys
+
+CS = 18
+>>>>>>> f2443c011df13822b67eb927f54238ea22376538
 
 spi = spidev.SpiDev()
 spi.open(0,0)
 
 GPIO.setmode(GPIO.BCM)
+<<<<<<< HEAD
 GPIO.setup(SLAVE_SELECT,GPIO.OUT)
 
 SEND_PWM = [1]
@@ -55,6 +67,13 @@ DEFAULT_ANGLE = 75
 
 
 DELAY = .0001
+=======
+GPIO.setup(CS,GPIO.OUT)
+
+SEND_PWM = [1]
+SEND_SERVO = [2]
+SEND_KILL = [3]
+>>>>>>> f2443c011df13822b67eb927f54238ea22376538
 
 width = 224
 height = 128
@@ -62,7 +81,11 @@ height = 128
 # initialize the camera and grab a reference to the raw camera capture
 camera = PiCamera()
 camera.resolution = (width, height)
+<<<<<<< HEAD
 camera.framerate = 20
+=======
+camera.framerate = 30
+>>>>>>> f2443c011df13822b67eb927f54238ea22376538
 camera.shutter_speed = 5000
 rawCapture = PiRGBArray(camera, size=(width, height))
 
@@ -83,6 +106,7 @@ feature_params = dict( maxCorners = 500,
                        minDistance = 7,
                        blockSize = 7 )
 
+<<<<<<< HEAD
 FILTER_COUNTS = 5
 ttcAvg = np.arange(FILTER_COUNTS)
 ttcMin = 5
@@ -173,6 +197,33 @@ def updatePID(self, err):
             output = pterm + (self.Ki * iterm) + (self.Kd * dterm)
 
             return output
+=======
+FILTER_COUNTS = 10
+ttcAvg = np.arange(FILTER_COUNTS)
+ttcMin = 7
+
+def sendPWM(pwm):
+    GPIO.output(CS,GPIO.LOW)
+    val1 = spi.xfer(SEND_PWM)
+    val2 = spi.xfer(pwm)
+    print(val1)
+    print(val2)
+    GPIO.output(CS,GPIO.HIGH)
+
+def sendServoAngle(servo):
+    GPIO.output(CS,GPIO.LOW);
+    val1 = spi.xfer(SEND_SERVO)
+    val2 = spi.xfer(servo)
+    print(val1)
+    print(val2)
+    GPIO.output(CS,GPIO.HIGH)
+
+def sendKill():
+    GPIO.output(CS,GPIO.LOW);
+    val1 = spi.xfer(SEND_KILL)
+    print("Kill")
+    GPIO.output(CS,GPIO.HIGH)
+>>>>>>> f2443c011df13822b67eb927f54238ea22376538
 
 class App:  
 
@@ -187,6 +238,7 @@ class App:
         self.data = list()
         self.runCount = list()
         self.inc = 0
+<<<<<<< HEAD
         
         #PID Variables
         self.current_time = 0
@@ -196,6 +248,8 @@ class App:
         self.Kd = 0
         self.last_error = 0
         self.windup_guard = 20
+=======
+>>>>>>> f2443c011df13822b67eb927f54238ea22376538
 
     def run(self):
         for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
@@ -209,6 +263,7 @@ class App:
             
             #To grayscale and equalize
             clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
+<<<<<<< HEAD
             frame_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
             std = np.std(frame_gray)
 
@@ -233,6 +288,16 @@ class App:
             #------------------------------CALCULATE OPTICAL FLOW-----------------------------------------
             if len(self.tracks) > 0:
                 #img0, img1 = self.prev_gray, frame_gray
+=======
+            frame_gray = clahe.apply(cv2.cvtColor(img, cv2.COLOR_BGR2GRAY))
+            
+            vis = img.copy()
+
+
+            #------------------------------CALCULATE OPTICAL FLOW-----------------------------------------
+            if len(self.tracks) > 0:
+                img0, img1 = self.prev_gray, frame_gray
+>>>>>>> f2443c011df13822b67eb927f54238ea22376538
                 
                 #puts in right data type and size
                 #p0 features in old frame to look for in new frame
@@ -240,6 +305,7 @@ class App:
                 
                 #calculates optical flow (second optical flow used for a validity check)
                 #p0 old coordinates, p1 new coordinates of same pixel
+<<<<<<< HEAD
                 lkTime = time.time()
                 p1, st, err = cv2.calcOpticalFlowPyrLK(self.prev_gray, frame_gray, p0, None, **lk_params)
                 p0r, st, err = cv2.calcOpticalFlowPyrLK(frame_gray, self.prev_gray, p1, None, **lk_params)
@@ -247,19 +313,31 @@ class App:
                 print('Optical Flow time = ')
                 print(lkTime)
                 print('')
+=======
+                p1, st, err = cv2.calcOpticalFlowPyrLK(img0, img1, p0, None, **lk_params)
+                p0r, st, err = cv2.calcOpticalFlowPyrLK(img1, img0, p1, None, **lk_params)
+
+>>>>>>> f2443c011df13822b67eb927f54238ea22376538
                 #timestamp used for velocity in ttc
                 self.time = time.time()
 
                 #Current points - previous points creates vector of displacement
                 #used in ttc calculation
+<<<<<<< HEAD
                 vec = (p1-p0).reshape(-1,2)
+=======
+                vec = p1-p0
+>>>>>>> f2443c011df13822b67eb927f54238ea22376538
 
                 #Compare previous points with those found in second optical flow calculation
                 d = abs(p0-p0r).reshape(-1, 2).max(-1)
 
                 #validity check
                 good = d < 1
+<<<<<<< HEAD
                 #rotation_filter = vec[:,0] > 10*vec[:,1]
+=======
+>>>>>>> f2443c011df13822b67eb927f54238ea22376538
 
                 #reset parameters to be used in for loop below
                 new_tracks = []
@@ -268,6 +346,7 @@ class App:
                 ttcSum = 0
                 xSum = 0
                 ySum = 0
+<<<<<<< HEAD
                 clusterData = np.matrix([[0,0]])
                 #Tracks are added, Focus of expansion is calculated, ttc calculated for each point
                 for tr, (x, y), (u,v), good_flag in zip(self.tracks, p1.reshape(-1, 2), vec, good):
@@ -276,6 +355,14 @@ class App:
                         continue
 ####                    if not rotation_check:
 ####                        continue
+=======
+
+                #Tracks are added, Focus of expansion is calculated, ttc calculated for each point
+                for tr, (x, y), (u,v), good_flag in zip(self.tracks, p1.reshape(-1, 2), vec.reshape(-1,2), good):
+                    #If not valid, break from loop
+                    if not good_flag:
+                        continue
+>>>>>>> f2443c011df13822b67eb927f54238ea22376538
                     
                     #add feature to track
                     tr.append((x, y))
@@ -284,11 +371,22 @@ class App:
                         del tr[0]
                         
                     new_tracks.append(tr)
+<<<<<<< HEAD
 
+=======
+                    
+                    #can be used to draw circles at each tracked point
+                    #cv2.circle(vis, (x, y), 2, (0, 255, 0), -1)
+>>>>>>> f2443c011df13822b67eb927f54238ea22376538
 
                     #TTC (magnitude of displacement)/(velocity of displacement)
                     d = math.sqrt((self.foe[0]-x)*(self.foe[0]-x)+(self.foe[1]-y)*(self.foe[1]-y))
                     dDot = math.sqrt(u*u+v*v)/(self.time-self.prev_time)
+<<<<<<< HEAD
+=======
+                    #u = (p1x - p0x)
+                    #v = (p1y - p0y)
+>>>>>>> f2443c011df13822b67eb927f54238ea22376538
 
                     #If dDot == 0, throws error so check
                     if dDot != 0:
@@ -298,11 +396,16 @@ class App:
 
                     #Print TTC for relevant points (ttcMin instantiated at beginning of program)
                     if ttc < ttcMin:
+<<<<<<< HEAD
                         #cv2.putText(vis,'%.2f' % ttc, (x,y), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+=======
+                        cv2.putText(vis,'%.2f' % ttc, (x,y), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+>>>>>>> f2443c011df13822b67eb927f54238ea22376538
                         ttcCount = ttcCount+1
                         ttcSum = ttc + ttcSum
                         xSum = xSum + x
                         ySum = ySum + y
+<<<<<<< HEAD
                         #Gather clustering data
                         if i == 0:
                             clusterData = np.matrix([[x,y]])
@@ -373,12 +476,19 @@ class App:
                             cv2.putText(vis,'x', (x,y), cv2.FONT_HERSHEY_SIMPLEX,.25,(255,255,255))
 
                             
+=======
+                        
+>>>>>>> f2443c011df13822b67eb927f54238ea22376538
                 #ROLLING AVERAGE FILTER
                 #Each entry in rolling average array is the average of all points with small time to contact
                 ttcTotalAvg = 0
                 xAvg = 0
                 yAvg = 0
+<<<<<<< HEAD
                 rAvgTime = time.time()
+=======
+                
+>>>>>>> f2443c011df13822b67eb927f54238ea22376538
                 if ttcCount > 0:
                     self.inc = self.inc + 1        
                     ttcAvg[self.inc % FILTER_COUNTS] = ttcSum/ttcCount
@@ -389,14 +499,18 @@ class App:
                         ttcTotalAvg = val + ttcTotalAvg
                     
                     ttcTotalAvg = ttcTotalAvg/FILTER_COUNTS
+<<<<<<< HEAD
                 rAvgTime = time.time()-rAvgTime
 
 
 
+=======
+>>>>>>> f2443c011df13822b67eb927f54238ea22376538
 
                 #-----------------------------A PRETEND CONTROL OUTPUT---------------------------------------
                 #Decides which direction to turn based on location of the center of each point
                 #Tells how quickly to turn based on magnitude of the ttc average
+<<<<<<< HEAD
                 temp = DEFAULT_ANGLE
                 EPSILON = 5
                 
@@ -428,11 +542,29 @@ class App:
                     temp = int((DEFAULT_ANGLE + 90.0*xErr/224.0))
 
                 #Servo Angle Saturation    
+=======
+                temp = 90
+                if xAvg == 0:
+                    #draw_str(vis, (20, 20), 'STRAIGHT')
+                    cv2.putText(vis,'STRAIGHT', (5,80), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+                elif xAvg < 112:
+                    #draw_str(vis, (20, 20), 'RIGHT')
+                    cv2.putText(vis,'RIGHT', (5,80), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+                    temp = int((90*(xAvg/112) + 90))
+                else:
+                    #draw_str(vis, (20, 20), 'LEFT')
+                    cv2.putText(vis,'LEFT', (5,80), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+##                    temp = int((90 + (xAvg-224)/2))
+                    temp = int(90*(xAvg - 112)/112)
+                    
+
+>>>>>>> f2443c011df13822b67eb927f54238ea22376538
                 if temp > 130: 
                     temp = 130
                 elif temp < 50:
                     temp = 50
                 angle = [temp]
+<<<<<<< HEAD
 
                 #PWM Saturation
                 temp1 = int(16*ttcTotalAvg)
@@ -453,6 +585,42 @@ class App:
                 
                 sendPWM(pwm)                                     
                 sendServoAngle(angle)
+=======
+##                angle = [int(xAvg)]
+
+
+                
+
+                temp1 = int(164*ttcTotalAvg/10)
+                if ttcTotalAvg == 0:
+                    temp1 = 164
+                if temp1 < 4:
+                    temp1 = 4
+
+
+                pwm = [temp1]
+                
+##                if ttcTotalAvg == 0:
+##                    cv2.putText(vis,'NOTHING', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+##                    #draw_str(vis, (20, 20), 'NOTHING')
+##                    pwm = [34]
+##                elif ttcTotalAvg < 3:
+##                    cv2.putText(vis,'MOVE NORMALLY', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+##                    #draw_str(vis, (20, 20), 'MOVE BITCH')
+##                    pwm = [30]
+##                else:
+##                    cv2.putText(vis,'MOVE QUICKLY', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+##                    #draw_str(vis, (20, 20), 'MOVE SLIGHTLY')
+##                    pwm = [32]
+
+
+                sendPWM(pwm)
+                sendServoAngle(angle)
+                    
+
+                #Draw the FOE (not necessary)
+                cv2.circle(vis, (self.foe[0], self.foe[1]), 2, (0, 0, 255), -1)
+>>>>>>> f2443c011df13822b67eb927f54238ea22376538
 
                 #Create data for the plot
                 #!= 0 filters out data when there is nothing to track
@@ -474,7 +642,11 @@ class App:
                     cv2.circle(mask, (x, y), 5, 0, -1)
                     
                 #get new features
+<<<<<<< HEAD
 ##                cv2.imshow('mask',mask)
+=======
+                cv2.imshow('mask',mask)
+>>>>>>> f2443c011df13822b67eb927f54238ea22376538
                 p = cv2.goodFeaturesToTrack(frame_gray, mask = mask, **feature_params)
                 
                 if p is not None:
@@ -490,7 +662,11 @@ class App:
 
             #Display the video
             cv2.imshow('lk_track', vis)
+<<<<<<< HEAD
 ##            cv2.imshow('CLAHE (8,8)',frame_gray)
+=======
+            cv2.imshow('CLAHE (8,8)',frame_gray)
+>>>>>>> f2443c011df13822b67eb927f54238ea22376538
 
             #UNCOMMENT TO WRITE FRAME TO VIDEO
             video1.write(vis)
@@ -503,6 +679,7 @@ class App:
             rawCapture.truncate(0)
 
             #plot when escape key is called
+<<<<<<< HEAD
 ##            if ch == 27:
 ##                for i in range(0,10):
 ##                    sendKill()
@@ -514,6 +691,19 @@ class App:
 ##                    plt.plot(self.runCount,self.data)
 ##                    plt.show()
 ##                break
+=======
+            if ch == 27:
+                for i in range(0,10):
+                    sendKill()
+                #video1.release()
+                plt.axis([0 , self.inc,0, 15])
+                plt.ylabel('Time to Contact (s)')
+                plt.xlabel('time')
+                plt.title('Time to Contact')
+                plt.plot(self.runCount,self.data)
+                plt.show()
+                break
+>>>>>>> f2443c011df13822b67eb927f54238ea22376538
 
 def main():
     import sys
