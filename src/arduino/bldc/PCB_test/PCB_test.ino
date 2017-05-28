@@ -1,4 +1,4 @@
-#define DEBUG 1
+#define DEBUG 0
 
 #define IN_A 9
 #define IN_B 10
@@ -134,9 +134,9 @@ void PWMsetup()
   pinMode( HALL_3, INPUT );
 
   interrupts();
-  attachInterrupt( digitalPinToInterrupt( HALL_1 ), isrHallSeq, CHANGE );
-  attachInterrupt( digitalPinToInterrupt( HALL_2 ), isrHallSeq, CHANGE );
-  attachInterrupt( digitalPinToInterrupt( HALL_3 ), isrHallSeq, CHANGE );
+  attachInterrupt( 2, isrHallSeq, CHANGE );
+  attachInterrupt( 3, isrHallSeq, CHANGE );
+  attachInterrupt( 4, isrHallSeq, CHANGE );
 }
 
 uint64_t prevmillis;
@@ -148,8 +148,8 @@ void PWMloop( uint64_t currmillis )
   int32_t dt = currmillis - prevmillis;
 
   const int32_t accum_max = 20000;
-  const int32_t Kp = 3;
-  const int32_t Ti = 10;
+  const int32_t Kp = 1;
+  const int32_t Ti = 100;
   int32_t accum = 0;
   int32_t err = 0;
   int32_t mypwm = 0;
@@ -157,7 +157,7 @@ void PWMloop( uint64_t currmillis )
   // read setpoint from dshare
   // FIXME
   if( currmillis < 8000 )
-    setpoint = 150;
+    setpoint = 100;
   else
     setpoint = 0;
 
@@ -169,40 +169,41 @@ void PWMloop( uint64_t currmillis )
     motorfreq = ( revcount * 1000 ) / dt / 12;
     revcount = 0;
     interrupts();
-  }
+  
 
-  // update pwm and motorccw using PI controller
-  // FIXME
-  err = setpoint - motorfreq;
-  accum += err;
-  if( accum > accum_max )
-    accum = accum_max;
-  else if( accum < -accum_max )
-    accum = -accum_max;
-
-  mypwm = Kp * ( err + ( accum * dt ) / Ti / 1000 );
-  noInterrupts();
-  if( mypwm < 0 )
-  {
-    mypwm = -mypwm;
-    motorccw = 0;
-  }
-  else
-    motorccw = 1;
-  if( mypwm > 255 )
-    pwm = 255;
-  pwm = (uint8_t) mypwm;
-  interrupts();
-
-  // motor is not moving, but it should be, hence hand-trigger sequence switch
-  if( setpoint != 0 && motorfreq == 0 )
-  {
+    // update pwm and motorccw using PI controller
+    // FIXME
+    err = setpoint - motorfreq;
+    accum += err;
+    if( accum > accum_max )
+      accum = accum_max;
+    else if( accum < -accum_max )
+      accum = -accum_max;
+  
+    mypwm = Kp * ( err + ( accum * dt ) / Ti / 1000 );
     noInterrupts();
-    isrHallSeq();
+    if( mypwm < 0 )
+    {
+      mypwm = -mypwm;
+      motorccw = 0;
+    }
+    else
+      motorccw = 1;
+    if( mypwm > 150 )
+      pwm = 150;
+    pwm = (uint8_t) mypwm;
     interrupts();
+  
+    // motor is not moving, but it should be, hence hand-trigger sequence switch
+    if( setpoint != 0 && motorfreq == 0 )
+    {
+      noInterrupts();
+      isrHallSeq();
+      interrupts();
+    }
+  
+    prevmillis = currmillis;
   }
-
-  prevmillis = currmillis;
 
 #if DEBUG
   Serial.print( OCR1A );
