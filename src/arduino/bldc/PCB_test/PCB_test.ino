@@ -1,4 +1,4 @@
-#define DEBUG 0
+#define DEBUG 1
 
 #define IN_A 9
 #define IN_B 10
@@ -16,15 +16,19 @@
 #define IS_B A3
 #define IS_C A4
 
+uint8_t FLAG = 1;
 /*
   A - Orange
   B - Blue
   C - Yellow
 */
 
-#define setPWMA( value ) ( bitSet( TCCR1A, COM1A1 ); OCR1A = (uint8_t) value )
-#define setPWMB( value ) ( bitSet( TCCR1A, COM1B1 ); OCR1B = (uint8_t) value )
-#define setPWMC( value ) ( bitSet( TCCR1A, COM1C1 ); OCR1C = (uint8_t) value )
+#define setPWMA( value ) { bitSet( TCCR1A, COM1A1 );\
+                           OCR1A = (uint8_t) value; }
+#define setPWMB( value ) { bitSet( TCCR1A, COM1B1 );\
+                           OCR1B = (uint8_t) value; }
+#define setPWMC( value ) { bitSet( TCCR1A, COM1C1 );\
+                           OCR1C = (uint8_t) value; }
 #define stopPWMA()       ( bitClear( TCCR1A, COM1A1 ) )
 #define stopPWMB()       ( bitClear( TCCR1A, COM1B1 ) )
 #define stopPWMC()       ( bitClear( TCCR1A, COM1C1 ) )
@@ -104,6 +108,11 @@ void setup()
   Serial.begin( 57600 );
 #endif
 
+  pwm = 0;
+  OCR1A = 0;
+  OCR1B = 0;
+  OCR1C = 0;
+
   // Disable all compare outputs, Fast PWM 8 bit
   TCCR1A = bit( WGM10 ); // Sec. 14.10.1, Table 14.2
   // Prescaler clock/8, Fast PWM 8 bit -> 7.8KHz PWM
@@ -155,24 +164,38 @@ void loop()
   //Serial.print(one);
   //Serial.print(two);
   //Serial.println(three);
-  Serial.print(OCR1A);
-  Serial.print(" ");
-  Serial.println(TCNT1);
+  //Serial.print(OCR1A);
+  //Serial.print(" ");
+  //Serial.println(TCNT1);
+  
   //Serial.println("################");
   //delay(100);
 #endif
 
-  if( currmillis < 30000 )
+  if( currmillis < 10000 )
   {
-    pwm = 100;
+    pwm = 60;
+    //Serial.println(dt);
     if( dt > 62 ) // 1/16 s = 62.5 ms
     {
-      motorfreq = revcount >> 4; // divide by 16
-      revcount = 0;
+      uint8_t OLDSREG = SREG;
+      motorfreq = (revcount * 1000) / 12 / dt;
+      SREG = OLDSREG;
+      #if DEBUG
+//      Serial.println(motorfreq);
+      #endif
+      //motorfreq = revcount >> 4; // divide by 16
+      revcount = 0; 
+      prevmillis = currmillis;
+      SPDR = motorfreq;
+      
     }
   }
-  else
+  else{
     pwm = 0;
-
-  prevmillis = currmillis;
+    if (FLAG == 1){
+      Serial.print("end");
+    } 
+    FLAG = 0;
+  }
 }
