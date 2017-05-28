@@ -32,9 +32,11 @@ from picamera.array import PiRGBArray
 from picamera import PiCamera
 from numpy.linalg import inv
 import math
-##import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 import RPi.GPIO as GPIO
 import sys
+from sklearn.cluster import DBSCAN
+
 
 SLAVE_SELECT = 18
 
@@ -60,7 +62,7 @@ height = 128
 # initialize the camera and grab a reference to the raw camera capture
 camera = PiCamera()
 camera.resolution = (width, height)
-camera.framerate = 30
+camera.framerate = 20
 camera.shutter_speed = 5000
 rawCapture = PiRGBArray(camera, size=(width, height))
 
@@ -83,7 +85,7 @@ feature_params = dict( maxCorners = 500,
 
 FILTER_COUNTS = 5
 ttcAvg = np.arange(FILTER_COUNTS)
-ttcMin = 7
+ttcMin = 5
 
 #SPI Methods
 def sendPWM(pwm):
@@ -95,8 +97,8 @@ def sendPWM(pwm):
     val2 = spi.xfer(pwm)
     sleep(DELAY)
     GPIO.output(SLAVE_SELECT,GPIO.HIGH)
-    print(val1)
-    print(val2)
+    #print(val1)
+    #print(val2)
 
 def sendBackPWM(pwm):
     GPIO.output(SLAVE_SELECT,GPIO.LOW)
@@ -107,8 +109,8 @@ def sendBackPWM(pwm):
     val2 = spi.xfer(pwm)
     sleep(DELAY)
     GPIO.output(SLAVE_SELECT,GPIO.HIGH)
-    print(val1)
-    print(val2)
+    #print(val1)
+    #print(val2)
 
 def sendServoAngle(servo):
     GPIO.output(SLAVE_SELECT,GPIO.LOW)
@@ -119,8 +121,8 @@ def sendServoAngle(servo):
     val2 = spi.xfer(servo)
     sleep(DELAY)
     GPIO.output(SLAVE_SELECT,GPIO.HIGH)
-    print(val1)
-    print(val2)
+    #print(val1)
+    #print(val2)
     
 def sendKill():
     for i in range(0,10):
@@ -185,7 +187,7 @@ class App:
         self.data = list()
         self.runCount = list()
         self.inc = 0
-
+        
         #PID Variables
         self.current_time = 0
         self.last_time = 0
@@ -207,14 +209,30 @@ class App:
             
             #To grayscale and equalize
             clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
-            frame_gray = clahe.apply(cv2.cvtColor(img, cv2.COLOR_BGR2GRAY))
-            
-            vis = img.copy()
+            frame_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            std = np.std(frame_gray)
 
+            vis = img.copy()
+            
+            if std < 20:
+                cv2.putText(vis,'NEED BETTER LIGHTING', (5,50), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+##                cv2.imshow('lk_track', vis)
+                rawCapture.truncate(0)
+                continue
+            
+            frame_gray = clahe.apply(frame_gray)
+            ttcCount = 0
+            clusterData = np.matrix([[0,0]])
+
+##            avg = np.average(frame_gray)
+##            std = np.std(frame_gray)
+##            print('Average = %.2f' % avg)
+##            print('std dev = %.2f' % std)
+##            print('')
 
             #------------------------------CALCULATE OPTICAL FLOW-----------------------------------------
             if len(self.tracks) > 0:
-                img0, img1 = self.prev_gray, frame_gray
+                #img0, img1 = self.prev_gray, frame_gray
                 
                 #puts in right data type and size
                 #p0 features in old frame to look for in new frame
@@ -222,21 +240,26 @@ class App:
                 
                 #calculates optical flow (second optical flow used for a validity check)
                 #p0 old coordinates, p1 new coordinates of same pixel
-                p1, st, err = cv2.calcOpticalFlowPyrLK(img0, img1, p0, None, **lk_params)
-                p0r, st, err = cv2.calcOpticalFlowPyrLK(img1, img0, p1, None, **lk_params)
-
+                lkTime = time.time()
+                p1, st, err = cv2.calcOpticalFlowPyrLK(self.prev_gray, frame_gray, p0, None, **lk_params)
+                p0r, st, err = cv2.calcOpticalFlowPyrLK(frame_gray, self.prev_gray, p1, None, **lk_params)
+                lkTime = time.time()-lkTime
+                print('Optical Flow time = ')
+                print(lkTime)
+                print('')
                 #timestamp used for velocity in ttc
                 self.time = time.time()
 
                 #Current points - previous points creates vector of displacement
                 #used in ttc calculation
-                vec = p1-p0
+                vec = (p1-p0).reshape(-1,2)
 
                 #Compare previous points with those found in second optical flow calculation
                 d = abs(p0-p0r).reshape(-1, 2).max(-1)
 
                 #validity check
                 good = d < 1
+                #rotation_filter = vec[:,0] > 10*vec[:,1]
 
                 #reset parameters to be used in for loop below
                 new_tracks = []
@@ -245,12 +268,14 @@ class App:
                 ttcSum = 0
                 xSum = 0
                 ySum = 0
-
+                clusterData = np.matrix([[0,0]])
                 #Tracks are added, Focus of expansion is calculated, ttc calculated for each point
-                for tr, (x, y), (u,v), good_flag in zip(self.tracks, p1.reshape(-1, 2), vec.reshape(-1,2), good):
+                for tr, (x, y), (u,v), good_flag in zip(self.tracks, p1.reshape(-1, 2), vec, good):
                     #If not valid, break from loop
                     if not good_flag:
                         continue
+####                    if not rotation_check:
+####                        continue
                     
                     #add feature to track
                     tr.append((x, y))
@@ -259,15 +284,11 @@ class App:
                         del tr[0]
                         
                     new_tracks.append(tr)
-                    
-                    #can be used to draw circles at each tracked point
-##                    cv2.circle(vis, (x, y), 2, (0, 255, 0), -1)
+
 
                     #TTC (magnitude of displacement)/(velocity of displacement)
                     d = math.sqrt((self.foe[0]-x)*(self.foe[0]-x)+(self.foe[1]-y)*(self.foe[1]-y))
                     dDot = math.sqrt(u*u+v*v)/(self.time-self.prev_time)
-                    #u = (p1x - p0x)
-                    #v = (p1y - p0y)
 
                     #If dDot == 0, throws error so check
                     if dDot != 0:
@@ -277,18 +298,87 @@ class App:
 
                     #Print TTC for relevant points (ttcMin instantiated at beginning of program)
                     if ttc < ttcMin:
-                        cv2.putText(vis,'%.2f' % ttc, (x,y), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+                        #cv2.putText(vis,'%.2f' % ttc, (x,y), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
                         ttcCount = ttcCount+1
                         ttcSum = ttc + ttcSum
                         xSum = xSum + x
                         ySum = ySum + y
-                        
+                        #Gather clustering data
+                        if i == 0:
+                            clusterData = np.matrix([[x,y]])
+                            clusterDataX = np.matrix([[x]])
+                            i = i + 1
+                        else:
+                            clusterData = np.vstack((clusterData,(x,y)))
+                            clusterDataX = np.vstack((clusterDataX,x))
+##
+##            #K-MEANS CLUSTERING
+##            if ttcCount > 5 :
+##                # generating bright palette
+##                cluster_n = 3
+##                colors = np.zeros((1, cluster_n, 3), np.uint8)
+##                colors[0,:] = 255
+##                colors[0,:,0] = np.arange(0, 180, 180.0/cluster_n)
+##                colors = cv2.cvtColor(colors, cv2.COLOR_HSV2BGR)[0]
+##                
+##                term_crit = (cv2.TERM_CRITERIA_EPS, 30, 0.1)
+##                kmeansTime = time.time()
+##                ret, labels, centers = cv2.kmeans(clusterData, cluster_n, None, term_crit, 10, 0)
+##                kmeansTime = time.time()-kmeansTime
+##                print('Number of points = %d ' % len(labels))
+##                print('kmeans time = ')
+##                print(kmeansTime)
+##                print('')
+##                
+##                labels = labels.ravel()
+##                for j in range(len(labels)):
+##                    x_ = clusterData[j,0]
+##                    y_ = clusterData[j,1]
+##                    label_ = labels[j]
+##                    
+##                    c = list(map(int, colors[label_]))
+##                    cv2.circle(vis, (x_, y_), 1, c, -1)
+
+##                        #DBSCAN CLUSTERING ALGORITHM
+                dbscanTime = time.time()
+                db = DBSCAN(eps=10,min_samples=4).fit(clusterData)
+                dbscanTime = time.time()-dbscanTime
+                print('dbscan Time = ')
+                print(dbscanTime)
+                print('')
+                core_samples_mask = np.zeros_like(db.labels_, dtype=bool)
+                core_samples_mask[db.core_sample_indices_] = True
+                labels = db.labels_
+                n_clusters = len(set(labels))-(1 if -1 in labels else 0)
+            
+##                        print('Estimated number of clusters: %d' % n_clusters)
+##                        print(labels)                        
+            
+                for k in set(labels):
+                    if k == -1:
+                        continue
+                    class_member_mask = (labels == k)
+                    xy = clusterData[class_member_mask & core_samples_mask]
+##                            print('xy = ')
+##                            print(xy.shape)
+
+                    for x,y in zip(xy[:,0],xy[:,1]):
+                        if k == 0:
+                            cv2.putText(vis,'x', (x,y), cv2.FONT_HERSHEY_SIMPLEX,.25,(255,0,0))
+                        elif k == 1:
+                            cv2.putText(vis,'x', (x,y), cv2.FONT_HERSHEY_SIMPLEX,.25,(0,255,0))
+                        elif k == 2:
+                            cv2.putText(vis,'x', (x,y), cv2.FONT_HERSHEY_SIMPLEX,.25,(0,0,255))
+                        elif k == 3:
+                            cv2.putText(vis,'x', (x,y), cv2.FONT_HERSHEY_SIMPLEX,.25,(255,255,255))
+
+                            
                 #ROLLING AVERAGE FILTER
                 #Each entry in rolling average array is the average of all points with small time to contact
                 ttcTotalAvg = 0
                 xAvg = 0
                 yAvg = 0
-                
+                rAvgTime = time.time()
                 if ttcCount > 0:
                     self.inc = self.inc + 1        
                     ttcAvg[self.inc % FILTER_COUNTS] = ttcSum/ttcCount
@@ -299,11 +389,20 @@ class App:
                         ttcTotalAvg = val + ttcTotalAvg
                     
                     ttcTotalAvg = ttcTotalAvg/FILTER_COUNTS
+                rAvgTime = time.time()-rAvgTime
+
+
+
 
                 #-----------------------------A PRETEND CONTROL OUTPUT---------------------------------------
-                #Decides which direction to turn based on location of the center of each point                #Tells how quickly to turn based on magnitude of the ttc average
+                #Decides which direction to turn based on location of the center of each point
+                #Tells how quickly to turn based on magnitude of the ttc average
                 temp = DEFAULT_ANGLE
                 EPSILON = 5
+                
+                cv2.putText(vis,'%.2f' % std, (5,40), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+                cv2.putText(vis,'%.2f' % ttcMin, (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+                
                 if xAvg == 0:
                     #draw_str(vis, (20, 20), 'STRAIGHT')
                     cv2.putText(vis,'STRAIGHT', (5,80), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
@@ -339,8 +438,8 @@ class App:
                 temp1 = int(16*ttcTotalAvg)
                 if ttcTotalAvg == 0:
                     temp1 = 100
-                elif temp1 < 20:
-                    temp1 = 20
+                elif temp1 < 50:
+                    temp1 = 50
 
                 pwm = [temp1]
 
@@ -390,7 +489,7 @@ class App:
             self.prev_time = self.time
 
             #Display the video
-##            cv2.imshow('lk_track', vis)
+            cv2.imshow('lk_track', vis)
 ##            cv2.imshow('CLAHE (8,8)',frame_gray)
 
             #UNCOMMENT TO WRITE FRAME TO VIDEO

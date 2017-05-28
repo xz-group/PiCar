@@ -207,28 +207,26 @@ class App:
                 
                 #clusterData = StandardScaler().fit_transform(clusterData)
                 
-                db = DBSCAN(eps=0.3,min_samples=10).fit(clusterData)
+                db = DBSCAN(eps=15,min_samples=2).fit(clusterData)
                 core_samples_mask = np.zeros_like(db.labels_, dtype=bool)
                 core_samples_mask[db.core_sample_indices_] = True
                 labels = db.labels_
                 n_clusters = len(set(labels))-(1 if -1 in labels else 0)
                 
                 print('Estimated number of clusters: %d' % n_clusters)
-                
+                print(labels)
                 unique_labels = set(labels)
                 colors = plt.cm.Spectral(np.linspace(0,1, len(unique_labels)))
                 
                 for k,col in zip(unique_labels, colors):
                     if k == -1:
-                        col = 'k'
+                        continue
 
                     class_member_mask = (labels == k)
 
                     xy = clusterData[class_member_mask & core_samples_mask]
                     plt.plot(xy[:,0], xy[:,1], 'o', markerfacecolor=col, markeredgecolor='k', markersize=14)
                     
-                    xy = clusterData[class_member_mask & core_samples_mask]
-                    plt.plot(xy[:,0], xy[:,1], 'o', markerfacecolor=col, markeredgecolor='k', markersize=6)
                 plt.axis([0 , 224,0, 96])
                 plt.title('Estimated number of clusters: %d' % n_clusters)
                 plt.show()
