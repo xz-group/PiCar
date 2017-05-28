@@ -20,17 +20,11 @@ bool kill = true;
 
 uint8_t tmp;
 
-//ISR(SPI_STC_vect) {
-//  SPDR = 27;
-//}
-
 void spiHandler()
 { 
   switch (marker)
   {
   case 0:
-//    Serial.print(receive);
-    
     dat = SPDR;
     receive = dat;
 //    Serial.println(dat);
@@ -61,8 +55,7 @@ void spiHandler()
       break;
     }
     else {
-//      Serial.println("dat is wrong 1");
-//      Serial.print("error: ");
+//      Serial.print("error1: ");
 //      Serial.println(dat);
     }
     break;    
@@ -92,18 +85,15 @@ void spiHandler()
     else if (receive == 3) {
       pwm = tmp;
       SPDR = 8;
-      setData( BLDC_DUTY_CYCLE ,pwm );
+      setData( BLDC_DUTY_CYCLE , -pwm );
       marker = 0;
       break;
     }
     else {
-//      Serial.println("dat is wrong 2");
 //      Serial.print("error2: ");
 //      Serial.println(dat); 
     }
     receive = 0;
     break;
   }
-//setData( BLDC_DUTY_CYCLE ,pwm );
-//setData( SERVO_ANGLE ,servoAngle );
 }
