@@ -29,7 +29,7 @@
 volatile uint8_t pwm = 0;
 volatile uint16_t revcount = 0;
 volatile uint8_t motorccw = 1;
-volatile uint8_t blcd_enable = 0;
+volatile uint8_t bldc_enable = 0;
 
 void isrHallSeq()
 {
