@@ -29,10 +29,18 @@
 volatile uint8_t pwm = 0;
 volatile uint16_t revcount = 0;
 volatile uint8_t motorccw = 1;
+volatile uint8_t blcd_enable = 0;
 
 void isrHallSeq()
 {
-  uint8_t hallstate = digitalRead( HALL_3 ) |
+  uint8_t hallstate;
+
+  revcount++;
+
+  if( !bldc_enable )
+    return;
+
+  hallstate = digitalRead( HALL_3 ) |
     ( digitalRead( HALL_2 ) << 1 ) |
     ( digitalRead( HALL_1 ) << 2 );
 
@@ -72,8 +80,6 @@ void isrHallSeq()
     setPWMC( pwm );
     break;
   }
-
-  revcount++;
 }
 
 
@@ -100,6 +106,7 @@ void PWMsetup()
   pwm = 0;
   motorccw = 1;
   revcount = 0;
+  bldc_enable = 0;
 
   // Initialize compare modules. Sec. 14.10.9-11
   OCR1A = 0;
@@ -148,6 +155,7 @@ void PWMloop( uint64_t currmillis )
   int32_t dt = currmillis - prevmillis;
 
   const int32_t accum_max = 20000;
+  const uint8_t pwm_max = 150;
   const int32_t Kp = 1;
   const int32_t Ti = 100;
   int32_t accum = 0;
@@ -157,9 +165,12 @@ void PWMloop( uint64_t currmillis )
   // read setpoint from dshare
   // FIXME
   if( currmillis < 8000 )
+  {
     setpoint = 100;
+    bldc_enable = 1;
+  }
   else
-    setpoint = 0;
+    bldc_enable = 0;
 
   // update motorfreq every 50ms
   if( dt > 50 )
@@ -169,7 +180,7 @@ void PWMloop( uint64_t currmillis )
     motorfreq = ( revcount * 1000 ) / dt / 12;
     revcount = 0;
     interrupts();
-  
+
 
     // update pwm and motorccw using PI controller
     // FIXME
@@ -179,7 +190,7 @@ void PWMloop( uint64_t currmillis )
       accum = accum_max;
     else if( accum < -accum_max )
       accum = -accum_max;
-  
+
     mypwm = Kp * ( err + ( accum * dt ) / Ti / 1000 );
     noInterrupts();
     if( mypwm < 0 )
@@ -189,20 +200,20 @@ void PWMloop( uint64_t currmillis )
     }
     else
       motorccw = 1;
-    if( mypwm > 150 )
-      pwm = 150;
+    if( mypwm > pwm_max )
+      pwm = pwm_max;
     pwm = (uint8_t) mypwm;
     interrupts();
-  
-    // motor is not moving, but it should be, hence hand-trigger sequence switch
-    if( setpoint != 0 && motorfreq == 0 )
-    {
-      noInterrupts();
-      isrHallSeq();
-      interrupts();
-    }
-  
+
     prevmillis = currmillis;
+  }
+
+  // motor is not moving, but it should be, hence hand-trigger sequence switch
+  if( setpoint != 0 && motorfreq == 0 )
+  {
+    noInterrupts();
+    isrHallSeq();
+    interrupts();
   }
 
 #if DEBUG
