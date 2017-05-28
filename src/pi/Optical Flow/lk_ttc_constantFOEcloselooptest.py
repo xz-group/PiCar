@@ -32,7 +32,6 @@ from picamera.array import PiRGBArray
 from picamera import PiCamera
 from numpy.linalg import inv
 import math
-<<<<<<< HEAD
 import matplotlib.pyplot as plt
 import RPi.GPIO as GPIO
 import sys
@@ -45,7 +44,6 @@ spi = spidev.SpiDev()
 spi.open(0,0)
 
 GPIO.setmode(GPIO.BCM)
-<<<<<<< HEAD
 GPIO.setup(SLAVE_SELECT,GPIO.OUT)
 
 SEND_PWM = [1]
