@@ -1,4 +1,4 @@
-#define DEBUG 0
+#define DEBUG 1
 
 #define IN_A 9
 #define IN_B 10
@@ -95,6 +95,17 @@ void loop()
 void PWMsetup()
 {
   noInterrupts();
+
+  // Initialize global pwm sequence variables
+  pwm = 0;
+  motorccw = 1;
+  revcount = 0;
+
+  // Initialize compare modules. Sec. 14.10.9-11
+  OCR1A = 0;
+  OCR1B = 0;
+  OCR1C = 0;
+
   // Disable all compare outputs, Fast PWM 8 bit
   TCCR1A = bit( WGM10 ); // Sec. 14.10.1, Table 14.2
   // Prescaler clock/8, Fast PWM 8 bit -> 7.8KHz PWM
@@ -136,10 +147,10 @@ void PWMloop( uint64_t currmillis )
 {
   int32_t dt = currmillis - prevmillis;
 
-  int32_t accum = 0;
   const int32_t accum_max = 20000;
-  int32_t Kp = 3;
-  int32_t Ti = 10;
+  const int32_t Kp = 3;
+  const int32_t Ti = 10;
+  int32_t accum = 0;
   int32_t err = 0;
   int32_t mypwm = 0;
 
@@ -192,4 +203,8 @@ void PWMloop( uint64_t currmillis )
   }
 
   prevmillis = currmillis;
+
+#if DEBUG
+  Serial.print( OCR1A );
+#endif
 }
