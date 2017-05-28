@@ -10,7 +10,7 @@ Usage
 -----
 lk_ttc.py
 ESC to exit
-'X' out plo  t
+'X' out plot
 
 Keys
 ----
@@ -81,7 +81,7 @@ feature_params = dict( maxCorners = 500,
                        minDistance = 7,
                        blockSize = 7 )
 
-FILTER_COUNTS = 10
+FILTER_COUNTS = 5
 ttcAvg = np.arange(FILTER_COUNTS)
 ttcMin = 7
 
@@ -342,15 +342,15 @@ class App:
                 elif temp1 < 20:
                     temp1 = 20
 
+                pwm = [temp1]
+
                 #backup code
-                pwm = [temp1]                
-                backupVal = 0
-                if ttcTotalAvg > 2 or ttcTotalAvg == 0:
-                    sendPWM(pwm)
-                else:
-                    pwm = [200]
-                    sendBackPWM(pwm)
-                    sleep(.5)
+##                if ttcTotalAvg > 2 or ttcTotalAvg == 0:
+##                    sendPWM(pwm)
+##                else:
+##                    pwm = [200]
+##                    sendBackPWM(pwm)
+##                    sleep(.5)
                 
                 sendPWM(pwm)                                     
                 sendServoAngle(angle)

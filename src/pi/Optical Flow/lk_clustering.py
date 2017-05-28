@@ -31,8 +31,9 @@ from picamera import PiCamera
 from numpy.linalg import inv
 import math
 import matplotlib.pyplot as plt
-#from scipy.cluster.hierarchy import linkage
-from sklearn.cluster import MeanShift
+from sklearn.cluster import DBSCAN
+from sklearn.preprocessing import StandardScaler
+
 
 width = 224
 height = 128
@@ -42,7 +43,6 @@ camera.resolution = (width, height)
 camera.framerate = 30
 camera.shutter_speed = 5000
 rawCapture = PiRGBArray(camera, size=(width, height))
-ms = MeanShift()
 # allow the camera to warmup
 time.sleep(2)
 
@@ -78,7 +78,7 @@ class App:
 
             #Slice unnecessary pixels off image
             img = img[int(height/8):int(7*height/8),:,:]
-            print(img.shape)
+            #print(img.shape)
             #To grayscale and equalize
             clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
             frame_gray = clahe.apply(cv2.cvtColor(img, cv2.COLOR_BGR2GRAY))
@@ -162,6 +162,7 @@ class App:
                             clusterData = np.vstack((clusterData,(x,y)))
                             clusterDataX = np.vstack((clusterDataX,x))
                             clusterDataY = np.vstack((clusterDataY,y))
+                            
                 #Draw the FOE (not necessary)
                 cv2.circle(vis, (self.foe[0], self.foe[1]), 2, (0, 255, 0), -1)
                 
@@ -179,7 +180,6 @@ class App:
                         #add features to tracked points
                         self.tracks.append([(x, y)])
 
-            z = linkage
             self.frame_idx += 1
             self.prev_gray = frame_gray
             self.prev_time = self.time
@@ -197,30 +197,57 @@ class App:
             
             #plot when escape key is called
             if ch == 27:
-                #z = linkage(clusterData)
-                #print(z)
+                print(clusterData)
                 plt.axis([0 , 224,0, 96])
                 plt.ylabel('y')
                 plt.xlabel('x')
                 plt.title('tracked Points with relevant TTC')
                 plt.scatter(clusterDataX,clusterDataY)
                 plt.show()
-
-                ms.fit(clusterData)
-                labels = ms.labels_
-                cluster_centers = ms.cluster_centers_
-                n_clusters_ = len(np.unique(labels))
-                print("number of estimated clusters:", n_clusters_)
                 
-                colors = 10*['r.','g.','b.','c.','k.','y.','m.']
-                for i in range(len(clusterData)):
-                    plt.plot(clusterData[i][0], clusterData[i],[1], colors[labels[i]],markersize = 10)
-                plt.scatter(cluster_centers[:,0], cluster_centers[:,1],marker="x", color='k',linewidths = 5, zorder=10)
+                #clusterData = StandardScaler().fit_transform(clusterData)
+                
+                db = DBSCAN(eps=0.3,min_samples=10).fit(clusterData)
+                core_samples_mask = np.zeros_like(db.labels_, dtype=bool)
+                core_samples_mask[db.core_sample_indices_] = True
+                labels = db.labels_
+                n_clusters = len(set(labels))-(1 if -1 in labels else 0)
+                
+                print('Estimated number of clusters: %d' % n_clusters)
+                
+                unique_labels = set(labels)
+                colors = plt.cm.Spectral(np.linspace(0,1, len(unique_labels)))
+                
+                for k,col in zip(unique_labels, colors):
+                    if k == -1:
+                        col = 'k'
+
+                    class_member_mask = (labels == k)
+
+                    xy = clusterData[class_member_mask & core_samples_mask]
+                    plt.plot(xy[:,0], xy[:,1], 'o', markerfacecolor=col, markeredgecolor='k', markersize=14)
+                    
+                    xy = clusterData[class_member_mask & core_samples_mask]
+                    plt.plot(xy[:,0], xy[:,1], 'o', markerfacecolor=col, markeredgecolor='k', markersize=6)
                 plt.axis([0 , 224,0, 96])
-                plt.ylabel('y')
-                plt.xlabel('x')
-                plt.title('tracked Points with relevant TTC')
+                plt.title('Estimated number of clusters: %d' % n_clusters)
                 plt.show()
+                
+##                ms.fit(clusterData)
+##                labels = ms.labels_
+##                cluster_centers = ms.cluster_centers_
+##                n_clusters_ = len(np.unique(labels))
+##                print("number of estimated clusters:", n_clusters_)
+##                
+##                colors = 10*['r.','g.','b.','c.','k.','y.','m.']
+##                for i in range(len(clusterData)):
+##                    plt.plot(clusterData[i][0], clusterData[i],[1], colors[labels[i]],markersize = 10)
+##                plt.scatter(cluster_centers[:,0], cluster_centers[:,1],marker="x", color='k',linewidths = 5, zorder=10)
+##                plt.axis([0 , 224,0, 96])
+##                plt.ylabel('y')
+##                plt.xlabel('x')
+##                plt.title('tracked Points with relevant TTC')
+##                plt.show()
                 
                 break
 
