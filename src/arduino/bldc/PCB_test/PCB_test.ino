@@ -88,7 +88,7 @@ void setup()
 #if DEBUG
   Serial.begin( 57600 );
 #endif
-
+pinMode(13,OUTPUT);
   PWMsetup();
 }
 
@@ -172,6 +172,8 @@ void PWMloop( uint64_t currmillis )
   else
     bldc_enable = 0;
 
+
+digitalWrite(13,bldc_enable);
   // update motorfreq every 50ms
   if( dt > 50 )
   {
