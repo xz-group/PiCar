@@ -16,7 +16,6 @@ uint8_t servoAngle;
 uint8_t marker;
 uint8_t dat;
 uint8_t receive;
-bool kill = true;
 
 uint8_t tmp;
 
@@ -50,7 +49,6 @@ void spiHandler()
       break;
     }
     else if (dat == 4) {
-      kill = false;
       servoAngle = 90;
       break;
     }
