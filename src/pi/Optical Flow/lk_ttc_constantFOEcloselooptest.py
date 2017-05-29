@@ -537,14 +537,11 @@ class App:
             self.prev_time = self.time
 
             #Display the video
-##            cv2.imshow('lk_track', vis)
+            cv2.imshow('lk_track', vis)
 
 ##            cv2.imshow('CLAHE (8,8)',frame_gray)
 
             #UNCOMMENT TO WRITE FRAME TO VIDEO
-            video1.write(vis)
-            video1.write(vis)
-            video1.write(vis)
             video1.write(vis)
             video1.write(vis)
             
