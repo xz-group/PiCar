@@ -1,5 +1,7 @@
 #include <Arduino.h>
 
+//FIX ME: make timers do stuff
+
 void initTimers() {
   // set up Timer 0
   TCCR0A = 0;          // normal operation

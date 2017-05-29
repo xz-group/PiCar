@@ -6,6 +6,8 @@
 #include "dshare.h"
 #include "ddefs.h"
 #include "spi_comm.h"
+
+//FIX ME: see timer.c file
 #include "timers.h"
 #include "imu.h"
 #include "fp.h"
@@ -25,6 +27,7 @@ volatile uint8_t redge;
 volatile uint8_t newfall;
 
 // Kill Switch Interrupt
+// FIX ME: use ICP3 not 1
 ISR( TIMER1_CAPT_vect )
 {
   if( !newfall )
@@ -45,6 +48,7 @@ ISR( TIMER1_CAPT_vect )
 
 
 // Servo Pwm Update interrupt
+// FIX ME: use other timer
 ISR(TIMER0_COMPA_vect)
 {
   if(kill) {
@@ -86,11 +90,11 @@ void setup() {
   initTimers();
 
   // setup esc and servo
+  // FIX ME: pins change for leonardo
   servo.attach( 3 );
   esc.attach( 5 );
 
   // Turn kill switch off
-//  setData( KILL_SWITCH, 1 );
   kill = false;
 
   //setup IMU
