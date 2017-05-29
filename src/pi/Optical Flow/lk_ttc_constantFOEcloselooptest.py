@@ -51,7 +51,7 @@ SEND_SERVO = [2]
 SEND_BACK = [3]
 SEND_KILL = [4]
 
-DEFAULT_ANGLE = 75
+DEFAULT_ANGLE = 90
 
 
 DELAY = .0001
@@ -62,7 +62,7 @@ height = 128
 # initialize the camera and grab a reference to the raw camera capture
 camera = PiCamera()
 camera.resolution = (width, height)
-camera.framerate = 20
+camera.framerate = 25
 camera.shutter_speed = 5000
 rawCapture = PiRGBArray(camera, size=(width, height))
 
@@ -72,7 +72,7 @@ time.sleep(2)
 #UNCOMMENT IF WANT TO RECORD VIDEO
 #initialize VideoWriter object
 fourcc = cv2.VideoWriter_fourcc('M','J','P','G')
-video1 = cv2.VideoWriter('constFOE.avi',fourcc, 20.0, (200,90))
+video1 = cv2.VideoWriter('constFOE.avi',fourcc, 20.0, (width-24,height-28-18))
 
 lk_params = dict( winSize  = (23, 23),
                   maxLevel = 3,
@@ -207,7 +207,7 @@ class App:
             
             
             #Slice unnecessary pixels off image
-            img = img[int(2*height/8):int(2*height/8+90),12:212,:]
+            img = img[18:height-28,12:212,:]
             
             #To grayscale and equalize
             clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
@@ -346,7 +346,7 @@ class App:
                 #ttc0Sum, ttc1Sum, ttc2Sum, ttc3Sum, ttc4Sum = 0,0,0,0,0,0
                 
                 dbscanTime = time.time()
-                db = DBSCAN(eps=13,min_samples=3).fit(clusterData)
+                db = DBSCAN(eps=17,min_samples=2).fit(clusterData)
                 dbscanTime = time.time()-dbscanTime
 ##                print('dbscan Time = ')
 ##                print(dbscanTime)
@@ -403,6 +403,16 @@ class App:
                     minIndex = np.where(ttcAvgArr == ttcTotalAvg)[0][0]
                     xAvg = xSumArr[minIndex]/ttcCountArr[minIndex]
                     yAvg = ySumArr[minIndex]/ttcCountArr[minIndex]
+                    if minIndex == 0:
+                        cv2.putText(vis,'%.2f' % ttcTotalAvg, (5,40), cv2.FONT_HERSHEY_SIMPLEX,.3,(255,0,0))
+                    elif minIndex == 1:
+                        cv2.putText(vis,'%.2f' % ttcTotalAvg, (5,40), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+                    elif minIndex == 2:
+                        cv2.putText(vis,'%.2f' % ttcTotalAvg, (5,40), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,0,255))
+                    elif minIndex == 3:
+                        cv2.putText(vis,'%.2f' % ttcTotalAvg, (5,40), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,255))
+                    elif minIndex == 4:
+                        cv2.putText(vis,'%.2f' % ttcTotalAvg, (5,40), cv2.FONT_HERSHEY_SIMPLEX,.3,(255,0,255))
                     
                     
                    # print('Smallest TTC = %.2f' % ttcTotalAvg)
@@ -436,7 +446,6 @@ class App:
                 temp = DEFAULT_ANGLE
                 EPSILON = 5
                 
-                cv2.putText(vis,'%.2f' % ttcTotalAvg, (5,40), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
                 #cv2.putText(vis,'%.2f' % ttcTotalAvg, (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
                 
                 if xAvg == 0:
@@ -475,8 +484,8 @@ class App:
                 temp1 = int(16*ttcTotalAvg)
                 if ttcTotalAvg == 0:
                     temp1 = 100
-                elif temp1 < 50:
-                    temp1 = 50
+                elif temp1 < 60:
+                    temp1 = 60
 
                 pwm = [temp1]
 
@@ -530,6 +539,8 @@ class App:
 ##            cv2.imshow('CLAHE (8,8)',frame_gray)
 
             #UNCOMMENT TO WRITE FRAME TO VIDEO
+            video1.write(vis)
+            video1.write(vis)
             video1.write(vis)
             video1.write(vis)
             video1.write(vis)
