@@ -6,6 +6,7 @@
 Servo servo;
 Servo esc;
 
+bool check = false;
 int test;
 int pwm;
 int servoAngle;
@@ -30,7 +31,9 @@ void loop() {
      SPDR = 1;
       if((SPSR & (1 << SPIF)) != 0) { 
         spiHandler();
+        check = true;
       }
+      Serial.println(check);
 }
 
 //function that sends spi transactions

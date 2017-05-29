@@ -544,9 +544,6 @@ class App:
             #UNCOMMENT TO WRITE FRAME TO VIDEO
             video1.write(vis)
             video1.write(vis)
-            video1.write(vis)
-            video1.write(vis)
-            video1.write(vis)
             
             ch = cv2.waitKey(1)
 
