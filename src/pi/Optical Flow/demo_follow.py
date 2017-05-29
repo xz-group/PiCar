@@ -72,7 +72,7 @@ time.sleep(2)
 #UNCOMMENT IF WANT TO RECORD VIDEO
 #initialize VideoWriter object
 fourcc = cv2.VideoWriter_fourcc('M','J','P','G')
-video1 = cv2.VideoWriter('constFOE.avi',fourcc, 20.0, (width-12,height-28-18))
+video1 = cv2.VideoWriter('follow.avi',fourcc, 20.0, (width-12,height-28-18))
 
 lk_params = dict( winSize  = (23, 23),
                   maxLevel = 3,
@@ -346,7 +346,7 @@ class App:
                 #ttc0Sum, ttc1Sum, ttc2Sum, ttc3Sum, ttc4Sum = 0,0,0,0,0,0
                 
                 dbscanTime = time.time()
-                db = DBSCAN(eps=17,min_samples=2).fit(clusterData)
+                db = DBSCAN(eps=15,min_samples=7).fit(clusterData)
                 dbscanTime = time.time()-dbscanTime
 ##                print('dbscan Time = ')
 ##                print(dbscanTime)
@@ -453,7 +453,7 @@ class App:
                 if xAvg == 0:
                     #draw_str(vis, (20, 20), 'STRAIGHT')
                     cv2.putText(vis,'STRAIGHT', (5,70), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-                else
+                else:
                     xDes = midpoint 
                     xErr = xAvg - xDes
 ##                    xErr = pVal*xErr
@@ -543,14 +543,11 @@ class App:
             self.prev_time = self.time
 
             #Display the video
-            cv2.imshow('lk_track', vis)
+##            cv2.imshow('lk_track', vis)
 
 ##            cv2.imshow('CLAHE (8,8)',frame_gray)
 
             #UNCOMMENT TO WRITE FRAME TO VIDEO
-            video1.write(vis)
-            video1.write(vis)
-            video1.write(vis)
             video1.write(vis)
             video1.write(vis)
             
