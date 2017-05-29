@@ -403,6 +403,7 @@ class App:
                     minIndex = np.where(ttcAvgArr == ttcTotalAvg)[0][0]
                     xAvg = xSumArr[minIndex]/ttcCountArr[minIndex]
                     yAvg = ySumArr[minIndex]/ttcCountArr[minIndex]
+                    cv2.circle(vis,(int(xAvg),int(yAvg)),5,(255,0,100),-1)
                     if minIndex == 0:
                         cv2.putText(vis,'%.2f' % ttcTotalAvg, (5,40), cv2.FONT_HERSHEY_SIMPLEX,.3,(255,0,0))
                     elif minIndex == 1:
@@ -445,17 +446,19 @@ class App:
 
                 temp = DEFAULT_ANGLE
                 EPSILON = 5
-                
+                midpoint = 100
                 #cv2.putText(vis,'%.2f' % ttcTotalAvg, (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-                
+                cv2.line(vis,(midpoint-EPSILON,0),(midpoint-EPSILON,200),(0,0,255))
+                cv2.line(vis,(midpoint+EPSILON,0),(midpoint+EPSILON,200),(0,0,255))
                 if xAvg == 0:
                     #draw_str(vis, (20, 20), 'STRAIGHT')
-                    cv2.putText(vis,'STRAIGHT', (5,80), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-                elif (xAvg < 112 + EPSILON) and (xAvg > 112 - EPSILON):
-                    temp = int(112 + DEFAULT_ANGLE - xAvg)
-                elif xAvg < 112:
+                    cv2.putText(vis,'STRAIGHT', (5,70), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+                elif (xAvg < midpoint + EPSILON) and (xAvg > midpoint - EPSILON):
+                    cv2.putText(vis,'BUFFER', (5,70), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+                    temp = int(midpoint + DEFAULT_ANGLE - xAvg)
+                elif xAvg < midpoint:
                     #draw_str(vis, (20, 20), 'RIGHT')
-                    cv2.putText(vis,'RIGHT', (5,80), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+                    cv2.putText(vis,'RIGHT', (5,70), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
                     ##in this elif desired xAvg is 0
                     xDes = 0
                     xErr = xAvg - xDes
@@ -464,7 +467,7 @@ class App:
                     temp = int(((90.0*(xErr/224.0) + DEFAULT_ANGLE)))
                 else:
                     #draw_str(vis, (20, 20), 'LEFT')
-                    cv2.putText(vis,'LEFT', (5,80), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+                    cv2.putText(vis,'LEFT', (5,70), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
                     ##in this elif desired xAvg is 224
                     xDes = 224
                     xErr = xAvg - xDes
@@ -483,7 +486,7 @@ class App:
                 #PWM Saturation
                 temp1 = int(16*ttcTotalAvg)
                 if ttcTotalAvg == 0:
-                    temp1 = 100
+                    temp1 = 200
                 elif temp1 < 60:
                     temp1 = 60
 
@@ -534,7 +537,7 @@ class App:
             self.prev_time = self.time
 
             #Display the video
-            cv2.imshow('lk_track', vis)
+##            cv2.imshow('lk_track', vis)
 
 ##            cv2.imshow('CLAHE (8,8)',frame_gray)
 
