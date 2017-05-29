@@ -185,8 +185,6 @@ class App:
         self.prev_time = 0
         self.time = 0
         self.foe = np.matrix([100,45]).reshape(2,1)
-        self.data = list()
-        self.runCount = list()
         self.inc = 0
 
         #PID Variables
@@ -342,7 +340,7 @@ class App:
                 xSumArr = np.array([0,0,0,0,0])
                 ySumArr = np.array([0,0,0,0,0])
                 ttcCountArr = np.array([0,0,0,0,0])
-                xAvg,yAvg,ttcTotalAvg = 0,0,0
+                xAvg,yAvg,ttcTotalAvg,ttcCountTotal = 0,0,0,0
                 #ttc0Sum, ttc1Sum, ttc2Sum, ttc3Sum, ttc4Sum = 0,0,0,0,0,0
                 
                 dbscanTime = time.time()
@@ -398,7 +396,7 @@ class App:
                 #print(ttcSumArr)
                 if(sum(ttcCountArr) > 0):
                     ttcAvgArr = ttcSumArr/ttcCountArr
-                    #print(ttcAvgArr)
+                    ttcCountTotal = np.sum(ttcCountArr)
                     ttcTotalAvg = min(m for m in ttcAvgArr if m > 0)
                     minIndex = np.where(ttcAvgArr == ttcTotalAvg)[0][0]
                     xAvg = xSumArr[minIndex]/ttcCountArr[minIndex]
@@ -444,9 +442,14 @@ class App:
                 #Decides which direction to turn based on location of the center of each point
                 #Tells how quickly to turn based on magnitude of the ttc average
 
-                temp = DEFAULT_ANGLE
+                tempAngle = DEFAULT_ANGLE
                 EPSILON = 4
+                maxPWM = 125
+                minPWM = 60
+                maxAngle = 50
+                minAngle 130
                 midpoint = 106
+                max_clusters_allowed = 4
                 #cv2.putText(vis,'%.2f' % ttcTotalAvg, (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
                 cv2.line(vis,(midpoint-EPSILON,0),(midpoint-EPSILON,200),(0,0,255))
                 cv2.line(vis,(midpoint+EPSILON,0),(midpoint+EPSILON,200),(0,0,255))
@@ -455,7 +458,7 @@ class App:
                     cv2.putText(vis,'STRAIGHT', (5,70), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
                 elif (xAvg < midpoint + EPSILON) and (xAvg > midpoint - EPSILON):
                     cv2.putText(vis,'BUFFER', (5,70), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-                    temp = int(midpoint + DEFAULT_ANGLE - xAvg)
+                    tempAngle = int(midpoint + DEFAULT_ANGLE - xAvg)
                 elif xAvg < midpoint:
                     #draw_str(vis, (20, 20), 'RIGHT')
                     cv2.putText(vis,'RIGHT', (5,70), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
@@ -464,7 +467,7 @@ class App:
                     xErr = xAvg - xDes
 ##                    xErr = pVal*xErr
                     xErr = updatePID(self,xErr)
-                    temp = int(((90.0*(xErr/224.0) + DEFAULT_ANGLE)))
+                    tempAngle = int(((90.0*(xErr/224.0) + DEFAULT_ANGLE)))
                 else:
                     #draw_str(vis, (20, 20), 'LEFT')
                     cv2.putText(vis,'LEFT', (5,70), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
@@ -473,24 +476,27 @@ class App:
                     xErr = xAvg - xDes
 ##                    xErr = pVal*xErr
                     xErr = updatePID(self,xErr)
-                    temp = int((DEFAULT_ANGLE + 90.0*xErr/224.0))
+                    tempAngle = int((DEFAULT_ANGLE + 90.0*xErr/224.0))
 
                 #Servo Angle Saturation    
 
-                if temp > 130: 
-                    temp = 130
-                elif temp < 50:
-                    temp = 50
-                angle = [temp]
+                if tempAngle > maxAngle: 
+                    tempAngle = maxAngle
+                elif tempAngle < minAngle:
+                    tempAngle = minAngle
+                angle = [tempAngle]
 
                 #PWM Saturation
-                temp1 = int(16*ttcTotalAvg)
+                tempSpeed = int(16*ttcTotalAvg)
                 if ttcTotalAvg == 0:
-                    temp1 = 125
-                elif temp1 < 60:
-                    temp1 = 60
-
-                pwm = [temp1]
+                    tempSpeed = maxPWM
+                elif tempSpeed < minPWM:
+                    tempSpeed = minPWM
+                
+                if n_clusters >= max_clusters_allowed:
+                    tempSpeed = minPWM
+                
+                pwm = [tempSpeed]
 
                 #backup code
 ##                if ttcTotalAvg > 2 or ttcTotalAvg == 0:
@@ -502,12 +508,6 @@ class App:
                 
                 sendPWM(pwm)                                     
                 sendServoAngle(angle)
-
-                #Create data for the plot
-                #!= 0 filters out data when there is nothing to track
-                if ttcTotalAvg != 0:
-                    self.data.append(ttcTotalAvg)
-                    self.runCount.append(len(self.data))
                 
                 self.tracks = new_tracks
 
@@ -550,16 +550,8 @@ class App:
             #Necessary to clear the camera stream before next image is read in
             rawCapture.truncate(0)
 
-            #plot when escape key is called
-
             if ch == 27:
                 video1.release()
-                plt.axis([0 , self.inc,0, 15])
-                plt.ylabel('Time to Contact (s)')
-                plt.xlabel('time')
-                plt.title('Time to Contact')
-                plt.plot(self.runCount,self.data)
-                plt.show()
                 break
 
 def main():
