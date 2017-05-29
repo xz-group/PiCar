@@ -87,6 +87,7 @@ FILTER_COUNTS = 5
 ttcAvg = np.arange(FILTER_COUNTS)
 ttcMin = 5
 
+
 #SPI Methods
 def sendPWM(pwm):
     GPIO.output(SLAVE_SELECT,GPIO.LOW) 
@@ -217,8 +218,6 @@ class App:
             vis = img.copy()
             
             if std < 20:
-                cv2.putText(vis,'NEED BETTER LIGHTING', (5,50), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-##                cv2.imshow('lk_track', vis)
                 rawCapture.truncate(0)
                 continue
             
@@ -226,11 +225,6 @@ class App:
             ttcCount = 0
             clusterData = np.matrix([[0,0]])
 
-##            avg = np.average(frame_gray)
-##            std = np.std(frame_gray)
-##            print('Average = %.2f' % avg)
-##            print('std dev = %.2f' % std)
-##            print('')
 
             #------------------------------CALCULATE OPTICAL FLOW-----------------------------------------
             if len(self.tracks) > 0:
@@ -246,9 +240,9 @@ class App:
                 p1, st, err = cv2.calcOpticalFlowPyrLK(self.prev_gray, frame_gray, p0, None, **lk_params)
                 p0r, st, err = cv2.calcOpticalFlowPyrLK(frame_gray, self.prev_gray, p1, None, **lk_params)
                 lkTime = time.time()-lkTime
-                print('Optical Flow time = ')
-                print(lkTime)
-                print('')
+##                print('Optical Flow time = ')
+##                print(lkTime)
+##                print('')
 
                 #timestamp used for velocity in ttc
                 self.time = time.time()
@@ -270,11 +264,8 @@ class App:
                 new_tracks = []
                 i = 0
                 ttcCount = 0
-                ttcSum = 0
-                xSum = 0
-                ySum = 0
+                clusterData = np.matrix([[0,0,0]])
 
-                clusterData = np.matrix([[0,0]])
                 #Tracks are added, Focus of expansion is calculated, ttc calculated for each point
                 for tr, (x, y), (u,v), good_flag in zip(self.tracks, p1.reshape(-1, 2), vec, good):
                     #If not valid, break from loop
@@ -305,18 +296,15 @@ class App:
                     if ttc < ttcMin:
                         #cv2.putText(vis,'%.2f' % ttc, (x,y), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
                         ttcCount = ttcCount+1
-                        ttcSum = ttc + ttcSum
-                        xSum = xSum + x
-                        ySum = ySum + y
-
+                        
                         #Gather clustering data
                         if i == 0:
-                            clusterData = np.matrix([[x,y]])
-                            clusterDataX = np.matrix([[x]])
+                            clusterData = np.matrix([[x,y,ttc]])
+                            #clusterDataX = np.matrix([[x]])
                             i = i + 1
                         else:
-                            clusterData = np.vstack((clusterData,(x,y)))
-                            clusterDataX = np.vstack((clusterDataX,x))
+                            clusterData = np.vstack((clusterData,(x,y,ttc)))
+                            #clusterDataX = np.vstack((clusterDataX,x))
 ##
 ##            #K-MEANS CLUSTERING
 ##            if ttcCount > 5 :
@@ -346,59 +334,99 @@ class App:
 ##                    cv2.circle(vis, (x_, y_), 1, c, -1)
 
 ##                        #DBSCAN CLUSTERING ALGORITHM
+
+                xSum,x0Sum,x1Sum,x2Sum,x3Sum,x4Sum = 0,0,0,0,0,0
+                ySum,y0Sum,y1Sum,y2Sum,y3Sum,y4Sum = 0,0,0,0,0,0
+                ttcSum = 0
+                ttcSumArr = np.array([0.0,0.0,0.0,0.0,0.0])
+                xSumArr = np.array([0,0,0,0,0])
+                ySumArr = np.array([0,0,0,0,0])
+                ttcCountArr = np.array([0,0,0,0,0])
+                xAvg,yAvg,ttcTotalAvg = 0,0,0
+                #ttc0Sum, ttc1Sum, ttc2Sum, ttc3Sum, ttc4Sum = 0,0,0,0,0,0
+                
                 dbscanTime = time.time()
-                db = DBSCAN(eps=10,min_samples=4).fit(clusterData)
+                db = DBSCAN(eps=13,min_samples=3).fit(clusterData)
                 dbscanTime = time.time()-dbscanTime
-                print('dbscan Time = ')
-                print(dbscanTime)
-                print('')
-                core_samples_mask = np.zeros_like(db.labels_, dtype=bool)
-                core_samples_mask[db.core_sample_indices_] = True
+##                print('dbscan Time = ')
+##                print(dbscanTime)
+##                print('')
+                
                 labels = db.labels_
                 n_clusters = len(set(labels))-(1 if -1 in labels else 0)
             
 ##                        print('Estimated number of clusters: %d' % n_clusters)
-##                        print(labels)                        
-            
+                #print(labels)                        
                 for k in set(labels):
                     if k == -1:
                         continue
                     class_member_mask = (labels == k)
-                    xy = clusterData[class_member_mask & core_samples_mask]
-##                            print('xy = ')
-##                            print(xy.shape)
+                    xy = clusterData[class_member_mask]
 
-                    for x,y in zip(xy[:,0],xy[:,1]):
+                    for x_,y_,ttc_ in zip(xy[:,0],xy[:,1],xy[:,2]):
                         if k == 0:
-                            cv2.putText(vis,'x', (x,y), cv2.FONT_HERSHEY_SIMPLEX,.25,(255,0,0))
+                            ttcSumArr[0] += ttc_
+                            xSumArr[0] += x_
+                            ySumArr[0] += y_
+                            ttcCountArr[0]+=1
+                            cv2.putText(vis,'x', (x_,y_), cv2.FONT_HERSHEY_SIMPLEX,.25,(255,0,0))
                         elif k == 1:
-                            cv2.putText(vis,'x', (x,y), cv2.FONT_HERSHEY_SIMPLEX,.25,(0,255,0))
+                            ttcSumArr[1] += ttc_
+                            xSumArr[1] += x_
+                            ySumArr[1] += y_
+                            ttcCountArr[1]+=1
+                            cv2.putText(vis,'x', (x_,y_), cv2.FONT_HERSHEY_SIMPLEX,.25,(0,255,0))
                         elif k == 2:
-                            cv2.putText(vis,'x', (x,y), cv2.FONT_HERSHEY_SIMPLEX,.25,(0,0,255))
+                            ttcSumArr[2] += ttc_
+                            xSumArr[2] += x_
+                            ySumArr[2] += y_
+                            ttcCountArr[2]+=1
+                            cv2.putText(vis,'x', (x_,y_), cv2.FONT_HERSHEY_SIMPLEX,.25,(0,0,255))
                         elif k == 3:
-                            cv2.putText(vis,'x', (x,y), cv2.FONT_HERSHEY_SIMPLEX,.25,(255,255,255))
-
-
+                            ttcSumArr[3] += ttc_
+                            xSumArr[3] += x_
+                            ySumArr[3] += y_
+                            ttcCountArr[3]+=1
+                            cv2.putText(vis,'x', (x_,y_), cv2.FONT_HERSHEY_SIMPLEX,.25,(0,255,255))
+                        elif k == 4:
+                            ttcSumArr[4] += ttc_
+                            xSumArr[4] += x_
+                            ySumArr[4] += y_
+                            ttcCountArr[4]+=1
+                            cv2.putText(vis,'x', (x_,y_), cv2.FONT_HERSHEY_SIMPLEX,.25,(255,0,255))
+                            
+                #print(ttcSumArr)
+                if(sum(ttcCountArr) > 0):
+                    ttcAvgArr = ttcSumArr/ttcCountArr
+                    #print(ttcAvgArr)
+                    ttcTotalAvg = min(m for m in ttcAvgArr if m > 0)
+                    minIndex = np.where(ttcAvgArr == ttcTotalAvg)[0][0]
+                    xAvg = xSumArr[minIndex]/ttcCountArr[minIndex]
+                    yAvg = ySumArr[minIndex]/ttcCountArr[minIndex]
+                    
+                    
+                   # print('Smallest TTC = %.2f' % ttcTotalAvg)
+                        
                 #ROLLING AVERAGE FILTER
                 #Each entry in rolling average array is the average of all points with small time to contact
-                ttcTotalAvg = 0
-                xAvg = 0
-                yAvg = 0
-
-                rAvgTime = time.time()
-
-                if ttcCount > 0:
-                    self.inc = self.inc + 1        
-                    ttcAvg[self.inc % FILTER_COUNTS] = ttcSum/ttcCount
-                    xAvg = xSum/ttcCount
-                    yAvg = ySum/ttcCount
-                    
-                    for val in ttcAvg:
-                        ttcTotalAvg = val + ttcTotalAvg
-                    
-                    ttcTotalAvg = ttcTotalAvg/FILTER_COUNTS
-
-                rAvgTime = time.time()-rAvgTime
+##                ttcTotalAvg = 0
+##                xAvg = 0
+##                yAvg = 0
+##
+##                rAvgTime = time.time()
+##
+##                if ttcCount > 0:
+##                    self.inc = self.inc + 1        
+##                    ttcAvg[self.inc % FILTER_COUNTS] = ttcSum/ttcCount
+##                    xAvg = xSum/ttcCount
+##                    yAvg = ySum/ttcCount
+##                    
+##                    for val in ttcAvg:
+##                        ttcTotalAvg = val + ttcTotalAvg
+##                    
+##                    ttcTotalAvg = ttcTotalAvg/FILTER_COUNTS
+##
+##                rAvgTime = time.time()-rAvgTime
 
 
                 #-----------------------------A PRETEND CONTROL OUTPUT---------------------------------------
@@ -408,8 +436,8 @@ class App:
                 temp = DEFAULT_ANGLE
                 EPSILON = 5
                 
-                cv2.putText(vis,'%.2f' % std, (5,40), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-                cv2.putText(vis,'%.2f' % ttcMin, (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+                cv2.putText(vis,'%.2f' % ttcTotalAvg, (5,40), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+                #cv2.putText(vis,'%.2f' % ttcTotalAvg, (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
                 
                 if xAvg == 0:
                     #draw_str(vis, (20, 20), 'STRAIGHT')
