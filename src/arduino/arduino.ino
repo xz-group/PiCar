@@ -15,7 +15,7 @@
 Servo servo;
 Servo esc;
 
-float SPEED_SCALE = 1.45;
+float SPEED_SCALE = 1.25;
 int tempAngle = 90;
 int tempPWM = 0;
 
@@ -110,7 +110,7 @@ void setup() {
 } 
 
 void loop() {
-//  Serial.println(tempAngle);
+  Serial.println(tempAngle);
 //  Serial.println(SPEED_SCALE*tempPWM);
 if( newfall )
   {
