@@ -15,9 +15,9 @@
 Servo servo;
 Servo esc;
 
-float SPEED_SCALE = 1.25;
-int tempAngle = 90;
-int tempPWM = 0;
+float SPEED_SCALE = 1.5;
+volatile int tempAngle = 90;
+volatile int tempPWM = 0;
 
 bool kill;
 
@@ -52,8 +52,10 @@ ISR( TIMER1_CAPT_vect )
 ISR(TIMER0_COMPA_vect)
 {
   if(kill) {
-    servo.write(90);
-    esc.writeMicroseconds(1500);
+    tempAngle = 90;
+    servo.write(tempAngle);
+    tempPWM = 1500;
+    esc.writeMicroseconds(tempPWM);
   }
   else {
     if ( getData( SERVO_ANGLE, &tempAngle ) == DSHARE_OK ) {
@@ -111,7 +113,7 @@ void setup() {
 
 void loop() {
   Serial.println(tempAngle);
-//  Serial.println(SPEED_SCALE*tempPWM);
+  Serial.println(SPEED_SCALE*tempPWM);
 if( newfall )
   {
     noInterrupts();

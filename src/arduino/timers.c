@@ -5,7 +5,7 @@
 void initTimers() {
   // set up Timer 0
   TCCR0A = 0;          // normal operation
-  TCCR0B = bit(WGM12) | bit(CS10) | bit (CS12);   // pre-scaling
+  TCCR0B = bit(WGM02) | bit(CS00) | bit (CS02);   // pre-scaling
   OCR0A =  100;       // compare A register value (1000 * clock speed)
   TIMSK0 = bit (OCIE1A);
 
