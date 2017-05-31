@@ -14313,7 +14313,7 @@ WashU ESE Dept - May 2017</text>
 <attribute name="NAME" x="331.4954" y="51.054" size="1.778" layer="95"/>
 <attribute name="VALUE" x="331.724" y="46.99" size="1.778" layer="96"/>
 </instance>
-<instance part="GND14" gate="1" x="307.34" y="134.62"/>
+<instance part="GND14" gate="1" x="307.34" y="137.16"/>
 <instance part="P+8" gate="1" x="127" y="243.84"/>
 <instance part="+3V6" gate="G$1" x="20.32" y="241.3"/>
 <instance part="U11" gate="G$1" x="111.76" y="73.66" smashed="yes" rot="MR90">
@@ -14353,16 +14353,16 @@ WashU ESE Dept - May 2017</text>
 <instance part="C29" gate="G$1" x="360.68" y="208.28"/>
 <instance part="P+5" gate="1" x="360.68" y="218.44"/>
 <instance part="GND13" gate="1" x="360.68" y="195.58"/>
-<instance part="EXTRAIO" gate="-1" x="309.88" y="96.52" smashed="yes">
-<attribute name="NAME" x="312.42" y="95.758" size="1.524" layer="95"/>
-<attribute name="VALUE" x="306.578" y="115.697" size="1.778" layer="96"/>
+<instance part="EXTRAIO" gate="-1" x="312.42" y="101.6" smashed="yes">
+<attribute name="NAME" x="314.96" y="100.838" size="1.524" layer="95"/>
+<attribute name="VALUE" x="309.118" y="120.777" size="1.778" layer="96"/>
 </instance>
-<instance part="EXTRAIO" gate="-2" x="309.88" y="109.22"/>
-<instance part="EXTRAIO" gate="-3" x="287.02" y="104.14"/>
-<instance part="EXTRAIO" gate="-4" x="287.02" y="101.6"/>
-<instance part="C37" gate="G$1" x="304.8" y="104.14"/>
-<instance part="GND15" gate="1" x="304.8" y="91.44"/>
-<instance part="P+7" gate="1" x="304.8" y="114.3"/>
+<instance part="EXTRAIO" gate="-2" x="312.42" y="114.3"/>
+<instance part="EXTRAIO" gate="-3" x="289.56" y="109.22"/>
+<instance part="EXTRAIO" gate="-4" x="289.56" y="106.68"/>
+<instance part="C37" gate="G$1" x="307.34" y="109.22"/>
+<instance part="GND15" gate="1" x="307.34" y="96.52"/>
+<instance part="P+7" gate="1" x="307.34" y="119.38"/>
 <instance part="R16" gate="G$1" x="241.3" y="215.9"/>
 </instances>
 <busses>
@@ -14747,7 +14747,7 @@ WashU ESE Dept - May 2017</text>
 <wire x1="307.34" y1="162.56" x2="307.34" y2="154.94" width="0.1524" layer="91"/>
 <wire x1="307.34" y1="154.94" x2="307.34" y2="147.32" width="0.1524" layer="91"/>
 <wire x1="307.34" y1="147.32" x2="307.34" y2="142.24" width="0.1524" layer="91"/>
-<wire x1="307.34" y1="142.24" x2="307.34" y2="137.16" width="0.1524" layer="91"/>
+<wire x1="307.34" y1="142.24" x2="307.34" y2="139.7" width="0.1524" layer="91"/>
 <junction x="307.34" y="162.56"/>
 <pinref part="U10" gate="G3" pin="OE"/>
 <wire x1="307.34" y1="170.18" x2="307.34" y2="162.56" width="0.1524" layer="91"/>
@@ -14774,11 +14774,11 @@ WashU ESE Dept - May 2017</text>
 <segment>
 <pinref part="GND15" gate="1" pin="GND"/>
 <pinref part="C37" gate="G$1" pin="2"/>
-<wire x1="304.8" y1="93.98" x2="304.8" y2="96.52" width="0.1524" layer="91"/>
+<wire x1="307.34" y1="99.06" x2="307.34" y2="101.6" width="0.1524" layer="91"/>
 <pinref part="EXTRAIO" gate="-1" pin="S"/>
-<wire x1="304.8" y1="96.52" x2="304.8" y2="99.06" width="0.1524" layer="91"/>
-<wire x1="307.34" y1="96.52" x2="304.8" y2="96.52" width="0.1524" layer="91"/>
-<junction x="304.8" y="96.52"/>
+<wire x1="307.34" y1="101.6" x2="307.34" y2="104.14" width="0.1524" layer="91"/>
+<wire x1="309.88" y1="101.6" x2="307.34" y2="101.6" width="0.1524" layer="91"/>
+<junction x="307.34" y="101.6"/>
 </segment>
 <segment>
 <pinref part="U9" gate="G$1" pin="PE2(!HWB!)"/>
@@ -15021,11 +15021,11 @@ WashU ESE Dept - May 2017</text>
 <segment>
 <pinref part="EXTRAIO" gate="-2" pin="S"/>
 <pinref part="P+7" gate="1" pin="+5V"/>
-<wire x1="307.34" y1="109.22" x2="304.8" y2="109.22" width="0.1524" layer="91"/>
-<wire x1="304.8" y1="109.22" x2="304.8" y2="111.76" width="0.1524" layer="91"/>
+<wire x1="309.88" y1="114.3" x2="307.34" y2="114.3" width="0.1524" layer="91"/>
+<wire x1="307.34" y1="114.3" x2="307.34" y2="116.84" width="0.1524" layer="91"/>
 <pinref part="C37" gate="G$1" pin="1"/>
-<wire x1="304.8" y1="109.22" x2="304.8" y2="106.68" width="0.1524" layer="91"/>
-<junction x="304.8" y="109.22"/>
+<wire x1="307.34" y1="114.3" x2="307.34" y2="111.76" width="0.1524" layer="91"/>
+<junction x="307.34" y="114.3"/>
 </segment>
 </net>
 <net name="+3V3" class="0">
@@ -15348,8 +15348,8 @@ WashU ESE Dept - May 2017</text>
 </segment>
 <segment>
 <pinref part="EXTRAIO" gate="-3" pin="S"/>
-<wire x1="284.48" y1="104.14" x2="274.32" y2="104.14" width="0.1524" layer="91"/>
-<label x="274.32" y="104.14" size="1.778" layer="95"/>
+<wire x1="287.02" y1="109.22" x2="276.86" y2="109.22" width="0.1524" layer="91"/>
+<label x="276.86" y="109.22" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="ATPB4" class="0">
@@ -15390,8 +15390,8 @@ WashU ESE Dept - May 2017</text>
 </segment>
 <segment>
 <pinref part="EXTRAIO" gate="-4" pin="S"/>
-<wire x1="284.48" y1="101.6" x2="274.32" y2="101.6" width="0.1524" layer="91"/>
-<label x="274.32" y="101.6" size="1.778" layer="95"/>
+<wire x1="287.02" y1="106.68" x2="276.86" y2="106.68" width="0.1524" layer="91"/>
+<label x="276.86" y="106.68" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="ATTX1" class="0">
