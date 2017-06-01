@@ -185,8 +185,6 @@ class App:
         self.prev_time = 0
         self.time = 0
         self.foe = np.matrix([100,45]).reshape(2,1)
-        self.data = list()
-        self.runCount = list()
         self.inc = 0
 
         #PID Variables
@@ -339,7 +337,12 @@ class App:
                 xSumArr = np.array([0,0,0,0,0])
                 ySumArr = np.array([0,0,0,0,0])
                 ttcCountArr = np.array([0,0,0,0,0])
+<<<<<<< HEAD
                 xAvg,yAvg,ttcTotalAvg = 0,0,0
+=======
+                xAvg,yAvg,ttcTotalAvg,ttcCountTotal = 0,0,0,0
+                #ttc0Sum, ttc1Sum, ttc2Sum, ttc3Sum, ttc4Sum = 0,0,0,0,0,0
+>>>>>>> 43796ff4781748b7aac3d3fc18477adc27424fc4
                 
                 dbscanTime = time.time()
                 db = DBSCAN(eps=17,min_samples=2).fit(clusterData)
@@ -396,6 +399,10 @@ class App:
                 if(sum(ttcCountArr) > 0):
                     
                     ttcAvgArr = ttcSumArr/ttcCountArr
+<<<<<<< HEAD
+=======
+                    ttcCountTotal = np.sum(ttcCountArr)
+>>>>>>> 43796ff4781748b7aac3d3fc18477adc27424fc4
                     ttcTotalAvg = min(m for m in ttcAvgArr if m > 0)
                     minIndex = np.where(ttcAvgArr == ttcTotalAvg)[0][0]
                     xAvg = xSumArr[minIndex]/ttcCountArr[minIndex]
@@ -419,9 +426,14 @@ class App:
                 #Decides which direction to turn based on location of the center of each point
                 #Tells how quickly to turn based on magnitude of the ttc average
 
-                temp = DEFAULT_ANGLE
+                tempAngle = DEFAULT_ANGLE
                 EPSILON = 4
+                maxPWM = 125
+                minPWM = 60
+                maxAngle = 50
+                minAngle 130
                 midpoint = 106
+                max_clusters_allowed = 4
                 #cv2.putText(vis,'%.2f' % ttcTotalAvg, (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
                 cv2.line(vis,(midpoint-EPSILON,0),(midpoint-EPSILON,200),(0,0,255))
                 cv2.line(vis,(midpoint+EPSILON,0),(midpoint+EPSILON,200),(0,0,255))
@@ -430,40 +442,51 @@ class App:
                     
                 elif (xAvg < midpoint + EPSILON) and (xAvg > midpoint - EPSILON):
                     cv2.putText(vis,'BUFFER', (5,70), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+<<<<<<< HEAD
                     temp = int(midpoint + DEFAULT_ANGLE - xAvg)
                     
+=======
+                    tempAngle = int(midpoint + DEFAULT_ANGLE - xAvg)
+>>>>>>> 43796ff4781748b7aac3d3fc18477adc27424fc4
                 elif xAvg < midpoint:
                     cv2.putText(vis,'RIGHT', (5,70), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
                     ##in this elif desired xAvg is 0
                     xDes = 0
                     xErr = xAvg - xDes
                     xErr = updatePID(self,xErr)
+<<<<<<< HEAD
                     temp = int(((90.0*(xErr/224.0) + DEFAULT_ANGLE)))
                     
+=======
+                    tempAngle = int(((90.0*(xErr/224.0) + DEFAULT_ANGLE)))
+>>>>>>> 43796ff4781748b7aac3d3fc18477adc27424fc4
                 else:
                     cv2.putText(vis,'LEFT', (5,70), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
                     ##in this elif desired xAvg is 224
                     xDes = 224
                     xErr = xAvg - xDes
                     xErr = updatePID(self,xErr)
-                    temp = int((DEFAULT_ANGLE + 90.0*xErr/224.0))
+                    tempAngle = int((DEFAULT_ANGLE + 90.0*xErr/224.0))
 
                 #Servo Angle Saturation    
 
-                if temp > 130: 
-                    temp = 130
-                elif temp < 50:
-                    temp = 50
-                angle = [temp]
+                if tempAngle > maxAngle: 
+                    tempAngle = maxAngle
+                elif tempAngle < minAngle:
+                    tempAngle = minAngle
+                angle = [tempAngle]
 
                 #PWM Saturation
-                temp1 = int(16*ttcTotalAvg)
+                tempSpeed = int(16*ttcTotalAvg)
                 if ttcTotalAvg == 0:
-                    temp1 = 125
-                elif temp1 < 60:
-                    temp1 = 60
-
-                pwm = [temp1]
+                    tempSpeed = maxPWM
+                elif tempSpeed < minPWM:
+                    tempSpeed = minPWM
+                
+                if n_clusters >= max_clusters_allowed:
+                    tempSpeed = minPWM
+                
+                pwm = [tempSpeed]
 
                 #backup code
 ##                if ttcTotalAvg > 2 or ttcTotalAvg == 0:
@@ -475,12 +498,6 @@ class App:
                 
                 sendPWM(pwm)                                     
                 sendServoAngle(angle)
-
-                #Create data for the plot
-                #!= 0 filters out data when there is nothing to track
-                if ttcTotalAvg != 0:
-                    self.data.append(ttcTotalAvg)
-                    self.runCount.append(len(self.data))
                 
                 self.tracks = new_tracks
           
