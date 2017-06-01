@@ -13987,6 +13987,7 @@ DIN A3, landscape with location and doc. field</description>
 <part name="P+7" library="supply1" deviceset="+5V" device=""/>
 <part name="R16" library="resistor" deviceset="R-US_" device="R1206" value="10k"/>
 <part name="U4" library="rpibout" deviceset="CAT24C32" device=""/>
+<part name="C41" library="resistor" deviceset="C-US" device="C1206" value="0.1u"/>
 </parts>
 <sheets>
 <sheet>
@@ -14080,11 +14081,11 @@ WashU ESE Dept - May 2017</text>
 <instance part="GND17" gate="1" x="48.26" y="10.16"/>
 <instance part="C17" gate="G$1" x="25.4" y="33.02"/>
 <instance part="GND18" gate="1" x="25.4" y="22.86"/>
-<instance part="ENCODER" gate="-1" x="365.76" y="180.34" smashed="yes">
-<attribute name="NAME" x="368.3" y="179.578" size="1.524" layer="95"/>
+<instance part="ENCODER" gate="-1" x="365.76" y="167.64" smashed="yes">
+<attribute name="NAME" x="368.3" y="166.878" size="1.524" layer="95"/>
 <attribute name="VALUE" x="362.458" y="186.817" size="1.778" layer="96"/>
 </instance>
-<instance part="ENCODER" gate="-2" x="365.76" y="167.64"/>
+<instance part="ENCODER" gate="-2" x="365.76" y="180.34"/>
 <instance part="ENCODER" gate="-3" x="345.44" y="170.18"/>
 <instance part="ENCODER" gate="-4" x="345.44" y="167.64"/>
 <instance part="R26" gate="G$1" x="337.82" y="177.8" smashed="yes" rot="R90">
@@ -14097,13 +14098,13 @@ WashU ESE Dept - May 2017</text>
 </instance>
 <instance part="P+4" gate="1" x="360.68" y="185.42"/>
 <instance part="GND36" gate="1" x="360.68" y="162.56"/>
-<instance part="IMU" gate="-1" x="345.44" y="40.64" smashed="yes">
-<attribute name="NAME" x="347.98" y="39.878" size="1.524" layer="95"/>
+<instance part="IMU" gate="-1" x="365.76" y="35.56" smashed="yes">
+<attribute name="NAME" x="368.3" y="34.798" size="1.524" layer="95"/>
 <attribute name="VALUE" x="362.458" y="54.737" size="1.778" layer="96"/>
 </instance>
-<instance part="IMU" gate="-2" x="345.44" y="33.02"/>
-<instance part="IMU" gate="-3" x="365.76" y="48.26"/>
-<instance part="IMU" gate="-4" x="365.76" y="35.56"/>
+<instance part="IMU" gate="-2" x="365.76" y="48.26"/>
+<instance part="IMU" gate="-3" x="345.44" y="40.64"/>
+<instance part="IMU" gate="-4" x="345.44" y="33.02"/>
 <instance part="GND40" gate="1" x="360.68" y="30.48"/>
 <instance part="+3V2" gate="G$1" x="360.68" y="53.34"/>
 <instance part="C33" gate="G$1" x="360.68" y="43.18"/>
@@ -14119,23 +14120,23 @@ WashU ESE Dept - May 2017</text>
 <instance part="GND46" gate="1" x="96.52" y="40.64"/>
 <instance part="GND47" gate="1" x="116.84" y="40.64"/>
 <instance part="P+9" gate="1" x="116.84" y="81.28"/>
-<instance part="HALL1" gate="-1" x="365.76" y="147.32" smashed="yes">
-<attribute name="NAME" x="368.3" y="146.558" size="1.524" layer="95"/>
+<instance part="HALL1" gate="-1" x="365.76" y="134.62" smashed="yes">
+<attribute name="NAME" x="368.3" y="133.858" size="1.524" layer="95"/>
 <attribute name="VALUE" x="362.458" y="153.797" size="1.778" layer="96"/>
 </instance>
-<instance part="HALL1" gate="-2" x="365.76" y="134.62"/>
+<instance part="HALL1" gate="-2" x="365.76" y="147.32"/>
 <instance part="HALL1" gate="-3" x="345.44" y="137.16"/>
-<instance part="HALL2" gate="-1" x="365.76" y="114.3" smashed="yes">
-<attribute name="NAME" x="368.3" y="113.538" size="1.524" layer="95"/>
+<instance part="HALL2" gate="-1" x="365.76" y="101.6" smashed="yes">
+<attribute name="NAME" x="368.3" y="100.838" size="1.524" layer="95"/>
 <attribute name="VALUE" x="362.458" y="120.777" size="1.778" layer="96"/>
 </instance>
-<instance part="HALL2" gate="-2" x="365.76" y="101.6"/>
+<instance part="HALL2" gate="-2" x="365.76" y="114.3"/>
 <instance part="HALL2" gate="-3" x="345.44" y="104.14"/>
-<instance part="HALL3" gate="-1" x="365.76" y="81.28" smashed="yes">
-<attribute name="NAME" x="368.3" y="80.518" size="1.524" layer="95"/>
+<instance part="HALL3" gate="-1" x="365.76" y="68.58" smashed="yes">
+<attribute name="NAME" x="368.3" y="67.818" size="1.524" layer="95"/>
 <attribute name="VALUE" x="362.458" y="87.757" size="1.778" layer="96"/>
 </instance>
-<instance part="HALL3" gate="-2" x="365.76" y="68.58"/>
+<instance part="HALL3" gate="-2" x="365.76" y="81.28"/>
 <instance part="HALL3" gate="-3" x="345.44" y="71.12"/>
 <instance part="P+11" gate="1" x="360.68" y="152.4"/>
 <instance part="GND49" gate="1" x="360.68" y="129.54"/>
@@ -14354,6 +14355,7 @@ WashU ESE Dept - May 2017</text>
 <instance part="R16" gate="G$1" x="218.44" y="208.28"/>
 <instance part="U5" gate="G4" x="279.4" y="193.04"/>
 <instance part="U4" gate="G$1" x="38.1" y="228.6"/>
+<instance part="C41" gate="G$1" x="360.68" y="76.2"/>
 </instances>
 <busses>
 </busses>
@@ -14469,12 +14471,12 @@ WashU ESE Dept - May 2017</text>
 <wire x1="25.4" y1="25.4" x2="25.4" y2="27.94" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="ENCODER" gate="-2" pin="S"/>
 <pinref part="GND36" gate="1" pin="GND"/>
-<wire x1="363.22" y1="167.64" x2="360.68" y2="167.64" width="0.1524" layer="91"/>
-<wire x1="360.68" y1="167.64" x2="360.68" y2="165.1" width="0.1524" layer="91"/>
 <pinref part="C25" gate="G$1" pin="2"/>
+<wire x1="360.68" y1="165.1" x2="360.68" y2="167.64" width="0.1524" layer="91"/>
+<pinref part="ENCODER" gate="-1" pin="S"/>
 <wire x1="360.68" y1="167.64" x2="360.68" y2="170.18" width="0.1524" layer="91"/>
+<wire x1="363.22" y1="167.64" x2="360.68" y2="167.64" width="0.1524" layer="91"/>
 <junction x="360.68" y="167.64"/>
 </segment>
 <segment>
@@ -14516,11 +14518,11 @@ WashU ESE Dept - May 2017</text>
 </segment>
 <segment>
 <pinref part="GND49" gate="1" pin="GND"/>
-<pinref part="HALL1" gate="-2" pin="S"/>
-<wire x1="363.22" y1="134.62" x2="360.68" y2="134.62" width="0.1524" layer="91"/>
-<wire x1="360.68" y1="134.62" x2="360.68" y2="132.08" width="0.1524" layer="91"/>
 <pinref part="C27" gate="G$1" pin="2"/>
 <wire x1="360.68" y1="137.16" x2="360.68" y2="134.62" width="0.1524" layer="91"/>
+<pinref part="HALL1" gate="-1" pin="S"/>
+<wire x1="360.68" y1="134.62" x2="360.68" y2="132.08" width="0.1524" layer="91"/>
+<wire x1="363.22" y1="134.62" x2="360.68" y2="134.62" width="0.1524" layer="91"/>
 <junction x="360.68" y="134.62"/>
 </segment>
 <segment>
@@ -14651,25 +14653,28 @@ WashU ESE Dept - May 2017</text>
 <pinref part="C33" gate="G$1" pin="2"/>
 <pinref part="GND40" gate="1" pin="GND"/>
 <wire x1="360.68" y1="38.1" x2="360.68" y2="35.56" width="0.1524" layer="91"/>
-<pinref part="IMU" gate="-4" pin="S"/>
+<pinref part="IMU" gate="-1" pin="S"/>
 <wire x1="360.68" y1="35.56" x2="360.68" y2="33.02" width="0.1524" layer="91"/>
 <wire x1="363.22" y1="35.56" x2="360.68" y2="35.56" width="0.1524" layer="91"/>
 <junction x="360.68" y="35.56"/>
 </segment>
 <segment>
-<pinref part="HALL2" gate="-2" pin="S"/>
-<wire x1="363.22" y1="101.6" x2="360.68" y2="101.6" width="0.1524" layer="91"/>
-<wire x1="360.68" y1="101.6" x2="360.68" y2="99.06" width="0.1524" layer="91"/>
 <pinref part="GND2" gate="1" pin="GND"/>
 <pinref part="C28" gate="G$1" pin="2"/>
 <wire x1="360.68" y1="104.14" x2="360.68" y2="101.6" width="0.1524" layer="91"/>
+<pinref part="HALL2" gate="-1" pin="S"/>
+<wire x1="360.68" y1="101.6" x2="360.68" y2="99.06" width="0.1524" layer="91"/>
+<wire x1="363.22" y1="101.6" x2="360.68" y2="101.6" width="0.1524" layer="91"/>
 <junction x="360.68" y="101.6"/>
 </segment>
 <segment>
-<pinref part="HALL3" gate="-2" pin="S"/>
-<wire x1="363.22" y1="68.58" x2="360.68" y2="68.58" width="0.1524" layer="91"/>
 <wire x1="360.68" y1="68.58" x2="360.68" y2="66.04" width="0.1524" layer="91"/>
 <pinref part="GND4" gate="1" pin="GND"/>
+<pinref part="HALL3" gate="-1" pin="S"/>
+<wire x1="363.22" y1="68.58" x2="360.68" y2="68.58" width="0.1524" layer="91"/>
+<pinref part="C41" gate="G$1" pin="2"/>
+<wire x1="360.68" y1="68.58" x2="360.68" y2="71.12" width="0.1524" layer="91"/>
+<junction x="360.68" y="68.58"/>
 </segment>
 <segment>
 <pinref part="GND6" gate="1" pin="GND"/>
@@ -14862,21 +14867,21 @@ WashU ESE Dept - May 2017</text>
 </net>
 <net name="+5V" class="0">
 <segment>
-<pinref part="ENCODER" gate="-1" pin="S"/>
 <pinref part="P+4" gate="1" pin="+5V"/>
-<wire x1="363.22" y1="180.34" x2="360.68" y2="180.34" width="0.1524" layer="91"/>
-<wire x1="360.68" y1="180.34" x2="360.68" y2="182.88" width="0.1524" layer="91"/>
 <pinref part="C25" gate="G$1" pin="1"/>
 <wire x1="360.68" y1="177.8" x2="360.68" y2="180.34" width="0.1524" layer="91"/>
+<pinref part="ENCODER" gate="-2" pin="S"/>
+<wire x1="360.68" y1="180.34" x2="360.68" y2="182.88" width="0.1524" layer="91"/>
+<wire x1="363.22" y1="180.34" x2="360.68" y2="180.34" width="0.1524" layer="91"/>
 <junction x="360.68" y="180.34"/>
 </segment>
 <segment>
-<pinref part="HALL1" gate="-1" pin="S"/>
 <pinref part="P+11" gate="1" pin="+5V"/>
-<wire x1="360.68" y1="149.86" x2="360.68" y2="147.32" width="0.1524" layer="91"/>
-<wire x1="360.68" y1="147.32" x2="363.22" y2="147.32" width="0.1524" layer="91"/>
 <pinref part="C27" gate="G$1" pin="1"/>
+<wire x1="360.68" y1="149.86" x2="360.68" y2="147.32" width="0.1524" layer="91"/>
+<pinref part="HALL1" gate="-2" pin="S"/>
 <wire x1="360.68" y1="147.32" x2="360.68" y2="144.78" width="0.1524" layer="91"/>
+<wire x1="363.22" y1="147.32" x2="360.68" y2="147.32" width="0.1524" layer="91"/>
 <junction x="360.68" y="147.32"/>
 </segment>
 <segment>
@@ -14944,7 +14949,7 @@ WashU ESE Dept - May 2017</text>
 <pinref part="P+14" gate="1" pin="+5V"/>
 <pinref part="C28" gate="G$1" pin="1"/>
 <wire x1="360.68" y1="116.84" x2="360.68" y2="114.3" width="0.1524" layer="91"/>
-<pinref part="HALL2" gate="-1" pin="S"/>
+<pinref part="HALL2" gate="-2" pin="S"/>
 <wire x1="360.68" y1="114.3" x2="360.68" y2="111.76" width="0.1524" layer="91"/>
 <wire x1="363.22" y1="114.3" x2="360.68" y2="114.3" width="0.1524" layer="91"/>
 <junction x="360.68" y="114.3"/>
@@ -14960,8 +14965,11 @@ WashU ESE Dept - May 2017</text>
 <segment>
 <pinref part="P+17" gate="1" pin="+5V"/>
 <wire x1="360.68" y1="83.82" x2="360.68" y2="81.28" width="0.1524" layer="91"/>
-<pinref part="HALL3" gate="-1" pin="S"/>
+<pinref part="HALL3" gate="-2" pin="S"/>
 <wire x1="363.22" y1="81.28" x2="360.68" y2="81.28" width="0.1524" layer="91"/>
+<pinref part="C41" gate="G$1" pin="1"/>
+<wire x1="360.68" y1="81.28" x2="360.68" y2="78.74" width="0.1524" layer="91"/>
+<junction x="360.68" y="81.28"/>
 </segment>
 <segment>
 <pinref part="P+19" gate="1" pin="+5V"/>
@@ -15037,7 +15045,7 @@ WashU ESE Dept - May 2017</text>
 <pinref part="+3V2" gate="G$1" pin="+3V3"/>
 <pinref part="C33" gate="G$1" pin="1"/>
 <wire x1="360.68" y1="50.8" x2="360.68" y2="48.26" width="0.1524" layer="91"/>
-<pinref part="IMU" gate="-3" pin="S"/>
+<pinref part="IMU" gate="-2" pin="S"/>
 <wire x1="360.68" y1="48.26" x2="360.68" y2="45.72" width="0.1524" layer="91"/>
 <wire x1="363.22" y1="48.26" x2="360.68" y2="48.26" width="0.1524" layer="91"/>
 <junction x="360.68" y="48.26"/>
@@ -15423,13 +15431,13 @@ WashU ESE Dept - May 2017</text>
 </net>
 <net name="IMUSCL" class="0">
 <segment>
-<pinref part="IMU" gate="-1" pin="S"/>
-<wire x1="342.9" y1="40.64" x2="327.66" y2="40.64" width="0.1524" layer="91"/>
 <label x="332.74" y="40.64" size="1.778" layer="95"/>
 <pinref part="U13" gate="T1" pin="S"/>
 <pinref part="R20" gate="G$1" pin="1"/>
 <wire x1="327.66" y1="40.64" x2="320.04" y2="40.64" width="0.1524" layer="91"/>
 <wire x1="327.66" y1="43.18" x2="327.66" y2="40.64" width="0.1524" layer="91"/>
+<pinref part="IMU" gate="-3" pin="S"/>
+<wire x1="327.66" y1="40.64" x2="342.9" y2="40.64" width="0.1524" layer="91"/>
 <junction x="327.66" y="40.64"/>
 </segment>
 <segment>
@@ -15440,13 +15448,13 @@ WashU ESE Dept - May 2017</text>
 </net>
 <net name="IMUSDA" class="0">
 <segment>
-<pinref part="IMU" gate="-2" pin="S"/>
-<wire x1="342.9" y1="33.02" x2="330.2" y2="33.02" width="0.1524" layer="91"/>
 <label x="332.74" y="33.02" size="1.778" layer="95"/>
 <pinref part="U13" gate="T2" pin="S"/>
 <pinref part="R21" gate="G$1" pin="1"/>
 <wire x1="330.2" y1="33.02" x2="325.12" y2="33.02" width="0.1524" layer="91"/>
 <wire x1="330.2" y1="43.18" x2="330.2" y2="33.02" width="0.1524" layer="91"/>
+<pinref part="IMU" gate="-4" pin="S"/>
+<wire x1="330.2" y1="33.02" x2="342.9" y2="33.02" width="0.1524" layer="91"/>
 <junction x="330.2" y="33.02"/>
 </segment>
 <segment>
