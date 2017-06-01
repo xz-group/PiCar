@@ -32,7 +32,7 @@ from picamera.array import PiRGBArray
 from picamera import PiCamera
 from numpy.linalg import inv
 import math
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import RPi.GPIO as GPIO
 import sys
 from sklearn.cluster import DBSCAN
@@ -56,8 +56,8 @@ DEFAULT_ANGLE = 75
 
 DELAY = .0001
 
-width = 224
-height = 128
+width = 640
+height = 240
 
 # initialize the camera and grab a reference to the raw camera capture
 camera = PiCamera()
@@ -72,7 +72,7 @@ time.sleep(2)
 #UNCOMMENT IF WANT TO RECORD VIDEO
 #initialize VideoWriter object
 fourcc = cv2.VideoWriter_fourcc('M','J','P','G')
-video1 = cv2.VideoWriter('constFOE.avi',fourcc, 20.0, (width-12,height-28-18))
+video1 = cv2.VideoWriter('constFOE.avi',fourcc, 20.0, (width,height))
 
 lk_params = dict( winSize  = (23, 23),
                   maxLevel = 3,
@@ -207,7 +207,7 @@ class App:
             
             
             #Slice unnecessary pixels off image
-            img = img[18:height-28,6:218,:]
+            #img = img[18:height-28,6:218,:]
             
             #To grayscale and equalize
             clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
@@ -271,8 +271,8 @@ class App:
                     #If not valid, break from loop
                     if not good_flag:
                         continue
-##                    if not rotation_check:
-##                        continue
+####                    if not rotation_check:
+####                        continue
                   
                     #add feature to track
                     tr.append((x, y))
@@ -333,13 +333,17 @@ class App:
 ##                    c = list(map(int, colors[label_]))
 ##                    cv2.circle(vis, (x_, y_), 1, c, -1)
 
+##                        #DBSCAN CLUSTERING ALGORITHM
 
-                #DBSCAN CLUSTERING ALGORITHM
+                xSum,x0Sum,x1Sum,x2Sum,x3Sum,x4Sum = 0,0,0,0,0,0
+                ySum,y0Sum,y1Sum,y2Sum,y3Sum,y4Sum = 0,0,0,0,0,0
+                ttcSum = 0
                 ttcSumArr = np.array([0.0,0.0,0.0,0.0,0.0])
                 xSumArr = np.array([0,0,0,0,0])
                 ySumArr = np.array([0,0,0,0,0])
                 ttcCountArr = np.array([0,0,0,0,0])
                 xAvg,yAvg,ttcTotalAvg = 0,0,0
+                #ttc0Sum, ttc1Sum, ttc2Sum, ttc3Sum, ttc4Sum = 0,0,0,0,0,0
                 
                 dbscanTime = time.time()
                 db = DBSCAN(eps=17,min_samples=2).fit(clusterData)
@@ -359,7 +363,6 @@ class App:
                     class_member_mask = (labels == k)
                     xy = clusterData[class_member_mask]
 
-                    #DRAW 'x' FOR EACH CLUSTER
                     for x_,y_,ttc_ in zip(xy[:,0],xy[:,1],xy[:,2]):
                         if k == 0:
                             ttcSumArr[0] += ttc_
@@ -392,17 +395,15 @@ class App:
                             ttcCountArr[4]+=1
                             cv2.putText(vis,'x', (x_,y_), cv2.FONT_HERSHEY_SIMPLEX,.25,(255,0,255))
                             
-                #CALCULATE PARAMETERS OF OBJECT TO AVOID
+                #print(ttcSumArr)
                 if(sum(ttcCountArr) > 0):
-                    
                     ttcAvgArr = ttcSumArr/ttcCountArr
+                    #print(ttcAvgArr)
                     ttcTotalAvg = min(m for m in ttcAvgArr if m > 0)
                     minIndex = np.where(ttcAvgArr == ttcTotalAvg)[0][0]
                     xAvg = xSumArr[minIndex]/ttcCountArr[minIndex]
                     yAvg = ySumArr[minIndex]/ttcCountArr[minIndex]
-                    
                     cv2.circle(vis,(int(xAvg),int(yAvg)),5,(255,0,100),-1)
-                    
                     if minIndex == 0:
                         cv2.putText(vis,'%.2f' % ttcTotalAvg, (5,40), cv2.FONT_HERSHEY_SIMPLEX,.3,(255,0,0))
                     elif minIndex == 1:
@@ -413,38 +414,64 @@ class App:
                         cv2.putText(vis,'%.2f' % ttcTotalAvg, (5,40), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,255))
                     elif minIndex == 4:
                         cv2.putText(vis,'%.2f' % ttcTotalAvg, (5,40), cv2.FONT_HERSHEY_SIMPLEX,.3,(255,0,255))
-                                            
+                    
+                    
+                   # print('Smallest TTC = %.2f' % ttcTotalAvg)
+                        
+                #ROLLING AVERAGE FILTER
+                #Each entry in rolling average array is the average of all points with small time to contact
+##                ttcTotalAvg = 0
+##                xAvg = 0
+##                yAvg = 0
+##
+##                rAvgTime = time.time()
+##
+##                if ttcCount > 0:
+##                    self.inc = self.inc + 1        
+##                    ttcAvg[self.inc % FILTER_COUNTS] = ttcSum/ttcCount
+##                    xAvg = xSum/ttcCount
+##                    yAvg = ySum/ttcCount
+##                    
+##                    for val in ttcAvg:
+##                        ttcTotalAvg = val + ttcTotalAvg
+##                    
+##                    ttcTotalAvg = ttcTotalAvg/FILTER_COUNTS
+##
+##                rAvgTime = time.time()-rAvgTime
+
 
                 #-----------------------------A PRETEND CONTROL OUTPUT---------------------------------------
                 #Decides which direction to turn based on location of the center of each point
                 #Tells how quickly to turn based on magnitude of the ttc average
 
                 temp = DEFAULT_ANGLE
-                EPSILON = 4
-                midpoint = 106
+                EPSILON = 6
+                midpoint = 320
                 #cv2.putText(vis,'%.2f' % ttcTotalAvg, (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-                cv2.line(vis,(midpoint-EPSILON,0),(midpoint-EPSILON,200),(0,0,255))
-                cv2.line(vis,(midpoint+EPSILON,0),(midpoint+EPSILON,200),(0,0,255))
+                cv2.line(vis,(midpoint-EPSILON,0),(midpoint-EPSILON,240),(0,0,255))
+                cv2.line(vis,(midpoint+EPSILON,0),(midpoint+EPSILON,240),(0,0,255))
                 if xAvg == 0:
+                    #draw_str(vis, (20, 20), 'STRAIGHT')
                     cv2.putText(vis,'STRAIGHT', (5,70), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-                    
                 elif (xAvg < midpoint + EPSILON) and (xAvg > midpoint - EPSILON):
                     cv2.putText(vis,'BUFFER', (5,70), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
                     temp = int(midpoint + DEFAULT_ANGLE - xAvg)
-                    
                 elif xAvg < midpoint:
+                    #draw_str(vis, (20, 20), 'RIGHT')
                     cv2.putText(vis,'RIGHT', (5,70), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
                     ##in this elif desired xAvg is 0
                     xDes = 0
                     xErr = xAvg - xDes
+##                    xErr = pVal*xErr
                     xErr = updatePID(self,xErr)
                     temp = int(((90.0*(xErr/224.0) + DEFAULT_ANGLE)))
-                    
                 else:
+                    #draw_str(vis, (20, 20), 'LEFT')
                     cv2.putText(vis,'LEFT', (5,70), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
                     ##in this elif desired xAvg is 224
                     xDes = 224
                     xErr = xAvg - xDes
+##                    xErr = pVal*xErr
                     xErr = updatePID(self,xErr)
                     temp = int((DEFAULT_ANGLE + 90.0*xErr/224.0))
 
@@ -483,6 +510,10 @@ class App:
                     self.runCount.append(len(self.data))
                 
                 self.tracks = new_tracks
+
+                #Draws the lines and the track count (unnecessary)
+                #cv2.polylines(vis, [np.int32(tr) for tr in self.tracks], False, (0, 255, 0))
+                #draw_str(vis, (20, 20), '%d' % len(self.tracks))
           
             if self.frame_idx % self.detect_interval == 0:
                 mask = np.zeros_like(frame_gray)
@@ -519,8 +550,16 @@ class App:
             #Necessary to clear the camera stream before next image is read in
             rawCapture.truncate(0)
 
+            #plot when escape key is called
+
             if ch == 27:
                 video1.release()
+                plt.axis([0 , self.inc,0, 15])
+                plt.ylabel('Time to Contact (s)')
+                plt.xlabel('time')
+                plt.title('Time to Contact')
+                plt.plot(self.runCount,self.data)
+                plt.show()
                 break
 
 def main():
