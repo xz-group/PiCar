@@ -11310,7 +11310,7 @@ diameter 5 mm, grid 2.54 mm</description>
 <wire x1="5.3" y1="2.42" x2="5.3" y2="-2.93" width="0.254" layer="21"/>
 <wire x1="5.3" y1="-2.93" x2="-5.3" y2="-2.93" width="0.254" layer="21"/>
 <wire x1="-5.3" y1="-2.93" x2="-5.3" y2="2.42" width="0.254" layer="21"/>
-<text x="-1.75" y="-3.5" size="1.27" layer="21" font="vector" rot="SR90" align="center">1</text>
+<text x="-1.75" y="-2.8" size="1.27" layer="21" font="vector" rot="SR90" align="center-right">1</text>
 <text x="5.75" y="0" size="1.016" layer="25" font="vector" rot="R90" align="top-center">&gt;NAME</text>
 <wire x1="-3.645" y1="2.42" x2="-3.645" y2="5.48" width="0.254" layer="51"/>
 <wire x1="-3.645" y1="5.48" x2="3.645" y2="5.48" width="0.254" layer="51"/>
@@ -11389,7 +11389,7 @@ diameter 5 mm, grid 2.54 mm</description>
 <wire x1="7.05" y1="2.42" x2="7.05" y2="-2.93" width="0.254" layer="21"/>
 <wire x1="7.05" y1="-2.93" x2="-7.05" y2="-2.93" width="0.254" layer="21"/>
 <wire x1="-7.05" y1="-2.93" x2="-7.05" y2="2.42" width="0.254" layer="21"/>
-<text x="-3.5" y="-3.5" size="1.27" layer="21" font="vector" rot="SR90" align="center">1</text>
+<text x="-3.5" y="-2.8" size="1.27" layer="21" font="vector" rot="SR90" align="center-right">1</text>
 <text x="7.5" y="0" size="1.016" layer="25" font="vector" rot="R90" align="top-center">&gt;NAME</text>
 <wire x1="-3.645" y1="2.42" x2="-3.645" y2="5.48" width="0.254" layer="51"/>
 <wire x1="-3.645" y1="5.48" x2="3.645" y2="5.48" width="0.254" layer="51"/>
@@ -11538,7 +11538,7 @@ diameter 5 mm, grid 2.54 mm</description>
 <wire x1="-5.3" y1="-5.04" x2="-5.3" y2="4.4" width="0.127" layer="39"/>
 <text x="-5.08" y="3.302" size="1.016" layer="25" font="vector">&gt;NAME</text>
 <text x="-5.08" y="-3.81" size="1.016" layer="27" font="vector">&gt;VALUE</text>
-<text x="4.445" y="-0.508" size="1.016" layer="21" font="vector" rot="SR180" align="center">1</text>
+<text x="3.81" y="-0.508" size="1.016" layer="21" font="vector" rot="SR180" align="center-right">1</text>
 <wire x1="-5.205" y1="2.86" x2="5.205" y2="2.86" width="0.127" layer="21"/>
 <wire x1="5.205" y1="2.86" x2="5.205" y2="1.27" width="0.127" layer="21"/>
 <wire x1="5.205" y1="1.27" x2="-5.205" y2="1.27" width="0.127" layer="21"/>
@@ -11581,7 +11581,7 @@ diameter 5 mm, grid 2.54 mm</description>
 <rectangle x1="-6.16" y1="-5.25" x2="-5.76" y2="0" layer="51"/>
 <rectangle x1="5.76" y1="-5.25" x2="6.16" y2="0" layer="51"/>
 </package>
-<package name="A6HF">
+<package name="A6HF-2DIP">
 <description>&lt;b&gt;A6HF-2102 2-pole Slide DIP Switch</description>
 <smd name="P2.2" x="0.635" y="3.81" dx="0.76" dy="1.27" layer="1"/>
 <smd name="P1.2" x="-0.635" y="3.81" dx="0.76" dy="1.27" layer="1"/>
@@ -11604,7 +11604,7 @@ diameter 5 mm, grid 2.54 mm</description>
 <wire x1="2.032" y1="5.08" x2="2.032" y2="-5.08" width="0.127" layer="39"/>
 <wire x1="2.032" y1="-5.08" x2="-2.032" y2="-5.08" width="0.127" layer="39"/>
 <wire x1="-2.032" y1="-5.08" x2="-2.032" y2="5.08" width="0.127" layer="39"/>
-<text x="-0.635" y="2.8" size="0.8128" layer="21" font="vector" rot="SR0" align="top-center">ON</text>
+<text x="-0.635" y="2.8" size="0.8128" layer="21" font="vector" rot="SR0" align="top-center">On</text>
 <text x="0.635" y="-2.8" size="0.8128" layer="21" font="vector" rot="SR0" align="bottom-center">2</text>
 </package>
 <package name="FCI-10103594-0001LF">
@@ -11651,6 +11651,8 @@ diameter 5 mm, grid 2.54 mm</description>
 <wire x1="-5.08" y1="-1.016" x2="-5.08" y2="1.016" width="0.127" layer="39"/>
 <wire x1="-5.08" y1="1.016" x2="-3.556" y2="1.016" width="0.127" layer="39"/>
 <wire x1="-3.556" y1="1.016" x2="-3.556" y2="2.55" width="0.127" layer="39"/>
+<text x="-3.81" y="2.54" size="1.016" layer="25" font="vector">&gt;NAME</text>
+<text x="-3.81" y="-2.54" size="1.016" layer="27" font="vector" align="top-left">&gt;VALUE</text>
 </package>
 <package name="MA-505">
 <smd name="1" x="-5.55" y="0" dx="4.1" dy="5.6" layer="1"/>
@@ -11681,6 +11683,7 @@ diameter 5 mm, grid 2.54 mm</description>
 <wire x1="-3.5" y1="6.25" x2="-3.65" y2="6.25" width="0.127" layer="51"/>
 <wire x1="-3.65" y1="6.25" x2="-3.65" y2="0" width="0.127" layer="21"/>
 <rectangle x1="-1.75" y1="-1.6" x2="1.75" y2="0" layer="51"/>
+<text x="-2.032" y="5.08" size="1.016" layer="25" font="vector">&gt;NAME</text>
 </package>
 <package name="SMA">
 <description>&lt;b&gt;SMA</description>
@@ -13055,7 +13058,7 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <gate name="P2" symbol="SWITCH" x="0" y="-5.08"/>
 </gates>
 <devices>
-<device name="" package="A6HF">
+<device name="" package="A6HF-2DIP">
 <connects>
 <connect gate="P1" pin="1" pad="P1.1"/>
 <connect gate="P1" pin="2" pad="P1.2"/>
@@ -13941,7 +13944,7 @@ DIN A3, landscape with location and doc. field</description>
 <part name="S2" library="rpibout" deviceset="A6HF-2DIP" device=""/>
 <part name="+3V5" library="supply1" deviceset="+3V3" device=""/>
 <part name="U12" library="rpibout" deviceset="BSS138BKS" device=""/>
-<part name="J2" library="rpibout" deviceset="USB-MICROB" device=""/>
+<part name="USB" library="rpibout" deviceset="USB-MICROB" device=""/>
 <part name="GND10" library="supply1" deviceset="GND" device=""/>
 <part name="R17" library="resistor" deviceset="R-US_" device="R1206" value="22"/>
 <part name="R18" library="resistor" deviceset="R-US_" device="R1206" value="22"/>
@@ -13953,7 +13956,7 @@ DIN A3, landscape with location and doc. field</description>
 <part name="S1" library="rpibout" deviceset="SWITCH-GND" device=""/>
 <part name="D1" library="rpibout" deviceset="ZENER_DIODE" device="SOD123" value="10V"/>
 <part name="D2" library="rpibout" deviceset="ZENER_DIODE" device="SMA" value="33V"/>
-<part name="LED1" library="rpibout" deviceset="LED_3COLOR_COMMONA" device="1411"/>
+<part name="LED" library="rpibout" deviceset="LED_3COLOR_COMMONA" device="1411"/>
 <part name="U5" library="rpibout" deviceset="SN74LV4T125" device=""/>
 <part name="P+10" library="supply1" deviceset="+5V" device=""/>
 <part name="GND12" library="supply1" deviceset="GND" device=""/>
@@ -13981,13 +13984,15 @@ DIN A3, landscape with location and doc. field</description>
 <part name="C29" library="resistor" deviceset="C-US" device="C1206" value="0.1u"/>
 <part name="P+5" library="supply1" deviceset="+5V" device=""/>
 <part name="GND13" library="supply1" deviceset="GND" device=""/>
-<part name="EXTRAIO" library="con-molex" deviceset="22-23-2041" device=""/>
+<part name="XIO" library="con-molex" deviceset="22-23-2041" device=""/>
 <part name="C37" library="resistor" deviceset="C-US" device="C1206" value="0.1u"/>
 <part name="GND15" library="supply1" deviceset="GND" device=""/>
 <part name="P+7" library="supply1" deviceset="+5V" device=""/>
 <part name="R16" library="resistor" deviceset="R-US_" device="R1206" value="10k"/>
 <part name="U4" library="rpibout" deviceset="CAT24C32" device=""/>
 <part name="C41" library="resistor" deviceset="C-US" device="C1206" value="0.1u"/>
+<part name="R31" library="resistor" deviceset="R-US_" device="R1206" value="10k"/>
+<part name="P+20" library="supply1" deviceset="+5V" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -14260,7 +14265,7 @@ WashU ESE Dept - May 2017</text>
 <attribute name="NAME" x="122.936" y="115.316" size="1.6764" layer="95" rot="R180"/>
 </instance>
 <instance part="U12" gate="T2" x="144.78" y="119.38"/>
-<instance part="J2" gate="G$1" x="25.4" y="195.58" rot="MR0"/>
+<instance part="USB" gate="G$1" x="25.4" y="195.58" rot="MR0"/>
 <instance part="GND10" gate="1" x="35.56" y="185.42"/>
 <instance part="R17" gate="G$1" x="48.26" y="195.58" smashed="yes">
 <attribute name="NAME" x="44.196" y="192.5066" size="1.778" layer="95"/>
@@ -14278,7 +14283,7 @@ WashU ESE Dept - May 2017</text>
 <instance part="S1" gate="G$1" x="111.76" y="218.44" rot="R270"/>
 <instance part="D1" gate="G$1" x="48.26" y="33.02" rot="R90"/>
 <instance part="D2" gate="G$1" x="58.42" y="33.02" rot="R90"/>
-<instance part="LED1" gate="G$1" x="116.84" y="127"/>
+<instance part="LED" gate="G$1" x="116.84" y="127"/>
 <instance part="U5" gate="PWR" x="271.78" y="238.76"/>
 <instance part="P+10" gate="1" x="271.78" y="251.46"/>
 <instance part="GND12" gate="1" x="271.78" y="226.06"/>
@@ -14342,13 +14347,13 @@ WashU ESE Dept - May 2017</text>
 <instance part="C29" gate="G$1" x="360.68" y="208.28"/>
 <instance part="P+5" gate="1" x="360.68" y="218.44"/>
 <instance part="GND13" gate="1" x="360.68" y="195.58"/>
-<instance part="EXTRAIO" gate="-1" x="312.42" y="101.6" smashed="yes">
+<instance part="XIO" gate="-1" x="312.42" y="101.6" smashed="yes">
 <attribute name="NAME" x="314.96" y="100.838" size="1.524" layer="95"/>
 <attribute name="VALUE" x="309.118" y="120.777" size="1.778" layer="96"/>
 </instance>
-<instance part="EXTRAIO" gate="-2" x="312.42" y="114.3"/>
-<instance part="EXTRAIO" gate="-3" x="289.56" y="109.22"/>
-<instance part="EXTRAIO" gate="-4" x="289.56" y="106.68"/>
+<instance part="XIO" gate="-2" x="312.42" y="114.3"/>
+<instance part="XIO" gate="-3" x="289.56" y="109.22"/>
+<instance part="XIO" gate="-4" x="289.56" y="106.68"/>
 <instance part="C37" gate="G$1" x="307.34" y="109.22"/>
 <instance part="GND15" gate="1" x="307.34" y="96.52"/>
 <instance part="P+7" gate="1" x="307.34" y="119.38"/>
@@ -14356,6 +14361,8 @@ WashU ESE Dept - May 2017</text>
 <instance part="U5" gate="G4" x="279.4" y="193.04"/>
 <instance part="U4" gate="G$1" x="38.1" y="228.6"/>
 <instance part="C41" gate="G$1" x="360.68" y="76.2"/>
+<instance part="R31" gate="G$1" x="254" y="198.12" rot="R90"/>
+<instance part="P+20" gate="1" x="254" y="205.74"/>
 </instances>
 <busses>
 </busses>
@@ -14699,10 +14706,10 @@ WashU ESE Dept - May 2017</text>
 <junction x="129.54" y="114.3"/>
 <pinref part="U12" gate="T2" pin="S"/>
 <wire x1="129.54" y1="114.3" x2="147.32" y2="114.3" width="0.1524" layer="91"/>
-<pinref part="LED1" gate="G$1" pin="R"/>
+<pinref part="LED" gate="G$1" pin="R"/>
 </segment>
 <segment>
-<pinref part="J2" gate="G$1" pin="GND"/>
+<pinref part="USB" gate="G$1" pin="GND"/>
 <pinref part="GND10" gate="1" pin="GND"/>
 <wire x1="33.02" y1="190.5" x2="35.56" y2="190.5" width="0.1524" layer="91"/>
 <wire x1="35.56" y1="190.5" x2="35.56" y2="187.96" width="0.1524" layer="91"/>
@@ -14774,7 +14781,7 @@ WashU ESE Dept - May 2017</text>
 <pinref part="GND15" gate="1" pin="GND"/>
 <pinref part="C37" gate="G$1" pin="2"/>
 <wire x1="307.34" y1="99.06" x2="307.34" y2="101.6" width="0.1524" layer="91"/>
-<pinref part="EXTRAIO" gate="-1" pin="S"/>
+<pinref part="XIO" gate="-1" pin="S"/>
 <wire x1="307.34" y1="101.6" x2="307.34" y2="104.14" width="0.1524" layer="91"/>
 <wire x1="309.88" y1="101.6" x2="307.34" y2="101.6" width="0.1524" layer="91"/>
 <junction x="307.34" y="101.6"/>
@@ -15021,13 +15028,17 @@ WashU ESE Dept - May 2017</text>
 <junction x="360.68" y="213.36"/>
 </segment>
 <segment>
-<pinref part="EXTRAIO" gate="-2" pin="S"/>
+<pinref part="XIO" gate="-2" pin="S"/>
 <pinref part="P+7" gate="1" pin="+5V"/>
 <wire x1="309.88" y1="114.3" x2="307.34" y2="114.3" width="0.1524" layer="91"/>
 <wire x1="307.34" y1="114.3" x2="307.34" y2="116.84" width="0.1524" layer="91"/>
 <pinref part="C37" gate="G$1" pin="1"/>
 <wire x1="307.34" y1="114.3" x2="307.34" y2="111.76" width="0.1524" layer="91"/>
 <junction x="307.34" y="114.3"/>
+</segment>
+<segment>
+<pinref part="R31" gate="G$1" pin="2"/>
+<pinref part="P+20" gate="1" pin="+5V"/>
 </segment>
 </net>
 <net name="+3V3" class="0">
@@ -15320,7 +15331,7 @@ WashU ESE Dept - May 2017</text>
 <label x="185.42" y="53.34" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="EXTRAIO" gate="-3" pin="S"/>
+<pinref part="XIO" gate="-3" pin="S"/>
 <wire x1="287.02" y1="109.22" x2="276.86" y2="109.22" width="0.1524" layer="91"/>
 <label x="276.86" y="109.22" size="1.778" layer="95"/>
 </segment>
@@ -15386,7 +15397,7 @@ WashU ESE Dept - May 2017</text>
 <label x="200.66" y="162.56" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="EXTRAIO" gate="-4" pin="S"/>
+<pinref part="XIO" gate="-4" pin="S"/>
 <wire x1="287.02" y1="106.68" x2="276.86" y2="106.68" width="0.1524" layer="91"/>
 <label x="276.86" y="106.68" size="1.778" layer="95"/>
 </segment>
@@ -15611,14 +15622,14 @@ WashU ESE Dept - May 2017</text>
 <segment>
 <pinref part="R15" gate="G$1" pin="1"/>
 <wire x1="114.3" y1="137.16" x2="114.3" y2="134.62" width="0.1524" layer="91"/>
-<pinref part="LED1" gate="G$1" pin="A"/>
+<pinref part="LED" gate="G$1" pin="A"/>
 </segment>
 </net>
 <net name="N$14" class="0">
 <segment>
 <pinref part="U12" gate="T1" pin="D"/>
 <wire x1="121.92" y1="124.46" x2="124.46" y2="124.46" width="0.1524" layer="91"/>
-<pinref part="LED1" gate="G$1" pin="B"/>
+<pinref part="LED" gate="G$1" pin="B"/>
 </segment>
 </net>
 <net name="N$22" class="0">
@@ -15626,7 +15637,7 @@ WashU ESE Dept - May 2017</text>
 <pinref part="U12" gate="T2" pin="D"/>
 <wire x1="121.92" y1="129.54" x2="147.32" y2="129.54" width="0.1524" layer="91"/>
 <wire x1="147.32" y1="129.54" x2="147.32" y2="124.46" width="0.1524" layer="91"/>
-<pinref part="LED1" gate="G$1" pin="G"/>
+<pinref part="LED" gate="G$1" pin="G"/>
 </segment>
 </net>
 <net name="RPILEDG" class="0">
@@ -15660,7 +15671,7 @@ WashU ESE Dept - May 2017</text>
 </net>
 <net name="ATVBUS" class="0">
 <segment>
-<pinref part="J2" gate="G$1" pin="VCC"/>
+<pinref part="USB" gate="G$1" pin="VCC"/>
 <wire x1="33.02" y1="200.66" x2="40.64" y2="200.66" width="0.1524" layer="91"/>
 <label x="33.02" y="200.66" size="1.778" layer="95"/>
 </segment>
@@ -15672,14 +15683,14 @@ WashU ESE Dept - May 2017</text>
 </net>
 <net name="N$16" class="0">
 <segment>
-<pinref part="J2" gate="G$1" pin="D-"/>
+<pinref part="USB" gate="G$1" pin="D-"/>
 <pinref part="R18" gate="G$1" pin="1"/>
 <wire x1="33.02" y1="198.12" x2="43.18" y2="198.12" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$25" class="0">
 <segment>
-<pinref part="J2" gate="G$1" pin="D+"/>
+<pinref part="USB" gate="G$1" pin="D+"/>
 <pinref part="R17" gate="G$1" pin="1"/>
 <wire x1="33.02" y1="195.58" x2="43.18" y2="195.58" width="0.1524" layer="91"/>
 </segment>
@@ -15709,8 +15720,12 @@ WashU ESE Dept - May 2017</text>
 </segment>
 <segment>
 <pinref part="U5" gate="G1" pin="OE"/>
-<wire x1="279.4" y1="190.5" x2="259.08" y2="190.5" width="0.1524" layer="91"/>
-<label x="259.08" y="190.5" size="1.778" layer="95"/>
+<wire x1="279.4" y1="190.5" x2="254" y2="190.5" width="0.1524" layer="91"/>
+<label x="243.84" y="190.5" size="1.778" layer="95"/>
+<pinref part="R31" gate="G$1" pin="1"/>
+<wire x1="254" y1="190.5" x2="243.84" y2="190.5" width="0.1524" layer="91"/>
+<wire x1="254" y1="193.04" x2="254" y2="190.5" width="0.1524" layer="91"/>
+<junction x="254" y="190.5"/>
 </segment>
 </net>
 <net name="ATD-" class="0">
