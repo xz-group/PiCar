@@ -32,8 +32,8 @@ from numpy.linalg import inv
 import math
 ##import matplotlib.pyplot as plt
 
-width = 224
-height = 128
+width = 640
+height = 240
 # initialize the camera and grab a reference to the raw camera capture
 camera = PiCamera()
 camera.resolution = (width, height)
@@ -44,9 +44,17 @@ rawCapture = PiRGBArray(camera, size=(width, height))
 # allow the camera to warmup
 time.sleep(2)
 
+#grab image
+camera.capture(rawCapture, format="bgr")
+frame = rawCapture.array
+height,width,layers = frame.shape
+
+#clear stream
+rawCapture.truncate(0)
+
 #initialize VideoWriter object
 fourcc = cv2.VideoWriter_fourcc('M','J','P','G')
-video1 = cv2.VideoWriter('constFOE.avi',fourcc, 20.0, (224,96))
+video1 = cv2.VideoWriter('ttc_screenshot.avi',fourcc, 20.0, (width,height))
 
 lk_params = dict( winSize  = (23, 23),
                   maxLevel = 3,
@@ -80,7 +88,7 @@ class App:
             img = frame.array
 
             #Slice unnecessary pixels off image
-            img = img[int(height/8):int(7*height/8),:,:]
+##            img = img[int(height/8):int(7*height/8),:,:]
             print(img.shape)
             #To grayscale and equalize
             clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
@@ -178,25 +186,25 @@ class App:
                 #-----------------------------A PRETEND CONTROL OUTPUT---------------------------------------
                 #Decides which direction to turn based on location of the center of each point
                 #Tells how quickly to turn based on magnitude of the ttc average
-                if xAvg == 0:
-                    #draw_str(vis, (20, 20), 'STRAIGHT')
-                    cv2.putText(vis,'STRAIGHT', (5,80), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-                elif xAvg < 112:
-                    #draw_str(vis, (20, 20), 'RIGHT')
-                    cv2.putText(vis,'RIGHT', (5,80), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-                else:
-                    #draw_str(vis, (20, 20), 'LEFT')
-                    cv2.putText(vis,'LEFT', (5,80), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-                    
-                if ttcTotalAvg == 0:
-                    cv2.putText(vis,'NOTHING', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-                    #draw_str(vis, (20, 20), 'NOTHING')
-                elif ttcTotalAvg < 7:
-                    cv2.putText(vis,'MOVE QUICKLY', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-                    #draw_str(vis, (20, 20), 'MOVE BITCH')
-                else:
-                    cv2.putText(vis,'MOVE SLIGHTLY', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-                    #draw_str(vis, (20, 20), 'MOVE SLIGHTLY')
+##                if xAvg == 0:
+##                    #draw_str(vis, (20, 20), 'STRAIGHT')
+##                    #cv2.putText(vis,'STRAIGHT', (5,80), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+##                elif xAvg < 112:
+##                    #draw_str(vis, (20, 20), 'RIGHT')
+##                    #cv2.putText(vis,'RIGHT', (5,80), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+##                else:
+##                    #draw_str(vis, (20, 20), 'LEFT')
+##                    #cv2.putText(vis,'LEFT', (5,80), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+##                    
+##                if ttcTotalAvg == 0:
+##                    #cv2.putText(vis,'NOTHING', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+##                    #draw_str(vis, (20, 20), 'NOTHING')
+##                elif ttcTotalAvg < 7:
+##                    #cv2.putText(vis,'MOVE QUICKLY', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+##                    #draw_str(vis, (20, 20), 'MOVE BITCH')
+##                else:
+##                    #cv2.putText(vis,'MOVE SLIGHTLY', (5,60), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
+##                    #draw_str(vis, (20, 20), 'MOVE SLIGHTLY')
                     
 
                 #Draw the FOE (not necessary)
@@ -238,7 +246,7 @@ class App:
 
             video1.write(vis)
             video1.write(vis)
-            video1.write(vis)
+            #video1.write(vis)
             
             ch = cv2.waitKey(1)
 
