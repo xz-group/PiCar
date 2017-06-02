@@ -12713,7 +12713,7 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 <pin name="C" x="2.54" y="0" visible="off" length="short" direction="pas" rot="R180"/>
 </symbol>
 <symbol name="LED_3COLOR_COMMONA">
-<description>&lt;b&gt;MSL0201RGB Right Angle SMD RGB LED</description>
+<description>&lt;b&gt;RGB LED with common Anode</description>
 <pin name="A" x="-2.54" y="7.62" visible="pad" length="short" direction="pas" rot="R270"/>
 <pin name="G" x="5.08" y="2.54" visible="pad" length="short" direction="pas" rot="R180"/>
 <pin name="R" x="5.08" y="0" visible="pad" length="short" direction="pas" rot="R180"/>
@@ -13072,7 +13072,7 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </devices>
 </deviceset>
 <deviceset name="USB-MICROB" prefix="J">
-<description>&lt;b&gt;USB Receptable&lt;/b&gt;</description>
+<description>&lt;b&gt;USB Receptacle</description>
 <gates>
 <gate name="G$1" symbol="USB-MICROB" x="0" y="0"/>
 </gates>
@@ -13162,7 +13162,7 @@ https://www.diodes.com/assets/Datasheets/DMG2305UX.pdf</description>
 </devices>
 </deviceset>
 <deviceset name="LED_3COLOR_COMMONA" prefix="LED">
-<description>&lt;b&gt;MSL0201RGB Right Angle SMD RGB LED</description>
+<description>&lt;b&gt;RGB LED with common Anode</description>
 <gates>
 <gate name="G$1" symbol="LED_3COLOR_COMMONA" x="0" y="0"/>
 </gates>
