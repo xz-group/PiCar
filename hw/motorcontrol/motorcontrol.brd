@@ -8,7 +8,7 @@
 </settings>
 <grid distance="10" unitdist="mil" unit="mil" style="dots" multiple="1" display="yes" altdistance="5" altunitdist="mil" altunit="mil"/>
 <layers>
-<layer number="1" name="Top" color="4" fill="1" visible="no" active="yes"/>
+<layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="6" fill="1" visible="no" active="yes"/>
 <layer number="3" name="Route3" color="4" fill="3" visible="no" active="no"/>
 <layer number="14" name="Route14" color="1" fill="6" visible="no" active="no"/>
@@ -20,7 +20,7 @@
 <layer number="20" name="Dimension" color="15" fill="1" visible="yes" active="yes"/>
 <layer number="21" name="tPlace" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="22" name="bPlace" color="7" fill="1" visible="no" active="yes"/>
-<layer number="23" name="tOrigins" color="15" fill="1" visible="no" active="yes"/>
+<layer number="23" name="tOrigins" color="15" fill="1" visible="yes" active="yes"/>
 <layer number="24" name="bOrigins" color="15" fill="1" visible="no" active="yes"/>
 <layer number="25" name="tNames" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="26" name="bNames" color="7" fill="1" visible="no" active="yes"/>
@@ -36,7 +36,7 @@
 <layer number="36" name="bGlue" color="7" fill="5" visible="no" active="yes"/>
 <layer number="37" name="tTest" color="7" fill="1" visible="no" active="yes"/>
 <layer number="38" name="bTest" color="7" fill="1" visible="no" active="yes"/>
-<layer number="39" name="tKeepout" color="4" fill="11" visible="no" active="yes"/>
+<layer number="39" name="tKeepout" color="4" fill="11" visible="yes" active="yes"/>
 <layer number="40" name="bKeepout" color="1" fill="11" visible="no" active="yes"/>
 <layer number="41" name="tRestrict" color="4" fill="10" visible="no" active="yes"/>
 <layer number="42" name="bRestrict" color="1" fill="10" visible="no" active="yes"/>
@@ -2447,7 +2447,7 @@ Please make sure your boards conform to these design rules.</description>
 <attribute name="VALUE" x="37.846" y="27.94" size="0.6096" layer="27" font="vector"/>
 </element>
 <element name="C15" library="resistor" package="C1206" value="0.22u" x="38.354" y="23.114" smashed="yes" rot="R90">
-<attribute name="NAME" x="37.338" y="20.066" size="0.8128" layer="25" font="vector" rot="R90"/>
+<attribute name="NAME" x="37.338" y="22.098" size="0.8128" layer="25" font="vector" rot="R90"/>
 <attribute name="VALUE" x="37.846" y="22.86" size="0.6096" layer="27" font="vector"/>
 </element>
 <element name="C17" library="resistor" package="C1206" value="0.1u" x="22.098" y="7.366" smashed="yes" rot="MR180">
@@ -2527,7 +2527,7 @@ Please make sure your boards conform to these design rules.</description>
 <attribute name="VALUE" x="37.846" y="39.878" size="0.6096" layer="27" font="vector"/>
 </element>
 <element name="C9" library="resistor" package="C1206" value="1n" x="34.036" y="23.622" smashed="yes" rot="R180">
-<attribute name="NAME" x="35.306" y="20.574" size="0.8128" layer="25" font="vector" rot="R180"/>
+<attribute name="NAME" x="31.75" y="20.828" size="0.8128" layer="25" font="vector" rot="R90"/>
 <attribute name="VALUE" x="34.544" y="23.876" size="0.6096" layer="27" font="vector" rot="R180"/>
 </element>
 <element name="ENCODER" library="con-molex" package="22-23-2041" value="22-23-2041" x="5.08" y="25.146" smashed="yes">
@@ -2578,7 +2578,7 @@ Please make sure your boards conform to these design rules.</description>
 <attribute name="VALUE" x="41.402" y="45.212" size="0.6096" layer="28" font="vector" rot="MR0"/>
 </element>
 <element name="R10" library="resistor" package="R1206" value="1k" x="34.036" y="21.59" smashed="yes">
-<attribute name="NAME" x="36.322" y="24.892" size="0.8128" layer="25" font="vector" rot="R270"/>
+<attribute name="NAME" x="31.75" y="22.86" size="0.8128" layer="25" font="vector" rot="R90"/>
 <attribute name="VALUE" x="33.528" y="21.336" size="0.6096" layer="27" font="vector"/>
 </element>
 <element name="R11" library="resistor" package="R1206" value="10k" x="43.942" y="25.146" smashed="yes" rot="MR90">
@@ -2778,7 +2778,7 @@ Please make sure your boards conform to these design rules.</description>
 <attribute name="VALUE" x="7.62" y="9.398" size="0.6096" layer="27" font="vector"/>
 </element>
 <element name="C40" library="resistor" package="C1206" value="0.1u" x="39.751" y="19.304" smashed="yes">
-<attribute name="NAME" x="40.259" y="20.32" size="0.8128" layer="25" font="vector"/>
+<attribute name="NAME" x="37.465" y="19.558" size="0.8128" layer="25" font="vector" rot="R180"/>
 <attribute name="VALUE" x="40.005" y="18.796" size="0.6096" layer="27" font="vector" rot="R90"/>
 </element>
 <element name="XTAL1" library="rpibout" package="ABLS7M2" value="16MHz" x="21.971" y="23.114" smashed="yes" rot="MR0">
@@ -3361,9 +3361,7 @@ Please make sure your boards conform to these design rules.</description>
 <polygon width="0.3048" layer="15">
 <vertex x="-0.508" y="58.42"/>
 <vertex x="65.532" y="58.42"/>
-<vertex x="65.532" y="51.054"/>
 <vertex x="65.532" y="-0.508"/>
-<vertex x="60.96" y="-0.508"/>
 <vertex x="-0.508" y="-0.508"/>
 </polygon>
 <polygon width="0.3048" layer="16" isolate="0.254">
@@ -3574,7 +3572,7 @@ Please make sure your boards conform to these design rules.</description>
 <wire x1="17.907" y1="54.356" x2="20.066" y2="52.197" width="0.4064" layer="2"/>
 <wire x1="20.066" y1="52.197" x2="22.135" y2="52.197" width="0.4064" layer="2"/>
 <wire x1="22.135" y1="52.197" x2="22.18" y2="52.242" width="0.4064" layer="2"/>
-<polygon width="0.3048" layer="16" rank="5">
+<polygon width="0.3048" layer="16" rank="4">
 <vertex x="-0.762" y="58.674"/>
 <vertex x="65.786" y="58.674"/>
 <vertex x="65.786" y="-0.762"/>
@@ -3612,7 +3610,7 @@ Please make sure your boards conform to these design rules.</description>
 <contactref element="C36" pad="+"/>
 <contactref element="U6" pad="1"/>
 <contactref element="U7" pad="4"/>
-<polygon width="0.4064" layer="16" rank="4">
+<polygon width="0.4064" layer="16" rank="2">
 <vertex x="33.782" y="15.24"/>
 <vertex x="43.688" y="15.24"/>
 <vertex x="43.688" y="0.508"/>
@@ -4512,11 +4510,9 @@ Please make sure your boards conform to these design rules.</description>
 <wire x1="25.4" y1="30.48" x2="25.781" y2="30.099" width="0.3048" layer="16"/>
 <wire x1="22.352" y1="33.528" x2="25.4" y2="30.48" width="0.3048" layer="2"/>
 <wire x1="18.923" y1="33.528" x2="22.352" y2="33.528" width="0.3048" layer="2"/>
-<wire x1="18.034" y1="34.417" x2="18.923" y2="33.528" width="0.3048" layer="2"/>
-<wire x1="14.986" y1="34.417" x2="18.034" y2="34.417" width="0.3048" layer="2"/>
-<wire x1="14.224" y1="33.655" x2="14.986" y2="34.417" width="0.3048" layer="2"/>
-<wire x1="13.208" y1="33.655" x2="14.224" y2="33.655" width="0.3048" layer="2"/>
-<wire x1="11.303" y1="35.56" x2="13.208" y2="33.655" width="0.3048" layer="2"/>
+<wire x1="18.542" y1="33.909" x2="18.923" y2="33.528" width="0.3048" layer="2"/>
+<wire x1="12.954" y1="33.909" x2="18.542" y2="33.909" width="0.3048" layer="2"/>
+<wire x1="11.303" y1="35.56" x2="12.954" y2="33.909" width="0.3048" layer="2"/>
 <wire x1="11.303" y1="37.846" x2="11.303" y2="35.56" width="0.3048" layer="1"/>
 <wire x1="10.922" y1="38.227" x2="11.303" y2="37.846" width="0.3048" layer="1"/>
 <wire x1="9.144" y1="38.227" x2="10.922" y2="38.227" width="0.3048" layer="1"/>
@@ -4526,7 +4522,6 @@ Please make sure your boards conform to these design rules.</description>
 <wire x1="27.305" y1="30.099" x2="27.39" y2="30.074" width="0.3048" layer="16"/>
 <wire x1="9.906" y1="42.418" x2="10.008" y2="42.418" width="0.3048" layer="1"/>
 <wire x1="51.308" y1="10.033" x2="51.308" y2="9.5" width="0.3048" layer="16"/>
-<wire x1="25.4" y1="30.353" x2="25.4" y2="30.48" width="0.3048" layer="2"/>
 <via x="25.4" y="30.48" extent="1-16" drill="0.4064"/>
 <via x="11.303" y="35.56" extent="1-16" drill="0.4064"/>
 <wire x1="50.038" y1="9.398" x2="51.308" y2="9.398" width="0.3048" layer="16"/>
@@ -4534,13 +4529,13 @@ Please make sure your boards conform to these design rules.</description>
 <wire x1="48.514" y1="19.304" x2="48.514" y2="10.922" width="0.3048" layer="16"/>
 <wire x1="37.084" y1="30.734" x2="48.514" y2="19.304" width="0.3048" layer="2"/>
 <wire x1="36.83" y1="30.734" x2="37.084" y2="30.734" width="0.3048" layer="2"/>
-<wire x1="30.48" y1="30.734" x2="36.83" y2="30.734" width="0.3048" layer="16"/>
-<wire x1="30.226" y1="30.48" x2="30.48" y2="30.734" width="0.3048" layer="2"/>
-<wire x1="25.4" y1="30.48" x2="30.226" y2="30.48" width="0.3048" layer="2"/>
+<wire x1="29.464" y1="30.734" x2="36.83" y2="30.734" width="0.3048" layer="16"/>
+<wire x1="29.21" y1="30.48" x2="29.464" y2="30.734" width="0.3048" layer="2"/>
+<wire x1="25.4" y1="30.48" x2="29.21" y2="30.48" width="0.3048" layer="2"/>
 <wire x1="51.308" y1="9.398" x2="51.308" y2="9.5" width="0.3048" layer="16"/>
 <via x="48.514" y="19.304" extent="1-16" drill="0.4064"/>
 <via x="36.83" y="30.734" extent="1-16" drill="0.4064"/>
-<via x="30.48" y="30.734" extent="1-16" drill="0.4064"/>
+<via x="29.464" y="30.734" extent="1-16" drill="0.4064"/>
 </signal>
 <signal name="ATPB1">
 <contactref element="U9" pad="9"/>
@@ -4554,12 +4549,12 @@ Please make sure your boards conform to these design rules.</description>
 <wire x1="54.356" y1="13.208" x2="54.356" y2="12.954" width="0.3048" layer="16"/>
 <wire x1="54.356" y1="12.954" x2="54.204" y2="12.954" width="0.3048" layer="16"/>
 <wire x1="54.204" y1="12.954" x2="53.594" y2="12.344" width="0.3048" layer="16"/>
-<wire x1="29.718" y1="30.861" x2="27.432" y2="30.861" width="0.3048" layer="16"/>
-<wire x1="30.226" y1="31.369" x2="29.718" y2="30.861" width="0.3048" layer="16"/>
+<wire x1="28.448" y1="30.861" x2="27.432" y2="30.861" width="0.3048" layer="16"/>
+<wire x1="28.956" y1="31.369" x2="28.448" y2="30.861" width="0.3048" layer="16"/>
 <wire x1="38.481" y1="31.369" x2="32.385" y2="31.369" width="0.3048" layer="16"/>
 <wire x1="32.385" y1="31.369" x2="32.131" y2="31.369" width="0.3048" layer="16"/>
 <wire x1="32.131" y1="31.369" x2="31.877" y2="31.369" width="0.3048" layer="16"/>
-<wire x1="31.877" y1="31.369" x2="30.226" y2="31.369" width="0.3048" layer="16"/>
+<wire x1="31.877" y1="31.369" x2="28.956" y2="31.369" width="0.3048" layer="16"/>
 <wire x1="38.735" y1="31.623" x2="38.481" y2="31.369" width="0.3048" layer="16"/>
 <wire x1="47.879" y1="31.623" x2="38.735" y2="31.623" width="0.3048" layer="2"/>
 <wire x1="47.879" y1="20.955" x2="47.879" y2="31.623" width="0.3048" layer="16"/>

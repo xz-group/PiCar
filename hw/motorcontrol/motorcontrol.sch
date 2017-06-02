@@ -13997,8 +13997,9 @@ DIN A3, landscape with location and doc. field</description>
 <sheets>
 <sheet>
 <plain>
-<text x="289.56" y="22.86" size="1.9304" layer="94" align="top-left">Raspberry PiCar Control Board
-WashU ESE Dept - May 2017</text>
+<text x="289.56" y="22.86" size="1.9304" layer="94" align="top-left">PiCar Control Board
+WashU ESE Dept - May 2017
+Pi HAT compatible</text>
 <text x="378.46" y="5.08" size="2.54" layer="94" align="bottom-center">v2.1</text>
 </plain>
 <instances>
@@ -14209,8 +14210,8 @@ WashU ESE Dept - May 2017</text>
 <instance part="+3V8" gate="G$1" x="299.72" y="251.46"/>
 <instance part="GND26" gate="1" x="299.72" y="226.06"/>
 <instance part="P+6" gate="1" x="147.32" y="218.44"/>
-<instance part="GND27" gate="1" x="129.54" y="109.22"/>
-<instance part="R15" gate="G$1" x="114.3" y="142.24" rot="R90"/>
+<instance part="GND27" gate="1" x="119.38" y="106.68"/>
+<instance part="R15" gate="G$1" x="104.14" y="139.7" rot="R90"/>
 <instance part="U6" gate="T1" x="99.06" y="66.04" smashed="yes" rot="MR0">
 <attribute name="NAME" x="96.52" y="66.04" size="1.778" layer="95" rot="MR0"/>
 </instance>
@@ -14260,11 +14261,11 @@ WashU ESE Dept - May 2017</text>
 <instance part="C16" gate="G$1" x="68.58" y="33.02"/>
 <instance part="S2" gate="P1" x="205.74" y="208.28"/>
 <instance part="S2" gate="P2" x="251.46" y="213.36"/>
-<instance part="+3V5" gate="G$1" x="114.3" y="152.4"/>
-<instance part="U12" gate="T1" x="121.92" y="119.38" smashed="yes">
-<attribute name="NAME" x="122.936" y="115.316" size="1.6764" layer="95" rot="R180"/>
+<instance part="+3V5" gate="G$1" x="104.14" y="149.86"/>
+<instance part="U12" gate="T1" x="111.76" y="116.84" smashed="yes">
+<attribute name="NAME" x="112.776" y="112.776" size="1.6764" layer="95" rot="R180"/>
 </instance>
-<instance part="U12" gate="T2" x="144.78" y="119.38"/>
+<instance part="U12" gate="T2" x="134.62" y="116.84"/>
 <instance part="USB" gate="G$1" x="25.4" y="195.58" rot="MR0"/>
 <instance part="GND10" gate="1" x="35.56" y="185.42"/>
 <instance part="R17" gate="G$1" x="48.26" y="195.58" smashed="yes">
@@ -14283,7 +14284,7 @@ WashU ESE Dept - May 2017</text>
 <instance part="S1" gate="G$1" x="111.76" y="218.44" rot="R270"/>
 <instance part="D1" gate="G$1" x="48.26" y="33.02" rot="R90"/>
 <instance part="D2" gate="G$1" x="58.42" y="33.02" rot="R90"/>
-<instance part="LED" gate="G$1" x="116.84" y="127"/>
+<instance part="LED" gate="G$1" x="106.68" y="124.46"/>
 <instance part="U5" gate="PWR" x="271.78" y="238.76"/>
 <instance part="P+10" gate="1" x="271.78" y="251.46"/>
 <instance part="GND12" gate="1" x="271.78" y="226.06"/>
@@ -14698,14 +14699,14 @@ WashU ESE Dept - May 2017</text>
 </segment>
 <segment>
 <pinref part="GND27" gate="1" pin="GND"/>
-<wire x1="121.92" y1="127" x2="129.54" y2="127" width="0.1524" layer="91"/>
-<wire x1="129.54" y1="127" x2="129.54" y2="114.3" width="0.1524" layer="91"/>
+<wire x1="111.76" y1="124.46" x2="119.38" y2="124.46" width="0.1524" layer="91"/>
+<wire x1="119.38" y1="124.46" x2="119.38" y2="111.76" width="0.1524" layer="91"/>
 <pinref part="U12" gate="T1" pin="S"/>
-<wire x1="129.54" y1="114.3" x2="129.54" y2="111.76" width="0.1524" layer="91"/>
-<wire x1="124.46" y1="114.3" x2="129.54" y2="114.3" width="0.1524" layer="91"/>
-<junction x="129.54" y="114.3"/>
+<wire x1="119.38" y1="111.76" x2="119.38" y2="109.22" width="0.1524" layer="91"/>
+<wire x1="114.3" y1="111.76" x2="119.38" y2="111.76" width="0.1524" layer="91"/>
+<junction x="119.38" y="111.76"/>
 <pinref part="U12" gate="T2" pin="S"/>
-<wire x1="129.54" y1="114.3" x2="147.32" y2="114.3" width="0.1524" layer="91"/>
+<wire x1="119.38" y1="111.76" x2="137.16" y2="111.76" width="0.1524" layer="91"/>
 <pinref part="LED" gate="G$1" pin="R"/>
 </segment>
 <segment>
@@ -15079,7 +15080,7 @@ WashU ESE Dept - May 2017</text>
 <segment>
 <pinref part="+3V5" gate="G$1" pin="+3V3"/>
 <pinref part="R15" gate="G$1" pin="2"/>
-<wire x1="114.3" y1="149.86" x2="114.3" y2="147.32" width="0.1524" layer="91"/>
+<wire x1="104.14" y1="147.32" x2="104.14" y2="144.78" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="+3V9" gate="G$1" pin="+3V3"/>
@@ -15621,30 +15622,30 @@ WashU ESE Dept - May 2017</text>
 <net name="N$10" class="0">
 <segment>
 <pinref part="R15" gate="G$1" pin="1"/>
-<wire x1="114.3" y1="137.16" x2="114.3" y2="134.62" width="0.1524" layer="91"/>
+<wire x1="104.14" y1="134.62" x2="104.14" y2="132.08" width="0.1524" layer="91"/>
 <pinref part="LED" gate="G$1" pin="A"/>
 </segment>
 </net>
 <net name="N$14" class="0">
 <segment>
 <pinref part="U12" gate="T1" pin="D"/>
-<wire x1="121.92" y1="124.46" x2="124.46" y2="124.46" width="0.1524" layer="91"/>
+<wire x1="111.76" y1="121.92" x2="114.3" y2="121.92" width="0.1524" layer="91"/>
 <pinref part="LED" gate="G$1" pin="B"/>
 </segment>
 </net>
 <net name="N$22" class="0">
 <segment>
 <pinref part="U12" gate="T2" pin="D"/>
-<wire x1="121.92" y1="129.54" x2="147.32" y2="129.54" width="0.1524" layer="91"/>
-<wire x1="147.32" y1="129.54" x2="147.32" y2="124.46" width="0.1524" layer="91"/>
+<wire x1="111.76" y1="127" x2="137.16" y2="127" width="0.1524" layer="91"/>
+<wire x1="137.16" y1="127" x2="137.16" y2="121.92" width="0.1524" layer="91"/>
 <pinref part="LED" gate="G$1" pin="G"/>
 </segment>
 </net>
 <net name="RPILEDG" class="0">
 <segment>
 <pinref part="U12" gate="T2" pin="G"/>
-<wire x1="142.24" y1="116.84" x2="132.08" y2="116.84" width="0.1524" layer="91"/>
-<label x="132.08" y="116.84" size="1.778" layer="95"/>
+<wire x1="132.08" y1="114.3" x2="121.92" y2="114.3" width="0.1524" layer="91"/>
+<label x="121.92" y="114.3" size="1.778" layer="95"/>
 </segment>
 <segment>
 <wire x1="60.96" y1="149.86" x2="73.66" y2="149.86" width="0.1524" layer="91"/>
@@ -15655,8 +15656,8 @@ WashU ESE Dept - May 2017</text>
 <net name="RPILEDB" class="0">
 <segment>
 <pinref part="U12" gate="T1" pin="G"/>
-<wire x1="119.38" y1="116.84" x2="109.22" y2="116.84" width="0.1524" layer="91"/>
-<label x="109.22" y="116.84" size="1.778" layer="95"/>
+<wire x1="109.22" y1="114.3" x2="99.06" y2="114.3" width="0.1524" layer="91"/>
+<label x="99.06" y="114.3" size="1.778" layer="95"/>
 </segment>
 <segment>
 <wire x1="261.62" y1="167.64" x2="274.32" y2="167.64" width="0.1524" layer="91"/>
