@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="7.7.0">
+<eagle version="8.2.1">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -15189,7 +15189,6 @@ Pi HAT compatible</text>
 <segment>
 <pinref part="R45" gate="G$1" pin="1"/>
 <wire x1="53.34" y1="231.14" x2="53.34" y2="228.6" width="0.1524" layer="91"/>
-<label x="7.62" y="129.54" size="1.778" layer="95"/>
 <wire x1="53.34" y1="228.6" x2="48.26" y2="228.6" width="0.1524" layer="91"/>
 <label x="63.5" y="228.6" size="1.778" layer="95"/>
 <wire x1="66.04" y1="228.6" x2="53.34" y2="228.6" width="0.1524" layer="91"/>
@@ -15197,8 +15196,9 @@ Pi HAT compatible</text>
 <pinref part="U4" gate="G$1" pin="SDA"/>
 </segment>
 <segment>
-<wire x1="25.4" y1="129.54" x2="7.62" y2="129.54" width="0.1524" layer="91"/>
 <pinref part="J1" gate="A" pin="IDSDA"/>
+<wire x1="25.4" y1="129.54" x2="7.62" y2="129.54" width="0.1524" layer="91"/>
+<label x="7.62" y="129.54" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="ATADC0" class="0">
@@ -15242,6 +15242,17 @@ Pi HAT compatible</text>
 <pinref part="U9" gate="G$1" pin="PF4(ADC4/TCK)"/>
 <wire x1="198.12" y1="220.98" x2="203.2" y2="220.98" width="0.1524" layer="91"/>
 <label x="200.66" y="220.98" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="R10" gate="G$1" pin="2"/>
+<wire x1="177.8" y1="55.88" x2="177.8" y2="58.42" width="0.1524" layer="91"/>
+<label x="180.34" y="58.42" size="1.778" layer="95"/>
+<pinref part="U3" gate="G$1" pin="IS"/>
+<wire x1="208.28" y1="58.42" x2="177.8" y2="58.42" width="0.1524" layer="91"/>
+<pinref part="C9" gate="G$1" pin="1"/>
+<wire x1="172.72" y1="55.88" x2="172.72" y2="58.42" width="0.1524" layer="91"/>
+<wire x1="172.72" y1="58.42" x2="177.8" y2="58.42" width="0.1524" layer="91"/>
+<junction x="177.8" y="58.42"/>
 </segment>
 </net>
 <net name="ATPF5" class="0">
@@ -15375,20 +15386,6 @@ Pi HAT compatible</text>
 <wire x1="340.36" y1="172.72" x2="340.36" y2="167.64" width="0.1524" layer="91"/>
 <junction x="340.36" y="167.64"/>
 <label x="327.66" y="167.64" size="1.778" layer="95"/>
-</segment>
-</net>
-<net name="ATPD7" class="0">
-<segment>
-<pinref part="U9" gate="G$1" pin="PD7(T0/OC4D/ADC10)"/>
-<wire x1="198.12" y1="170.18" x2="203.2" y2="170.18" width="0.1524" layer="91"/>
-<label x="200.66" y="170.18" size="1.778" layer="95"/>
-</segment>
-</net>
-<net name="ATPD6" class="0">
-<segment>
-<pinref part="U9" gate="G$1" pin="PD6(T1/!OC4D!/ADC9)"/>
-<wire x1="198.12" y1="167.64" x2="203.2" y2="167.64" width="0.1524" layer="91"/>
-<label x="200.66" y="167.64" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="ATICP1" class="0">
@@ -15954,19 +15951,6 @@ Pi HAT compatible</text>
 <pinref part="J1" gate="A" pin="GPIO14/TX0"/>
 <wire x1="60.96" y1="154.94" x2="73.66" y2="154.94" width="0.1524" layer="91"/>
 <label x="66.04" y="154.94" size="1.778" layer="95"/>
-</segment>
-</net>
-<net name="ATADC2" class="0">
-<segment>
-<pinref part="R10" gate="G$1" pin="2"/>
-<wire x1="177.8" y1="55.88" x2="177.8" y2="58.42" width="0.1524" layer="91"/>
-<label x="180.34" y="58.42" size="1.778" layer="95"/>
-<pinref part="U3" gate="G$1" pin="IS"/>
-<wire x1="208.28" y1="58.42" x2="177.8" y2="58.42" width="0.1524" layer="91"/>
-<pinref part="C9" gate="G$1" pin="1"/>
-<wire x1="172.72" y1="55.88" x2="172.72" y2="58.42" width="0.1524" layer="91"/>
-<wire x1="172.72" y1="58.42" x2="177.8" y2="58.42" width="0.1524" layer="91"/>
-<junction x="177.8" y="58.42"/>
 </segment>
 </net>
 <net name="U5OE" class="0">
