@@ -71,8 +71,8 @@ time.sleep(2)
 
 #UNCOMMENT IF WANT TO RECORD VIDEO
 #initialize VideoWriter object
-fourcc = cv2.VideoWriter_fourcc('M','J','P','G')
-video1 = cv2.VideoWriter('constFOE.avi',fourcc, 20.0, (width-12,height-28-18))
+#fourcc = cv2.VideoWriter_fourcc('M','J','P','G')
+#video1 = cv2.VideoWriter('constFOE.avi',fourcc, 20.0, (width-12,height-28-18))
 
 lk_params = dict( winSize  = (23, 23),
                   maxLevel = 3,
@@ -208,6 +208,7 @@ class App:
             img = img[18:height-28,6:218,:]
             
             #To grayscale and equalize
+            #Use Contrast Limited Adaptive Histogram Equalization to more effectively equalize
             clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
 
             frame_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -215,6 +216,7 @@ class App:
 
             vis = img.copy()
             
+            #If poor lighting (i.e. image color has low standard deviation), ignore frame
             if std < 20:
                 rawCapture.truncate(0)
                 continue
@@ -226,8 +228,6 @@ class App:
 
             #------------------------------CALCULATE OPTICAL FLOW-----------------------------------------
             if len(self.tracks) > 0:
-                #img0, img1 = self.prev_gray, frame_gray
-                
                 #puts in right data type and size
                 #p0 features in old frame to look for in new frame
                 p0 = np.float32([tr[-1] for tr in self.tracks]).reshape(-1, 1, 2)
@@ -269,8 +269,7 @@ class App:
                     #If not valid, break from loop
                     if not good_flag:
                         continue
-##                    if not rotation_check:
-##                        continue
+
                   
                     #add feature to track
                     tr.append((x, y))
@@ -337,13 +336,9 @@ class App:
                 xSumArr = np.array([0,0,0,0,0])
                 ySumArr = np.array([0,0,0,0,0])
                 ttcCountArr = np.array([0,0,0,0,0])
-<<<<<<< HEAD
-                xAvg,yAvg,ttcTotalAvg = 0,0,0
-=======
+
                 xAvg,yAvg,ttcTotalAvg,ttcCountTotal = 0,0,0,0
-                #ttc0Sum, ttc1Sum, ttc2Sum, ttc3Sum, ttc4Sum = 0,0,0,0,0,0
->>>>>>> 43796ff4781748b7aac3d3fc18477adc27424fc4
-                
+
                 dbscanTime = time.time()
                 db = DBSCAN(eps=17,min_samples=2).fit(clusterData)
                 dbscanTime = time.time()-dbscanTime
@@ -355,7 +350,7 @@ class App:
                 n_clusters = len(set(labels))-(1 if -1 in labels else 0)
             
 ##                        print('Estimated number of clusters: %d' % n_clusters)
-                #print(labels)                        
+##                        print(labels)                        
                 for k in set(labels):
                     if k == -1:
                         continue
@@ -399,10 +394,7 @@ class App:
                 if(sum(ttcCountArr) > 0):
                     
                     ttcAvgArr = ttcSumArr/ttcCountArr
-<<<<<<< HEAD
-=======
                     ttcCountTotal = np.sum(ttcCountArr)
->>>>>>> 43796ff4781748b7aac3d3fc18477adc27424fc4
                     ttcTotalAvg = min(m for m in ttcAvgArr if m > 0)
                     minIndex = np.where(ttcAvgArr == ttcTotalAvg)[0][0]
                     xAvg = xSumArr[minIndex]/ttcCountArr[minIndex]
@@ -442,24 +434,18 @@ class App:
                     
                 elif (xAvg < midpoint + EPSILON) and (xAvg > midpoint - EPSILON):
                     cv2.putText(vis,'BUFFER', (5,70), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-<<<<<<< HEAD
-                    temp = int(midpoint + DEFAULT_ANGLE - xAvg)
-                    
-=======
+
                     tempAngle = int(midpoint + DEFAULT_ANGLE - xAvg)
->>>>>>> 43796ff4781748b7aac3d3fc18477adc27424fc4
+
                 elif xAvg < midpoint:
                     cv2.putText(vis,'RIGHT', (5,70), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
                     ##in this elif desired xAvg is 0
                     xDes = 0
                     xErr = xAvg - xDes
                     xErr = updatePID(self,xErr)
-<<<<<<< HEAD
-                    temp = int(((90.0*(xErr/224.0) + DEFAULT_ANGLE)))
-                    
-=======
+
                     tempAngle = int(((90.0*(xErr/224.0) + DEFAULT_ANGLE)))
->>>>>>> 43796ff4781748b7aac3d3fc18477adc27424fc4
+
                 else:
                     cv2.putText(vis,'LEFT', (5,70), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
                     ##in this elif desired xAvg is 224
@@ -528,8 +514,8 @@ class App:
 ##            cv2.imshow('CLAHE (8,8)',frame_gray)
 
             #UNCOMMENT TO WRITE FRAME TO VIDEO
-            video1.write(vis)
-            video1.write(vis)
+            #video1.write(vis)
+            #video1.write(vis)
             
             ch = cv2.waitKey(1)
 
