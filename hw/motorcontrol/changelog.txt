@@ -23,11 +23,11 @@ v2.1
   is +5V, Pin 2 is GND, rest is for communication.
 
 - New RCVR connector. Communication pin connected to ATMega32u4's
-  ICP3.
+  ICP3. Use this connector read data from wireless receiver.
 
 - New XIO connector. Communication pins connected to ATMega32u4's ICP1
   and OC1C (shared with motor controller). Use this connector to
-  control an ESC module.
+  control an ESC module or read a second wireless receiver line.
 
 - Encoder communication pins connected to INT6 and PB4.
 
