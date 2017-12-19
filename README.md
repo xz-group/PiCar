@@ -1,11 +1,11 @@
 Raspberry Pi Car Project
 ========================
 
-The Raspberry Pi Car project aims to design a miniature four-wheeled car powered by a Raspberry Pi B+ board.
+The Raspberry Pi Car project aims to design a miniature four-wheeled car powered by a Raspberry Pi 3 board.
 
 This repository contains all the software and hardware source files required to duplicate the car, including:
 * Chassis 3D printer CAD sources.
-* Raspberry Pi B+ breakout PCB to connect peripherals and draw power from LiPo battery.
+* Raspberry Pi 3 breakout PCB to connect peripherals and draw power from LiPo battery.
 * Source code of the following sofware modules capable of:
  * Acquire wheel angle data from two quadrature encoders.
  * Acquire acceleration, angular velocity, and compass data from an I²C LSM9DS1 IMU.
