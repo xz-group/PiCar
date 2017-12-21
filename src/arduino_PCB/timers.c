@@ -28,9 +28,9 @@ void initTimers() {
 
 //  // set up Timer 3
 //  TCCR3A = 0;          // normal operation
-//  TCCR3B = bit(WGM12) | bit(CS10) | bit (CS12);   // pre-scaling
-//  OCR3A =  999;       // compare A register value (1000 * clock speed)
-//  TIMSK3 = bit (OCIE1A);
+//  TCCR3B = bit(WGM32) | bit(CS30) | bit (CS32);   // pre-scaling
+//  OCR3A =  100;       // compare A register value (1000 * clock speed)
+//  TIMSK3 = bit (ICIE3);
 //
 //  // set up Timer 4
 //  TCCR4A = 0;          // normal operation

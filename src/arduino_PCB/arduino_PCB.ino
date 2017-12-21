@@ -6,7 +6,7 @@
 #include "dshare.h"
 #include "ddefs.h"
 #include "spi_comm.h"
-
+#include <avr/interrupt.h>
 //FIX ME: see timer.c file
 #include "timers.h"
 #include "imu.h"
@@ -15,7 +15,7 @@
 Servo servo;
 Servo esc;
 
-float SPEED_SCALE = 1.45;
+float SPEED_SCALE = 1.5;
 int tempAngle = 90;
 int tempPWM = 0;
 
@@ -30,6 +30,7 @@ volatile uint8_t newfall;
 // FIX ME: use ICP3 not 1
 ISR( TIMER3_CAPT_vect )
 {
+  Serial.println("abc");
   if( !newfall )
     if( redge )
     {
@@ -40,7 +41,7 @@ ISR( TIMER3_CAPT_vect )
     else
     {
       bitSet( TCCR3B, ICES3 );
-      diff = ICR3;
+      diff =  ;
       redge = 1;
       newfall = 1;
     }
@@ -79,7 +80,7 @@ ISR(SPI_STC_vect) {
 
 void setup() {
   //open serial port for debugging
-  Serial.begin(115200);
+  Serial.begin(57600);
   
   //setup SPI
   SPI.attachInterrupt();
@@ -89,6 +90,8 @@ void setup() {
   //Initialize timers
   //initTimers();
 
+  
+  
   // setup esc and servo
   // FIX ME: pins change for leonardo
   servo.attach( 9 );
@@ -114,6 +117,7 @@ void setup() {
 void loop() {
 //  Serial.println(tempAngle);
 //  Serial.println(SPEED_SCALE*tempPWM);
+
 if( newfall )
   {
     noInterrupts();
