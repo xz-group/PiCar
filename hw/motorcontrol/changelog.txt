@@ -1,0 +1,60 @@
+v2.1
+====
+- Changed all the devices that were hard to solder (pads smaller than
+  1mil) for useful equivalents.
+
+- RPi-ATMega32u4 communication using either SPI or UART. New Slave
+  Select connection using RPi's CE0. UART communication is
+  recommended.
+
+- Redesign RPi-ATMega32u4 voltage translation interface. Now using 2x
+  SN74LV4T125. If RPi is not connected then RPi->ATMega32u4 lines
+  become HiZ. S2P2 now controls HiZ state of RPi->ATMega32u4 SPI
+  lines.
+
+- SPI MOSI, SCLK, and CE0 lines are shared with Hall sensors. Hence,
+  they cannot be used simultaneously. S2P2 *must* be open if Hall
+  sensors are present. Also, Hall sensors must be read using Port B's
+  general interrupt.
+
+- Redesign ATRESET bus. Now S1 and RPIRESET can reset ATMega32u4.
+
+- All connectors now follow RC toys' unspoken standard pinout: Pin 1
+  is +5V, Pin 2 is GND, rest is for communication.
+
+- New RCVR connector. Communication pin connected to ATMega32u4's
+  ICP3. Use this connector read data from wireless receiver.
+
+- New XIO connector. Communication pins connected to ATMega32u4's ICP1
+  and OC1C (shared with motor controller). Use this connector to
+  control an ESC module or read a second wireless receiver line.
+
+- Encoder communication pins connected to INT6 and PB4.
+
+- Servo communication pin connected to OC3A.
+
+- U11 is now rated for 6A.
+
+- S2P1 now controls state of ATMega32u4's HWB (PE2) pin.
+
+- Motor controllers' IS now connected to ADC0, ADC1, and ADC4. Also,
+  INH now connected to PF5, PF6, and PF7.
+
+- Blue LED controlled via RPi GPIO23 and ATMega32u4 PD5. Green LED
+  controlled via RPi GPIO18/PCMCLK.
+
+
+
+v2.0
+====
+- Changed from 2 to 1 motor controllers.
+
+- Add ATMega32u4 to read all the sensors and control motor.
+
+- RPi-ATMega32u4 communication via SPI (see errata).
+
+- Pi Hat compatible design.
+
+- RPi back-power protection.
+
+- Motor over-voltage protection.

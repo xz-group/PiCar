@@ -1,0 +1,16 @@
+- RPi-Arduino SPI connection does not work due to lack of Slave Select
+  (SS) connection. One solution is to add jumper wire between
+  ATMega32u4 Pin 8 (PB0) and RPi Connection Pin 15 (GPIO22).
+
+- Capacitor C22 makes ADG3304 become unstable (oscillations at
+  ~8MHz). DO NOT SOLDER.
+
+- Resistors R31 and R44 are not necessary, IMU comes with its own
+  pull-up resistors.
+
+- Although Vout is rated for 6A, U11 is only rated for 4A. Hence, U11
+  will fail (i.e., crack open) if the +5V carries more than ~4A.
+
+- S2P2 does not work as expected. This is an open bug, it is unclear
+  if the problem is the board design or ATMega32u4's fuse
+  configuration.

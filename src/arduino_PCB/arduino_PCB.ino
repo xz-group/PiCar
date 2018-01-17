@@ -1,12 +1,12 @@
 //  Created by Matt Kollada on 5/17/17.
-
-#include <stdint.h>
+//PCB
+//#include <stdint.h>
 #include <Servo.h>
 #include <SPI.h>
 #include "dshare.h"
 #include "ddefs.h"
 #include "spi_comm.h"
-
+#include <avr/interrupt.h>
 //FIX ME: see timer.c file
 #include "timers.h"
 #include "imu.h"
@@ -16,8 +16,8 @@ Servo servo;
 Servo esc;
 
 float SPEED_SCALE = 1.5;
-volatile int tempAngle = 90;
-volatile int tempPWM = 0;
+int tempAngle = 90;
+int tempPWM = 0;
 
 bool kill;
 
@@ -28,19 +28,20 @@ volatile uint8_t newfall;
 
 // Kill Switch Interrupt
 // FIX ME: use ICP3 not 1
-ISR( TIMER1_CAPT_vect )
+ISR( TIMER3_CAPT_vect )
 {
+  Serial.println("abc");
   if( !newfall )
     if( redge )
     {
-      bitClear( TCCR1B, ICES1 );
-      raising = ICR1;
+      bitClear( TCCR3B, ICES3 );
+      raising = ICR3;
       redge = 0;
     }
     else
     {
-      bitSet( TCCR1B, ICES1 );
-      diff = ICR1;
+      bitSet( TCCR3B, ICES3 );
+      diff =  ;
       redge = 1;
       newfall = 1;
     }
@@ -52,10 +53,8 @@ ISR( TIMER1_CAPT_vect )
 ISR(TIMER0_COMPA_vect)
 {
   if(kill) {
-    tempAngle = 90;
-    servo.write(tempAngle);
-    tempPWM = 1500;
-    esc.writeMicroseconds(tempPWM);
+    servo.write(90);
+    esc.writeMicroseconds(1500);
   }
   else {
     if ( getData( SERVO_ANGLE, &tempAngle ) == DSHARE_OK ) {
@@ -81,7 +80,7 @@ ISR(SPI_STC_vect) {
 
 void setup() {
   //open serial port for debugging
-  Serial.begin(115200);
+  Serial.begin(57600);
   
   //setup SPI
   SPI.attachInterrupt();
@@ -89,12 +88,14 @@ void setup() {
   SPCR |= _BV(SPE);
 
   //Initialize timers
-  initTimers();
+  //initTimers();
 
+  
+  
   // setup esc and servo
   // FIX ME: pins change for leonardo
-  servo.attach( 3 );
-  esc.attach( 5 );
+  servo.attach( 9 );
+  esc.attach( 10 );
 
   // Turn kill switch off
   kill = false;
@@ -102,18 +103,21 @@ void setup() {
   //setup IMU
   imuSetup();
 
+
   // ICES1: 0: falling edge, 1: raising edge
   // ICNC1: Noise cancel enabled
-  bitSet( TCCR1B, ICNC1 );
-  bitSet( TCCR1B, ICES1 );
-  bitSet( TIMSK1, ICIE1 ); // IC interrupt enabled
+  bitSet( TCCR3B, ICNC3 );
+  bitSet( TCCR3B, ICES3 );
+  bitSet( TIMSK3, ICIE3 ); // IC interrupt enabled
   redge = 1;
   newfall = 0;
+
 } 
 
 void loop() {
-  Serial.println(tempAngle);
-  Serial.println(SPEED_SCALE*tempPWM);
+//  Serial.println(tempAngle);
+//  Serial.println(SPEED_SCALE*tempPWM);
+
 if( newfall )
   {
     noInterrupts();

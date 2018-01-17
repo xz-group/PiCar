@@ -32,10 +32,10 @@ from picamera import PiCamera
 
 # initialize the camera and grab a reference to the raw camera capture
 camera = PiCamera()
-camera.resolution = (224, 128)
+camera.resolution = (640, 240)
 camera.framerate = 30
 camera.shutter_speed = 5000
-rawCapture = PiRGBArray(camera, size=(200, 120))
+rawCapture = PiRGBArray(camera, size=(640, 240))
 #camera.exposure_mode = 'off'
 
 # allow the camera to warmup
@@ -51,7 +51,7 @@ rawCapture.truncate(0)
 
 #initialize VideoWriter object
 fourcc = cv2.VideoWriter_fourcc('M','J','P','G')
-video1 = cv2.VideoWriter('TestElevatedFast.avi',fourcc, 20.0, (width,height))
+video1 = cv2.VideoWriter('First_lk_Screenshot.avi',fourcc, 20.0, (width,height))
 
 #Set parameters in optical flow
 lk_params = dict( winSize  = (23, 23),
@@ -76,14 +76,11 @@ class App:
             #Read from camera
             img = frame.array
             
-            #Convert to grayscale
-            frame_gray_old = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
-            #Equalize Histogram
-            frame_gray = cv2.equalizeHist(frame_gray_old)
+            #Equalize
+            clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
+            frame_gray = clahe.apply(cv2.cvtColor(img, cv2.COLOR_BGR2GRAY))
             
             vis = img.copy()
-
             
             if len(self.tracks) > 0:
                 img0, img1 = self.prev_gray, frame_gray
@@ -121,7 +118,7 @@ class App:
             self.prev_gray = frame_gray
             
             #Display
-#            cv2.imshow('lk_track', vis)
+            cv2.imshow('lk_track', vis)
 #            cv2.imshow('Before Equalization', frame_gray_old)
 #            cv2.imshow('After Equalization',frame_gray)
 

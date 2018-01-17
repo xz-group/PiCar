@@ -1,0 +1,3 @@
+## ignore Eagle backups
+*.b$*
+*.s$*
