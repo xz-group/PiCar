@@ -45,8 +45,8 @@ rawCapture = PiRGBArray(camera, size=(width, height))
 time.sleep(2)
 
 #initialize VideoWriter object
-fourcc = cv2.VideoWriter_fourcc('M','J','P','G')
-video1 = cv2.VideoWriter('constFOE.avi',fourcc, 20.0, (224,96))
+#fourcc = cv2.VideoWriter_fourcc('M','J','P','G')
+#video1 = cv2.VideoWriter('constFOE.avi',fourcc, 20.0, (224,96))
 
 lk_params = dict( winSize  = (23, 23),
                   maxLevel = 3,
@@ -236,9 +236,9 @@ class App:
             #cv2.imshow('Before Equalization', frame_gray_old)
             #cv2.imshow('CLAHE (8,8)',frame_gray)
 
-            video1.write(vis)
-            video1.write(vis)
-            video1.write(vis)
+            #video1.write(vis)
+            #video1.write(vis)
+            #video1.write(vis)
             
             ch = cv2.waitKey(1)
 
