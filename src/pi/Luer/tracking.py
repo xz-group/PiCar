@@ -1,17 +1,36 @@
 import cv2
 import sys
 import time
+from picamera.array import PiRGBArray
+from picamera import PiCamera
+import sys
 
 
-(major_ver, minor_ver, subminor_ver) = (cv2.__version__).split('.')￼
+if len(sys.argv) < 2:
+    print("usage: python3 tracking.py <1,2,3,4>")
+    sys.exit()
+else:
+    clArg = int(sys.argv[1])
+width = 640
+height = 480
+
+# initialize the camera and grab a reference to the raw camera capture
+camera = PiCamera()
+camera.resolution = (width, height)
+camera.framerate = 25
+camera.shutter_speed = 5000
+rawCapture = PiRGBArray(camera, size=(width, height))
+time.sleep(1)
+
+(major_ver, minor_ver, subminor_ver) = (cv2.__version__).split('.')
 
 if __name__ == '__main__' :
 
     # Set up tracker.
     # Instead of MIL, you can also use
 
-    tracker_types = ['BOOSTING', 'MIL','KCF', 'TLD', 'MEDIANFLOW', 'GOTURN']
-    tracker_type = tracker_types[2]
+    tracker_types = ['BOOSTING', 'MIL','KCF', 'TLD', 'MEDIANFLOW']
+    tracker_type = tracker_types[clArg]
 
     if int(minor_ver) < 3:
         tracker = cv2.Tracker_create(tracker_type)
@@ -26,23 +45,32 @@ if __name__ == '__main__' :
             tracker = cv2.TrackerTLD_create()
         if tracker_type == 'MEDIANFLOW':
             tracker = cv2.TrackerMedianFlow_create()
-        if tracker_type == 'GOTURN':
-            tracker = cv2.TrackerGOTURN_create()
 
     # Read video
-    video = cv2.VideoCapture("~/Downloads/bouncing.mp4")
+    #video = cv2.VideoCapture("bouncing.mp4")
 
     # Exit if video not opened.
-    if not video.isOpened():
-        print ("Could not open video")
-        sys.exit()
+  #  if not video.isOpened():
+  #      print ("Could not open video")
+  #      sys.exit()
 
     # Read first frame.
-    ok, frame = video.read()
-    if not ok:
-        print ('Cannot read video file')
-        sys.exit()
+   # ok, frame = video.read()
+   # if not ok:
+   #     print ('Cannot read video file')
+   #     sys.exit()
+    rawCapture.truncate(0)
 
+    for img in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+
+        # Read a new frame
+        frame = img.array
+        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
+        frame_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+        frame = clahe.apply(frame_gray)
+        break
+    
     # Define an initial bounding box
     bbox = (287, 23, 86, 320)
 
@@ -51,13 +79,18 @@ if __name__ == '__main__' :
 
     # Initialize tracker with first frame and bounding box
     ok = tracker.init(frame, bbox)
+    
+    rawCapture.truncate(0)
+    for img in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
 
-    while True:
         # Read a new frame
-        ok, frame = video.read()
-        if not ok:
-            break
+        frame = img.array
 
+        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
+        frame_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+        frame = clahe.apply(frame_gray)
+        
         # Start timer
         timer = cv2.getTickCount()
 
@@ -85,7 +118,7 @@ if __name__ == '__main__' :
 
         # Display result
         cv2.imshow("Tracking", frame)
-
+        rawCapture.truncate(0)
         # Exit if ESC pressed
         k = cv2.waitKey(1) & 0xff
         if k == 27 : break
