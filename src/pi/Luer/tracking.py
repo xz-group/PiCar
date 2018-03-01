@@ -22,6 +22,9 @@ camera.shutter_speed = 5000
 rawCapture = PiRGBArray(camera, size=(width, height))
 time.sleep(1)
 
+out = cv2.VideoWriter("kcf.avi",cv2.VideoWriter_fourcc(*"MJPG"),10,(width,height))
+print("width: ", width)
+print("Height: ",height)
 (major_ver, minor_ver, subminor_ver) = (cv2.__version__).split('.')
 
 if __name__ == '__main__' :
@@ -67,7 +70,7 @@ if __name__ == '__main__' :
         frame = img.array
         clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
         frame_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
+        
         frame = clahe.apply(frame_gray)
         break
     
@@ -76,7 +79,7 @@ if __name__ == '__main__' :
 
     # Uncomment the line below to select a different bounding box
     bbox = cv2.selectROI(frame, False)
-
+    print("BOUNDING BOX: ",bbox)
     # Initialize tracker with first frame and bounding box
     ok = tracker.init(frame, bbox)
     
@@ -89,14 +92,14 @@ if __name__ == '__main__' :
         clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
         frame_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-        frame = clahe.apply(frame_gray)
+        frame_gray = clahe.apply(frame_gray)
         
         # Start timer
         timer = cv2.getTickCount()
 
         # Update tracker
-        ok, bbox = tracker.update(frame)
-
+        ok, bbox = tracker.update(frame_gray)
+        #print("BOUNDING BOX: ",bbox)
         # Calculate Frames per second (FPS)
         fps = cv2.getTickFrequency() / (cv2.getTickCount() - timer);
 
@@ -116,9 +119,16 @@ if __name__ == '__main__' :
         # Display FPS on frame
         cv2.putText(frame, "FPS : " + str(int(fps)), (100,50), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (50,170,50), 2);
 
+        #print("frame dimensions: ", frame.shape)
+        
         # Display result
         cv2.imshow("Tracking", frame)
+        out.write(frame)
         rawCapture.truncate(0)
+
+        
         # Exit if ESC pressed
         k = cv2.waitKey(1) & 0xff
-        if k == 27 : break
+        if k == 27 :
+            out.release()
+            break

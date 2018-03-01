@@ -71,5 +71,6 @@ for i in np.arange(0, detections.shape[2]):
 			cv2.FONT_HERSHEY_SIMPLEX, 0.5, COLORS[idx], 2)
 
 # show the output image
+cv2.imwrite("phone.jpg",image)
 cv2.imshow("Output", image)
 cv2.waitKey(0)
