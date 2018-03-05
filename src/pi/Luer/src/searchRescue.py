@@ -20,7 +20,7 @@ camera.shutter_speed = 5000
 rawCapture = PiRGBArray(camera, size=(width, height))
 time.sleep(1)
 
-out = cv2.VideoWriter("yoloTrackerBottle.avi",cv2.VideoWriter_fourcc(*"MJPG"),10,(width,height))
+out = cv2.VideoWriter("bottle2.avi",cv2.VideoWriter_fourcc(*"MJPG"),10,(width,height))
 
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
@@ -48,7 +48,7 @@ for img in camera.capture_continuous(rawCapture, format="bgr", use_video_port=Tr
 rawCapture.truncate(0)
 # load our serialized model from disk
 print("[INFO] loading model...")
-net = cv2.dnn.readNetFromCaffe("MobileNetSSD_deploy.prototxt.txt", "MobileNetSSD_deploy.caffemodel")
+net = cv2.dnn.readNetFromCaffe("../model/MobileNetSSD_deploy.prototxt.txt", "../model/MobileNetSSD_deploy.caffemodel")
 
 # Construct an input blob for the image
 # by resizing to a fixed 300x300 pixels and then normalizing it
