@@ -26,18 +26,29 @@ out = cv2.VideoWriter("../media/bottle2.avi",cv2.VideoWriter_fourcc(*"MJPG"),10,
 ap = argparse.ArgumentParser()
 ap.add_argument("-c", "--confidence", type=float, default=0.2,
                 help="minimum probability to filter weak detections")
+ap.add_argument('-l','--list', nargs='+', help='specify items to track. usage: --list bottle dog horse',required=True)
 args = vars(ap.parse_args())
 
-
+itemsToTrack = args["list"]
 # initialize the list of class labels MobileNet SSD was trained to
 # detect, then generate a set of bounding box colors for each class
 CLASSES = ["background", "aeroplane", "bicycle", "bird", "boat",
 	"bottle", "bus", "car", "cat", "chair", "cow", "diningtable",
 	"dog", "horse", "motorbike", "person", "pottedplant", "sheep",
 	"sofa", "train", "tvmonitor"]
+
+for item in itemsToTrack:
+    if item not in CLASSES:
+        itemsToTrack.remove(item)
+        print("[ERROR] Cannot track %s. Removing from list..." % item)
+
 COLORS = np.random.uniform(0, 255, size=(len(CLASSES), 3))
 
+count = 0
 while True:
+    count = count % len(itemsToTrack)
+    itemInterest = itemsToTrack[count]
+    count += 1
     for img in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
             # Read a single frame
             image = img.array
@@ -48,7 +59,7 @@ while True:
 
     rawCapture.truncate(0)
     # load our serialized model from disk
-    print("[INFO] loading model...")
+    #print("[INFO] loading model...")
     net = cv2.dnn.readNetFromCaffe("../model/MobileNetSSD_deploy.prototxt.txt", "../model/MobileNetSSD_deploy.caffemodel")
 
     # Construct an input blob for the image
@@ -80,13 +91,13 @@ while True:
                 idx = int(detections[0, 0, i, 1])
                 box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
                 (startX, startY, endX, endY) = box.astype("int")
-                if CLASSES[idx] == "bicycle":
+                if CLASSES[idx] == itemInterest:
                 #if True:
                     x1 = startX
                     y1 = startY
                     x2 = endX
                     y2 = endY
-                    print("[INFO] Locking on to bottle...")
+                    print("[INFO] Locking on to %s..." % itemInterest)
 
                     # display the prediction
                     label = "{}: {:.2f}%".format(CLASSES[idx], confidence * 100)
