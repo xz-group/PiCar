@@ -26,6 +26,7 @@ out = cv2.VideoWriter("../media/bottle2.avi",cv2.VideoWriter_fourcc(*"MJPG"),10,
 ap = argparse.ArgumentParser()
 ap.add_argument("-c", "--confidence", type=float, default=0.2,
                 help="minimum probability to filter weak detections")
+ap.add_argument('-l','--list', nargs='+', help='specify items to track. usage: --list bottle dog horse',required=True)
 args = vars(ap.parse_args())
 
 itemsToTrack = args["list"]
@@ -36,11 +37,17 @@ CLASSES = ["background", "aeroplane", "bicycle", "bird", "boat",
 	"dog", "horse", "motorbike", "person", "pottedplant", "sheep",
 	"sofa", "train", "tvmonitor"]
 
+for item in itemsToTrack:
+    if item not in CLASSES:
+        itemsToTrack.remove(item)
+        print("[ERROR] Cannot track %s. Removing from list..." % item)
+
 COLORS = np.random.uniform(0, 255, size=(len(CLASSES), 3))
 
 count = 0
 while True:
-    itemInterest = "bottle"
+    count = count % len(itemsToTrack)
+    itemInterest = itemsToTrack[count]
     count += 1
     for img in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
             # Read a single frame
