@@ -38,7 +38,6 @@ CLASSES = ["background", "aeroplane", "bicycle", "bird", "boat",
 COLORS = np.random.uniform(0, 255, size=(len(CLASSES), 3))
 
 while True:
-    time.sleep(.5)
     for img in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
             # Read a single frame
             image = img.array
@@ -49,7 +48,7 @@ while True:
 
     rawCapture.truncate(0)
     # load our serialized model from disk
-    #print("[INFO] loading model...")
+    print("[INFO] loading model...")
     net = cv2.dnn.readNetFromCaffe("../model/MobileNetSSD_deploy.prototxt.txt", "../model/MobileNetSSD_deploy.caffemodel")
 
     # Construct an input blob for the image
@@ -81,13 +80,13 @@ while True:
                 idx = int(detections[0, 0, i, 1])
                 box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
                 (startX, startY, endX, endY) = box.astype("int")
-                if CLASSES[idx] == "bottle":
+                if CLASSES[idx] == "bicycle":
                 #if True:
                     x1 = startX
                     y1 = startY
                     x2 = endX
                     y2 = endY
-                    print("[INFO] Bottle Found...")
+                    print("[INFO] Locking on to bottle...")
 
                     # display the prediction
                     label = "{}: {:.2f}%".format(CLASSES[idx], confidence * 100)
@@ -107,14 +106,13 @@ while True:
     bbox = (x1,y1,x2-x1,y2-y1)
     #bbox = (y1,x1,y2-y1,x2-x1)
 
-    #print("[INFO] Passing coordinates to tracking algorithm: ", bbox)
+    print("[INFO] Passing coordinates to tracking algorithm: ", bbox)
     ok = tracker.init(image_gray, bbox)
 
     timeInFailure = 0
     failureStartTime = 0
     failureInterval = 0.5           #How much time I want to be in a failure state until I recheck for item
 
-    print("[INFO] Tracking started...")
     for img in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
             frame = img.array
             clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
