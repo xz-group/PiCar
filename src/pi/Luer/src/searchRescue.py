@@ -20,7 +20,7 @@ camera.shutter_speed = 5000
 rawCapture = PiRGBArray(camera, size=(width, height))
 time.sleep(1)
 
-out = cv2.VideoWriter("bottle2.avi",cv2.VideoWriter_fourcc(*"MJPG"),10,(width,height))
+out = cv2.VideoWriter("../media/bottle2.avi",cv2.VideoWriter_fourcc(*"MJPG"),10,(width,height))
 
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
@@ -98,7 +98,7 @@ while True:
     # show the output image
     ssdTime = time.time()-ssdTime
     print("[RESULTS] SSD took %f seconds..." % ssdTime)
-    cv2.imwrite("lockedOn.jpg",image)
+    cv2.imwrite("../media/lockedOn.jpg",image)
     #cv2.imshow("Output", image)
     #cv2.waitKey(0)
 
