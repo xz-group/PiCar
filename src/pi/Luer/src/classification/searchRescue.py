@@ -1,8 +1,10 @@
-# USAGE
-# python deep_learning_object_detection.py --image images/example_01.jpg \
-#	--prototxt MobileNetSSD_deploy.prototxt.txt --model MobileNetSSD_deploy.caffemodel
-
-# import the necessary packages
+# TO-DO 3/6/18
+#1. Clean up code
+#   - init, main, functions
+#   - make it logical
+#2. Fix bounding box problem
+#3. Make this be portable so that I can use it on the pi and the mac
+#
 import numpy as np
 import argparse
 import cv2
