@@ -2,7 +2,7 @@ import cv2
 import math
 import numpy as np
 from keypointFinders import randomSample,fast,sift,surf,orb,shi_tomasi
-from featureMatchings import opticalflow,flann
+from featureMatchings import opticalflow,flann,bruteforce
 import time
 
 class MedianFlowTracker(object):
@@ -23,24 +23,26 @@ class MedianFlowTracker(object):
             print("[INFO] Using fast for sampling")
         elif samplingMethod == "sift":
             self.getKeyPoints = sift
-            print("[INFO] Using sift for sampling")
+            print("[INFO] Using SIFT for sampling")
         elif samplingMethod == "surf":
             self.getKeyPoints = surf
-            print("[INFO] Using surf for sampling")
+            print("[INFO] Using SURF for sampling")
         elif samplingMethod == "orb":
             self.getKeyPoints = orb
-            print("[INFO] Using orb for sampling")
+            print("[INFO] Using ORB for sampling")
         elif samplingMethod == "shi-tomasi":
             self.getKeyPoints = shi_tomasi
-            print("[INFO] Using shi-tomasi for sampling")
+            print("[INFO] Using Shi-Tomasi for sampling")
 
         if featureMatching == "opticalflow":
             self.matchFeatures = opticalflow
             print("[INFO] Using optical flow as feature matcher")
-        # if featureMatching == "bruteforce":
-        #     self.matchFeatures = bruteforece
+        elif featureMatching == "bruteforce":
+            self.matchFeatures = bruteforce
+            print("[INFO] Using bruteforce as feature matcher")
         elif featureMatching == "flann":
             self.matchFeatures = flann
+            print("[INFO] Using FLANN as feature matcher")
 
 
 

@@ -90,9 +90,67 @@ def flann(prev,curr,bb,keypointFinder):
         return None,None
     if len(p0) < 3:
         return None,None
+    # print(desc0)
+    desc0 = np.float32(desc0)
+    # print(desc1)
+    desc1 = np.float32(desc1)
+    # print(desc1)
     flann = cv2.FlannBasedMatcher(index_params,search_params)
 
     matches = flann.knnMatch(desc0,desc1,k=2)
+    matchesMask = [0 for i in range(len(matches))]
+
+    p0good = []
+    p1good = []
+    # ratio test as per Lowe's paper
+    for i,(m,n) in enumerate(matches):
+        if m.distance < 0.75*n.distance:
+            matchesMask[i]=1
+
+    # print("MATCHES: ", matches)
+    # print("SHAPE OF MATCHES: ", np.shape(matches))
+    for i in range(len(p0)):
+        if matchesMask[i] == 1:
+            p0good.append(p0[matches[i][0].queryIdx])
+            p1good.append(p1[matches[i][0].trainIdx])
+
+    draw_params = dict(matchColor = (0,255,0),
+                       singlePointColor = (255,0,0),
+                       matchesMask = matchesMask,
+                       flags = 0)
+    # img3 = cv2.drawMatchesKnn(prev[bb[1]:bb[3],bb[0]:bb[2]],p0,curr,p1,matches,None,**draw_params)
+    # cv2.imshow("matches",img3)
+    # cv2.waitKey(0)
+    # print(matchesMask)
+
+    # print(matches)
+    p0good = np.array([*p0good]).astype(int)
+    p1good = np.array([*p1good]).astype(int)
+
+    # print("RETURNING: ")
+    # print(p0good)
+    # print("p1")
+    # print(p1good)
+    if len(p0good) < 3:
+        print("[ERROR] Not enough features to track")
+        return None,None
+    return p0good,p1good
+
+def bruteforce(prev,curr,bb,keypointFinder):
+
+    p0,desc0 = keypointFinder(prev,bb,desc=True)
+    p1,desc1 = keypointFinder(curr,bb,current=True,desc=True)
+    if p0 is None:
+        return None,None
+    if len(p0) < 3:
+        return None,None
+
+    desc0 = np.float32(desc0)
+    desc1 = np.float32(desc1)
+
+    bf = cv2.BFMatcher()
+
+    matches = bf.knnMatch(desc0,desc1,k=2)
     matchesMask = [0 for i in range(len(matches))]
 
     p0good = []
@@ -121,21 +179,10 @@ def flann(prev,curr,bb,keypointFinder):
     # print(matches)
     p0good = np.array([*p0good]).astype(int)
     p1good = np.array([*p1good]).astype(int)
+    if len(p0good) < 3:
+        print("[ERROR] Not enough features to track")
+        return None,None
     return p0good,p1good
-
-
-
-# def bruteforce(vis,bb):
-#     sift = cv2.xfeatures2d.SIFT_create()
-#     kp = sift.detect(vis[bb[1]:bb[3],bb[0]:bb[2]],None)
-#     print("Number of sift keypoints found = ", len(kp))
-#     for i in range(len(kp)):
-#         kp[i] = kp[i].pt
-#     kp = np.array([*kp]).astype(np.float32)
-#     kp[:,0] += bb[0]
-#     kp[:,1] += bb[1]
-#     return kp
-#
 # if __name__ == "__main__":
 #     source = cv2.VideoCapture("bouncing.mp4")
 #     ret, frame = source.read()
