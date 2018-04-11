@@ -26,7 +26,7 @@ def draw(vis,box):
 
 
 class TrackingManager(object):
-    def __init__(self, win, source):
+    def __init__(self, win, source, featurematcher):
         # VIDEO SOURCE
         self._device = cv2.VideoCapture(source)
 
@@ -37,7 +37,7 @@ class TrackingManager(object):
         self._bounding_box = None
 
         # CONSTRUCT MEDIANFLOWTRACKER
-        self._tracker = MedianFlowTracker(win)
+        self._tracker = MedianFlowTracker(win, featurematcher)
 
     def run(self):
         prev, curr = None, None
@@ -57,7 +57,8 @@ class TrackingManager(object):
         #     d += b
 
         self._bounding_box = (a,b,c,d)
-        self._bounding_box = (183, 0, 275, 77)
+        # self._bounding_box = (183, 0, 275, 77)
+        self._bounding_box = (195, 50, 280, 130)
 
         print("[INFO] Bounding box = ", self._bounding_box)
 
@@ -98,12 +99,12 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("-s", "--source", required=True, help="Enter the path to your video or enter 0 to use your webcam.")
     ap.add_argument("-k", "--keypoint", required=True, help="Enter the method of keypoint detection. Options are random, fast, sift, surf, orb, shi-tomasi.")
-    # ap.add_argument("-m", "--matching", required=True, help="Enter the method of feature matching. Options are bruteforce, flann, opticalflow.")
+    ap.add_argument("-m", "--matching", required=True, help="Enter the method of feature matching. Options are bruteforce, flann, opticalflow.")
 
     args = vars(ap.parse_args())
     source = args["source"]
     keypointmethod = args["keypoint"]
-    # featurematcher = args["matching"]
+    featurematcher = args["matching"]
 
     # START TRACKER
-    TrackingManager(keypointmethod, source).run()
+    TrackingManager(keypointmethod, source,featurematcher).run()

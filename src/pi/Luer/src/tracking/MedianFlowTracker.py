@@ -2,37 +2,46 @@ import cv2
 import math
 import numpy as np
 from keypointFinders import randomSample,fast,sift,surf,orb,shi_tomasi
+from featureMatchings import opticalflow,flann
 import time
 
 class MedianFlowTracker(object):
-    def __init__(self,samplingMethod):
-        self.lk_params = dict(winSize  = (11, 11),
-                              maxLevel = 3,
-                              criteria = (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 0.1))
+    def __init__(self,samplingMethod,featureMatching):
+
 
         self._atan2 = np.vectorize(np.math.atan2)
         self._n_samples = 10
         self._num_frames = 0
+        self.sample = samplingMethod
+        self.match = featureMatching
 
         if samplingMethod == "random":
             self.getKeyPoints = randomSample
+            print("[INFO] Using random sampling")
         elif samplingMethod == "fast":
             self.getKeyPoints = fast
+            print("[INFO] Using fast for sampling")
         elif samplingMethod == "sift":
             self.getKeyPoints = sift
+            print("[INFO] Using sift for sampling")
         elif samplingMethod == "surf":
             self.getKeyPoints = surf
+            print("[INFO] Using surf for sampling")
         elif samplingMethod == "orb":
             self.getKeyPoints = orb
+            print("[INFO] Using orb for sampling")
         elif samplingMethod == "shi-tomasi":
             self.getKeyPoints = shi_tomasi
+            print("[INFO] Using shi-tomasi for sampling")
 
+        if featureMatching == "opticalflow":
+            self.matchFeatures = opticalflow
+            print("[INFO] Using optical flow as feature matcher")
         # if featureMatching == "bruteforce":
         #     self.matchFeatures = bruteforece
-        # elif featureMatching == "flann":
-        #     self.matchFeatures = flann
-        # elif featureMatching == "opticalflow":
-        #     self.matchFeatures = opticalflow
+        elif featureMatching == "flann":
+            self.matchFeatures = flann
+
 
 
     '''
@@ -73,57 +82,13 @@ class MedianFlowTracker(object):
         self._fb_max_dist = 1
         self._ds_factor = 0.95
         self._min_n_points = 10
-
+        # RECORD DATA
         csvWrite = ""
         vsPoints = ""
-        # TIMING 1
-        samplingStart = time.time()
+        p0,p1 = self.matchFeatures(prev,curr,bb,self.getKeyPoints)
 
-        # sample points inside the bounding box
-        p0 = self.getKeyPoints(prev,bb)
-
-        #TODO
-        # Check for empty p0 list
-
-        mask = np.zeros_like(prev)
-        mask[:] = 255
-
-        samplingEnd = time.time()-samplingStart;
-
-        csvWrite += str(samplingEnd) + ","
-
-        # TIMING FEATURE TRACKING AND CHECKING
-        checkStart = time.time()
-
-        # forward-backward tracking
-        p1, st, err = cv2.calcOpticalFlowPyrLK(prev, curr, p0, None, **self.lk_params)
-        vsPoints += str(len(p1)) + ","
-        indx = np.where(st == 1)[0]
-        p0 = p0[indx, :]
-        p1 = p1[indx, :]
-        p0r, st, err = cv2.calcOpticalFlowPyrLK(curr, prev, p1, None, **self.lk_params)
-
-        if err is None:
+        if p0 is None or p1 is None:
             return "None",0
-
-
-        # check forward-backward error and min number of points
-        fb_dist = np.abs(p0 - p0r).max(axis=1)
-        good = fb_dist < self._fb_max_dist
-
-        # keep half of the points
-        err = err[good].flatten()
-        if len(err) < self._min_n_points:
-            return "None",0
-
-        checkEnd = time.time()-checkStart
-        csvWrite += str(checkEnd) + ","
-        vsPoints += str(checkEnd) + "\n"
-        indx = np.argsort(err)
-        half_indx = indx[:len(indx) // 2]
-        p0 = (p0[good])[half_indx]
-        p1 = (p1[good])[half_indx]
-
         # TIMING HORIZONTAL AND VERTICAL TRANSLATION
         trackEstimateStart = time.time()
 
