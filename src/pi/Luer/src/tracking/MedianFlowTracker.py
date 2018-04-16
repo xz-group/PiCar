@@ -62,12 +62,22 @@ class MedianFlowTracker(object):
         vsPoints = ""
 
         p0,p1,times = self.matchFeatures(prev,curr,bb,self.getKeyPoints)
-        # times is a string of the form x,y
-        csvWrite += times
-
+        # times is a string of the form keypointDetectorTime,featureMatchingTime
+        if times != None:
+            csvWrite += times
+        else:
+            csvWrite += "0,0"
         # print("[INFO] Following ", len(p0), " points")
         if p0 is None or p1 is None:
-            return "None",0
+            fpsTimeEnd = time.time()-fpsTimeStart
+            fps = 1/fpsTimeEnd
+            csvWrite += ",0," + str(fps) + ",0\n"
+            writeFile = open('data/timingData.csv', "a")
+            writeFile.write(csvWrite)
+            writeFile.close()
+
+            return "None",fps
+
         # TIMING HORIZONTAL AND VERTICAL TRANSLATION
         trackEstimateStart = time.time()
 
@@ -87,11 +97,7 @@ class MedianFlowTracker(object):
         ds = (1.0 - self._ds_factor) + self._ds_factor * ds;
 
         trackEstimateEnd = time.time()-trackEstimateStart
-        csvWrite += ","+str(trackEstimateEnd) + "\n"
 
-        writeFile = open('timingData.csv', "a")
-        writeFile.write(csvWrite)
-        writeFile.close()
 
         # writeFile = open('timingPoints.csv', "a")
         # writeFile.write(vsPoints)
@@ -107,6 +113,11 @@ class MedianFlowTracker(object):
 
         fpsTimeEnd = time.time()-fpsTimeStart
         fps = 1/fpsTimeEnd
+
+        csvWrite += ","+str(trackEstimateEnd) + "," + str(fps) + "," + str(len(p0)) +"\n"
+        writeFile = open('data/timingData.csv', "a")
+        writeFile.write(csvWrite)
+        writeFile.close()
 
         if bb_curr[0] >= bb_curr[2] or bb_curr[1] >= bb_curr[3]:
             return "None",fps

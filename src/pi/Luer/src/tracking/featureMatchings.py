@@ -41,7 +41,7 @@ def opticalflow(prev,curr,bb,keypointFinder):
     csvWrite += str(samplingEnd) + ","
     # print("p0 = ", p0)
     if p0 is None:
-        return None,None
+        return None,None,None
     lk_params = dict(winSize  = (11, 11),maxLevel = 3,criteria = (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 0.1))
 
     # TIMING FOR FEATURE MATCHING
@@ -85,7 +85,6 @@ def flann(prev,curr,bb,keypointFinder):
     search_params = dict(checks=50)   # or pass empty dictionary
 
     csvWrite = ""
-
     samplingStart = time.time()
 
     p0,desc0 = keypointFinder(prev,bb,desc=True)
@@ -94,9 +93,7 @@ def flann(prev,curr,bb,keypointFinder):
     samplingEnd = time.time()-samplingStart;
     csvWrite += str(samplingEnd) + ","
 
-    if p0 is None:
-        return None,None,None
-    if len(p0) < 3:
+    if p0 is None or len(p0) < 3:
         return None,None,None
 
 
@@ -119,8 +116,7 @@ def flann(prev,curr,bb,keypointFinder):
         if m.distance < 0.75*n.distance:
             matchesMask[i]=1
 
-    checkEnd = time.time()-checkStart
-    csvWrite += str(checkEnd)
+
 
     # print("MATCHES: ", matches)
     # print("SHAPE OF MATCHES: ", np.shape(matches))
@@ -129,10 +125,10 @@ def flann(prev,curr,bb,keypointFinder):
             p0good.append(p0[matches[i][0].queryIdx])
             p1good.append(p1[matches[i][0].trainIdx])
 
-    draw_params = dict(matchColor = (0,255,0),
-                       singlePointColor = (255,0,0),
-                       matchesMask = matchesMask,
-                       flags = 0)
+    # draw_params = dict(matchColor = (0,255,0),
+    #                    singlePointColor = (255,0,0),
+    #                    matchesMask = matchesMask,
+    #                    flags = 0)
     # img3 = cv2.drawMatchesKnn(prev[bb[1]:bb[3],bb[0]:bb[2]],p0,curr,p1,matches,None,**draw_params)
     # cv2.imshow("matches",img3)
     # cv2.waitKey(0)
@@ -145,22 +141,33 @@ def flann(prev,curr,bb,keypointFinder):
     if len(p0good) < 3:
         print("[ERROR] Not enough features to track")
         return None,None,None
+
+    checkEnd = time.time()-checkStart
+    csvWrite += str(checkEnd)
     return p0good,p1good,csvWrite
 
 def bruteforce(prev,curr,bb,keypointFinder):
 
+    csvWrite = ""
+    samplingStart = time.time()
+
+
     p0,desc0 = keypointFinder(prev,bb,desc=True)
     p1,desc1 = keypointFinder(curr,bb,current=True,desc=True)
-    if p0 is None:
-        return None,None
-    if len(p0) < 3:
-        return None,None
+
+    if p0 is None or len(p0) < 3:
+        return None,None,None
+
+    samplingEnd = time.time()-samplingStart;
+    csvWrite += str(samplingEnd) + ","
 
     desc0 = np.float32(desc0)
     desc1 = np.float32(desc1)
 
-    bf = cv2.BFMatcher()
+    # TIMING FOR FEATURE MATCHING
+    checkStart = time.time()
 
+    bf = cv2.BFMatcher()
     matches = bf.knnMatch(desc0,desc1,k=2)
     matchesMask = [0 for i in range(len(matches))]
 
@@ -192,8 +199,12 @@ def bruteforce(prev,curr,bb,keypointFinder):
     p1good = np.array([*p1good]).astype(int)
     if len(p0good) < 3:
         print("[ERROR] Not enough features to track")
-        return None,None
-    return p0good,p1good
+        return None,None,None
+
+    checkEnd = time.time()-checkStart
+    csvWrite += str(checkEnd)
+
+    return p0good,p1good,csvWrite
 # if __name__ == "__main__":
 #     source = cv2.VideoCapture("bouncing.mp4")
 #     ret, frame = source.read()

@@ -43,7 +43,7 @@ class TrackingManager(object):
     def run(self):
         prev, curr = None, None
         time.sleep(1)
-
+        failureDetector = False
         ret, frame = self._device.read()
         if not ret:
             raise IOError('can\'t reade frame')
@@ -93,6 +93,10 @@ class TrackingManager(object):
                 # Bounding box not found
                 # Draw old coordinates in red
                 else:
+                    if not failureDetector:
+                        failureDetector = True
+                        # GET FRAME NUMBER IF DESIRED
+
                     cv2.rectangle(frame, self._bounding_box[:2], self._bounding_box[2:], (0, 0, 255), 2)
                     cv2.putText(frame, str(fps), (50, 50),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 2)
             # draw(frame,self._bounding_box)
@@ -101,7 +105,10 @@ class TrackingManager(object):
 
             ch = cv2.waitKey(1)
             if ch == 27 or ch in (ord('q'), ord('Q')):
+                return failureDetector
                 break
+
+        return failureDetector
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
@@ -119,13 +126,13 @@ if __name__ == "__main__":
             print("[USAGE] Cannot use", keypointmethod, "and", featurematcher, "together")
         else:
             # START TRACKER
-            TrackingManager(keypointmethod, source,featurematcher).run()
+            failureDetector = TrackingManager(keypointmethod, source,featurematcher).run()
             if errorCalculate:
-                print("calling generator")
-                generator = ReportGenerator(source,"data/trueBottleData.csv","data/test.csv","TIMINGPATH",keypointmethod,featurematcher).generateReport()
+                print("[INFO] Calling Results Generator")
+                generator = ReportGenerator(source,"data/trueBottleData.csv","data/test.csv","data/timingData.csv",keypointmethod,featurematcher,failureDetector).calculateErrors()
     else:
         # START TRACKER
-        TrackingManager(keypointmethod, source,featurematcher).run()
+        failureDetector = TrackingManager(keypointmethod, source,featurematcher).run()
         if errorCalculate:
-            print("calling generator")
-            generator = ReportGenerator(source,"data/trueBottleData.csv","data/test.csv","timingData.csv",keypointmethod,featurematcher).calculateErrors()
+            print("[INFO] Calling Results Generator")
+            generator = ReportGenerator(source,"data/trueBottleData.csv","data/test.csv","data/timingData.csv",keypointmethod,featurematcher,failureDetector).calculateErrors()
