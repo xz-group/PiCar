@@ -32,14 +32,14 @@ def opticalflow(prev,curr,bb,keypointFinder):
 
     # RECORD DATA
     csvWrite = ""
-    vsPoints = ""
 
     # TIMING FOR SAMPLING
     samplingStart = time.time()
     p0 = keypointFinder(prev,bb)
     samplingEnd = time.time()-samplingStart;
-    # csvWrite += str(samplingEnd) + ","
 
+    csvWrite += str(samplingEnd) + ","
+    # print("p0 = ", p0)
     if p0 is None:
         return None,None
     lk_params = dict(winSize  = (11, 11),maxLevel = 3,criteria = (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 0.1))
@@ -54,13 +54,13 @@ def opticalflow(prev,curr,bb,keypointFinder):
     p0r, st, err = cv2.calcOpticalFlowPyrLK(curr, prev, p1, None, **lk_params)
 
     checkEnd = time.time()-checkStart
-    # csvWrite += str(checkEnd) + ","
+    csvWrite += str(checkEnd)
     # vsPoints += str(checkEnd) + "\n"
 
     # vsPoints += str(len(p1)) + ","
 
     if err is None:
-        return None,None
+        return None,None,None
 
     # check forward-backward error and min number of points
     fb_dist = np.abs(p0 - p0r).max(axis=1)
@@ -69,14 +69,14 @@ def opticalflow(prev,curr,bb,keypointFinder):
     # keep half of the points
     err = err[good].flatten()
     if len(err) < min_n_points:
-        return None,None
+        return None,None,None
 
     indx = np.argsort(err)
     half_indx = indx[:len(indx) // 2]
     p0 = (p0[good])[half_indx]
     p1 = (p1[good])[half_indx]
     # print("p0 OF = ", p0)
-    return p0,p1
+    return p0,p1,csvWrite
 
 def flann(prev,curr,bb,keypointFinder):
     # FLANN parameters
@@ -84,17 +84,27 @@ def flann(prev,curr,bb,keypointFinder):
     index_params = dict(algorithm = FLANN_INDEX_KDTREE, trees = 5)
     search_params = dict(checks=50)   # or pass empty dictionary
 
+    csvWrite = ""
+
+    samplingStart = time.time()
+
     p0,desc0 = keypointFinder(prev,bb,desc=True)
     p1,desc1 = keypointFinder(curr,bb,current=True,desc=True)
+
+    samplingEnd = time.time()-samplingStart;
+    csvWrite += str(samplingEnd) + ","
+
     if p0 is None:
-        return None,None
+        return None,None,None
     if len(p0) < 3:
-        return None,None
-    # print(desc0)
+        return None,None,None
+
+
+    # TIMING FOR FEATURE MATCHING
+    checkStart = time.time()
+
     desc0 = np.float32(desc0)
-    # print(desc1)
     desc1 = np.float32(desc1)
-    # print(desc1)
     flann = cv2.FlannBasedMatcher(index_params,search_params)
 
     matches = flann.knnMatch(desc0,desc1,k=2)
@@ -102,10 +112,15 @@ def flann(prev,curr,bb,keypointFinder):
 
     p0good = []
     p1good = []
+
+
     # ratio test as per Lowe's paper
     for i,(m,n) in enumerate(matches):
         if m.distance < 0.75*n.distance:
             matchesMask[i]=1
+
+    checkEnd = time.time()-checkStart
+    csvWrite += str(checkEnd)
 
     # print("MATCHES: ", matches)
     # print("SHAPE OF MATCHES: ", np.shape(matches))
@@ -127,14 +142,10 @@ def flann(prev,curr,bb,keypointFinder):
     p0good = np.array([*p0good]).astype(int)
     p1good = np.array([*p1good]).astype(int)
 
-    # print("RETURNING: ")
-    # print(p0good)
-    # print("p1")
-    # print(p1good)
     if len(p0good) < 3:
         print("[ERROR] Not enough features to track")
-        return None,None
-    return p0good,p1good
+        return None,None,None
+    return p0good,p1good,csvWrite
 
 def bruteforce(prev,curr,bb,keypointFinder):
 

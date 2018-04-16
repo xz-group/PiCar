@@ -18,6 +18,7 @@ import numpy as np
 import cv2
 import time
 from MedianFlowTracker import MedianFlowTracker
+from ReportGenerator import ReportGenerator
 
 def draw(vis,box):
     x0, y0, x1, y1 = box
@@ -57,8 +58,15 @@ class TrackingManager(object):
         #     d += b
 
         self._bounding_box = (a,b,c,d)
+
+        #bouncing red ball
         # self._bounding_box = (183, 0, 275, 77)
+
+        #basketball
         self._bounding_box = (195, 50, 280, 130)
+
+        #Bottle
+        self._bounding_box = (460,260,590,600)
 
         print("[INFO] Bounding box = ", self._bounding_box)
 
@@ -97,14 +105,27 @@ class TrackingManager(object):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
+    ap.add_argument("-e","--error", action="store_true", help="Use this flag to calculate error and show plots")
     ap.add_argument("-s", "--source", required=True, help="Enter the path to your video or enter 0 to use your webcam.")
     ap.add_argument("-k", "--keypoint", required=True, help="Enter the method of keypoint detection. Options are random, fast, sift, surf, orb, shi-tomasi.")
     ap.add_argument("-m", "--matching", required=True, help="Enter the method of feature matching. Options are bruteforce, flann, opticalflow.")
-
     args = vars(ap.parse_args())
     source = args["source"]
     keypointmethod = args["keypoint"]
     featurematcher = args["matching"]
-
-    # START TRACKER
-    TrackingManager(keypointmethod, source,featurematcher).run()
+    errorCalculate = args["error"]
+    if featurematcher == "flann" or featurematcher == "bruteforce":
+        if keypointmethod == "random" or keypointmethod == "fast" or keypointmethod == "shi-tomasi":
+            print("[USAGE] Cannot use", keypointmethod, "and", featurematcher, "together")
+        else:
+            # START TRACKER
+            TrackingManager(keypointmethod, source,featurematcher).run()
+            if errorCalculate:
+                print("calling generator")
+                generator = ReportGenerator(source,"data/trueBottleData.csv","data/test.csv","TIMINGPATH",keypointmethod,featurematcher).generateReport()
+    else:
+        # START TRACKER
+        TrackingManager(keypointmethod, source,featurematcher).run()
+        if errorCalculate:
+            print("calling generator")
+            generator = ReportGenerator(source,"data/trueBottleData.csv","data/test.csv","timingData.csv",keypointmethod,featurematcher).calculateErrors()

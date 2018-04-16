@@ -45,33 +45,6 @@ class MedianFlowTracker(object):
             print("[INFO] Using FLANN as feature matcher")
 
 
-
-    '''
-    FEATURE MATCHING
-    Takes in array of keypoints found via a keypoint detector and performs forward-backward checking
-    on the kepoints with images prev and next
-
-    INPUT:
-        p0 - an array of keypoints found in prev
-        prev - first image
-        next - next image
-    OUTPUT
-        kp - points to track
-
-    bruteforce
-    flann
-    opticalflow
-    '''
-    # def bruteforce(self,p0,prev,next):
-    #     # TO-DO
-    #
-    # def flann(self,p0,prev,next):
-    #     # TO-DO
-    #
-    # def opticalflow(self,p0,prev,next):
-        # TO-DO
-
-
     def track(self, bb, prev, curr):
 
         fpsTimeStart = time.time()
@@ -87,8 +60,12 @@ class MedianFlowTracker(object):
         # RECORD DATA
         csvWrite = ""
         vsPoints = ""
-        p0,p1 = self.matchFeatures(prev,curr,bb,self.getKeyPoints)
 
+        p0,p1,times = self.matchFeatures(prev,curr,bb,self.getKeyPoints)
+        # times is a string of the form x,y
+        csvWrite += times
+
+        # print("[INFO] Following ", len(p0), " points")
         if p0 is None or p1 is None:
             return "None",0
         # TIMING HORIZONTAL AND VERTICAL TRANSLATION
@@ -110,7 +87,7 @@ class MedianFlowTracker(object):
         ds = (1.0 - self._ds_factor) + self._ds_factor * ds;
 
         trackEstimateEnd = time.time()-trackEstimateStart
-        csvWrite += str(trackEstimateEnd) + "\n"
+        csvWrite += ","+str(trackEstimateEnd) + "\n"
 
         writeFile = open('timingData.csv', "a")
         writeFile.write(csvWrite)
@@ -138,5 +115,13 @@ class MedianFlowTracker(object):
                    min(max(0, bb_curr[1]), curr.shape[0]),
                    min(max(0, bb_curr[2]), curr.shape[1]),
                    min(max(0, bb_curr[3]), curr.shape[0]))
+
+        xMid = (bb[2]+bb[0])/2
+        yMid = (bb[3]+bb[1])/2
+
+        writeFile = open('data/test.csv', "a")
+        writeFile.write(str(xMid) + "," + str(yMid) + "\n")
+        writeFile.close()
+
 
         return bb_curr,fps

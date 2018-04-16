@@ -83,8 +83,8 @@ def sift(vis,bb,current=False,desc=False):
 def surf(vis,bb,current=False,desc=False):
     bb = bbCheck(vis,bb,current)
     surf = cv2.xfeatures2d.SURF_create()
-    kp = surf.detect(vis[bb[1]:bb[3],bb[0]:bb[2]],None)
     # print("Number of surf keypoints found = ", len(kp))
+
     # If feature descriptors needed
     if desc:
         kp,desc = surf.detectAndCompute(vis[bb[1]:bb[3],bb[0]:bb[2]],None)
@@ -97,28 +97,32 @@ def surf(vis,bb,current=False,desc=False):
         kp = surf.detect(vis[bb[1]:bb[3],bb[0]:bb[2]],None)
         if len(kp) > 0:
             return convertKP(kp,bb)
-    return None,None
+        else:
+            return None
 
 def orb(vis,bb,current=False,desc=False):
     bb = bbCheck(vis,bb,current)
     orb = cv2.ORB_create()
     # cv2.imshow("SLICED", vis[bb[1]:bb[3],bb[0]:bb[2]])
     # cv2.waitKey(0)
-    kp = orb.detect(vis[bb[1]:bb[3],bb[0]:bb[2]],None)
-    # print("Number of orb keypoints found = ", len(kp))
+
     # If feature descriptors needed
     if desc:
         kp,desc = orb.detectAndCompute(vis[bb[1]:bb[3],bb[0]:bb[2]],None)
+        # print("Number of orb keypoints found = ", len(kp))
         if len(kp) > 0:
             return convertKP(kp,bb),desc
             # return kp,desc
         else:
+
             return None,None
     else:
         kp = orb.detect(vis[bb[1]:bb[3],bb[0]:bb[2]],None)
+        # print("Number of orb keypoints found = ", len(kp))
         if len(kp) > 0:
             return convertKP(kp,bb)
-    return None,None
+        else:
+            return None
 
 
 def shi_tomasi(vis,bb=None,current=False,desc=False):

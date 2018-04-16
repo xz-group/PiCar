@@ -25,5 +25,7 @@ plt.scatter(frames, checking, s=10, c='r', marker="o", label='checking')
 # plt.scatter(frames, tracking, s=10, c='g', marker="o", label='tracking')
 plt.xlabel("Frame")
 plt.ylabel("Time")
+plt.xlim(xmin=0)
+plt.ylim(ymin=0)
 plt.legend(loc='upper left');
 plt.show()
