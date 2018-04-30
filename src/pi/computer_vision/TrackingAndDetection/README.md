@@ -37,12 +37,12 @@ python3 TrackingManager.py -s bottle.mp4 -k shi-tomasi -m opticalflow
 
 To generate a performace report, follow the following steps:
 1. Record video using recordVideo.py
-  - Edit file to include correct video path name
+&emsp;&ensp;- Edit file to include correct video path name
 2. Manually gather true data with clickTrueData.py
-  - Edit file to include correct csv path name to store
+&emsp;&ensp;- Edit file to include correct csv path name to store
 3. Run TrackingManager via command line with -e flag
-  - Edit ReportGenerator to include correct pathways to csv files.
-  - Delete the files test.csv and timingData.csv from the data folder before every run because data will be appended to file.
+&emsp;&ensp;- Edit ReportGenerator to include correct pathways to csv files.
+&emsp;&ensp;- Delete the files test.csv and timingData.csv from the data folder before every run because data will be appended to file.
 
 ex. To generate a performance report:
 python3 TrackingManager.py -e -s bottle.mp4 -k shi-tomasi -m opticalflow
