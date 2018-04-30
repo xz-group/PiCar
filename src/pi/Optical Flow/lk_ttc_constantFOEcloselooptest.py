@@ -14,7 +14,7 @@ ESC to exit
 
 Keys
 ----
-ESC - exit 
+ESC - exit
 '''
 
 # Python 2/3 compatibility
@@ -23,7 +23,6 @@ import time
 import numpy as np
 import spidev
 import cv2
-from common import anorm2, draw_str
 from time import clock
 from time import sleep
 import video
@@ -90,7 +89,7 @@ ttcMin = 5
 
 #SPI Methods
 def sendPWM(pwm):
-    GPIO.output(SLAVE_SELECT,GPIO.LOW) 
+    GPIO.output(SLAVE_SELECT,GPIO.LOW)
     val1 = spi.xfer(SEND_PWM)
     sleep(DELAY)
     GPIO.output(SLAVE_SELECT,GPIO.HIGH)
@@ -117,14 +116,14 @@ def sendServoAngle(servo):
     GPIO.output(SLAVE_SELECT,GPIO.LOW)
     val1 = spi.xfer(SEND_SERVO)
     sleep(DELAY)
-    GPIO.output(SLAVE_SELECT,GPIO.HIGH) 
+    GPIO.output(SLAVE_SELECT,GPIO.HIGH)
     GPIO.output(SLAVE_SELECT,GPIO.LOW)
     val2 = spi.xfer(servo)
     sleep(DELAY)
     GPIO.output(SLAVE_SELECT,GPIO.HIGH)
     #print(val1)
     #print(val2)
-    
+
 def sendKill():
     for i in range(0,10):
         GPIO.output(SLAVE_SELECT,GPIO.LOW);
@@ -151,7 +150,7 @@ def updatePID(self, err):
         delta_error = err - self.last_error
 
         iterm = 0
-        
+
         sample_time = 0
 
         if (delta_time >= sample_time):
@@ -175,7 +174,7 @@ def updatePID(self, err):
 
             return output
 
-class App:  
+class App:
 
     def __init__(self):
         self.track_len = 10
@@ -202,11 +201,11 @@ class App:
             #------------------------READ AND PREPROCESS IMAGE-------------------------------------------------
             #Read from camera
             img = frame.array
-            
-            
+
+
             #Slice unnecessary pixels off image
             img = img[18:height-28,6:218,:]
-            
+
             #To grayscale and equalize
             #Use Contrast Limited Adaptive Histogram Equalization to more effectively equalize
             clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
@@ -215,12 +214,12 @@ class App:
             std = np.std(frame_gray)
 
             vis = img.copy()
-            
+
             #If poor lighting (i.e. image color has low standard deviation), ignore frame
             if std < 20:
                 rawCapture.truncate(0)
                 continue
-            
+
             frame_gray = clahe.apply(frame_gray)
             ttcCount = 0
             clusterData = np.matrix([[0,0]])
@@ -231,7 +230,7 @@ class App:
                 #puts in right data type and size
                 #p0 features in old frame to look for in new frame
                 p0 = np.float32([tr[-1] for tr in self.tracks]).reshape(-1, 1, 2)
-                
+
                 #calculates optical flow (second optical flow used for a validity check)
                 #p0 old coordinates, p1 new coordinates of same pixel
                 lkTime = time.time()
@@ -255,7 +254,7 @@ class App:
 
                 #validity check
                 good = d < 1
-                
+
                 #rotation_filter = vec[:,0] > 10*vec[:,1]
 
                 #reset parameters to be used in for loop below
@@ -270,13 +269,13 @@ class App:
                     if not good_flag:
                         continue
 
-                  
+
                     #add feature to track
                     tr.append((x, y))
-                    
+
                     if len(tr) > self.track_len:
                         del tr[0]
-                        
+
                     new_tracks.append(tr)
 
                     #TTC (magnitude of displacement)/(velocity of displacement)
@@ -293,7 +292,7 @@ class App:
                     if ttc < ttcMin:
                         #cv2.putText(vis,'%.2f' % ttc, (x,y), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
                         ttcCount = ttcCount+1
-                        
+
                         #Gather clustering data
                         if i == 0:
                             clusterData = np.matrix([[x,y,ttc]])
@@ -311,7 +310,7 @@ class App:
 ##                colors[0,:] = 255
 ##                colors[0,:,0] = np.arange(0, 180, 180.0/cluster_n)
 ##                colors = cv2.cvtColor(colors, cv2.COLOR_HSV2BGR)[0]
-##                
+##
 ##                term_crit = (cv2.TERM_CRITERIA_EPS, 30, 0.1)
 ##                kmeansTime = time.time()
 ##                ret, labels, centers = cv2.kmeans(clusterData, cluster_n, None, term_crit, 10, 0)
@@ -320,13 +319,13 @@ class App:
 ##                print('kmeans time = ')
 ##                print(kmeansTime)
 ##                print('')
-##                
+##
 ##                labels = labels.ravel()
 ##                for j in range(len(labels)):
 ##                    x_ = clusterData[j,0]
 ##                    y_ = clusterData[j,1]
 ##                    label_ = labels[j]
-##                    
+##
 ##                    c = list(map(int, colors[label_]))
 ##                    cv2.circle(vis, (x_, y_), 1, c, -1)
 
@@ -345,12 +344,12 @@ class App:
 ##                print('dbscan Time = ')
 ##                print(dbscanTime)
 ##                print('')
-                
+
                 labels = db.labels_
                 n_clusters = len(set(labels))-(1 if -1 in labels else 0)
-            
+
 ##                        print('Estimated number of clusters: %d' % n_clusters)
-##                        print(labels)                        
+##                        print(labels)
                 for k in set(labels):
                     if k == -1:
                         continue
@@ -389,19 +388,19 @@ class App:
                             ySumArr[4] += y_
                             ttcCountArr[4]+=1
                             cv2.putText(vis,'x', (x_,y_), cv2.FONT_HERSHEY_SIMPLEX,.25,(255,0,255))
-                            
+
                 #CALCULATE PARAMETERS OF OBJECT TO AVOID
                 if(sum(ttcCountArr) > 0):
-                    
+
                     ttcAvgArr = ttcSumArr/ttcCountArr
                     ttcCountTotal = np.sum(ttcCountArr)
                     ttcTotalAvg = min(m for m in ttcAvgArr if m > 0)
                     minIndex = np.where(ttcAvgArr == ttcTotalAvg)[0][0]
                     xAvg = xSumArr[minIndex]/ttcCountArr[minIndex]
                     yAvg = ySumArr[minIndex]/ttcCountArr[minIndex]
-                    
+
                     cv2.circle(vis,(int(xAvg),int(yAvg)),5,(255,0,100),-1)
-                    
+
                     if minIndex == 0:
                         cv2.putText(vis,'%.2f' % ttcTotalAvg, (5,40), cv2.FONT_HERSHEY_SIMPLEX,.3,(255,0,0))
                     elif minIndex == 1:
@@ -412,7 +411,7 @@ class App:
                         cv2.putText(vis,'%.2f' % ttcTotalAvg, (5,40), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,255))
                     elif minIndex == 4:
                         cv2.putText(vis,'%.2f' % ttcTotalAvg, (5,40), cv2.FONT_HERSHEY_SIMPLEX,.3,(255,0,255))
-                                            
+
 
                 #-----------------------------A PRETEND CONTROL OUTPUT---------------------------------------
                 #Decides which direction to turn based on location of the center of each point
@@ -432,7 +431,7 @@ class App:
                 cv2.line(vis,(midpoint+EPSILON,0),(midpoint+EPSILON,200),(0,0,255))
                 if xAvg == 0:
                     cv2.putText(vis,'STRAIGHT', (5,70), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
-                    
+
                 elif (xAvg < midpoint + EPSILON) and (xAvg > midpoint - EPSILON):
                     cv2.putText(vis,'BUFFER', (5,70), cv2.FONT_HERSHEY_SIMPLEX,.3,(0,255,0))
 
@@ -455,9 +454,9 @@ class App:
                     xErr = updatePID(self,xErr)
                     tempAngle = int((DEFAULT_ANGLE + 90.0*xErr/224.0))
 
-                #Servo Angle Saturation    
+                #Servo Angle Saturation
 
-                if tempAngle > maxAngle: 
+                if tempAngle > maxAngle:
                     tempAngle = maxAngle
                 elif tempAngle < minAngle:
                     tempAngle = minAngle
@@ -469,10 +468,10 @@ class App:
                     tempSpeed = maxPWM
                 elif tempSpeed < minPWM:
                     tempSpeed = minPWM
-                
+
                 if n_clusters >= max_clusters_allowed:
                     tempSpeed = minPWM
-                
+
                 pwm = [tempSpeed]
 
                 #backup code
@@ -482,22 +481,22 @@ class App:
 ##                    pwm = [200]
 ##                    sendBackPWM(pwm)
 ##                    sleep(.5)
-                
-                sendPWM(pwm)                                     
+
+                sendPWM(pwm)
                 sendServoAngle(angle)
-                
+
                 self.tracks = new_tracks
-          
+
             if self.frame_idx % self.detect_interval == 0:
                 mask = np.zeros_like(frame_gray)
                 mask[:] = 255
-                
+
                 for x, y in [np.int32(tr[-1]) for tr in self.tracks]:
                     cv2.circle(mask, (x, y), 5, 0, -1)
-                    
+
                 #get new features
                 p = cv2.goodFeaturesToTrack(frame_gray, mask = mask, **feature_params)
-                
+
                 if p is not None:
                     for x, y in np.float32(p).reshape(-1, 2):
                         #add features to tracked points
@@ -505,7 +504,7 @@ class App:
 
 
             self.frame_idx += 1
-            
+
             self.prev_gray = frame_gray
             self.prev_time = self.time
 
@@ -517,7 +516,7 @@ class App:
             #UNCOMMENT TO WRITE FRAME TO VIDEO
             #video1.write(vis)
             #video1.write(vis)
-            
+
             ch = cv2.waitKey(1)
 
             #Necessary to clear the camera stream before next image is read in
