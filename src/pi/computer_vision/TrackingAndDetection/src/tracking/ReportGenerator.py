@@ -84,10 +84,12 @@ class ReportGenerator(object):
         mea = mean_absolute_error(y_actual,dist)
 
         rmsArray = []
-        meaArray = []
-        for i in range(len(dist)):
-            rmsArray.append(sqrt(mean_squared_error([0], [dist[i]])))
-            meaArray.append(mean_absolute_error([0], [dist[i]]))
+        maeArray = []
+        for i in range(1,len(dist)):
+            actual = [0 for x in range(i)]
+            calculated = dist[:i]
+            rmsArray.append(sqrt(mean_squared_error(actual, calculated)))
+            maeArray.append(mean_absolute_error(actual, calculated))
 
         sampling = []
         matching = []
@@ -141,11 +143,11 @@ class ReportGenerator(object):
         plt.clf()
 
         plt.scatter(numPts[:len(rmsArray)],rmsArray,s=10,c='b',marker='o',label="RMS")
-        plt.scatter(numPts[:len(meaArray)],meaArray,s=10,c='r',marker='o',label="MEA")
+        plt.scatter(numPts[:len(maeArray)],maeArray,s=10,c='r',marker='o',label="MAE")
         plt.xlabel("Number of Tracked Points")
         plt.ylabel("Error Value")
         plt.legend(loc='upper left')
-        plt.title("RMS/MEA vs Number of Tracked Points")
+        plt.title("RMS/MAE vs Number of Tracked Points")
         plt.xlim(xmin=0)
         plt.ylim(ymin=0)
         plt.savefig(self.reportPath+"/errVsNumPts.png")

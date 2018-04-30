@@ -30,6 +30,8 @@ class TrackingManager(object):
     def __init__(self, win, source, featurematcher):
         # VIDEO SOURCE
         self._device = cv2.VideoCapture(source)
+        # fourcc = cv2.VideoWriter_fourcc(*'MJPG')
+        # self.out = cv2.VideoWriter('output2.avi',fourcc, 20.0, (1080,720))
 
 
         # WINDOW NAME
@@ -63,7 +65,7 @@ class TrackingManager(object):
         # self._bounding_box = (183, 0, 275, 77)
 
         #basketball
-        self._bounding_box = (195, 50, 280, 130)
+        # self._bounding_box = (195, 50, 280, 130)
 
         #Bottle
         self._bounding_box = (460,260,590,600)
@@ -102,9 +104,10 @@ class TrackingManager(object):
             # draw(frame,self._bounding_box)
             nFrames += 1
             cv2.imshow(self.win, frame)
-
+            # self.out.write(frame)
             ch = cv2.waitKey(1)
             if ch == 27 or ch in (ord('q'), ord('Q')):
+                # self.out.release()
                 return failureDetector
                 break
 
