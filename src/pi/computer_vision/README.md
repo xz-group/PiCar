@@ -42,5 +42,5 @@ Computer vision techniques implemented for Raspberry Pi 3 and webcams
 
 ## Results
 Results of Optical Flow and obstacle avoidance can be seen here:
-https://www.youtube.com/watch?v=2QJigzSVVe4&t=4s
+https://www.youtube.com/watch?v=2QJigzSVVe4&t=4s <br>
 https://www.youtube.com/watch?v=4JIqfRzICwc
