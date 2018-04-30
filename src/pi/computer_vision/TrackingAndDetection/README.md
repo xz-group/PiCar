@@ -19,7 +19,7 @@ Customizable tracking techniques via command line. Supports 5 different keypoint
 4. shi-tomasi
 5. orb *
 6. fast
-* - incompatible with opticalflow feature matching
+ /* incompatible with opticalflow feature matching
 
 
 ### Feature matching techniques
