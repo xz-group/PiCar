@@ -32,7 +32,7 @@ Customizable tracking techniques via command line. Supports 5 different keypoint
 ### Usage:
 python3 TrackingManager.py [-h] [-e] -s SOURCE -k KEYPOINT -m MATCHER
 
-ex. To use shi-tomasi keypoint detection and optical feature matching on a local file called bottle.mp4:
+ex. To use shi-tomasi keypoint detection and optical feature matching on a local file called bottle.mp4: <br>
 python3 TrackingManager.py -s bottle.mp4 -k shi-tomasi -m opticalflow
 
 To generate a performace report, follow the following steps:
