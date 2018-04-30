@@ -44,7 +44,7 @@ To generate a performace report, follow the following steps:
 &emsp;&ensp;- Edit ReportGenerator to include correct pathways to csv files.<br>
 &emsp;&ensp;- Delete the files test.csv and timingData.csv from the data folder before every run because data will be appended to file.
 
-ex. To generate a performance report:
+ex. To generate a performance report use the -e flag:<br>
 python3 TrackingManager.py -e -s bottle.mp4 -k shi-tomasi -m opticalflow
 
 
