@@ -1,0 +1,47 @@
+Each message is sent as a string of XML. This string is stored in the Message
+class as its `content` parameter. In order to facilitate easy access to the
+data a message contains, the `Message` class also implements the
+`find_values()` method that will return a list of all the values that are
+wrapped by the key that is passed in.
+    Ex:
+        >>> msg = Message("<x>Hello World!</x><x>How are you?</x>")
+        >>> find_x = msg.find_values('x')
+
+        find_x = ['Hello World!', 'How are you?']
+
+`Message` has two main subclasses, `IncomingMessage` and `OutgoingMessage`.
+These subclasses facilitate sending and receiving messages using the
+`Network` class. For example, calling `Network.broadcast()` will construct
+an `OutgoingMessage` object and broadcast its contents. On the other hand,
+`Network.read()` will return a list of `IncomingMessage` objects, which is more
+useful than returning the message's contents because it gives the user
+access to all the `Message`'s methods (like `find_values()`).
+
+Ideally, the user will never have to deal with an `OutgoingMessage` object
+directly. The `Network` class should perform all necessary operations on it
+behind the scenes.
+
+Any `OutgoingMessage` (and therefore, any `IncomingMessage` that is read
+by the `Network`) will have at least three parts:
+
+The sender:
+
+    This is where the message is being sent from. The sender is stored as an
+    IP address inside of "<f>" tags.
+
+The receiver:
+
+    This where the message is being sent to. The receiver is stored as an
+    IP address inside "<t>" tags.
+
+The timestamp:
+
+    This is the time at which the message was sent. The timestamp is
+    formatted as Year_Month_Day_Hour_Min_Sec_MicroSec.
+
+These keys are therefore reserved.
+
+    <t>     Contains the receiver's IP address (or '255.255.255.255' if the
+            message was broadcast).
+    <f>     Contains the sender's IP address.
+    <s>     Contains the timestamp
