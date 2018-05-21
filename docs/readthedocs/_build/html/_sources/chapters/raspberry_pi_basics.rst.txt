@@ -1,0 +1,15 @@
+Raspberry Pi Tutorial
+=======================
+
+A small crash course on setting up and using the Raspberry Pi
+(as a server, ftp storage, home-base, etc.)
+
+What is a Raspberry Pi?
+-----------------------
+A Raspberry Pi is a credit card sized computer that can run Linux
+(and other OS) to do almost anything your computer can do. It can
+be simply connected to a monitor/TV, keyboard and mouse and be used
+as a regular computer. Because of its low power consumption, it is
+used as a web-server, file storage system, home automation system,
+etc. It can also be connected to an Arduino to aid in robotics such
+as the PiCar.
