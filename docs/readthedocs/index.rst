@@ -17,3 +17,5 @@ PiCar
    chapters/usage
    chapters/results
    chapters/contributors
+
+Click on ``Introduction`` on the sidebar or any of the above links to get started.
