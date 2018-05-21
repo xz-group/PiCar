@@ -13,6 +13,7 @@ Current Team
 
     * An Zou
     * `Adith Boloor <https://github.com/ajboloor>`_
+    * `Jerry Kong <https://github.com/woodcutter1998>`_
 
 Former Team
   - Advisor(s):
