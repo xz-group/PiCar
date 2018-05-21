@@ -1,4 +1,4 @@
-Arduino Tutorial
+Arduino Basics
 =================
 
 A small crash course on the Arduino micro-controller.

@@ -1,4 +1,4 @@
-Raspberry Pi Tutorial
+Raspberry Pi Basics
 =======================
 
 A small crash course on setting up and using the Raspberry Pi

@@ -1,4 +1,4 @@
-Read the Docs Tutorial
+Read the Docs Basics
 ======================
 
 What is Read the Docs?
@@ -73,6 +73,6 @@ and open ``index.html`` in a browser.
 
 .. warning:: ReadtheDocs is very strict with indentation and formating. Check warning
              messages (with the associated line number) to fix issues.
-             
+
 7. Once you have made changes without errors and warnings and are satisfied
 with the updated documentation, submit a pull request to the latest Github branch.
