@@ -5,7 +5,7 @@ The PiCar project is a miniature four-wheeled car powered by a Raspberry Pi 3 bo
 This lab-scale autonomous research platform is easy to build and modify.
 A camera and LIDAR mounted on the car allows for complex computer vision algorithms.
 
-The `PiCar repository <https://github.com/xz-group/PiCar>`_ contains all the software
+The `PiCar GitHub Repository <https://github.com/xz-group/PiCar>`_ contains all the software
 and hardware source files required to duplicate the car, including:
 
   *  Chassis 3D printing, and CAD sources.

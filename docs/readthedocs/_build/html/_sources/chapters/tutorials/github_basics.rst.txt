@@ -93,3 +93,4 @@ wait until your Pull Request is merged with the master branch.
 Resources
 ---------
 - `GitHub Guide <https://guides.github.com/activities/hello-world/>`_
+- `Forking and Syncing repositories <https://help.github.com/articles/fork-a-repo/>`_

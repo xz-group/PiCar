@@ -46,6 +46,8 @@ or Sublime text. Atom can be installed by:
 
   .. code-block:: bash
 
+    sudo add-apt-repository ppa:webupd8team/atom
+    sudo apt-get update
     sudo apt-get install atom
 
 Atom can be launched in the ``../readthedocs`` directory by:
