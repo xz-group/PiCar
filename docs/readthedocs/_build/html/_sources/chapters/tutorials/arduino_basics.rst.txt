@@ -56,4 +56,4 @@ Resources
 ---------
 - `LadyAda's Arduino tutorial <http://www.ladyada.net/learn/arduino/>`_
 - `Adafruit's Arduino tutorial <https://learn.adafruit.com/lesson-0-getting-started>`_
-- 'Instructables Arduino projects <http://www.instructables.com/howto/arduino/>'_
+- `Instructables Arduino projects <http://www.instructables.com/howto/arduino/>`_

@@ -3,11 +3,14 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to PiCar's documentation!
+PiCar Documentation
 =================================
 
 PiCar
-    A robotic, lab-scale, open-source, autonomous research platform.
+    A multi-purpose, robotic, lab-scale, open-source, wheeled, autonomous research
+    platform created at Washington University in St. Louis
+
+Click on ``Introduction`` on the sidebar, use the searchbar or use any of the following links to get started.
 
 .. toctree::
    :maxdepth: 3
@@ -18,5 +21,3 @@ PiCar
    chapters/results
    chapters/changelogs
    chapters/contributors
-
-Click on ``Introduction`` on the sidebar or any of the above links to get started.
