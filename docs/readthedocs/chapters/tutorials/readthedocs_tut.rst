@@ -79,7 +79,7 @@ and open ``index.html`` in a browser.
 with the updated documentation, submit a pull request to the latest Github branch.
 
 .. note:: If you want to create readthedocs style documentation for an entirely new repository,
-or you want to test and see how the HTML pages looks online, you will need to create a
-`readthedocs <https://readthedocs.org/>`_ account (either import your GitHub account or create a
-new one), and import that specific repository. This ensures that when new commits are submitted,
-the docs are updated automatically as well.
+          or you want to test and see how the HTML pages looks online, you will need to create a
+          `readthedocs <https://readthedocs.org/>`_ account (either import your GitHub account or create a
+          new one), and import that specific repository. This ensures that when new commits are submitted,
+          the docs are updated automatically as well.
