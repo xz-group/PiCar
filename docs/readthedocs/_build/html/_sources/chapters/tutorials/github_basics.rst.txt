@@ -15,7 +15,7 @@ Procedure
 2. On a browser, navigate to the `PiCar GitHub Repository <https://github.com/xz-group/PiCar>`_
 3. ``Fork`` the repo to create a copy of the master PiCar repo on your account.
 4. Under your repositories navigate to your version of the PiCar repo.
-5. Clone (download) the repo to your computer
+5. ``Clone`` (download) the repo to your computer
 
   Windows
     * Download and install `GitHub Desktop <https://desktop.github.com/>`_
