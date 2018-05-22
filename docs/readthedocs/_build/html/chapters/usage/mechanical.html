@@ -87,12 +87,23 @@
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../usage.html">Usage</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Mechanical</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Mechanical</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#design">Design</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cad">CAD</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#assembly">Assembly</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#materials-required">Materials Required</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="electronics.html">Electronics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="software.html">Software</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../results.html">Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelogs.html">Changelogs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributors.html">Contributors</a></li>
 </ul>
 
@@ -162,7 +173,143 @@
             
   <div class="section" id="mechanical">
 <h1>Mechanical<a class="headerlink" href="#mechanical" title="Permalink to this headline">¶</a></h1>
-<p>Mechanics</p>
+<p>The mechanical documentation involves designing, 3D printing and assembling
+the PiCar chassis</p>
+<div class="section" id="design">
+<h2>Design<a class="headerlink" href="#design" title="Permalink to this headline">¶</a></h2>
+<p>For the base chassis of PiCar v2, we will be using the Dromida 1/18 Scale
+Buggy. It retrofit it with sensors and micro-controllers, we will be adding
+some 3D printed parts.</p>
+<div class="section" id="cad">
+<h3>CAD<a class="headerlink" href="#cad" title="Permalink to this headline">¶</a></h3>
+<p>The parts are designed using <a class="reference external" href="https://www.autodesk.com/products/fusion-360">Autodesk Fusion 360</a>. We will be splitting the
+chassis into three layers, connected with spacers for better management:</p>
+<dl class="docutils">
+<dt>Layer Zero</dt>
+<dd><ul class="first last simple">
+<li>Dromida buggy (without cover)</li>
+<li>DC Motor (drive)</li>
+<li>Servo (steer)</li>
+<li>Encoder</li>
+<li>ESC</li>
+</ul>
+</dd>
+<dt>Layer One</dt>
+<dd><ul class="first last simple">
+<li>Raspberry Pi</li>
+<li>Arduino</li>
+<li>Lipo Battery(s)</li>
+<li>Current sensors</li>
+<li>IMU</li>
+</ul>
+</dd>
+<dt>Layer Two</dt>
+<dd><ul class="first last simple">
+<li>Servo (LIDAR)</li>
+<li>TFMini LIDAR</li>
+<li>PiCamera</li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="assembly">
+<h2>Assembly<a class="headerlink" href="#assembly" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="materials-required">
+<h3>Materials Required<a class="headerlink" href="#materials-required" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Component</th>
+<th class="head">Price ($)</th>
+<th class="head">Quantity</th>
+<th class="head">Sub-total ($)</th>
+<th class="head">Store Link</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Dromida 1/18 Buggy 4WD RTR</td>
+<td>99.99</td>
+<td>1</td>
+<td>99.99</td>
+<td><a class="reference external" href="https://www.dromida.com/surface/didc0049-bx4wd/index.php">https://www.dromida.com/surface/didc0049-bx4wd/index.php</a></td>
+</tr>
+<tr class="row-odd"><td>ISC25 Rotary Encoder</td>
+<td>39.95</td>
+<td>1</td>
+<td>39.95</td>
+<td><a class="reference external" href="http://www.rotaryencoder-yumo.com/products/isc25-series-solid-shaft-incremental-rotary-encoder-ID84.html">http://www.rotaryencoder-yumo.com/products/isc25-series-solid-shaft-incremental-rotary-encoder-ID84.html</a></td>
+</tr>
+<tr class="row-even"><td>Arduino UNO Rev 3</td>
+<td>24.95</td>
+<td>1</td>
+<td>24.95</td>
+<td><a class="reference external" href="https://www.sparkfun.com/products/11021">https://www.sparkfun.com/products/11021</a></td>
+</tr>
+<tr class="row-odd"><td>Raspberry Pi 3 B+</td>
+<td>39.95</td>
+<td>1</td>
+<td>39.95</td>
+<td><a class="reference external" href="https://www.sparkfun.com/products/14643">https://www.sparkfun.com/products/14643</a></td>
+</tr>
+<tr class="row-even"><td>32GB MicroSD Card</td>
+<td>12.99</td>
+<td>1</td>
+<td>12.99</td>
+<td><a class="reference external" href="https://www.amazon.com/dp/B06XWN9Q99">https://www.amazon.com/dp/B06XWN9Q99</a></td>
+</tr>
+<tr class="row-odd"><td>IMU 9DoF Sensor Stick</td>
+<td>14.95</td>
+<td>1</td>
+<td>14.95</td>
+<td><a class="reference external" href="https://www.sparkfun.com/products/13944">https://www.sparkfun.com/products/13944</a></td>
+</tr>
+<tr class="row-even"><td>Raspberry Pi Camera Module V2</td>
+<td>29.95</td>
+<td>1</td>
+<td>29.95</td>
+<td><a class="reference external" href="https://www.sparkfun.com/products/14028">https://www.sparkfun.com/products/14028</a></td>
+</tr>
+<tr class="row-odd"><td>Brushed ESC Motor Speed Controller</td>
+<td>5.76</td>
+<td>1</td>
+<td>5.76</td>
+<td><a class="reference external" href="https://www.amazon.com/gp/product/B00JXI3H6Y">https://www.amazon.com/gp/product/B00JXI3H6Y</a></td>
+</tr>
+<tr class="row-even"><td>TowerPro SG90 Micro Servo</td>
+<td>3.72</td>
+<td>1</td>
+<td>3.72</td>
+<td><a class="reference external" href="https://www.amazon.com/dp/B01608II3Q">https://www.amazon.com/dp/B01608II3Q</a></td>
+</tr>
+<tr class="row-odd"><td>TFMini - Micro LiDAR Module</td>
+<td>39.95</td>
+<td>1</td>
+<td>39.95</td>
+<td><a class="reference external" href="https://www.sparkfun.com/products/14588">https://www.sparkfun.com/products/14588</a></td>
+</tr>
+<tr class="row-even"><td>Current Sensors</td>
+<td>9.95</td>
+<td>6</td>
+<td>59.7</td>
+<td><a class="reference external" href="https://www.digikey.com/product-detail/en/adafruit-industries-llc/1164/1528-1807-ND/6565386">https://www.digikey.com/product-detail/en/adafruit-industries-llc/1164/1528-1807-ND/6565386</a></td>
+</tr>
+<tr class="row-odd"><td>&#160;</td>
+<td>&#160;</td>
+<td><strong>Total</strong></td>
+<td>371.86</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 
 

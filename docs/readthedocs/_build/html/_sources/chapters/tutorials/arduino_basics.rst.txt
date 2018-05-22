@@ -3,12 +3,12 @@ Arduino Basics
 
 A small crash course on the Arduino micro-controller.
 
-What is Arduino?
-----------------
-`Arduino <https://www.arduino.cc/>`_  is an open-source electronics platform based on
-easy-to-use hardware and software. It's intended for anyone making
-interactive projects. We will be using the Arduino micro-controller to interface
-with the motor and servo(s).
+What is an Arduino?
+-------------------
+`Arduino <https://www.arduino.cc/>`_  is an open-source electronics platform
+based on easy-to-use hardware and software. It's intended for anyone making
+interactive projects. We will be using the Arduino micro-controller to
+interface with the motor and servo(s).
 
 Getting Started
 ----------------
@@ -20,8 +20,9 @@ Materials Required
 
 Procedure
 ^^^^^^^^^
-1. Download and install the `Arduino IDE <https://www.arduino.cc/en/Main/Software>`_
-   (Integrated development environment) for your OS
+1. Download and install the
+   `Arduino IDE <https://www.arduino.cc/en/Main/Software>`_ (Integrated
+   development environment) for your OS
 
 2. Launch the Arduino IDE.
 

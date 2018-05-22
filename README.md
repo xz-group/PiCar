@@ -14,4 +14,6 @@ This repository contains all the software and hardware source files required to 
  * Perform real-time computer vision using camera data.
  * Control the speed of brushed DC motor.
 
-Documentation for the above can be accessed via the project's wiki: https://github.com/xz-group/PiCar/wiki
+Documentation: 
+- http://picar.readthedocs.io 
+- https://github.com/xz-group/PiCar/wiki (old)

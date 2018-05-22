@@ -30,7 +30,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Read the Docs Basics" href="readthedocs_tut.html" />
-    <link rel="prev" title="Github Basics" href="github_basics.html" /> 
+    <link rel="prev" title="GitHub Basics" href="github_basics.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -88,11 +88,12 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../tutorials.html">Tutorials</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="raspberry_pi_basics.html">Raspberry Pi Basics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="arduino_basics.html">Arduino Basics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="github_basics.html">Github Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="github_basics.html">GitHub Basics</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Linux Basics</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#what-is-linux">What is Linux?</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#getting-started">Getting started</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#procedure">Procedure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#general-linux-commands">General Linux Commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#raspberry-pi-specific-commands">Raspberry Pi Specific Commands</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#resources">Resources</a></li>
@@ -103,6 +104,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../results.html">Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelogs.html">Changelogs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributors.html">Contributors</a></li>
 </ul>
 
@@ -174,24 +176,230 @@
 <h1>Linux Basics<a class="headerlink" href="#linux-basics" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="what-is-linux">
 <h2>What is Linux?<a class="headerlink" href="#what-is-linux" title="Permalink to this headline">¶</a></h2>
-<p>Linux is an open-source operating system. It is the underlying
-operating system on which many popular operating systems like
-Android, Ubuntu, Raspbian and MacOS are based on.</p>
+<p>Linux is an open-source operating system. It is the underlying operating
+system on which many popular operating systems like Android, Ubuntu, Raspbian
+and MacOS are based on.</p>
 </div>
 <div class="section" id="getting-started">
 <h2>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="procedure">
-<h3>Procedure<a class="headerlink" href="#procedure" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="general-linux-commands">
+<h3>General Linux Commands<a class="headerlink" href="#general-linux-commands" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
 <li>SSH into a Raspberry Pi or use a computer with Ubuntu.</li>
-<li>Follow Digital Ocean’s Linux crash course.</li>
+<li>Try out the following commands in the terminal:</li>
 </ol>
+<dl class="docutils">
+<dt>Make (create) directory with name <code class="docutils literal notranslate"><span class="pre">foo</span></code></dt>
+<dd><div class="first last highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir foo
+</pre></div>
+</div>
+</dd>
+<dt>List Files</dt>
+<dd><div class="first last highlight-bash notranslate"><div class="highlight"><pre><span></span>ls
+</pre></div>
+</div>
+</dd>
+<dt>Change directory to <code class="docutils literal notranslate"><span class="pre">foo</span></code></dt>
+<dd><div class="first last highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span>
+</pre></div>
+</div>
+</dd>
+<dt>Print Working Directory</dt>
+<dd><div class="first last highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">pwd</span>
+</pre></div>
+</div>
+</dd>
+<dt>Create Python script</dt>
+<dd><div class="first last highlight-bash notranslate"><div class="highlight"><pre><span></span>nano helloworld.py
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">nano</span></code> is the simplest Terminal based editor you can use. You
+can also use <code class="docutils literal notranslate"><span class="pre">vi</span></code>. If you are on the Desktop (via HDMI or VNC),
+you can use graphical editors like <code class="docutils literal notranslate"><span class="pre">gedit</span></code> and <code class="docutils literal notranslate"><span class="pre">Atom</span></code>.</p>
+</div>
+<dl class="docutils">
+<dt>Within <code class="docutils literal notranslate"><span class="pre">helloworld.py</span></code>, type the following:</dt>
+<dd><div class="first highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Helloworld!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="last simple">
+<li>Save the file using <code class="docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">X</span></code> &gt;&gt; <code class="docutils literal notranslate"><span class="pre">Y</span></code> &gt;&gt; <code class="docutils literal notranslate"><span class="pre">Enter</span></code></li>
+</ul>
+</dd>
+<dt>Run the Python script</dt>
+<dd><div class="first highlight-bash notranslate"><div class="highlight"><pre><span></span>python helloworld.py
+</pre></div>
+</div>
+<ul class="last simple">
+<li>This should output <code class="docutils literal notranslate"><span class="pre">HelloWorld!</span></code></li>
+</ul>
+</dd>
+<dt>Concatenate (get contents) of a file</dt>
+<dd><div class="first highlight-bash notranslate"><div class="highlight"><pre><span></span>cat helloworld.py
+</pre></div>
+</div>
+<ul class="last simple">
+<li>This should output <code class="docutils literal notranslate"><span class="pre">print(&quot;Helloworld!&quot;)</span></code></li>
+</ul>
+</dd>
+<dt>Copy file <code class="docutils literal notranslate"><span class="pre">helloworld.py</span></code> to <code class="docutils literal notranslate"><span class="pre">copy_of_helloworld.py</span></code></dt>
+<dd><div class="first highlight-bash notranslate"><div class="highlight"><pre><span></span>cp helloworld.py copy_of_helloworld.py
+</pre></div>
+</div>
+<ul class="last simple">
+<li>Try <code class="docutils literal notranslate"><span class="pre">ls</span></code> now.</li>
+</ul>
+</dd>
+<dt>Move file (<code class="docutils literal notranslate"><span class="pre">copy_of_helloworld.py</span></code>) to new directory <code class="docutils literal notranslate"><span class="pre">bar</span></code></dt>
+<dd><div class="first last highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir bar
+mv copy_of_helloworld.py bar/
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Sometimes, typing the entire filename or command takes too long. In
+cases like this you can use <code class="docutils literal notranslate"><span class="pre">Tab</span> <span class="pre">Completion</span></code> to quickly type the
+commands. You write the partial file/directory name or command and
+press <code class="docutils literal notranslate"><span class="pre">Tab</span></code> to complete it (or choose from possible options by
+double tapping <code class="docutils literal notranslate"><span class="pre">Tab</span></code>).</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Use the <code class="docutils literal notranslate"><span class="pre">UP</span> <span class="pre">Arrow</span> <span class="pre">Key</span></code> to use the fetch the previously used command.</p>
+</div>
+<dl class="docutils">
+<dt>Rename file (<code class="docutils literal notranslate"><span class="pre">copy_of_helloworld.py</span></code>) to (<code class="docutils literal notranslate"><span class="pre">renamed_helloworld.py</span></code>)</dt>
+<dd><div class="first last highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> bar/
+mv copy_of_helloworld.py renamed_helloworld.py
+</pre></div>
+</div>
+</dd>
+<dt>Go back a directory level</dt>
+<dd><div class="first last highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ..
+</pre></div>
+</div>
+</dd>
+<dt>Delete a file or directory</dt>
+<dd><div class="first last highlight-bash notranslate"><div class="highlight"><pre><span></span>rm bar/renamed_helloworld.py
+rm bar -R
+</pre></div>
+</div>
+</dd>
+<dt>Manual for a command</dt>
+<dd><div class="first last highlight-bash notranslate"><div class="highlight"><pre><span></span>man rm
+man sudo
+</pre></div>
+</div>
+</dd>
+<dt>Update and upgrade your Linux packages</dt>
+<dd><div class="first last highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get update
+sudo apt-get upgrade
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">sudo</span></code> is akin to an admin. Using it will sometimes ask you to
+enter the user’s password.</p>
+</div>
+<dl class="docutils">
+<dt>Installing a new package like <code class="docutils literal notranslate"><span class="pre">htop</span></code></dt>
+<dd><div class="first last highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get install htop
+htop
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">htop</span></code> is a great terminal way of checking how much
+processing power and memory your computer is using.</p>
+</div>
+<dl class="docutils">
+<dt>Pinging a website like <code class="docutils literal notranslate"><span class="pre">www.google.com</span></code></dt>
+<dd><div class="first last highlight-bash notranslate"><div class="highlight"><pre><span></span>ping www.google.com
+</pre></div>
+</div>
+</dd>
+<dt>Show network configuration</dt>
+<dd><div class="first last highlight-bash notranslate"><div class="highlight"><pre><span></span>ifconfig
+iwconfig
+</pre></div>
+</div>
+</dd>
+<dt>Check date</dt>
+<dd><div class="first last highlight-bash notranslate"><div class="highlight"><pre><span></span>date
+</pre></div>
+</div>
+</dd>
+<dt>Clear screen</dt>
+<dd><div class="first last highlight-bash notranslate"><div class="highlight"><pre><span></span>clear
+</pre></div>
+</div>
+</dd>
+<dt>Check version of an installed package</dt>
+<dd><div class="first last highlight-bash notranslate"><div class="highlight"><pre><span></span>htop -v
+</pre></div>
+</div>
+</dd>
+<dt>Get local and global IP</dt>
+<dd><div class="first last highlight-bash notranslate"><div class="highlight"><pre><span></span>hostname -I
+curl ifconfig.me
+</pre></div>
+</div>
+</dd>
+<dt>Disk space information</dt>
+<dd><div class="first last highlight-bash notranslate"><div class="highlight"><pre><span></span>df -h
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="raspberry-pi-specific-commands">
+<h3>Raspberry Pi Specific Commands<a class="headerlink" href="#raspberry-pi-specific-commands" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>Check the pinouts on the Raspberry Pi</dt>
+<dd><div class="first last highlight-bash notranslate"><div class="highlight"><pre><span></span>pinout
+gpio readall
+</pre></div>
+</div>
+</dd>
+<dt>Lists connected USB hardware</dt>
+<dd><div class="first last highlight-bash notranslate"><div class="highlight"><pre><span></span>lsusb
+</pre></div>
+</div>
+</dd>
+<dt>Show Raspberry Pi CPU Temperature</dt>
+<dd><div class="first last highlight-bash notranslate"><div class="highlight"><pre><span></span>vcgencmd measure_temp
+</pre></div>
+</div>
+</dd>
+<dt>Show CPU &amp; GPU memory split</dt>
+<dd><div class="first last highlight-bash notranslate"><div class="highlight"><pre><span></span>vcgencmd get_mem arm <span class="o">&amp;&amp;</span> vcgencmd get_mem gpu
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you need more than one <code class="docutils literal notranslate"><span class="pre">Terminal</span></code> open at one time, and you
+do not want too many new Terminal windows, you can use <code class="docutils literal notranslate"><span class="pre">Ctrl</span></code> +
+<code class="docutils literal notranslate"><span class="pre">Shift</span></code> + <code class="docutils literal notranslate"><span class="pre">T</span></code>.</p>
+</div>
 </div>
 </div>
 <div class="section" id="resources">
 <h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><a class="reference external" href="https://www.digitalocean.com/community/tutorials/an-introduction-to-linux-basics">Digital Ocean’s Linux Intro</a></li>
+<li><a class="reference external" href="https://www.raspberrypi.org/documentation/linux/usage/commands.md">Fundamental and common Linux commands</a></li>
 </ul>
 </div>
 </div>
@@ -207,7 +415,7 @@ Android, Ubuntu, Raspbian and MacOS are based on.</p>
         <a href="readthedocs_tut.html" class="btn btn-neutral float-right" title="Read the Docs Basics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="github_basics.html" class="btn btn-neutral" title="Github Basics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="github_basics.html" class="btn btn-neutral" title="GitHub Basics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
