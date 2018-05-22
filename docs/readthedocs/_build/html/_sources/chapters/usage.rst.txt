@@ -1,7 +1,7 @@
 Usage
 =============
 
-How to use this repository...
+The project is split into three parts:
 
 .. toctree::
    :maxdepth: 1

@@ -7,10 +7,11 @@ PiCar Documentation
 =================================
 
 PiCar
-    A multi-purpose, robotic, lab-scale, open-source, wheeled, autonomous research
-    platform created at Washington University in St. Louis
+    A multi-purpose, robotic, lab-scale, open-source, wheeled, autonomous
+    research platform created at Washington University in St. Louis
 
-Click on ``Introduction`` on the sidebar, use the searchbar or use any of the following links to get started.
+Click on ``Introduction`` on the sidebar, use the search-bar or use any of
+the following links to get started.
 
 .. toctree::
    :maxdepth: 3

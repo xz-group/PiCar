@@ -101,13 +101,14 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="arduino_basics.html">Arduino Basics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="github_basics.html">Github Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="github_basics.html">GitHub Basics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="linux_basics.html">Linux Basics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="readthedocs_tut.html">Read the Docs Basics</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../results.html">Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelogs.html">Changelogs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributors.html">Contributors</a></li>
 </ul>
 
@@ -181,13 +182,12 @@
 (as a server, ftp storage, home-base, etc.)</p>
 <div class="section" id="what-is-a-raspberry-pi">
 <h2>What is a Raspberry Pi?<a class="headerlink" href="#what-is-a-raspberry-pi" title="Permalink to this headline">¶</a></h2>
-<p>A <a class="reference external" href="https://www.raspberrypi.org/">Raspberry Pi</a> is a credit card sized computer that can run Linux
-(and other OS) to do almost anything your computer can do. It can
-be simply connected to a monitor/TV, keyboard and mouse and be used
-as a regular computer. Because of its low power consumption, it is
-used as a web-server, file storage system, home automation system,
-etc. It can also be connected to an Arduino to aid in robotics such
-as the PiCar.</p>
+<p>A <a class="reference external" href="https://www.raspberrypi.org/">Raspberry Pi</a> is a credit card sized
+computer that can run Linux (and other OS) to do almost anything your computer
+can do. It can be simply connected to a monitor/TV, keyboard and mouse and
+be used as a regular computer. Because of its low power consumption, it is
+used as a web-server, file storage system, home automation system, etc. It
+can also be connected to an Arduino to aid in robotics such as the PiCar.</p>
 </div>
 <div class="section" id="setting-up-a-raspberry-pi-with-ssh">
 <h2>Setting up a Raspberry Pi with SSH<a class="headerlink" href="#setting-up-a-raspberry-pi-with-ssh" title="Permalink to this headline">¶</a></h2>
@@ -196,7 +196,8 @@ as the PiCar.</p>
 <ul class="simple">
 <li>Raspberry Pi 3 B+ (older models will also work)</li>
 <li>Pi compatible power adapter</li>
-<li>Micro SD Card (with alteast 16GB of memory; you may need an SD card adapter to connect it to your computer)</li>
+<li>Micro SD Card (with alteast 16GB of memory; you may need an SD card adapter
+to connect it to your computer)</li>
 <li>USB keyboard and mouse</li>
 <li>Access to a monitor + HDMI cable</li>
 <li>Access to your router, or a new router</li>
@@ -207,9 +208,10 @@ as the PiCar.</p>
 <h3>Procedure<a class="headerlink" href="#procedure" title="Permalink to this headline">¶</a></h3>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">If you are a Washington University student working on the PiCar project, you can
-skip to step 10 and use the given IP address of the Pi to communicate with the Pi.
-However it is recommended to atleast glance through the steps to see what was done.</p>
+<p class="last">If you are a Washington University student working on the PiCar
+project, you can skip to step 10 and use the given IP address of
+the Pi to communicate with the Pi. However it is recommended to
+atleast glance through the steps to see what was done.</p>
 </div>
 <ol class="arabic">
 <li><p class="first">Download the <a class="reference external" href="https://www.raspberrypi.org/downloads/raspbian/">Raspbian Stretch with Desktop</a> image.</p>
@@ -227,8 +229,8 @@ However it is recommended to atleast glance through the steps to see what was do
 <li><p class="first">Choose the SD Card drive</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Ensure to select the correct drive (SD Card) because it will be
-formatted.</p>
+<p class="last">Ensure to select the correct drive (SD Card) because it will
+be formatted.</p>
 </div>
 </li>
 <li><p class="first">Flash the Raspbian image.</p>
@@ -237,7 +239,8 @@ formatted.</p>
 </li>
 </ul>
 </li>
-<li><p class="first">Connect the mouse, keyboard and monitor to the Raspberry Pi. Finally connect the power cable to turn on the Raspberry Pi.</p>
+<li><p class="first">Connect the mouse, keyboard and monitor to the Raspberry Pi. Finally
+connect the power cable to turn on the Raspberry Pi.</p>
 </li>
 <li><p class="first">The default login credentials for the Raspberry Pi are:</p>
 <ul class="simple">
@@ -246,44 +249,44 @@ formatted.</p>
 </ul>
 </li>
 <li><p class="first">Change the password to your liking by opening the terminal and typing:</p>
-</li>
-</ol>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo passwd pi
 </pre></div>
 </div>
-<ol class="arabic simple" start="7">
-<li>Use the following command to enable SSH (Secure Shell) which will be used to communicate to your computer wirelessly.</li>
-</ol>
+</li>
+<li><p class="first">Use the following command to enable SSH (Secure Shell) which will be used
+to communicate to your computer wirelessly.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo raspi-config
 </pre></div>
 </div>
 <ul class="simple">
 <li>Navigate to <code class="docutils literal notranslate"><span class="pre">Interfacing</span> <span class="pre">Options</span></code> &gt;&gt; <code class="docutils literal notranslate"><span class="pre">SSH</span></code> &gt;&gt; <code class="docutils literal notranslate"><span class="pre">Enable</span></code></li>
 </ul>
-<ol class="arabic simple" start="8">
-<li>Connect the Pi to your router (which is connected to your company/university internet port) and reboot the Pi using:</li>
-</ol>
+</li>
+<li><p class="first">Connect the Pi to your router (which is connected to your company/university
+internet port) and reboot the Pi using:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo reboot now
 </pre></div>
 </div>
-<ol class="arabic simple" start="9">
-<li>Get the local IP address of your Pi using:</li>
-</ol>
+</li>
+<li><p class="first">Get the local IP address of your Pi using:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hostname -I
 </pre></div>
 </div>
 <ul class="simple">
 <li>You will find your Pi’s local IP (eg: <cite>192.168.1.123</cite>)</li>
-<li>Alternatively you can navigate to the router admin page to check the IP addresses of connected devices.</li>
+<li>Alternatively you can navigate to the router admin page to check the
+IP addresses of connected devices.</li>
 </ul>
-<ol class="arabic" start="10">
-<li><p class="first">On your laptop, connect to the router and use the following instructions based on your OS:</p>
+</li>
+<li><p class="first">On your laptop, connect to the router and use the following instructions
+based on your OS:</p>
 <dl class="docutils">
 <dt>Windows:</dt>
 <dd><ul class="first last simple">
 <li>Download <a class="reference external" href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html">Putty</a></li>
 <li>Run <cite>Putty</cite></li>
-<li>For the hostname, use the IP address you got for the Pi (eg: <cite>pi&#64;192.168.123</cite>), and click Open</li>
+<li>For the hostname, use the IP address you got for the Pi (eg:
+<code class="docutils literal notranslate"><span class="pre">pi&#64;192.168.123</span></code>), and click Open</li>
 </ul>
 </dd>
 <dt>Mac/Linux:</dt>
@@ -292,57 +295,56 @@ formatted.</p>
 </ul>
 </dd>
 </dl>
-</li>
-</ol>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh pi@192.168.1.123
 </pre></div>
 </div>
-<ol class="arabic simple" start="11">
-<li>Doing so will prompt you to enter the Pi’s new password. Enter it.</li>
+</li>
+<li><p class="first">Doing so will prompt you to enter the Pi’s new password. Enter it.</p>
+</li>
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The default port used by Pi for SSH is 22. As long as your router and Pi
-password are strong, the security risk is minimized. Currently, SSH will only
-allow you to access the Pi when your computer and the Pi are connected to the same router.</p>
+<p class="last">The default port used by Pi for SSH is 22. As long as your router
+and Pi password are strong, the security risk is minimized.
+Currently, SSH will only allow you to access the Pi when your
+computer and the Pi are connected to the same router.</p>
 </div>
 </div>
 </div>
 <div class="section" id="desktop-interface">
 <h2>Desktop Interface<a class="headerlink" href="#desktop-interface" title="Permalink to this headline">¶</a></h2>
 <p>Sometimes an terminal only interface does not suffice. We can alternatively
-connect to the Raspberry Pi using a VNC (Virtual Network Computing) Viewer to see
-the ‘screen’ of the Pi.</p>
+connect to the Raspberry Pi using a VNC (Virtual Network Computing) Viewer to
+see the ‘screen’ of the Pi.</p>
 <div class="section" id="id1">
 <h3>Procedure<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<ol class="arabic simple">
-<li>Login to the Pi as usual using SSH</li>
-<li>Enable VNC by using the following command:</li>
-</ol>
+<ol class="arabic">
+<li><p class="first">Login to the Pi as usual using SSH</p>
+</li>
+<li><p class="first">Enable VNC by using the following command:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo raspi-config
 </pre></div>
 </div>
 <ul class="simple">
 <li>Navigate to <code class="docutils literal notranslate"><span class="pre">Interfacing</span> <span class="pre">Options</span></code> &gt;&gt; <code class="docutils literal notranslate"><span class="pre">VNC</span></code> &gt;&gt; <code class="docutils literal notranslate"><span class="pre">Enable</span></code></li>
 </ul>
-<ol class="arabic simple" start="3">
-<li>Reboot the Pi</li>
-</ol>
+</li>
+<li><p class="first">Reboot the Pi</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo reboot now
 </pre></div>
 </div>
-<ol class="arabic simple" start="4">
-<li>Install <a class="reference external" href="https://www.realvnc.com/en/connect/download/vnc/">VNC Viewer</a> on your laptop.</li>
-<li>Open VNC viewer. Open a new connection: <code class="docutils literal notranslate"><span class="pre">File</span></code> &gt;&gt; <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">Connection</span></code></li>
-</ol>
-<blockquote>
-<div><ul class="simple">
+</li>
+<li><p class="first">Install <a class="reference external" href="https://www.realvnc.com/en/connect/download/vnc/">VNC Viewer</a>
+on your laptop.</p>
+</li>
+<li><p class="first">Open VNC viewer. Open a new connection: <code class="docutils literal notranslate"><span class="pre">File</span></code> &gt;&gt; <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">Connection</span></code></p>
+<ul class="simple">
 <li>Use the local IP of the Pi and the SSH port (22 by default)</li>
 <li>Use your credentials to login</li>
 </ul>
-</div></blockquote>
-<ol class="arabic simple" start="6">
-<li>You should be able to see the same screen that you saw when you initially connected to the Pi using HDMI</li>
+</li>
+<li><p class="first">You should be able to see the same screen that you saw when you initially connected to the Pi using HDMI</p>
+</li>
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>

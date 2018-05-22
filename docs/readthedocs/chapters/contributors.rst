@@ -8,6 +8,7 @@ Current Team
   - Advisor(s):
 
     * `Dr. Xuan 'Silvia' Zhang <https://github.com/xz-group>`_
+    * `Dr. Christopher D. Gill <http://www.cse.wustl.edu/~cdgill/>`_
 
   - Team Members:
 
