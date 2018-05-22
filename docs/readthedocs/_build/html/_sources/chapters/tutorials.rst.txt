@@ -14,4 +14,4 @@ will help you bring to speed about the different components used.
    tutorials/readthedocs_tut
 
 .. note:: Some of the tutorials will be in the general sense of the components,
-          like Linux, etc., while others will specific to the PiCar project
+          like Linux, etc., while others will specific to the PiCar project.
