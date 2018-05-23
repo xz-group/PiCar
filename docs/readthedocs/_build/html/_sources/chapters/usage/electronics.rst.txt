@@ -124,6 +124,43 @@ SPI Method
 USB Method
 ^^^^^^^^^^
 
+PI and IMU communication
+------------------------
+
+I2C Method
+^^^^^^^^^^
+
+*The example code for this section in the PiCar/src/pi/imu*
+
+To compile, use the command:
+
+$gcc -o <programname> runi2c.c -lm
+
+
+Wiring:
+
++----------------+-----------+
+|RPI             |IMU        |
++================+===========+
+|Pin 1 (3.3v)    |Vcc        |
++----------------+-----------+
+|Pin 3           |SDA        |
++----------------+-----------+
+|Pin 5           |SCL        |
++----------------+-----------+
+|Pin 6           |Gnd        |
++----------------+-----------+
+
+The connection is by SMBUS.
+
+For RPI, go to /usr/include/linux, replace i2c_dev.h with the header file in the repository
+
+(Method 'enableIMU' needs further development to enable IMU configuration setting)
+
+See Also:
+#########
+
+* `IMU datasheet <https://cdn.sparkfun.com/assets/learn_tutorials/3/7/3/LSM9DS1_Datasheet.pdf/>`_
 
 Resources
 ^^^^^^^^^
