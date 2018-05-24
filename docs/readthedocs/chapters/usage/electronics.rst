@@ -124,6 +124,190 @@ SPI Method
 USB Method
 ^^^^^^^^^^
 
+PI and TFMini Lidar Communication
+------------------------------------
+
+Setup
+^^^^^^^^^^
+To search for available serial ports, enter the following command in terminal:
+
+.. code-block:: bash
+
+  $ dmesg | grep tty
+
+If the output looks like
+
+.. code-block:: bash
+
+  pi@raspberrypi:~ $ dmesg | grep tty
+  [    0.000000] Kernel command line: 8250.nr_uarts=1 bcm2708_fb.fbwidth=1824 bcm2708_fb.fbheight=984 bcm2708_fb.fbswap=1 dma.dmachans=0x7f35
+  bcm2709.boardrev=0xa02082 bcm2709.serial=0x11f38c9c bcm2709.uart_clock=48000000 smsc95xx.macaddr=B8:27:EB:F3:8C:9C vc_mem.mem_base=0x3dc00000
+  vc_mem.mem_size=0x3f000000  dwc_otg.lpm_enable=0 console=tty1 console=ttyS0,115200 root=/dev/mmcblk0p7 rootfstype=ext4 elevator=deadline
+  fsck.repair=yes rootwait splash plymouth.ignore-serial-consoles
+  [    0.001365] console [tty1] enabled
+  [    0.343313] console [ttyS0] disabled
+  [    0.343481] 3f215040.uart: ttyS0 at MMIO 0x3f215040 (irq = 59, base_baud = 31250000) is a 16550
+  [    1.078177] console [ttyS0] enabled
+  [    2.210431] 3f201000.uart: ttyAMA0 at MMIO 0x3f201000 (irq = 87, base_baud = 0) is a PL011 rev2
+  [    3.527349] systemd[1]: Expecting device dev-ttyS0.device...
+  [    4.653975] systemd[1]: Starting system-serial\x2dgetty.slice.
+  [    4.669517] systemd[1]: Created slice system-serial\x2dgetty.slice.
+
+the console needs to be disabled on the serial port ttyAMA0.
+
+To do so, run the configuration command
+
+.. code-block:: bash
+
+  $ sudo raspi-config
+
+and navigate to option 5, Interfacing Options. Choose P6, Serial.
+
+When prompted, answer No to "Would you like a login shell to be accessible over serial?" and Yes to "Would you like the seria port hardware to be enabled?".
+
+Enter the following command to reboot and search for available ports again:
+
+.. code-block:: bash
+
+  $ sudo reboot
+  $ dmesg | grep tty
+
+The output now should look like:
+
+.. code-block:: bash
+
+  pi@raspberrypi:~ $ dmesg | grep tty
+  [    0.000000] Kernel command line: 8250.nr_uarts=1 bcm2708_fb.fbwidth=1824 bcm2708_fb.fbheight=984 bcm2708_fb.fbswap=1
+  dma.dmachans=0x7f35 bcm2709.boardrev=0xa02082 bcm2709.serial=0x11f38c9c bcm2709.uart_clock=48000000
+  smsc95xx.macaddr=B8:27:EB:F3:8C:9C vc_mem.mem_base=0x3dc00000 vc_mem.mem_size=0x3f000000  dwc_otg.lpm_enable=0
+  console=tty1 root=/dev/mmcblk0p7 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait splash plymouth.ignore-serial-consoles
+  [    0.001345] console [tty1] enabled
+  [    0.343464] 3f215040.uart: ttyS0 at MMIO 0x3f215040 (irq = 59, base_baud = 31250000) is a 16550
+  [    1.146776] 3f201000.uart: ttyAMA0 at MMIO 0x3f201000 (irq = 87, base_baud = 0) is a PL011 rev2
+
+
+Wiring
+^^^^^^^^^^
+
++--------------+-----------+
+|Rasberry Pi 3 |TFmini     |
++==============+===========+
+| +5V          | 5V (RED)  |
++--------------+-----------+
+| GND          |GND (BLACK)|
++--------------+-----------+
+|TXD0          |RX (WHITE) |
++--------------+-----------+
+|RXD0          |TX (GREEN) |
++--------------+-----------+
+
+The pinout of the Rasberry Pi is:
+
+.. image:: electronics/j8header-3b.png
+  :width: 275
+  :height: 500
+
+
+Code
+^^^^^^^^^^
+
+.. code-block:: python
+    :linenos:
+
+    # tfmini.py
+    # supports Python 2
+    # prints distance from sensor
+
+    #coding: utf-8
+    import serial
+    import time
+    ser = serial.Serial("/dev/ttyS0", 115200)
+
+    def getTFminiData():
+    while True:
+        count = ser.in_waiting
+        #count = 0
+        #print(count)
+        if count > 8:
+            recv = ser.read(9)
+            ser.reset_input_buffer()
+            if recv[0] == 'Y' and recv[1] == 'Y': # 0x59 is 'Y'
+                low = int(recv[2].encode('hex'), 16)
+                high = int(recv[3].encode('hex'), 16)
+                distance = low + high * 256
+                print('distance is: ')
+                print(distance)
+                time.sleep(1)
+
+    if __name__ == '__main__':
+        try:
+            if ser.is_open == False:
+                ser.open()
+                getTFminiData()
+        except KeyboardInterrupt:   # Ctrl+C
+            if ser != None:
+                ser.close()
+
+
+.. code-block:: python
+    :linenos:
+
+    # tfmini_2.py
+    # supports Python 2 or Python 3
+    # prints distance and strength from sensor
+
+    #coding: utf-8
+    import serial
+    import time
+
+    ser = serial.Serial("/dev/ttyS0", 115200)
+
+    def getTFminiData():
+        while True:
+            #time.sleep(0.1)
+            count = ser.in_waiting
+            if count > 8:
+                recv = ser.read(9)
+                ser.reset_input_buffer()
+                # type(recv), 'str' in python2(recv[0] = 'Y'), 'bytes' in python3(recv[0] = 89)
+                # type(recv[0]), 'str' in python2, 'int' in python3
+
+                if recv[0] == 0x59 and recv[1] == 0x59:     #python3
+                    distance = recv[2] + recv[3] * 256
+                    strength = recv[4] + recv[5] * 256
+                    print('(', distance, ',', strength, ')')
+                    ser.reset_input_buffer()
+
+                if recv[0] == 'Y' and recv[1] == 'Y':     #python2
+                    lowD = int(recv[2].encode('hex'), 16)
+                    highD = int(recv[3].encode('hex'), 16)
+                    lowS = int(recv[4].encode('hex'), 16)
+                    highS = int(recv[5].encode('hex'), 16)
+                    distance = lowD + highD * 256
+                    strength = lowS + highS * 256
+                    print(distance, strength)
+
+                # you can also distinguish python2 and python3:
+                #import sys
+                #sys.version[0] == '2'    #True, python2
+                #sys.version[0] == '3'    #True, python3
+
+
+    if __name__ == '__main__':
+        try:
+            if ser.is_open == False:
+                ser.open()
+            getTFminiData()
+        except KeyboardInterrupt:   # Ctrl+C
+            if ser != None:
+                ser.close()
+
+
+Resources
+^^^^^^^^^
+  * `READ AND WRITE FROM SERIAL PORT WITH RASPBERRY PI <http://www.instructables.com/id/Read-and-write-from-serial-port-with-Raspberry-Pi/>`_
+  * `TFmini-RaspberryPi <https://github.com/TFmini/TFmini-RaspberryPi>`_
+
 PI and IMU communication
 ------------------------
 

@@ -13,6 +13,8 @@
 
   
   
+  
+  
 
   
 
@@ -23,28 +25,21 @@
   
 
   
-  
     <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="PiCar Project 2018 documentation" href="../../index.html"/>
-        <link rel="up" title="Usage" href="../usage.html"/>
-        <link rel="next" title="Software" href="software.html"/>
-        <link rel="prev" title="Mechanical" href="mechanical.html"/> 
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Software" href="software.html" />
+    <link rel="prev" title="Mechanical" href="mechanical.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -85,7 +80,10 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../usage.html">Usage</a><ul class="current">
@@ -97,9 +95,16 @@
 <li class="toctree-l4"><a class="reference internal" href="#usb-method">USB Method</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#pi-and-tfmini-lidar-communication">PI and TFMini Lidar Communication</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#setup">Setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#wiring">Wiring</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#code">Code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#resources">Resources</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#pi-and-imu-communication">PI and IMU communication</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id1">I2C Method</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#resources">Resources</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Resources</a></li>
 </ul>
 </li>
 </ul>
@@ -121,36 +126,56 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../index.html">PiCar Project</a>
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">PiCar Project</a>
+        
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="../usage.html">Usage</a> &raquo;</li>
-      
-    <li>Electronics</li>
+        
+      <li>Electronics</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
+            
             <a href="../../_sources/chapters/usage/electronics.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -339,6 +364,263 @@
 <h3>USB Method<a class="headerlink" href="#usb-method" title="Permalink to this headline">¶</a></h3>
 </div>
 </div>
+<div class="section" id="pi-and-tfmini-lidar-communication">
+<h2>PI and TFMini Lidar Communication<a class="headerlink" href="#pi-and-tfmini-lidar-communication" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="setup">
+<h3>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h3>
+<p>To search for available serial ports, enter the following command in terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ dmesg <span class="p">|</span> grep tty
+</pre></div>
+</div>
+<p>If the output looks like</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ dmesg <span class="p">|</span> grep tty
+<span class="o">[</span>    0.000000<span class="o">]</span> Kernel <span class="nb">command</span> line: <span class="m">8250</span>.nr_uarts<span class="o">=</span><span class="m">1</span> bcm2708_fb.fbwidth<span class="o">=</span><span class="m">1824</span> bcm2708_fb.fbheight<span class="o">=</span><span class="m">984</span> bcm2708_fb.fbswap<span class="o">=</span><span class="m">1</span> dma.dmachans<span class="o">=</span>0x7f35
+bcm2709.boardrev<span class="o">=</span>0xa02082 bcm2709.serial<span class="o">=</span>0x11f38c9c bcm2709.uart_clock<span class="o">=</span><span class="m">48000000</span> smsc95xx.macaddr<span class="o">=</span>B8:27:EB:F3:8C:9C vc_mem.mem_base<span class="o">=</span>0x3dc00000
+vc_mem.mem_size<span class="o">=</span>0x3f000000  dwc_otg.lpm_enable<span class="o">=</span><span class="m">0</span> <span class="nv">console</span><span class="o">=</span>tty1 <span class="nv">console</span><span class="o">=</span>ttyS0,115200 <span class="nv">root</span><span class="o">=</span>/dev/mmcblk0p7 <span class="nv">rootfstype</span><span class="o">=</span>ext4 <span class="nv">elevator</span><span class="o">=</span>deadline
+fsck.repair<span class="o">=</span>yes rootwait splash plymouth.ignore-serial-consoles
+<span class="o">[</span>    0.001365<span class="o">]</span> console <span class="o">[</span>tty1<span class="o">]</span> enabled
+<span class="o">[</span>    0.343313<span class="o">]</span> console <span class="o">[</span>ttyS0<span class="o">]</span> disabled
+<span class="o">[</span>    0.343481<span class="o">]</span> 3f215040.uart: ttyS0 at MMIO 0x3f215040 <span class="o">(</span><span class="nv">irq</span> <span class="o">=</span> <span class="m">59</span>, <span class="nv">base_baud</span> <span class="o">=</span> <span class="m">31250000</span><span class="o">)</span> is a <span class="m">16550</span>
+<span class="o">[</span>    1.078177<span class="o">]</span> console <span class="o">[</span>ttyS0<span class="o">]</span> enabled
+<span class="o">[</span>    2.210431<span class="o">]</span> 3f201000.uart: ttyAMA0 at MMIO 0x3f201000 <span class="o">(</span><span class="nv">irq</span> <span class="o">=</span> <span class="m">87</span>, <span class="nv">base_baud</span> <span class="o">=</span> <span class="m">0</span><span class="o">)</span> is a PL011 rev2
+<span class="o">[</span>    3.527349<span class="o">]</span> systemd<span class="o">[</span><span class="m">1</span><span class="o">]</span>: Expecting device dev-ttyS0.device...
+<span class="o">[</span>    4.653975<span class="o">]</span> systemd<span class="o">[</span><span class="m">1</span><span class="o">]</span>: Starting system-serial<span class="se">\x</span>2dgetty.slice.
+<span class="o">[</span>    4.669517<span class="o">]</span> systemd<span class="o">[</span><span class="m">1</span><span class="o">]</span>: Created slice system-serial<span class="se">\x</span>2dgetty.slice.
+</pre></div>
+</div>
+<p>the console needs to be disabled on the serial port ttyAMA0.</p>
+<p>To do so, run the configuration command</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo raspi-config
+</pre></div>
+</div>
+<p>and navigate to option 5, Interfacing Options. Choose P6, Serial.</p>
+<p>When prompted, answer No to “Would you like a login shell to be accessible over serial?” and Yes to “Would you like the seria port hardware to be enabled?”.</p>
+<p>Enter the following command to reboot and search for available ports again:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo reboot
+$ dmesg <span class="p">|</span> grep tty
+</pre></div>
+</div>
+<p>The output now should look like:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ dmesg <span class="p">|</span> grep tty
+<span class="o">[</span>    0.000000<span class="o">]</span> Kernel <span class="nb">command</span> line: <span class="m">8250</span>.nr_uarts<span class="o">=</span><span class="m">1</span> bcm2708_fb.fbwidth<span class="o">=</span><span class="m">1824</span> bcm2708_fb.fbheight<span class="o">=</span><span class="m">984</span> bcm2708_fb.fbswap<span class="o">=</span><span class="m">1</span>
+dma.dmachans<span class="o">=</span>0x7f35 bcm2709.boardrev<span class="o">=</span>0xa02082 bcm2709.serial<span class="o">=</span>0x11f38c9c bcm2709.uart_clock<span class="o">=</span><span class="m">48000000</span>
+smsc95xx.macaddr<span class="o">=</span>B8:27:EB:F3:8C:9C vc_mem.mem_base<span class="o">=</span>0x3dc00000 vc_mem.mem_size<span class="o">=</span>0x3f000000  dwc_otg.lpm_enable<span class="o">=</span><span class="m">0</span>
+<span class="nv">console</span><span class="o">=</span>tty1 <span class="nv">root</span><span class="o">=</span>/dev/mmcblk0p7 <span class="nv">rootfstype</span><span class="o">=</span>ext4 <span class="nv">elevator</span><span class="o">=</span>deadline fsck.repair<span class="o">=</span>yes rootwait splash plymouth.ignore-serial-consoles
+<span class="o">[</span>    0.001345<span class="o">]</span> console <span class="o">[</span>tty1<span class="o">]</span> enabled
+<span class="o">[</span>    0.343464<span class="o">]</span> 3f215040.uart: ttyS0 at MMIO 0x3f215040 <span class="o">(</span><span class="nv">irq</span> <span class="o">=</span> <span class="m">59</span>, <span class="nv">base_baud</span> <span class="o">=</span> <span class="m">31250000</span><span class="o">)</span> is a <span class="m">16550</span>
+<span class="o">[</span>    1.146776<span class="o">]</span> 3f201000.uart: ttyAMA0 at MMIO 0x3f201000 <span class="o">(</span><span class="nv">irq</span> <span class="o">=</span> <span class="m">87</span>, <span class="nv">base_baud</span> <span class="o">=</span> <span class="m">0</span><span class="o">)</span> is a PL011 rev2
+</pre></div>
+</div>
+</div>
+<div class="section" id="wiring">
+<h3>Wiring<a class="headerlink" href="#wiring" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="56%" />
+<col width="44%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Rasberry Pi 3</th>
+<th class="head">TFmini</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>+5V</td>
+<td>5V (RED)</td>
+</tr>
+<tr class="row-odd"><td>GND</td>
+<td>GND (BLACK)</td>
+</tr>
+<tr class="row-even"><td>TXD0</td>
+<td>RX (WHITE)</td>
+</tr>
+<tr class="row-odd"><td>RXD0</td>
+<td>TX (GREEN)</td>
+</tr>
+</tbody>
+</table>
+<p>The pinout of the Rasberry Pi is:</p>
+<a class="reference internal image-reference" href="../../_images/j8header-3b.png"><img alt="../../_images/j8header-3b.png" src="../../_images/j8header-3b.png" style="width: 275px; height: 500px;" /></a>
+</div>
+<div class="section" id="code">
+<h3>Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># tfmini.py</span>
+<span class="c1"># supports Python 2</span>
+<span class="c1"># prints distance from sensor</span>
+
+<span class="c1">#coding: utf-8</span>
+<span class="kn">import</span> <span class="nn">serial</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="n">ser</span> <span class="o">=</span> <span class="n">serial</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span><span class="s2">&quot;/dev/ttyS0&quot;</span><span class="p">,</span> <span class="mi">115200</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">getTFminiData</span><span class="p">():</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">ser</span><span class="o">.</span><span class="n">in_waiting</span>
+    <span class="c1">#count = 0</span>
+    <span class="c1">#print(count)</span>
+    <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">8</span><span class="p">:</span>
+        <span class="n">recv</span> <span class="o">=</span> <span class="n">ser</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+        <span class="n">ser</span><span class="o">.</span><span class="n">reset_input_buffer</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">recv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Y&#39;</span> <span class="ow">and</span> <span class="n">recv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span> <span class="c1"># 0x59 is &#39;Y&#39;</span>
+            <span class="n">low</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">recv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;hex&#39;</span><span class="p">),</span> <span class="mi">16</span><span class="p">)</span>
+            <span class="n">high</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">recv</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;hex&#39;</span><span class="p">),</span> <span class="mi">16</span><span class="p">)</span>
+            <span class="n">distance</span> <span class="o">=</span> <span class="n">low</span> <span class="o">+</span> <span class="n">high</span> <span class="o">*</span> <span class="mi">256</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;distance is: &#39;</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">distance</span><span class="p">)</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">ser</span><span class="o">.</span><span class="n">is_open</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+            <span class="n">ser</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
+            <span class="n">getTFminiData</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>   <span class="c1"># Ctrl+C</span>
+        <span class="k">if</span> <span class="n">ser</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">ser</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># tfmini_2.py</span>
+<span class="c1"># supports Python 2 or Python 3</span>
+<span class="c1"># prints distance and strength from sensor</span>
+
+<span class="c1">#coding: utf-8</span>
+<span class="kn">import</span> <span class="nn">serial</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">ser</span> <span class="o">=</span> <span class="n">serial</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span><span class="s2">&quot;/dev/ttyS0&quot;</span><span class="p">,</span> <span class="mi">115200</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">getTFminiData</span><span class="p">():</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="c1">#time.sleep(0.1)</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="n">ser</span><span class="o">.</span><span class="n">in_waiting</span>
+        <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">8</span><span class="p">:</span>
+            <span class="n">recv</span> <span class="o">=</span> <span class="n">ser</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+            <span class="n">ser</span><span class="o">.</span><span class="n">reset_input_buffer</span><span class="p">()</span>
+            <span class="c1"># type(recv), &#39;str&#39; in python2(recv[0] = &#39;Y&#39;), &#39;bytes&#39; in python3(recv[0] = 89)</span>
+            <span class="c1"># type(recv[0]), &#39;str&#39; in python2, &#39;int&#39; in python3</span>
+
+            <span class="k">if</span> <span class="n">recv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0x59</span> <span class="ow">and</span> <span class="n">recv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0x59</span><span class="p">:</span>     <span class="c1">#python3</span>
+                <span class="n">distance</span> <span class="o">=</span> <span class="n">recv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">recv</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="mi">256</span>
+                <span class="n">strength</span> <span class="o">=</span> <span class="n">recv</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">+</span> <span class="n">recv</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">*</span> <span class="mi">256</span>
+                <span class="k">print</span><span class="p">(</span><span class="s1">&#39;(&#39;</span><span class="p">,</span> <span class="n">distance</span><span class="p">,</span> <span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">strength</span><span class="p">,</span> <span class="s1">&#39;)&#39;</span><span class="p">)</span>
+                <span class="n">ser</span><span class="o">.</span><span class="n">reset_input_buffer</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">recv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Y&#39;</span> <span class="ow">and</span> <span class="n">recv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span>     <span class="c1">#python2</span>
+                <span class="n">lowD</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">recv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;hex&#39;</span><span class="p">),</span> <span class="mi">16</span><span class="p">)</span>
+                <span class="n">highD</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">recv</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;hex&#39;</span><span class="p">),</span> <span class="mi">16</span><span class="p">)</span>
+                <span class="n">lowS</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">recv</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;hex&#39;</span><span class="p">),</span> <span class="mi">16</span><span class="p">)</span>
+                <span class="n">highS</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">recv</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;hex&#39;</span><span class="p">),</span> <span class="mi">16</span><span class="p">)</span>
+                <span class="n">distance</span> <span class="o">=</span> <span class="n">lowD</span> <span class="o">+</span> <span class="n">highD</span> <span class="o">*</span> <span class="mi">256</span>
+                <span class="n">strength</span> <span class="o">=</span> <span class="n">lowS</span> <span class="o">+</span> <span class="n">highS</span> <span class="o">*</span> <span class="mi">256</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">distance</span><span class="p">,</span> <span class="n">strength</span><span class="p">)</span>
+
+            <span class="c1"># you can also distinguish python2 and python3:</span>
+            <span class="c1">#import sys</span>
+            <span class="c1">#sys.version[0] == &#39;2&#39;    #True, python2</span>
+            <span class="c1">#sys.version[0] == &#39;3&#39;    #True, python3</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">ser</span><span class="o">.</span><span class="n">is_open</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+            <span class="n">ser</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
+        <span class="n">getTFminiData</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>   <span class="c1"># Ctrl+C</span>
+        <span class="k">if</span> <span class="n">ser</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">ser</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="resources">
+<h3>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="http://www.instructables.com/id/Read-and-write-from-serial-port-with-Raspberry-Pi/">READ AND WRITE FROM SERIAL PORT WITH RASPBERRY PI</a></li>
+<li><a class="reference external" href="https://github.com/TFmini/TFmini-RaspberryPi">TFmini-RaspberryPi</a></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
 <div class="section" id="pi-and-imu-communication">
 <h2>PI and IMU communication<a class="headerlink" href="#pi-and-imu-communication" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id1">
@@ -382,8 +664,8 @@
 </ul>
 </div>
 </div>
-<div class="section" id="resources">
-<h3>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h3>Resources<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><a class="reference external" href="https://learn.sparkfun.com/tutorials/i2c">I2C</a></li>
 </ul>
@@ -395,15 +677,16 @@
 
 
            </div>
+           
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="software.html" class="btn btn-neutral float-right" title="Software" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="software.html" class="btn btn-neutral float-right" title="Software" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="mechanical.html" class="btn btn-neutral" title="Mechanical" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="mechanical.html" class="btn btn-neutral" title="Mechanical" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -416,7 +699,7 @@
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -435,9 +718,11 @@
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
             VERSION:'2018',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../../_static/jquery.js"></script>
@@ -451,14 +736,11 @@
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
   
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

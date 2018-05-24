@@ -15,15 +15,17 @@ Current Team
     * An Zou
     * `Adith Boloor <https://github.com/ajboloor>`_
     * `Jerry Kong <https://github.com/woodcutter1998>`_
+    * `Shadi Davari <https://github.com/shadidavari>`_
+    * `Feiyang Jin <https://github.com/FeiyangJin>`_
 
 Former Team
-  - Advisor(s):
+  - Advisor(s):s
 
     * `Dr. Humberto Gonzalez <https://github.com/hgonzale>`_
 
   - Team Members:
 
-    * Andrew O'Sullivan
+    * `Andrew O'Sullivan <https://www.andrewosullivan.com/>`_
     * `Jacob Cytron <https://github.com/jcytron>`_
     * `Jeffrey Gu <https://github.com/jguc17>`_
     * John Fordice
