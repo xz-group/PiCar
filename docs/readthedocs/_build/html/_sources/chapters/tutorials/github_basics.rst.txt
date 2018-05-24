@@ -107,3 +107,4 @@ Resources
 - `Forking repositories <https://help.github.com/articles/fork-a-repo/>`_
 - `Syncing a fork <https://stackoverflow.com/a/19506355>`_
 - `Pushing to remote <https://help.github.com/articles/pushing-to-a-remote/#pushing-a-branch>`_
+- `Do not be afraid to commit <http://dont-be-afraid-to-commit.readthedocs.io>`_
