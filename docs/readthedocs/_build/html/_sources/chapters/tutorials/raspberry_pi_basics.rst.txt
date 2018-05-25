@@ -147,6 +147,94 @@ Procedure
 .. note:: For SSH connection to work, your laptop needs to be connected to the same WiFi (router) that the Raspberry Pi
           is connected to.
 
+Password-less SSH
+-----------------
+For SHH via a private computer, you can use an SSH key pair to login to the
+server or Raspberry Pi without a password
+
+Procedure
+^^^^^^^^^
+1. Open a new terminal window and type the following command to generate a
+   SSH key pair. You will keep the private key on your computer and send the
+   public key to the server which will authenticate SSH connection without the
+   password.
+
+   .. code-block:: bash
+
+    ssh-keygen -t rsa
+
+    * Follow through the process. If key pair has been generated previously,
+    choose a new file name. A passphrase is not necessary.
+
+2. The following commands will create a SSH directory on the Pi, upload the
+   generated public key to to the Pi and set the necessary permissions (replace
+   ``<Pi IP Address>``, ``<Pi SSH Port (defaut: 22)>`` and ``<Pi username>``
+   with their respective names/numbers):
+
+   .. code-block:: bash
+
+      ssh_ip=<Pi IP Address>
+      ssh_port=<Pi SSH Port (defaut: 22)>
+      ssh_user=<Pi username>
+
+      ssh $ssh_user@$ssh_ip -p $ssh_port mkdir -p .ssh
+      cat ~/.ssh/id_rsa.pub | ssh $ssh_user@$ssh_ip -p $ssh_port 'cat >> .ssh/authorized_keys'
+      ssh $ssh_user@$ssh_ip -p $ssh_port "chmod 700 .ssh; chmod 640 .ssh/authorized_keys"
+
+   .. note:: You will need to enter the SSH password for the above steps. Also,
+             there is no space between ``ssh_pi``, ``=`` and ``<Pi IP Address>``, etc.
+
+3. Now the SSH keys have been set up. To make the connecting via SSH even
+   faster, do the following:
+
+   .. code-block:: bash
+
+      cat ~/.ssh/config
+
+   * If the ``~/.ssh/config`` file does not exist, create one using ``nano``:
+
+   .. code-block:: bash
+
+      sudo nano ~/.ssh/config
+
+   * Fill it in the following format:
+
+   .. code-block:: bash
+
+      Host <some unique name>
+         Hostname <Pi IP Address>
+         User <Pi username>
+         Port <Pi SSH Port (defaut: 22)>
+
+   * Or you can use the following command:
+
+   .. code-block:: bash
+
+      ssh_id=<some unique name>
+      echo "\nHost $ssh_id\n   Hostname $ssh_ip" >> ~/.ssh/config
+      echo "\n   User $ssh_user\n   Port $ssh_port" >> ~/.ssh/config
+
+   * Example (in ``~/.ssh/config``):
+
+   .. code-block:: bash
+
+      Host pi-server
+         Hostname 192.168.1.200
+         User pi
+         Port 22
+
+   * Save the file
+
+4. Now you can SSH in to the Pi without a password using the command:
+
+   .. code-block:: bash
+
+      ssh pi-server # or whatever host identifier you chose
+
+
+
+
+
 Resources
 ---------
 - `Adafruit's Raspberry Pi Tutorial <https://learn.adafruit.com/series/learn-raspberry-pi>`_

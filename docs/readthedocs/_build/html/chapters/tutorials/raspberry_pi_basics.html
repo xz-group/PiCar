@@ -13,6 +13,8 @@
 
   
   
+  
+  
 
   
 
@@ -23,28 +25,21 @@
   
 
   
-  
     <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="PiCar Project 2018 documentation" href="../../index.html"/>
-        <link rel="up" title="Tutorials" href="../tutorials.html"/>
-        <link rel="next" title="Arduino Basics" href="arduino_basics.html"/>
-        <link rel="prev" title="Tutorials" href="../tutorials.html"/> 
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Arduino Basics" href="arduino_basics.html" />
+    <link rel="prev" title="Tutorials" href="../tutorials.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -85,7 +80,10 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../tutorials.html">Tutorials</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Raspberry Pi Basics</a><ul>
@@ -97,6 +95,10 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#desktop-interface">Desktop Interface</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id1">Procedure</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#password-less-ssh">Password-less SSH</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Procedure</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#resources">Resources</a></li>
@@ -123,36 +125,56 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../index.html">PiCar Project</a>
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">PiCar Project</a>
+        
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="../tutorials.html">Tutorials</a> &raquo;</li>
-      
-    <li>Raspberry Pi Basics</li>
+        
+      <li>Raspberry Pi Basics</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
+            
             <a href="../../_sources/chapters/tutorials/raspberry_pi_basics.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -335,6 +357,92 @@ is connected to.</p>
 </div>
 </div>
 </div>
+<div class="section" id="password-less-ssh">
+<h2>Password-less SSH<a class="headerlink" href="#password-less-ssh" title="Permalink to this headline">¶</a></h2>
+<p>For SHH via a private computer, you can use an SSH key pair to login to the
+server or Raspberry Pi without a password</p>
+<div class="section" id="id2">
+<h3>Procedure<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Open a new terminal window and type the following command to generate a
+SSH key pair. You will keep the private key on your computer and send the
+public key to the server which will authenticate SSH connection without the
+password.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh-keygen -t rsa
+
+* Follow through the process. If key pair has been generated previously,
+choose a new file name. A passphrase is not necessary.
+</pre></div>
+</div>
+</li>
+<li><p class="first">The following commands will create a SSH directory on the Pi, upload the
+generated public key to to the Pi and set the necessary permissions (replace
+<code class="docutils literal notranslate"><span class="pre">&lt;Pi</span> <span class="pre">IP</span> <span class="pre">Address&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;Pi</span> <span class="pre">SSH</span> <span class="pre">Port</span> <span class="pre">(defaut:</span> <span class="pre">22)&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;Pi</span> <span class="pre">username&gt;</span></code>
+with their respective names/numbers):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">ssh_ip</span><span class="o">=</span>&lt;Pi IP Address&gt;
+<span class="nv">ssh_port</span><span class="o">=</span>&lt;Pi SSH Port <span class="o">(</span>defaut: <span class="m">22</span><span class="o">)</span>&gt;
+<span class="nv">ssh_user</span><span class="o">=</span>&lt;Pi username&gt;
+
+ssh <span class="nv">$ssh_user</span>@<span class="nv">$ssh_ip</span> -p <span class="nv">$ssh_port</span> mkdir -p .ssh
+cat ~/.ssh/id_rsa.pub <span class="p">|</span> ssh <span class="nv">$ssh_user</span>@<span class="nv">$ssh_ip</span> -p <span class="nv">$ssh_port</span> <span class="s1">&#39;cat &gt;&gt; .ssh/authorized_keys&#39;</span>
+ssh <span class="nv">$ssh_user</span>@<span class="nv">$ssh_ip</span> -p <span class="nv">$ssh_port</span> <span class="s2">&quot;chmod 700 .ssh; chmod 640 .ssh/authorized_keys&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You will need to enter the SSH password for the above steps. Also,
+there is no space between <code class="docutils literal notranslate"><span class="pre">ssh_pi</span></code>, <code class="docutils literal notranslate"><span class="pre">=</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;Pi</span> <span class="pre">IP</span> <span class="pre">Address&gt;</span></code>, etc.</p>
+</div>
+</li>
+<li><p class="first">Now the SSH keys have been set up. To make the connecting via SSH even
+faster, do the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat ~/.ssh/config
+</pre></div>
+</div>
+<ul class="simple">
+<li>If the <code class="docutils literal notranslate"><span class="pre">~/.ssh/config</span></code> file does not exist, create one using <code class="docutils literal notranslate"><span class="pre">nano</span></code>:</li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo nano ~/.ssh/config
+</pre></div>
+</div>
+<ul class="simple">
+<li>Fill it in the following format:</li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Host &lt;some unique name&gt;
+   Hostname &lt;Pi IP Address&gt;
+   User &lt;Pi username&gt;
+   Port &lt;Pi SSH Port <span class="o">(</span>defaut: <span class="m">22</span><span class="o">)</span>&gt;
+</pre></div>
+</div>
+<ul class="simple">
+<li>Or you can use the following command:</li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">ssh_id</span><span class="o">=</span>&lt;some unique name&gt;
+<span class="nb">echo</span> <span class="s2">&quot;\nHost </span><span class="nv">$ssh_id</span><span class="s2">\n   Hostname </span><span class="nv">$ssh_ip</span><span class="s2">&quot;</span> &gt;&gt; ~/.ssh/config
+<span class="nb">echo</span> <span class="s2">&quot;\n   User </span><span class="nv">$ssh_user</span><span class="s2">\n   Port </span><span class="nv">$ssh_port</span><span class="s2">&quot;</span> &gt;&gt; ~/.ssh/config
+</pre></div>
+</div>
+<ul class="simple">
+<li>Example (in <code class="docutils literal notranslate"><span class="pre">~/.ssh/config</span></code>):</li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Host pi-server
+   Hostname <span class="m">192</span>.168.1.200
+   User pi
+   Port <span class="m">22</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Save the file</li>
+</ul>
+</li>
+<li><p class="first">Now you can SSH in to the Pi without a password using the command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh pi-server <span class="c1"># or whatever host identifier you chose</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+</div>
 <div class="section" id="resources">
 <h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
@@ -346,15 +454,16 @@ is connected to.</p>
 
 
            </div>
+           
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="arduino_basics.html" class="btn btn-neutral float-right" title="Arduino Basics" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="arduino_basics.html" class="btn btn-neutral float-right" title="Arduino Basics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../tutorials.html" class="btn btn-neutral" title="Tutorials" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../tutorials.html" class="btn btn-neutral" title="Tutorials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -367,7 +476,7 @@ is connected to.</p>
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -386,9 +495,11 @@ is connected to.</p>
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
             VERSION:'2018',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../../_static/jquery.js"></script>
@@ -402,14 +513,11 @@ is connected to.</p>
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
   
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>
