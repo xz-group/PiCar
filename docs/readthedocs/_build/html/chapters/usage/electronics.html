@@ -183,12 +183,16 @@
             
   <div class="section" id="electronics">
 <h1>Electronics<a class="headerlink" href="#electronics" title="Permalink to this headline">¶</a></h1>
+<p>The electronics section will deal with interfacing the Raspberry Pi and Arduino
+with the sensors and actuators.</p>
 <div class="section" id="pi-and-arduino-communication">
 <h2>Pi and Arduino Communication<a class="headerlink" href="#pi-and-arduino-communication" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="i2c-method">
 <h3>I2C Method<a class="headerlink" href="#i2c-method" title="Permalink to this headline">¶</a></h3>
-<p><em>The code is from https://oscarliang.com/raspberry-pi-arduino-connected-i2c/, with slight changes to accommodate python 3 instead of python 2</em></p>
-<p>Using I2C protocol, we could communicate between raspberry pi and arduino using only three wires</p>
+<p>The code is from <a class="reference external" href="https://oscarliang.com/raspberry-pi-arduino-connected-i2c/">here</a>,
+with slight changes to accommodate Python 3 instead of Python 2.</p>
+<p>Using I2C protocol, we could communicate between Raspberry Pi
+and Arduino using only three wires.</p>
 <p>The wiring is:</p>
 <a class="reference internal image-reference" href="../../_images/PiArduinoI2CHardware_bb.jpg"><img alt="../../_images/PiArduinoI2CHardware_bb.jpg" src="../../_images/PiArduinoI2CHardware_bb.jpg" style="width: 500px;" /></a>
 <p>Raspberry pi and Arduino both agree on the a slave address of 0x04</p>
@@ -285,7 +289,7 @@
 <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
-<p><strong>Run the python code on the raspberry pi</strong></p>
+<p><strong>Run the python code on the Raspberry Pi</strong></p>
 <p>The testing code is:</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -359,9 +363,11 @@
 </div>
 <div class="section" id="spi-method">
 <h3>SPI Method<a class="headerlink" href="#spi-method" title="Permalink to this headline">¶</a></h3>
+<p>To do</p>
 </div>
 <div class="section" id="usb-method">
 <h3>USB Method<a class="headerlink" href="#usb-method" title="Permalink to this headline">¶</a></h3>
+<p>To do</p>
 </div>
 </div>
 <div class="section" id="pi-and-tfmini-lidar-communication">
@@ -369,46 +375,46 @@
 <div class="section" id="setup">
 <h3>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h3>
 <p>To search for available serial ports, enter the following command in terminal:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ dmesg <span class="p">|</span> grep tty
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dmesg <span class="p">|</span> grep tty
 </pre></div>
 </div>
-<p>If the output looks like</p>
+<p>If the output looks like:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ dmesg <span class="p">|</span> grep tty
-<span class="o">[</span>    0.000000<span class="o">]</span> Kernel <span class="nb">command</span> line: <span class="m">8250</span>.nr_uarts<span class="o">=</span><span class="m">1</span> bcm2708_fb.fbwidth<span class="o">=</span><span class="m">1824</span> bcm2708_fb.fbheight<span class="o">=</span><span class="m">984</span> bcm2708_fb.fbswap<span class="o">=</span><span class="m">1</span> dma.dmachans<span class="o">=</span>0x7f35
+<span class="o">[</span>    <span class="m">0</span>.000000<span class="o">]</span> Kernel <span class="nb">command</span> line: <span class="m">8250</span>.nr_uarts<span class="o">=</span><span class="m">1</span> bcm2708_fb.fbwidth<span class="o">=</span><span class="m">1824</span> bcm2708_fb.fbheight<span class="o">=</span><span class="m">984</span> bcm2708_fb.fbswap<span class="o">=</span><span class="m">1</span> dma.dmachans<span class="o">=</span>0x7f35
 bcm2709.boardrev<span class="o">=</span>0xa02082 bcm2709.serial<span class="o">=</span>0x11f38c9c bcm2709.uart_clock<span class="o">=</span><span class="m">48000000</span> smsc95xx.macaddr<span class="o">=</span>B8:27:EB:F3:8C:9C vc_mem.mem_base<span class="o">=</span>0x3dc00000
 vc_mem.mem_size<span class="o">=</span>0x3f000000  dwc_otg.lpm_enable<span class="o">=</span><span class="m">0</span> <span class="nv">console</span><span class="o">=</span>tty1 <span class="nv">console</span><span class="o">=</span>ttyS0,115200 <span class="nv">root</span><span class="o">=</span>/dev/mmcblk0p7 <span class="nv">rootfstype</span><span class="o">=</span>ext4 <span class="nv">elevator</span><span class="o">=</span>deadline
 fsck.repair<span class="o">=</span>yes rootwait splash plymouth.ignore-serial-consoles
-<span class="o">[</span>    0.001365<span class="o">]</span> console <span class="o">[</span>tty1<span class="o">]</span> enabled
-<span class="o">[</span>    0.343313<span class="o">]</span> console <span class="o">[</span>ttyS0<span class="o">]</span> disabled
-<span class="o">[</span>    0.343481<span class="o">]</span> 3f215040.uart: ttyS0 at MMIO 0x3f215040 <span class="o">(</span><span class="nv">irq</span> <span class="o">=</span> <span class="m">59</span>, <span class="nv">base_baud</span> <span class="o">=</span> <span class="m">31250000</span><span class="o">)</span> is a <span class="m">16550</span>
-<span class="o">[</span>    1.078177<span class="o">]</span> console <span class="o">[</span>ttyS0<span class="o">]</span> enabled
-<span class="o">[</span>    2.210431<span class="o">]</span> 3f201000.uart: ttyAMA0 at MMIO 0x3f201000 <span class="o">(</span><span class="nv">irq</span> <span class="o">=</span> <span class="m">87</span>, <span class="nv">base_baud</span> <span class="o">=</span> <span class="m">0</span><span class="o">)</span> is a PL011 rev2
-<span class="o">[</span>    3.527349<span class="o">]</span> systemd<span class="o">[</span><span class="m">1</span><span class="o">]</span>: Expecting device dev-ttyS0.device...
-<span class="o">[</span>    4.653975<span class="o">]</span> systemd<span class="o">[</span><span class="m">1</span><span class="o">]</span>: Starting system-serial<span class="se">\x</span>2dgetty.slice.
-<span class="o">[</span>    4.669517<span class="o">]</span> systemd<span class="o">[</span><span class="m">1</span><span class="o">]</span>: Created slice system-serial<span class="se">\x</span>2dgetty.slice.
+<span class="o">[</span>    <span class="m">0</span>.001365<span class="o">]</span> console <span class="o">[</span>tty1<span class="o">]</span> enabled
+<span class="o">[</span>    <span class="m">0</span>.343313<span class="o">]</span> console <span class="o">[</span>ttyS0<span class="o">]</span> disabled
+<span class="o">[</span>    <span class="m">0</span>.343481<span class="o">]</span> 3f215040.uart: ttyS0 at MMIO 0x3f215040 <span class="o">(</span><span class="nv">irq</span> <span class="o">=</span> <span class="m">59</span>, <span class="nv">base_baud</span> <span class="o">=</span> <span class="m">31250000</span><span class="o">)</span> is a <span class="m">16550</span>
+<span class="o">[</span>    <span class="m">1</span>.078177<span class="o">]</span> console <span class="o">[</span>ttyS0<span class="o">]</span> enabled
+<span class="o">[</span>    <span class="m">2</span>.210431<span class="o">]</span> 3f201000.uart: ttyAMA0 at MMIO 0x3f201000 <span class="o">(</span><span class="nv">irq</span> <span class="o">=</span> <span class="m">87</span>, <span class="nv">base_baud</span> <span class="o">=</span> <span class="m">0</span><span class="o">)</span> is a PL011 rev2
+<span class="o">[</span>    <span class="m">3</span>.527349<span class="o">]</span> systemd<span class="o">[</span><span class="m">1</span><span class="o">]</span>: Expecting device dev-ttyS0.device...
+<span class="o">[</span>    <span class="m">4</span>.653975<span class="o">]</span> systemd<span class="o">[</span><span class="m">1</span><span class="o">]</span>: Starting system-serial<span class="se">\x</span>2dgetty.slice.
+<span class="o">[</span>    <span class="m">4</span>.669517<span class="o">]</span> systemd<span class="o">[</span><span class="m">1</span><span class="o">]</span>: Created slice system-serial<span class="se">\x</span>2dgetty.slice.
 </pre></div>
 </div>
-<p>the console needs to be disabled on the serial port ttyAMA0.</p>
+<p>The console needs to be disabled on the serial port <code class="docutils literal notranslate"><span class="pre">ttyAMA0</span></code>.</p>
 <p>To do so, run the configuration command</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo raspi-config
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo raspi-config
 </pre></div>
 </div>
 <p>and navigate to option 5, Interfacing Options. Choose P6, Serial.</p>
 <p>When prompted, answer No to “Would you like a login shell to be accessible over serial?” and Yes to “Would you like the seria port hardware to be enabled?”.</p>
 <p>Enter the following command to reboot and search for available ports again:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo reboot
-$ dmesg <span class="p">|</span> grep tty
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo reboot
+dmesg <span class="p">|</span> grep tty
 </pre></div>
 </div>
 <p>The output now should look like:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ dmesg <span class="p">|</span> grep tty
-<span class="o">[</span>    0.000000<span class="o">]</span> Kernel <span class="nb">command</span> line: <span class="m">8250</span>.nr_uarts<span class="o">=</span><span class="m">1</span> bcm2708_fb.fbwidth<span class="o">=</span><span class="m">1824</span> bcm2708_fb.fbheight<span class="o">=</span><span class="m">984</span> bcm2708_fb.fbswap<span class="o">=</span><span class="m">1</span>
+<span class="o">[</span>    <span class="m">0</span>.000000<span class="o">]</span> Kernel <span class="nb">command</span> line: <span class="m">8250</span>.nr_uarts<span class="o">=</span><span class="m">1</span> bcm2708_fb.fbwidth<span class="o">=</span><span class="m">1824</span> bcm2708_fb.fbheight<span class="o">=</span><span class="m">984</span> bcm2708_fb.fbswap<span class="o">=</span><span class="m">1</span>
 dma.dmachans<span class="o">=</span>0x7f35 bcm2709.boardrev<span class="o">=</span>0xa02082 bcm2709.serial<span class="o">=</span>0x11f38c9c bcm2709.uart_clock<span class="o">=</span><span class="m">48000000</span>
 smsc95xx.macaddr<span class="o">=</span>B8:27:EB:F3:8C:9C vc_mem.mem_base<span class="o">=</span>0x3dc00000 vc_mem.mem_size<span class="o">=</span>0x3f000000  dwc_otg.lpm_enable<span class="o">=</span><span class="m">0</span>
 <span class="nv">console</span><span class="o">=</span>tty1 <span class="nv">root</span><span class="o">=</span>/dev/mmcblk0p7 <span class="nv">rootfstype</span><span class="o">=</span>ext4 <span class="nv">elevator</span><span class="o">=</span>deadline fsck.repair<span class="o">=</span>yes rootwait splash plymouth.ignore-serial-consoles
-<span class="o">[</span>    0.001345<span class="o">]</span> console <span class="o">[</span>tty1<span class="o">]</span> enabled
-<span class="o">[</span>    0.343464<span class="o">]</span> 3f215040.uart: ttyS0 at MMIO 0x3f215040 <span class="o">(</span><span class="nv">irq</span> <span class="o">=</span> <span class="m">59</span>, <span class="nv">base_baud</span> <span class="o">=</span> <span class="m">31250000</span><span class="o">)</span> is a <span class="m">16550</span>
-<span class="o">[</span>    1.146776<span class="o">]</span> 3f201000.uart: ttyAMA0 at MMIO 0x3f201000 <span class="o">(</span><span class="nv">irq</span> <span class="o">=</span> <span class="m">87</span>, <span class="nv">base_baud</span> <span class="o">=</span> <span class="m">0</span><span class="o">)</span> is a PL011 rev2
+<span class="o">[</span>    <span class="m">0</span>.001345<span class="o">]</span> console <span class="o">[</span>tty1<span class="o">]</span> enabled
+<span class="o">[</span>    <span class="m">0</span>.343464<span class="o">]</span> 3f215040.uart: ttyS0 at MMIO 0x3f215040 <span class="o">(</span><span class="nv">irq</span> <span class="o">=</span> <span class="m">59</span>, <span class="nv">base_baud</span> <span class="o">=</span> <span class="m">31250000</span><span class="o">)</span> is a <span class="m">16550</span>
+<span class="o">[</span>    <span class="m">1</span>.146776<span class="o">]</span> 3f201000.uart: ttyAMA0 at MMIO 0x3f201000 <span class="o">(</span><span class="nv">irq</span> <span class="o">=</span> <span class="m">87</span>, <span class="nv">base_baud</span> <span class="o">=</span> <span class="m">0</span><span class="o">)</span> is a PL011 rev2
 </pre></div>
 </div>
 </div>
@@ -615,7 +621,7 @@ smsc95xx.macaddr<span class="o">=</span>B8:27:EB:F3:8C:9C vc_mem.mem_base<span c
 <h3>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
-<li><a class="reference external" href="http://www.instructables.com/id/Read-and-write-from-serial-port-with-Raspberry-Pi/">READ AND WRITE FROM SERIAL PORT WITH RASPBERRY PI</a></li>
+<li><a class="reference external" href="http://www.instructables.com/id/Read-and-write-from-serial-port-with-Raspberry-Pi/">Read and write from serial port with Raspberry Pi</a></li>
 <li><a class="reference external" href="https://github.com/TFmini/TFmini-RaspberryPi">TFmini-RaspberryPi</a></li>
 </ul>
 </div></blockquote>
@@ -625,9 +631,11 @@ smsc95xx.macaddr<span class="o">=</span>B8:27:EB:F3:8C:9C vc_mem.mem_base<span c
 <h2>PI and IMU communication<a class="headerlink" href="#pi-and-imu-communication" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id1">
 <h3>I2C Method<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<p><em>The example code for this section in the PiCar/src/pi/imu</em></p>
+<p>The example code for this section in the <code class="docutils literal notranslate"><span class="pre">PiCar/src/pi/imu</span></code>.</p>
 <p>To compile, use the command:</p>
-<p>$gcc -o &lt;programname&gt; runi2c.c -lm</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gcc -o &lt;programname&gt; runi2c.c -lm
+</pre></div>
+</div>
 <p>Wiring:</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -655,7 +663,7 @@ smsc95xx.macaddr<span class="o">=</span>B8:27:EB:F3:8C:9C vc_mem.mem_base<span c
 </tbody>
 </table>
 <p>The connection is by SMBUS.</p>
-<p>For RPI, go to /usr/include/linux, replace i2c_dev.h with the header file in the repository</p>
+<p>For RPI, go to <code class="docutils literal notranslate"><span class="pre">/usr/include/linux</span></code>, replace <code class="docutils literal notranslate"><span class="pre">i2c_dev.h</span></code> with the header file in the repository</p>
 <p>(Method ‘enableIMU’ needs further development to enable IMU configuration setting)</p>
 <div class="section" id="id2">
 <h4>See Also:<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
@@ -667,9 +675,8 @@ smsc95xx.macaddr<span class="o">=</span>B8:27:EB:F3:8C:9C vc_mem.mem_base<span c
 <div class="section" id="id3">
 <h3>Resources<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><a class="reference external" href="https://learn.sparkfun.com/tutorials/i2c">I2C</a></li>
+<li><a class="reference external" href="https://learn.sparkfun.com/tutorials/i2c">I2C SPI Reference page</a></li>
 </ul>
-<p>I2C SPI Reference page</p>
 <p>Contributors: Jerry Kong, Shadi Davari, Josh Jin</p>
 </div>
 </div>
