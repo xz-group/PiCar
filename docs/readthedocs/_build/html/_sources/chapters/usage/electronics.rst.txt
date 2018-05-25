@@ -1,6 +1,8 @@
 Electronics
 =============
 
+The electronics section will deal with interfacing the Raspberry Pi and Arduino
+with the sensors and actuators.
 
 Pi and Arduino Communication
 ----------------------------
@@ -8,9 +10,11 @@ Pi and Arduino Communication
 I2C Method
 ^^^^^^^^^^
 
-*The code is from https://oscarliang.com/raspberry-pi-arduino-connected-i2c/, with slight changes to accommodate python 3 instead of python 2*
+The code is from `here <https://oscarliang.com/raspberry-pi-arduino-connected-i2c/>`_,
+with slight changes to accommodate Python 3 instead of Python 2.
 
-Using I2C protocol, we could communicate between raspberry pi and arduino using only three wires
+Using I2C protocol, we could communicate between Raspberry Pi
+and Arduino using only three wires.
 
 The wiring is:
 
@@ -72,7 +76,7 @@ The testing code is:
     Wire.write(number);
   }
 
-**Run the python code on the raspberry pi**
+**Run the python code on the Raspberry Pi**
 
 The testing code is:
 
@@ -116,13 +120,13 @@ See Also:
 * `SMBus Package <https://pypi.org/project/smbus-cffi/>`_
 
 
-
 SPI Method
 ^^^^^^^^^^
-
+To do
 
 USB Method
 ^^^^^^^^^^
+To do
 
 PI and TFMini Lidar Communication
 ------------------------------------
@@ -133,9 +137,9 @@ To search for available serial ports, enter the following command in terminal:
 
 .. code-block:: bash
 
-  $ dmesg | grep tty
+   dmesg | grep tty
 
-If the output looks like
+If the output looks like:
 
 .. code-block:: bash
 
@@ -153,13 +157,13 @@ If the output looks like
   [    4.653975] systemd[1]: Starting system-serial\x2dgetty.slice.
   [    4.669517] systemd[1]: Created slice system-serial\x2dgetty.slice.
 
-the console needs to be disabled on the serial port ttyAMA0.
+The console needs to be disabled on the serial port ``ttyAMA0``.
 
 To do so, run the configuration command
 
 .. code-block:: bash
 
-  $ sudo raspi-config
+   sudo raspi-config
 
 and navigate to option 5, Interfacing Options. Choose P6, Serial.
 
@@ -169,8 +173,8 @@ Enter the following command to reboot and search for available ports again:
 
 .. code-block:: bash
 
-  $ sudo reboot
-  $ dmesg | grep tty
+   sudo reboot
+   dmesg | grep tty
 
 The output now should look like:
 
@@ -305,7 +309,7 @@ Code
 
 Resources
 ^^^^^^^^^
-  * `READ AND WRITE FROM SERIAL PORT WITH RASPBERRY PI <http://www.instructables.com/id/Read-and-write-from-serial-port-with-Raspberry-Pi/>`_
+  * `Read and write from serial port with Raspberry Pi <http://www.instructables.com/id/Read-and-write-from-serial-port-with-Raspberry-Pi/>`_
   * `TFmini-RaspberryPi <https://github.com/TFmini/TFmini-RaspberryPi>`_
 
 PI and IMU communication
@@ -314,11 +318,13 @@ PI and IMU communication
 I2C Method
 ^^^^^^^^^^
 
-*The example code for this section in the PiCar/src/pi/imu*
+The example code for this section in the ``PiCar/src/pi/imu``.
 
 To compile, use the command:
 
-$gcc -o <programname> runi2c.c -lm
+.. code-block:: bash
+
+   gcc -o <programname> runi2c.c -lm
 
 
 Wiring:
@@ -337,7 +343,7 @@ Wiring:
 
 The connection is by SMBUS.
 
-For RPI, go to /usr/include/linux, replace i2c_dev.h with the header file in the repository
+For RPI, go to ``/usr/include/linux``, replace ``i2c_dev.h`` with the header file in the repository
 
 (Method 'enableIMU' needs further development to enable IMU configuration setting)
 
@@ -348,8 +354,6 @@ See Also:
 
 Resources
 ^^^^^^^^^
-* `I2C <https://learn.sparkfun.com/tutorials/i2c>`_
-
-I2C SPI Reference page
+* `I2C SPI Reference page <https://learn.sparkfun.com/tutorials/i2c>`_
 
 Contributors: Jerry Kong, Shadi Davari, Josh Jin

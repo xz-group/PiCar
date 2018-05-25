@@ -97,6 +97,10 @@
 <li class="toctree-l4"><a class="reference internal" href="#id1">Procedure</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#password-less-ssh">Password-less SSH</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Procedure</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#resources">Resources</a></li>
 </ul>
 </li>
@@ -351,6 +355,92 @@ on your laptop.</p>
 <p class="last">For SSH connection to work, your laptop needs to be connected to the same WiFi (router) that the Raspberry Pi
 is connected to.</p>
 </div>
+</div>
+</div>
+<div class="section" id="password-less-ssh">
+<h2>Password-less SSH<a class="headerlink" href="#password-less-ssh" title="Permalink to this headline">¶</a></h2>
+<p>For SHH via a private computer, you can use an SSH key pair to login to the
+server or Raspberry Pi without a password</p>
+<div class="section" id="id2">
+<h3>Procedure<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Open a new terminal window and type the following command to generate a
+SSH key pair. You will keep the private key on your computer and send the
+public key to the server which will authenticate SSH connection without the
+password.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh-keygen -t rsa
+
+* Follow through the process. If key pair has been generated previously,
+choose a new file name. A passphrase is not necessary.
+</pre></div>
+</div>
+</li>
+<li><p class="first">The following commands will create a SSH directory on the Pi, upload the
+generated public key to to the Pi and set the necessary permissions (replace
+<code class="docutils literal notranslate"><span class="pre">&lt;Pi</span> <span class="pre">IP</span> <span class="pre">Address&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;Pi</span> <span class="pre">SSH</span> <span class="pre">Port</span> <span class="pre">(defaut:</span> <span class="pre">22)&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;Pi</span> <span class="pre">username&gt;</span></code>
+with their respective names/numbers):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">ssh_ip</span><span class="o">=</span>&lt;Pi IP Address&gt;
+<span class="nv">ssh_port</span><span class="o">=</span>&lt;Pi SSH Port <span class="o">(</span>defaut: <span class="m">22</span><span class="o">)</span>&gt;
+<span class="nv">ssh_user</span><span class="o">=</span>&lt;Pi username&gt;
+
+ssh <span class="nv">$ssh_user</span>@<span class="nv">$ssh_ip</span> -p <span class="nv">$ssh_port</span> mkdir -p .ssh
+cat ~/.ssh/id_rsa.pub <span class="p">|</span> ssh <span class="nv">$ssh_user</span>@<span class="nv">$ssh_ip</span> -p <span class="nv">$ssh_port</span> <span class="s1">&#39;cat &gt;&gt; .ssh/authorized_keys&#39;</span>
+ssh <span class="nv">$ssh_user</span>@<span class="nv">$ssh_ip</span> -p <span class="nv">$ssh_port</span> <span class="s2">&quot;chmod 700 .ssh; chmod 640 .ssh/authorized_keys&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You will need to enter the SSH password for the above steps. Also,
+there is no space between <code class="docutils literal notranslate"><span class="pre">ssh_pi</span></code>, <code class="docutils literal notranslate"><span class="pre">=</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;Pi</span> <span class="pre">IP</span> <span class="pre">Address&gt;</span></code>, etc.</p>
+</div>
+</li>
+<li><p class="first">Now the SSH keys have been set up. To make the connecting via SSH even
+faster, do the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat ~/.ssh/config
+</pre></div>
+</div>
+<ul class="simple">
+<li>If the <code class="docutils literal notranslate"><span class="pre">~/.ssh/config</span></code> file does not exist, create one using <code class="docutils literal notranslate"><span class="pre">nano</span></code>:</li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo nano ~/.ssh/config
+</pre></div>
+</div>
+<ul class="simple">
+<li>Fill it in the following format:</li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Host &lt;some unique name&gt;
+   Hostname &lt;Pi IP Address&gt;
+   User &lt;Pi username&gt;
+   Port &lt;Pi SSH Port <span class="o">(</span>defaut: <span class="m">22</span><span class="o">)</span>&gt;
+</pre></div>
+</div>
+<ul class="simple">
+<li>Or you can use the following command:</li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">ssh_id</span><span class="o">=</span>&lt;some unique name&gt;
+<span class="nb">echo</span> <span class="s2">&quot;\nHost </span><span class="nv">$ssh_id</span><span class="s2">\n   Hostname </span><span class="nv">$ssh_ip</span><span class="s2">&quot;</span> &gt;&gt; ~/.ssh/config
+<span class="nb">echo</span> <span class="s2">&quot;\n   User </span><span class="nv">$ssh_user</span><span class="s2">\n   Port </span><span class="nv">$ssh_port</span><span class="s2">&quot;</span> &gt;&gt; ~/.ssh/config
+</pre></div>
+</div>
+<ul class="simple">
+<li>Example (in <code class="docutils literal notranslate"><span class="pre">~/.ssh/config</span></code>):</li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Host pi-server
+   Hostname <span class="m">192</span>.168.1.200
+   User pi
+   Port <span class="m">22</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Save the file</li>
+</ul>
+</li>
+<li><p class="first">Now you can SSH in to the Pi without a password using the command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh pi-server <span class="c1"># or whatever host identifier you chose</span>
+</pre></div>
+</div>
+</li>
+</ol>
 </div>
 </div>
 <div class="section" id="resources">

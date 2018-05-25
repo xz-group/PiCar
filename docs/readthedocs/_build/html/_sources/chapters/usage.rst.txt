@@ -4,7 +4,7 @@ Usage
 The project is split into three parts:
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    usage/mechanical
    usage/electronics

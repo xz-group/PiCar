@@ -98,3 +98,7 @@ How to update the Docs?
           account or create a new one), and import that specific repository.
           This ensures that when new commits are submitted, the docs are
           updated automatically as well.
+
+Resources
+---------
+- `Rest and Sphinx Memo <http://rest-sphinx-memo.readthedocs.io/en/latest/ReST.html>`_
