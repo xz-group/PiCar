@@ -11,6 +11,7 @@ will help you bring to speed about the different components used.
    tutorials/arduino_basics
    tutorials/github_basics
    tutorials/linux_basics
+   tutorials/python_basics
    tutorials/readthedocs_tut
 
 .. note:: Some of the tutorials will be in the general sense of the components,
