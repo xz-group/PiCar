@@ -1,6 +1,11 @@
 PiCar Project
 ========================
 
+[![Documentation Status](https://readthedocs.org/projects/picar/badge/?version=latest)](https://picar.readthedocs.io/en/latest/?badge=latest)
+
+About
+-----
+
 The PiCar project is a miniature four-wheeled car powered by a Raspberry Pi 3 board. 
 This lab-scale autonomous research platform is easy to build and modify. A camera and LIDAR mounted on the car allows for complex computer vision algorithms. 
 
@@ -15,5 +20,6 @@ This repository contains all the software and hardware source files required to 
  * Control the speed of brushed DC motor.
 
 Documentation: 
+--------------
 - http://picar.readthedocs.io 
 - https://github.com/xz-group/PiCar/wiki (old)
