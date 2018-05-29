@@ -1,0 +1,475 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Python Basics &mdash; PiCar Project 2018 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Read the Docs Basics" href="readthedocs_tut.html" />
+    <link rel="prev" title="Linux Basics" href="linux_basics.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> PiCar Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorials.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="raspberry_pi_basics.html">Raspberry Pi Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arduino_basics.html">Arduino Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="github_basics.html">GitHub Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linux_basics.html">Linux Basics</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Python Basics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-is-python">What is Python?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#helloworld-with-python">HelloWorld with Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-python-modules">Installing Python Modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#useful-modules">Useful Modules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#computer-vision">Computer Vision</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cloud-intergration">Cloud Intergration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#guis-graphical-user-interfaces">GUIs (Graphical User Interfaces)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#data-science-scientific-computing">Data Science &amp; Scientific Computing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#interactive-python">Interactive Python</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#games-simulations">Games &amp; Simulations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#machine-learning">Machine Learning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#networking">Networking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#plotting-data-visualization">Plotting &amp; Data-visualization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#web-scraping">Web Scraping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#miscellaneous">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#resources">Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="readthedocs_tut.html">Read the Docs Basics</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../results.html">Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelogs.html">Changelogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">PiCar Project</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../tutorials.html">Tutorials</a> &raquo;</li>
+        
+      <li>Python Basics</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/chapters/tutorials/python_basics.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="python-basics">
+<h1>Python Basics<a class="headerlink" href="#python-basics" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-python">
+<h2>What is Python?<a class="headerlink" href="#what-is-python" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://www.python.org/">Python</a> is a programming language that lets you
+work quickly and integrate systems more effectively. We will be using it for
+programming the Raspberry Pi, data aggregation, data transfer and data anaylsis.
+<a class="reference external" href="https://www.python.org/downloads/release/python-2715/">Python 2.7</a> and
+<a class="reference external" href="https://www.python.org/downloads/release/python-365/">Python 3</a> are the
+most popular versions of Python.</p>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>Windows</dt>
+<dd><ul class="first last simple">
+<li>Download and install the Python setup from <a class="reference external" href="https://www.python.org/downloads/windows/">Python Releases for
+Windows</a></li>
+<li>Download <a class="reference external" href="https://www.eclipse.org/downloads/">Eclipse</a> or a similar IDE
+and follow this <a class="reference external" href="https://www.rose-hulman.edu/class/csse/resources/Eclipse/eclipse-python-configuration.htm">tutorial for setting up Python on Eclipse</a></li>
+</ul>
+</dd>
+<dt>Mac</dt>
+<dd><ul class="first last simple">
+<li>Python 2.7 comes pre-installed with the Mac OS X 10.8 +.</li>
+<li>To install and use other versions of Python on a Mac, use the tutorial on
+<a class="reference external" href="https://docs.python.org/3/using/mac.html">Using Python on a Macintosh</a></li>
+</ul>
+</dd>
+<dt>Linux</dt>
+<dd><ul class="first simple">
+<li>Python (2.7 and 3.4) usually comes preinstalled with major distributions
+of Linux. You can test if Python is installed using the following commands
+in the terminal:</li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python --version
+python2 --version
+python3 --version
+</pre></div>
+</div>
+<ul class="simple">
+<li>If you get a message saying no command found or package is missing, you can
+install it using:</li>
+</ul>
+<div class="last highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get install python
+sudo apt-get install python3
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="helloworld-with-python">
+<h2>HelloWorld with Python<a class="headerlink" href="#helloworld-with-python" title="Permalink to this headline">¶</a></h2>
+<p>Create a new file called <code class="docutils literal notranslate"><span class="pre">helloworld.py</span></code> using the IDE for Windows/Mac
+or using <code class="docutils literal notranslate"><span class="pre">nano</span></code> on Linux and enter the following Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;HelloWorld!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Save and run the file. On the IDE it would be via clicking a <code class="docutils literal notranslate"><span class="pre">Run</span> <span class="pre">Python</span> <span class="pre">Script</span></code>
+button and via terminal you need to type <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">helloworld.py</span></code>.
+The output should simply be the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>HelloWorld!
+</pre></div>
+</div>
+</div>
+<div class="section" id="installing-python-modules">
+<h2>Installing Python Modules<a class="headerlink" href="#installing-python-modules" title="Permalink to this headline">¶</a></h2>
+<p>What makes Python so powerful is the plethora of packages made to allow a
+programmer do a lot of things like web-parsing, plotting, simulation,
+computer vision, machine learning or simply getting the weather.
+Use the official guide for <a class="reference external" href="https://docs.python.org/3/installing/index.html">Installing Python Packages</a> to get things set up.</p>
+<dl class="docutils">
+<dt>Windows</dt>
+<dd><ul class="first simple">
+<li>Use the <code class="docutils literal notranslate"><span class="pre">py</span></code> Python launcher in combination with the -m switch:</li>
+</ul>
+<div class="last highlight-bash notranslate"><div class="highlight"><pre><span></span>py -2   -m pip install SomePackage  <span class="c1"># default Python 2</span>
+py -2.7 -m pip install SomePackage  <span class="c1"># specifically Python 2.7</span>
+py -3   -m pip install SomePackage  <span class="c1"># default Python 3</span>
+py -3.4 -m pip install SomePackage  <span class="c1"># specifically Python 3.4</span>
+</pre></div>
+</div>
+</dd>
+<dt>Mac / Linux</dt>
+<dd><ul class="first simple">
+<li>Install <code class="docutils literal notranslate"><span class="pre">pip</span></code> which is a Python Package Installer</li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get install python-pip
+sudo apt-get install python3-pip
+</pre></div>
+</div>
+<ul class="simple">
+<li>Install Python modules using <code class="docutils literal notranslate"><span class="pre">pip</span></code>:</li>
+</ul>
+<div class="last highlight-bash notranslate"><div class="highlight"><pre><span></span>pip2 install SomePackage <span class="c1"># short hand installation for Python 2</span>
+pip3 install SomePackage <span class="c1"># short hand installation for Python 2</span>
+
+<span class="c1"># or</span>
+
+python2   -m pip install SomePackage  <span class="c1"># default Python 2</span>
+python2.7 -m pip install SomePackage  <span class="c1"># specifically Python 2.7</span>
+python3   -m pip install SomePackage  <span class="c1"># default Python 3</span>
+python3.4 -m pip install SomePackage  <span class="c1"># specifically Python 3.4</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you get an <code class="docutils literal notranslate"><span class="pre">Permission</span> <span class="pre">denied</span></code> while using <code class="docutils literal notranslate"><span class="pre">pip</span></code>,
+you can append the command with <code class="docutils literal notranslate"><span class="pre">--user</span></code>. Example: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span>
+<span class="pre">matplotlib</span> <span class="pre">--user</span></code>. It is not recommended to use <code class="docutils literal notranslate"><span class="pre">sudo</span></code> to install
+packages using <code class="docutils literal notranslate"><span class="pre">pip</span></code>.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It is highly recommended to install the Python module called
+<a class="reference external" href="http://ipython.org/">IPython</a>. It significantly improves upon the
+vanilla version of Python command line (terminal) interface.</p>
+</div>
+</div>
+<div class="section" id="useful-modules">
+<h2>Useful Modules<a class="headerlink" href="#useful-modules" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="https://wiki.python.org/moin/UsefulModules">official list</a> of useful
+modules does not begin to cover the vast number of modules available for
+different tasks, but it is a good place to start. Some of them are listed
+below:</p>
+<div class="section" id="computer-vision">
+<h3>Computer Vision<a class="headerlink" href="#computer-vision" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>openCV</strong> (<a class="reference external" href="https://pypi.org/project/opencv-python/">https://pypi.org/project/opencv-python/</a>)</li>
+</ul>
+</div>
+<div class="section" id="cloud-intergration">
+<h3>Cloud Intergration<a class="headerlink" href="#cloud-intergration" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>Amazon Web Services</strong> (<a class="reference external" href="https://aws.amazon.com/python/">https://aws.amazon.com/python/</a>)</li>
+<li><strong>Google Cloud</strong> (<a class="reference external" href="https://googlecloudplatform.github.io/google-cloud-python/">https://googlecloudplatform.github.io/google-cloud-python/</a>)</li>
+</ul>
+</div>
+<div class="section" id="guis-graphical-user-interfaces">
+<h3>GUIs (Graphical User Interfaces)<a class="headerlink" href="#guis-graphical-user-interfaces" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>PyGObject</strong> (<a class="reference external" href="https://pygobject.readthedocs.io/en/latest/">https://pygobject.readthedocs.io/en/latest/</a>)</li>
+<li><strong>tKinter</strong> (<a class="reference external" href="https://docs.python.org/2/library/tkinter.html">https://docs.python.org/2/library/tkinter.html</a>)</li>
+<li><strong>wxPython</strong> (<a class="reference external" href="https://wxpython.org/">https://wxpython.org/</a>)</li>
+</ul>
+</div>
+<div class="section" id="data-science-scientific-computing">
+<h3>Data Science &amp; Scientific Computing<a class="headerlink" href="#data-science-scientific-computing" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>NumPy</strong> (<a class="reference external" href="http://www.numpy.org/">http://www.numpy.org/</a>)</li>
+<li><strong>SciPy</strong> (<a class="reference external" href="https://www.scipy.org/">https://www.scipy.org/</a>)</li>
+<li><strong>pandas</strong> (<a class="reference external" href="https://pandas.pydata.org/">https://pandas.pydata.org/</a>)</li>
+<li><strong>parquet</strong> (<a class="reference external" href="https://arrow.apache.org/docs/python/parquet.html">https://arrow.apache.org/docs/python/parquet.html</a>)</li>
+</ul>
+</div>
+<div class="section" id="interactive-python">
+<h3>Interactive Python<a class="headerlink" href="#interactive-python" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>IPython</strong> (<a class="reference external" href="http://ipython.org/">http://ipython.org/</a>)</li>
+<li><strong>Jupyter Notebook</strong> (<a class="reference external" href="http://ipython.org/">http://ipython.org/</a>)</li>
+</ul>
+</div>
+<div class="section" id="games-simulations">
+<h3>Games &amp; Simulations<a class="headerlink" href="#games-simulations" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>Pygame</strong> (<a class="reference external" href="http://www.pygame.org/news.html">http://www.pygame.org/news.html</a>)</li>
+<li><strong>Pyglet</strong> (<a class="reference external" href="http://www.pyglet.org/">http://www.pyglet.org/</a>)</li>
+</ul>
+</div>
+<div class="section" id="machine-learning">
+<h3>Machine Learning<a class="headerlink" href="#machine-learning" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>TensorFlow</strong> (<a class="reference external" href="https://www.tensorflow.org/install/">https://www.tensorflow.org/install/</a>)</li>
+<li><strong>Keras</strong> (<a class="reference external" href="https://keras.io/">https://keras.io/</a>)</li>
+</ul>
+</div>
+<div class="section" id="networking">
+<h3>Networking<a class="headerlink" href="#networking" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>Twisted</strong> (<a class="reference external" href="https://twistedmatrix.com/trac/">https://twistedmatrix.com/trac/</a>)</li>
+</ul>
+</div>
+<div class="section" id="plotting-data-visualization">
+<h3>Plotting &amp; Data-visualization<a class="headerlink" href="#plotting-data-visualization" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>matplotlib</strong> (<a class="reference external" href="https://matplotlib.org/">https://matplotlib.org/</a>)</li>
+<li><strong>seaborn</strong> (<a class="reference external" href="https://seaborn.pydata.org/">https://seaborn.pydata.org/</a>)</li>
+<li><strong>plotly</strong> (<a class="reference external" href="https://plot.ly/">https://plot.ly/</a>)</li>
+</ul>
+</div>
+<div class="section" id="web-scraping">
+<h3>Web Scraping<a class="headerlink" href="#web-scraping" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>BeautifulSoup</strong> (<a class="reference external" href="https://www.crummy.com/software/BeautifulSoup/">https://www.crummy.com/software/BeautifulSoup/</a>)</li>
+<li><strong>Scrapy</strong> (<a class="reference external" href="http://www.scrapy.org/">http://www.scrapy.org/</a>)</li>
+</ul>
+</div>
+<div class="section" id="miscellaneous">
+<h3>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt><strong>pint</strong> (<a class="reference external" href="https://pint.readthedocs.io/en/latest/">https://pint.readthedocs.io/en/latest/</a>)</dt>
+<dd>Define, operate and manipulate physical quantities</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">Style Guide for Python</a></li>
+<li><a class="reference external" href="https://automatetheboringstuff.com/chapter1/">Automate the Boring Stuff</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="readthedocs_tut.html" class="btn btn-neutral float-right" title="Read the Docs Basics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="linux_basics.html" class="btn btn-neutral" title="Linux Basics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, xz-group.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'2018',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
