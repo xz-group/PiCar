@@ -18,6 +18,7 @@
 #include <string.h>
 #include <sys/time.h>
 #include "imui2c.c"
+#include "LSM9DS1_Types.h"
 
 
 #define DT 0.02         // [s/loop] loop period. 20ms
@@ -76,7 +77,7 @@ int main(int argc, char *argv[])
 
 	int startInt  = mymillis();
 	struct  timeval tvBegin, tvEnd,tvDiff;
-
+	time_t ltime; /* calendar time */
 
 	signal(SIGINT, INThandler);
 
@@ -111,9 +112,10 @@ int main(int argc, char *argv[])
 
 
 		//Convert Accelerometer values to degrees
+		/*
 		AccXangle = (float) (atan2(accRaw[1],accRaw[2])+M_PI)*RAD_TO_DEG;
 		AccYangle = (float) (atan2(accRaw[2],accRaw[0])+M_PI)*RAD_TO_DEG;
-
+*/
 		//Change the rotation value of the accelerometer to -/+ 180 and move the Y axis '0' point to up.
 		//Two different pieces of code are used depending on how your IMU is mounted.
 		//If IMU is upside down
@@ -126,23 +128,26 @@ int main(int argc, char *argv[])
 		*/
 
 		//If IMU is up the correct way, use these lines
+		/*
 		AccXangle -= (float)180.0;
 		if (AccYangle > 90)
 				AccYangle -= (float)270;
 		else
 			AccYangle += (float)90;
-
+			*/
 
 		//Complementary filter used to combine the accelerometer and gyro values.
+		/*
 		CFangleX=AA*(CFangleX+rate_gyr_x*DT) +(1 - AA) * AccXangle;
 		CFangleY=AA*(CFangleY+rate_gyr_y*DT) +(1 - AA) * AccYangle;
+		*/
 
-
-		printf ("   GyroX  %7.3f \t AccXangle \e[m %7.3f \t \033[22;31mCFangleX %7.3f\033[0m\t GyroY  %7.3f \t AccYangle %7.3f \t \033[22;36mCFangleY %7.3f\t\033[0m\n",gyroXangle,AccXangle,CFangleX,gyroYangle,AccYangle,CFangleY);
+    ltime=time(NULL); /* get current cal time */
+		printf ("Time  %s   GyroX  %7.3f  AccXangle %7.3f  GyroY  %7.3f  AccYangle %7.3f \n",asctime( localtime(&ltime) ),gyroXangle,AccXangle,gyroYangle,AccYangle);
 
 		//Each loop should be at least 20ms.
 		while(mymillis() - startInt < (DT*1000)){
-				usleep(100);
+				usleep(5);
 		}
 
 		printf("Loop Time %d\t", mymillis()- startInt);
