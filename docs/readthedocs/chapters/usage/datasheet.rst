@@ -55,10 +55,12 @@ Based on armv7l, the memory architecture for this model is:
 
 +------------------------+------------------------------+
 |L1-instruction Cache    | 32-bytes cache line size     |
+|                        | 16 KB                        |
 |                        | 2-way set-associative Cache  |
 +------------------------+------------------------------+
 |L1-data Cache           | 64-bytes cache line size     |
-|                        | 2-way set-associative cache  |
+|                        | 16 KB                        |
+|                        | 4-way set-associative cache  |
 +------------------------+------------------------------+
 |L2 Cache                | 128 KB in size               |
 +------------------------+------------------------------+
