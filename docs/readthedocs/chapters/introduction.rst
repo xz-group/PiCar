@@ -6,6 +6,14 @@ board. This lab-scale autonomous research platform is easy to build and modify.
 A camera and LIDAR mounted on the car allows for complex computer vision
 algorithms.
 
+.. raw:: html
+
+  <p align="middle">
+  <a href="https://github.com/xz-group/PiCar" target="_blank"
+  class="btn btn-neutral" title="Go to the PiCar Repo">
+  <span class="icon icon-github"></span>PiCar GitHub</a></p>
+
+
 The `PiCar GitHub Repository <https://github.com/xz-group/PiCar>`_ contains
 all the software and hardware source files required to duplicate the car,
 including:
