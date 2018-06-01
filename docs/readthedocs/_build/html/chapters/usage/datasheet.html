@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Software &mdash; PiCar Project 2018 documentation</title>
+  <title>Datasheet &mdash; PiCar Project 2018 documentation</title>
   
 
   
@@ -36,7 +36,7 @@
     <link rel="top" title="PiCar Project 2018 documentation" href="../../index.html"/>
         <link rel="up" title="Usage" href="../usage.html"/>
         <link rel="next" title="Results" href="../results.html"/>
-        <link rel="prev" title="Electronics" href="electronics.html"/> 
+        <link rel="prev" title="Software" href="software.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -91,9 +91,12 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../usage.html">Usage</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="mechanical.html">Mechanical</a></li>
 <li class="toctree-l2"><a class="reference internal" href="electronics.html">Electronics</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Software</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#data-logging">Data Logging</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#data-analysis">Data Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="software.html">Software</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Datasheet</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#raspberrypi">RaspberryPi</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#raspberrypi-3-b">RaspberryPi 3 B+</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -133,11 +136,11 @@
       
           <li><a href="../usage.html">Usage</a> &raquo;</li>
       
-    <li>Software</li>
+    <li>Datasheet</li>
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/chapters/usage/software.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/chapters/usage/datasheet.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -147,18 +150,92 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="software">
-<h1>Software<a class="headerlink" href="#software" title="Permalink to this headline">¶</a></h1>
-<p>The software section will document all the heavy duty programming
-programming aspects of the project. There may be some overlap with
-the Electronics section.</p>
-<div class="section" id="data-logging">
-<h2>Data Logging<a class="headerlink" href="#data-logging" title="Permalink to this headline">¶</a></h2>
-<p>To do</p>
+  <div class="section" id="datasheet">
+<h1>Datasheet<a class="headerlink" href="#datasheet" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="raspberrypi">
+<h2>RaspberryPi<a class="headerlink" href="#raspberrypi" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="raspberrypi-3-b">
+<h3>RaspberryPi 3 B+<a class="headerlink" href="#raspberrypi-3-b" title="Permalink to this headline">¶</a></h3>
+<p><em>This section documents some information about the PI 3 MODEL B+ our team is using for easier reference.</em></p>
+<p>Check CPU information:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>lscpu
+</pre></div>
 </div>
-<div class="section" id="data-analysis">
-<h2>Data Analysis<a class="headerlink" href="#data-analysis" title="Permalink to this headline">¶</a></h2>
-<p>To do</p>
+<p>For the model we are using:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="37%" />
+<col width="63%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Architecture</td>
+<td>armv7l</td>
+</tr>
+<tr class="row-even"><td>Byte Order</td>
+<td>Little Endian</td>
+</tr>
+<tr class="row-odd"><td>CPU(s)</td>
+<td>4</td>
+</tr>
+<tr class="row-even"><td>On-line CPU(s) list</td>
+<td>0-3</td>
+</tr>
+<tr class="row-odd"><td>Thread(s) per core</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>Core(s) per socket</td>
+<td>4</td>
+</tr>
+<tr class="row-odd"><td>Socket(s)</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>Model</td>
+<td>4</td>
+</tr>
+<tr class="row-odd"><td>Model name</td>
+<td>ARMv7 Processor rev 4 (v7l)</td>
+</tr>
+<tr class="row-even"><td>CPU max MHz</td>
+<td>1400.0000</td>
+</tr>
+<tr class="row-odd"><td>CPU min MHz</td>
+<td>600.0000</td>
+</tr>
+<tr class="row-even"><td>BogoMIPS</td>
+<td>38.40</td>
+</tr>
+<tr class="row-odd"><td>Flags</td>
+<td>half thumb fastmult vfp edsp
+neon vfpv3 tls vfpv4 idiva
+idivt vfpd32 lpae evtstrm crc32</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Important: Notice that the list says that the memory architecture is armv7l. However, on the raspberrypi 3 B+ official site, it says that the architecture is armv8. The diffrence is probably caused by the OS that the RaspberryPi is using(Raspbian). It is by default a 32bit system, and armv7 is 32bit while armv8 is 64bit, causing the architecture to adapt to 32bit</strong></p>
+<p>For more information about this model, click <a class="reference external" href="https://www.raspberrypi.org/documentation/hardware/raspberrypi/README.md">here</a></p>
+<p>Based on armv7l, the memory architecture for this model is:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="44%" />
+<col width="56%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>L1-instruction Cache</td>
+<td>32-bytes cache line size
+2-way set-associative Cache</td>
+</tr>
+<tr class="row-even"><td>L1-data Cache</td>
+<td>64-bytes cache line size
+2-way set-associative cache</td>
+</tr>
+<tr class="row-odd"><td>L2 Cache</td>
+<td>128 KB in size</td>
+</tr>
+</tbody>
+</table>
+<p><em>(However, in RaspberryPi, L2 Cache is devoted to GPU, the benefit and necessity of enabling it to data cache needs further exploration)</em></p>
+<p>Contributor: Jerry Kong</p>
+</div>
 </div>
 </div>
 
@@ -172,7 +249,7 @@ the Electronics section.</p>
         <a href="../results.html" class="btn btn-neutral float-right" title="Results" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="electronics.html" class="btn btn-neutral" title="Electronics" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="software.html" class="btn btn-neutral" title="Software" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -9,3 +9,4 @@ The project is split into three parts:
    usage/mechanical
    usage/electronics
    usage/software
+   usage/datasheet
