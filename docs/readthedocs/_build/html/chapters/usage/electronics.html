@@ -102,12 +102,19 @@
 <li class="toctree-l4"><a class="reference internal" href="#resources">Resources</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#pi-camera-usage">Pi Camera Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#connection">Connection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#capture-an-image">Capture an image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#record-a-video-for-10-seconds">Record a video for 10 seconds</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Resources</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#pi-and-imu-communication">PI and IMU communication</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#i2c-method-by-lsm9ds1-library">I2C Method by LSM9DS1 Library</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id1">Setup</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id2">Resources</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id3">I2C Method</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id5">Resources</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Resources</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">I2C Method</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">Resources</a></li>
 </ul>
 </li>
 </ul>
@@ -631,13 +638,42 @@ smsc95xx.macaddr<span class="o">=</span>B8:27:EB:F3:8C:9C vc_mem.mem_base<span c
 </div></blockquote>
 </div>
 </div>
+<div class="section" id="pi-camera-usage">
+<h2>Pi Camera Usage<a class="headerlink" href="#pi-camera-usage" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="connection">
+<h3>Connection<a class="headerlink" href="#connection" title="Permalink to this headline">¶</a></h3>
+<p>Install the Raspberry Pi Camera module by inserting the cable into the Raspberry Pi.
+The cable slots into the connector situated between the Ethernet and HDMI ports, with the silver connectors facing the HDMI port.</p>
+</div>
+<div class="section" id="capture-an-image">
+<h3>Capture an image<a class="headerlink" href="#capture-an-image" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo raspistill -o image.jpg
+</pre></div>
+</div>
+</div>
+<div class="section" id="record-a-video-for-10-seconds">
+<h3>Record a video for 10 seconds<a class="headerlink" href="#record-a-video-for-10-seconds" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo raspivid -o video.h264 -t <span class="m">10000</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h3>Resources<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="https://thepihut.com/blogs/raspberry-pi-tutorials/16021420-how-to-install-use-the-raspberry-pi-camera">How to install/use the pi camera</a></li>
+<li><a class="reference external" href="http://picar.readthedocs.io/en/latest/chapters/usage/software.html">python code and rapid capturing</a></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
 <div class="section" id="pi-and-imu-communication">
 <h2>PI and IMU communication<a class="headerlink" href="#pi-and-imu-communication" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="i2c-method-by-lsm9ds1-library">
 <h3>I2C Method by LSM9DS1 Library<a class="headerlink" href="#i2c-method-by-lsm9ds1-library" title="Permalink to this headline">¶</a></h3>
 </div>
-<div class="section" id="id1">
-<h3>Setup<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id2">
+<h3>Setup<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>In order to use the LSM9DS1 Library, we need to install WiringPi first.
 Enter the following command in Pi terminal:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get install libi2c-dev
@@ -686,14 +722,14 @@ sudo python LSM9DS1_Basic_I2C.py
 </tbody>
 </table>
 </div>
-<div class="section" id="id2">
-<h3>Resources<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h3>Resources<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><a class="reference external" href="https://github.com/akimach/LSM9DS1_RaspberryPi_Library">LSM9DS1_RaspberryPi_Library</a></li>
 </ul>
 </div>
-<div class="section" id="id3">
-<h3>I2C Method<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id4">
+<h3>I2C Method<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <p>The example code for this section in the <code class="docutils literal notranslate"><span class="pre">PiCar/src/pi/imu</span></code>.</p>
 <p>To compile, use the command:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gcc -o &lt;programname&gt; runi2c.c -lm
@@ -728,15 +764,15 @@ sudo python LSM9DS1_Basic_I2C.py
 <p>The connection is by SMBUS.</p>
 <p>For RPI, go to <code class="docutils literal notranslate"><span class="pre">/usr/include/linux</span></code>, replace <code class="docutils literal notranslate"><span class="pre">i2c_dev.h</span></code> with the header file in the repository</p>
 <p>(Method ‘enableIMU’ needs further development to enable IMU configuration setting)</p>
-<div class="section" id="id4">
-<h4>See Also:<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id5">
+<h4>See Also:<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><a class="reference external" href="https://cdn.sparkfun.com/assets/learn_tutorials/3/7/3/LSM9DS1_Datasheet.pdf/">IMU datasheet</a></li>
 </ul>
 </div>
 </div>
-<div class="section" id="id5">
-<h3>Resources<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id6">
+<h3>Resources<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><a class="reference external" href="https://learn.sparkfun.com/tutorials/i2c">I2C SPI Reference page</a></li>
 </ul>

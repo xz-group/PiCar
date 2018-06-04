@@ -312,6 +312,33 @@ Resources
   * `Read and write from serial port with Raspberry Pi <http://www.instructables.com/id/Read-and-write-from-serial-port-with-Raspberry-Pi/>`_
   * `TFmini-RaspberryPi <https://github.com/TFmini/TFmini-RaspberryPi>`_
 
+
+Pi Camera Usage
+---------------
+Connection
+^^^^^^^^^^
+Install the Raspberry Pi Camera module by inserting the cable into the Raspberry Pi.
+The cable slots into the connector situated between the Ethernet and HDMI ports, with the silver connectors facing the HDMI port.
+
+Capture an image
+^^^^^^^^^^^^^^^^
+.. code-block:: bash
+
+  sudo raspistill -o image.jpg
+
+
+Record a video for 10 seconds
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. code-block:: bash
+
+  sudo raspivid -o video.h264 -t 10000
+
+Resources
+^^^^^^^^^
+  * `How to install/use the pi camera <https://thepihut.com/blogs/raspberry-pi-tutorials/16021420-how-to-install-use-the-raspberry-pi-camera>`_
+
+  * `python code and rapid capturing <http://picar.readthedocs.io/en/latest/chapters/usage/software.html>`_
+
 PI and IMU communication
 ------------------------
 

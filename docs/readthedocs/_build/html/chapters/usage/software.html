@@ -95,6 +95,17 @@
 <li class="toctree-l4"><a class="reference internal" href="#client-side">Client side</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#sensors-lidar-imu-reading-and-writing">Sensors(Lidar,IMU) reading and writing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#setup">Setup:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#steps">steps:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#camera-picture-data-by-rapid-capturing">Camera(picture) data by rapid capturing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#connection">Connection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#code">Code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#resources">Resources</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#data-logging">Data Logging</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#data-analysis">Data Analysis</a></li>
 </ul>
@@ -287,6 +298,88 @@ the Electronics section.</p>
 <span class="k">print</span><span class="p">(</span><span class="s1">&#39;connection closed&#39;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
+</div>
+</div>
+<div class="section" id="sensors-lidar-imu-reading-and-writing">
+<h2>Sensors(Lidar,IMU) reading and writing<a class="headerlink" href="#sensors-lidar-imu-reading-and-writing" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="setup">
+<h3>Setup:<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h3>
+<p>Make sure you have alreadly connect TFmini Lidar and IMU as
+<a class="reference external" href="http://picar.readthedocs.io/en/latest/chapters/usage/electronics.html#pi-and-tfmini-lidar-communication">TFmini Lidar</a>
+, <a class="reference external" href="http://picar.readthedocs.io/en/latest/chapters/usage/electronics.html#pi-and-imu-communication">IMU by LSM9DS1</a> did.
+and download corresponding libraris.</p>
+<p>source code:
+Under Directory PiCar/src/pi/IMU_Lidar</p>
+</div>
+<div class="section" id="steps">
+<h3>steps:<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h3>
+<p>1.Download the repository and connect sensors correctly</p>
+<p>2.run the python script Lidar_IMU_read_optimize.py</p>
+<p>3.After the program ends, you should see two csv files under the same directory.One records
+the time between two consecutive reads, and the other one contains data from sensors in the format:
+timestamp, distance, accelaration in x,y,z, angular velocity in x,y,z</p>
+</div>
+</div>
+<div class="section" id="camera-picture-data-by-rapid-capturing">
+<h2>Camera(picture) data by rapid capturing<a class="headerlink" href="#camera-picture-data-by-rapid-capturing" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="connection">
+<h3>Connection<a class="headerlink" href="#connection" title="Permalink to this headline">¶</a></h3>
+<p>Connect the camera correctly</p>
+</div>
+<div class="section" id="code">
+<h3>Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">picamera</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+
+<span class="n">frames</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="k">def</span> <span class="nf">filenames</span><span class="p">():</span>
+    <span class="n">frame</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">frame</span> <span class="o">&lt;</span> <span class="n">frames</span><span class="p">:</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="k">yield</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">.jpg&#39;</span> <span class="o">%</span> <span class="n">current</span>
+        <span class="n">frame</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="k">with</span> <span class="n">picamera</span><span class="o">.</span><span class="n">PiCamera</span><span class="p">(</span><span class="n">resolution</span><span class="o">=</span><span class="p">(</span><span class="mi">480</span><span class="p">,</span><span class="mi">480</span><span class="p">),</span> <span class="n">framerate</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span> <span class="k">as</span> <span class="n">camera</span><span class="p">:</span>
+    <span class="n">camera</span><span class="o">.</span><span class="n">start_preview</span><span class="p">()</span>
+    <span class="c1"># Give the camera some warm-up time</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">camera</span><span class="o">.</span><span class="n">capture_sequence</span><span class="p">(</span><span class="n">filenames</span><span class="p">(),</span> <span class="n">use_video_port</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">finish</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Captured </span><span class="si">%d</span><span class="s1"> frames at </span><span class="si">%.2f</span><span class="s1">fps, in </span><span class="si">%f</span><span class="s1"> seconds&#39;</span> <span class="o">%</span> <span class="p">(</span>
+    <span class="n">frames</span><span class="p">,</span>
+    <span class="n">frames</span> <span class="o">/</span> <span class="p">(</span><span class="n">finish</span> <span class="o">-</span> <span class="n">start</span><span class="p">),</span> <span class="p">(</span><span class="n">finish</span> <span class="o">-</span> <span class="n">start</span><span class="p">)))</span>
+</pre></div>
+</td></tr></table></div>
+<p>This will give you real time and fps.</p>
+</div>
+<div class="section" id="resources">
+<h3>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://picamera.readthedocs.io/en/release-1.13/recipes2.html#rapid-capture-and-processing">rapid capture and processing</a></p>
 </div>
 </div>
 <div class="section" id="data-logging">
