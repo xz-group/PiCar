@@ -315,6 +315,57 @@ Resources
 PI and IMU communication
 ------------------------
 
+I2C Method by LSM9DS1 Library
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Setup
+^^^^^
+In order to use the LSM9DS1 Library, we need to install WiringPi first.
+Enter the following command in Pi terminal:
+
+.. code-block:: bash
+
+  sudo apt-get install libi2c-dev
+  git clone git://git.drogon.net/wiringPi
+  cd wiringPi
+  git pull origin
+  ./build
+
+Then we can install the LSM9DS1 Library:
+
+.. code-block:: bash
+
+  git clone https://github.com/akimach/LSM9DS1_RaspberryPi_Library.git
+  cd LSM9DS1_RaspberryPi_Library
+  make
+  sudo make install
+
+To test it, we can run the python sample code inside the library once we connect the IMU:
+
+.. code-block:: bash
+
+  cd LSM9DS1_RaspberryPi_Library/example
+  sudo python LSM9DS1_Basic_I2C.py
+
+Wiring
+
++----------------+-----------+
+|RPI             |IMU        |
++================+===========+
+|Pin 1 (3.3v)    |Vcc        |
++----------------+-----------+
+|Pin 3           |SDA        |
++----------------+-----------+
+|Pin 5           |SCL        |
++----------------+-----------+
+|Pin 6           |Gnd        |
++----------------+-----------+
+
+Resources
+^^^^^^^^^
+* `LSM9DS1_RaspberryPi_Library <https://github.com/akimach/LSM9DS1_RaspberryPi_Library>`_
+
+
 I2C Method
 ^^^^^^^^^^
 

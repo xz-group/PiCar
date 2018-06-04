@@ -90,6 +90,11 @@
 <li class="toctree-l2"><a class="reference internal" href="mechanical.html">Mechanical</a></li>
 <li class="toctree-l2"><a class="reference internal" href="electronics.html">Electronics</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#socket-file-transfer">Socket File Transfer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#server-side">Server side</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#client-side">Client side</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#data-logging">Data Logging</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#data-analysis">Data Analysis</a></li>
 </ul>
@@ -171,6 +176,119 @@
 <p>The software section will document all the heavy duty programming
 programming aspects of the project. There may be some overlap with
 the Electronics section.</p>
+<div class="section" id="socket-file-transfer">
+<h2>Socket File Transfer<a class="headerlink" href="#socket-file-transfer" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="server-side">
+<h3>Server side<a class="headerlink" href="#server-side" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">socket</span>                   <span class="c1"># Import socket module</span>
+
+<span class="n">port</span> <span class="o">=</span> <span class="mi">60000</span>                    <span class="c1"># Reserve a port for your service.</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">()</span>             <span class="c1"># Create a socket object</span>
+<span class="n">host</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">gethostbyaddr</span><span class="p">(</span><span class="s2">&quot;your IP static IP if under same WIFI&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>     <span class="c1"># Get local machine name</span>
+<span class="n">s</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">))</span>            <span class="c1"># Bind to the port</span>
+<span class="n">s</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>                     <span class="c1"># Now wait for client connection.</span>
+
+<span class="k">print</span> <span class="p">(</span><span class="s1">&#39;Server listening....&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">))</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">conn</span><span class="p">,</span> <span class="n">addr</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>     <span class="c1"># Establish connection with client.</span>
+    <span class="k">print</span> <span class="p">(</span><span class="s1">&#39;Got connection from&#39;</span><span class="p">,</span> <span class="n">addr</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Server received&#39;</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+
+    <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;your file name&#39;</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">l</span><span class="p">):</span>
+       <span class="n">conn</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+       <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Sent &#39;</span><span class="p">,</span><span class="nb">repr</span><span class="p">(</span><span class="n">l</span><span class="p">))</span>
+       <span class="n">l</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>          <span class="c1">#alter this to control data sending rate</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Done sending&#39;</span><span class="p">)</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="client-side">
+<h3>Client side<a class="headerlink" href="#client-side" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">socket</span>                   <span class="c1"># Import socket module</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">()</span>             <span class="c1"># Create a socket object</span>
+<span class="n">host</span> <span class="o">=</span> <span class="s1">&#39;your ip address&#39;</span>     <span class="c1"># Get local machine name</span>
+<span class="n">port</span> <span class="o">=</span> <span class="mi">60000</span>                    <span class="c1"># Reserve a port for your service.</span>
+
+<span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">))</span>
+<span class="n">s</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;Hello server!&quot;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">))</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;received_file&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">print</span> <span class="p">(</span><span class="s1">&#39;file opened&#39;</span><span class="p">)</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;receiving data...&#39;</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>          <span class="c1">#must be identical to the data rate at server side</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;data=</span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">data</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="c1"># write data to a file</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Successfully get the file&#39;</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;connection closed&#39;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
 <div class="section" id="data-logging">
 <h2>Data Logging<a class="headerlink" href="#data-logging" title="Permalink to this headline">¶</a></h2>
 <p>To do</p>
