@@ -11,9 +11,7 @@ algorithms.
   <p align="middle">
   <a href="https://github.com/xz-group/PiCar" target="_blank"
   class="btn btn-neutral" title="Go to the PiCar Repo">
-  <span class="icon icon-github"></span>
-  Go to the PiCar Repo</a>
-  </p>
+  <span class="icon icon-github"></span>PiCar GitHub</a></p>
 
 
 The `PiCar GitHub Repository <https://github.com/xz-group/PiCar>`_ contains
