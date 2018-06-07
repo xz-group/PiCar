@@ -13,6 +13,8 @@
 
   
   
+  
+  
 
   
 
@@ -23,28 +25,21 @@
   
 
   
-  
     <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="PiCar Project 2018 documentation" href="../../index.html"/>
-        <link rel="up" title="Usage" href="../usage.html"/>
-        <link rel="next" title="Datasheet" href="datasheet.html"/>
-        <link rel="prev" title="Electronics" href="electronics.html"/> 
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Datasheet" href="datasheet.html" />
+    <link rel="prev" title="Electronics" href="electronics.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -85,7 +80,10 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../usage.html">Usage</a><ul class="current">
@@ -98,14 +96,20 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#sensors-lidar-imu-reading-and-writing">Sensors(Lidar,IMU) reading and writing</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#setup">Setup:</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#steps">steps:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setup">Setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#steps">Steps</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#camera-picture-data-by-rapid-capturing">Camera(picture) data by rapid capturing</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#connection">Connection</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#code">Code</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#resources">Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#sensors-camera-concurrent-reading-by-timer-version1">Sensors/Camera concurrent reading by Timer(Version1)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Connection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Resources</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#data-logging">Data Logging</a></li>
@@ -129,36 +133,56 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../index.html">PiCar Project</a>
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">PiCar Project</a>
+        
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="../usage.html">Usage</a> &raquo;</li>
-      
-    <li>Software</li>
+        
+      <li>Software</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
+            
             <a href="../../_sources/chapters/usage/software.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -285,7 +309,7 @@ the Electronics section.</p>
 <div class="section" id="sensors-lidar-imu-reading-and-writing">
 <h2>Sensors(Lidar,IMU) reading and writing<a class="headerlink" href="#sensors-lidar-imu-reading-and-writing" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="setup">
-<h3>Setup:<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h3>
+<h3>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h3>
 <p>Make sure you have alreadly connect TFmini Lidar and IMU as
 <a class="reference external" href="http://picar.readthedocs.io/en/latest/chapters/usage/electronics.html#pi-and-tfmini-lidar-communication">TFmini Lidar</a>
 , <a class="reference external" href="http://picar.readthedocs.io/en/latest/chapters/usage/electronics.html#pi-and-imu-communication">IMU by LSM9DS1</a> did.
@@ -294,7 +318,7 @@ and download corresponding libraris.</p>
 Under Directory PiCar/src/pi/IMU_Lidar</p>
 </div>
 <div class="section" id="steps">
-<h3>steps:<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h3>
+<h3>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h3>
 <p>1.Download the repository and connect sensors correctly</p>
 <p>2.run the python script Lidar_IMU_read_optimize.py</p>
 <p>3.After the program ends, you should see two csv files under the same directory.One records
@@ -364,6 +388,27 @@ timestamp, distance, accelaration in x,y,z, angular velocity in x,y,z</p>
 <p><a class="reference external" href="https://picamera.readthedocs.io/en/release-1.13/recipes2.html#rapid-capture-and-processing">rapid capture and processing</a></p>
 </div>
 </div>
+<div class="section" id="sensors-camera-concurrent-reading-by-timer-version1">
+<h2>Sensors/Camera concurrent reading by Timer(Version1)<a class="headerlink" href="#sensors-camera-concurrent-reading-by-timer-version1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Connection<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Connect IMU,TFmini Lidar, and Pi Camera correctly as previous tutorial did.</p>
+</div>
+<div class="section" id="id2">
+<h3>Code<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>The code for this part is under directory PiCar/src/pi/pythonTimer;
+I put most of the explanation in the code.</p>
+</div>
+<div class="section" id="id3">
+<h3>Resources<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="https://docs.python.org/3.4/library/multiprocessing.html?highlight=process">Python multiprocessing–Process-based Parallelism</a></li>
+<li><a class="reference external" href="https://docs.python.org/3/library/threading.html#timer-objects">Python threading timer object</a></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
 <div class="section" id="data-logging">
 <h2>Data Logging<a class="headerlink" href="#data-logging" title="Permalink to this headline">¶</a></h2>
 <p>To do</p>
@@ -376,15 +421,16 @@ timestamp, distance, accelaration in x,y,z, angular velocity in x,y,z</p>
 
 
            </div>
+           
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="datasheet.html" class="btn btn-neutral float-right" title="Datasheet" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="datasheet.html" class="btn btn-neutral float-right" title="Datasheet" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="electronics.html" class="btn btn-neutral" title="Electronics" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="electronics.html" class="btn btn-neutral" title="Electronics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -397,7 +443,7 @@ timestamp, distance, accelaration in x,y,z, angular velocity in x,y,z</p>
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -416,9 +462,11 @@ timestamp, distance, accelaration in x,y,z, angular velocity in x,y,z</p>
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
             VERSION:'2018',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../../_static/jquery.js"></script>
@@ -432,14 +480,11 @@ timestamp, distance, accelaration in x,y,z, angular velocity in x,y,z</p>
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
   
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>
