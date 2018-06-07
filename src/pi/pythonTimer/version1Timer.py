@@ -7,50 +7,41 @@ from collections import deque
 import numpy as np
 import time,datetime,serial,sys,csv,picamera,os
 
-
 sys.version[0] == '3'
 ser = serial.Serial("/dev/ttyS0", 115200)
 
 imu = lib.lsm9ds1_create()
 lib.lsm9ds1_begin(imu)
 
+#Frequency for reading data
 readFrequency = 0.019
 cameraFrequency = 0.5
-taskDuration = 10
+#taskDuration = 10
 frames = 5
 
-
-sensorDataDeque = deque()
+#Frequency for writing data
 sensorData = []
 writeFrequency = 10
 dataFile = "sensorData.csv"
 
-sensorDataNumpyArray = np.array(['time','distance','ax','ay','az','gx','gy','gz'])
 
-#write sensor data to a csv file
+#write sensor data to a csv file based on writeFrequency
 def writeSensorData():
     global sensorDataNumpyArray
-    writeStart = time.time()
+    #writeStart = time.time()
     with open(dataFile,"a",newline = '') as csvfile:
         spamwriter = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
-##        for row in sensorDataNumpyArray:
-##            spamwriter.writerow([row])
-        #writeTime = "writeTime:" + str(datetime.datetime.now())
-        #title = [writeTime,len(sensorData)]
-        #spamwriter.writerow(title)
-        #length = len(sensorData)
         for element in sensorData:
             #row = [sensorData.pop()]
             spamwriter.writerow([element])
-##        for element in sensorDataDeque:
-##            spamwriter.writerow([element])
+    #After each writing, we clear the list to ease pressure
     sensorData.clear()
-##    sensorDataNumpyArray = np.delete(sensorDataNumpyArray,slice(0,sensorDataNumpyArray.ndim),axis=0)    
+
     writeEnd = time.time()
-    print("total writing time is %f" % (writeEnd - writeStart))
+    #print("total writing time is %f" % (writeEnd - writeStart))
     Timer(writeFrequency,writeSensorData).start()
 
-            
+
 #get IMU data
 def getIMU():
     global imu
@@ -82,32 +73,26 @@ def getLidar():
         return distance
 
 
+#get IMU and Lidar data at same time
 def getData():
     global last
     global sensorDataNumpyArray
-    #print("pid for sensors:%d" % os.getpid())
     Timer(writeFrequency,writeSensorData).start()
     while True:
         time.sleep(readFrequency)
-        #print("time for sensors:%f" % (time.time() - last))
         if lib.lsm9ds1_accelAvailable(imu) > 0 and ser.in_waiting > 8:
             #print("time for sensors:%f" % (time.time() - last))
             Lidardata = getLidar()
             IMUdata = getIMU()
             currentTime = str(datetime.datetime.now())
-            #row = np.array([currentTime,Lidardata,IMUdata[0],IMUdata[1],IMUdata[2],IMUdata[3],IMUdata[4],IMUdata[5]])
-            #sensorDataNumpyArray = np.vstack((sensorDataNumpyArray,row))
+
             row = [currentTime,Lidardata,IMUdata[0],IMUdata[1],IMUdata[2],IMUdata[3],IMUdata[4],IMUdata[5]]
-            #sensorDataDeque.append(row)
             sensorData.append(row)
-            #print(sensorDataNumpyArray)
             #print(Lidardata,IMUdata)
             #last = time.time()
-        #last = time.time()
-    #Timer(readFrequency,getData).start()
 
 
-#generate photo names based on how many frames taken each time
+#generate photo names based on time, the number is determined by variable frames.
 def filenames():
     frame = 0
     while frame < frames:
@@ -118,18 +103,14 @@ def filenames():
 
 #rapidly capturing photos, number is frames
 def capture():
-    #print("pid for camera %i" % os.getpid())
     global last
-##    camera = PiCamera()
-##    camera.resolution = (480,480)
-##    camera.framerate = 40
     with picamera.PiCamera(resolution=(480,480), framerate=40) as camera:
         while True:
             time.sleep(cameraFrequency)
             #print("time for camera:%f" % (time.time() - last))
-            #camera.capture_sequence(filenames(), use_video_port=True)
+            camera.capture_sequence(filenames(), use_video_port=True)
             last = time.time()
-    #Timer(cameraFrequency,capture).start()
+
 
 
 last = time.time()
@@ -138,13 +119,19 @@ if __name__ == '__main__':
         print("Failed to communicate with LSM9DS1.")
         quit()
     lib.lsm9ds1_calibrate(imu)
-    
+
     if ser.is_open == False:
         ser.open()
-    #Timer(readFrequency,getData).start()
-    #Timer(cameraFrequency,capture).start()
+
     pool = Pool()
-    sensors = pool.apply_async(getData)
-    camera = pool.apply_async(capture)
+    sensors = pool.apply_async(getData) #here sensors reading will run on one cpu
+    camera = pool.apply_async(capture) #image capturing will run on another cpu
+
+    #'get' helps to keep the programe run all the time, we do not expect any value from
+    #sensors or data. This might be tricky, if it is hard to understand, just think the
+    #following code as:
+    #while True:
+    #sensorReading
+    #cameraReading
     sensors.get()
     camera.get()
