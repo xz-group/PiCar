@@ -24,6 +24,6 @@ Authors
 Links
 --------
 
-[`Report <../../../../../reports/IMU-Navigation_Sam_Moira_2018/IMU-Navigation_Sam_Moira_2018.pdf>`_]
-[`Presentation <../../../../../reports/IMU-Navigation_Sam_Moira_2018/IMU-Navigation_Sam_Moira_2018.pptx>`_]
-[`Code <../../../../../reports/IMU-Navigation_Sam_Moira_2018/IMU-Navigation_Sam_Moira_2018.zip>`_]
+[`Report <https://github.com/xz-group/PiCar/blob/master/docs/reports/IMU-Navigation_Sam_Moira_2018/IMU-Navigation_Sam_Moira_2018.pdf>`_]
+[`Presentation <https://github.com/xz-group/PiCar/blob/master/docs/reports/IMU-Navigation_Sam_Moira_2018/IMU-Navigation_Sam_Moira_2018.pptx>`_]
+[`Code <https://github.com/xz-group/PiCar/blob/master/docs/reports/IMU-Navigation_Sam_Moira_2018/IMU-Navigation_Sam_Moira_2018.zip>`_]
