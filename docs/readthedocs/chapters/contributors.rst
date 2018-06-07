@@ -17,6 +17,7 @@ Current Team
     * `Jerry Kong <https://github.com/woodcutter1998>`_
     * `Shadi Davari <https://github.com/shadidavari>`_
     * `Feiyang Jin <https://github.com/FeiyangJin>`_
+    * `Hayden Sierra <https://github.com/Yruhere88>`_
 
 Former Team
   - Advisor(s):
