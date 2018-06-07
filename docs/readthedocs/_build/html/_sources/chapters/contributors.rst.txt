@@ -19,7 +19,7 @@ Current Team
     * `Feiyang Jin <https://github.com/FeiyangJin>`_
 
 Former Team
-  - Advisor(s):s
+  - Advisor(s):
 
     * `Dr. Humberto Gonzalez <https://github.com/hgonzale>`_
 
