@@ -13,8 +13,6 @@
 
   
   
-  
-  
 
   
 
@@ -25,21 +23,28 @@
   
 
   
+  
     <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Software" href="software.html" />
-    <link rel="prev" title="Mechanical" href="mechanical.html" /> 
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="PiCar Project 2018 documentation" href="../../index.html"/>
+        <link rel="up" title="Usage" href="../usage.html"/>
+        <link rel="next" title="Software" href="software.html"/>
+        <link rel="prev" title="Mechanical" href="mechanical.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav">
+<body class="wy-body-for-nav" role="document">
 
-   
   <div class="wy-grid-for-nav">
 
     
@@ -80,10 +85,7 @@
           
             
             
-              
-            
-            
-              <ul class="current">
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../usage.html">Usage</a><ul class="current">
@@ -137,56 +139,36 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">PiCar Project</a>
-        
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">PiCar Project</a>
       </nav>
 
 
+      
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
           
 
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
-
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
-        
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
           <li><a href="../usage.html">Usage</a> &raquo;</li>
-        
-      <li>Electronics</li>
-    
-    
+      
+    <li>Electronics</li>
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../../_sources/chapters/usage/electronics.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -391,18 +373,18 @@ and Arduino using only three wires.</p>
 </div>
 <p>If the output looks like:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ dmesg <span class="p">|</span> grep tty
-<span class="o">[</span>    <span class="m">0</span>.000000<span class="o">]</span> Kernel <span class="nb">command</span> line: <span class="m">8250</span>.nr_uarts<span class="o">=</span><span class="m">1</span> bcm2708_fb.fbwidth<span class="o">=</span><span class="m">1824</span> bcm2708_fb.fbheight<span class="o">=</span><span class="m">984</span> bcm2708_fb.fbswap<span class="o">=</span><span class="m">1</span> dma.dmachans<span class="o">=</span>0x7f35
+<span class="o">[</span>    0.000000<span class="o">]</span> Kernel <span class="nb">command</span> line: <span class="m">8250</span>.nr_uarts<span class="o">=</span><span class="m">1</span> bcm2708_fb.fbwidth<span class="o">=</span><span class="m">1824</span> bcm2708_fb.fbheight<span class="o">=</span><span class="m">984</span> bcm2708_fb.fbswap<span class="o">=</span><span class="m">1</span> dma.dmachans<span class="o">=</span>0x7f35
 bcm2709.boardrev<span class="o">=</span>0xa02082 bcm2709.serial<span class="o">=</span>0x11f38c9c bcm2709.uart_clock<span class="o">=</span><span class="m">48000000</span> smsc95xx.macaddr<span class="o">=</span>B8:27:EB:F3:8C:9C vc_mem.mem_base<span class="o">=</span>0x3dc00000
 vc_mem.mem_size<span class="o">=</span>0x3f000000  dwc_otg.lpm_enable<span class="o">=</span><span class="m">0</span> <span class="nv">console</span><span class="o">=</span>tty1 <span class="nv">console</span><span class="o">=</span>ttyS0,115200 <span class="nv">root</span><span class="o">=</span>/dev/mmcblk0p7 <span class="nv">rootfstype</span><span class="o">=</span>ext4 <span class="nv">elevator</span><span class="o">=</span>deadline
 fsck.repair<span class="o">=</span>yes rootwait splash plymouth.ignore-serial-consoles
-<span class="o">[</span>    <span class="m">0</span>.001365<span class="o">]</span> console <span class="o">[</span>tty1<span class="o">]</span> enabled
-<span class="o">[</span>    <span class="m">0</span>.343313<span class="o">]</span> console <span class="o">[</span>ttyS0<span class="o">]</span> disabled
-<span class="o">[</span>    <span class="m">0</span>.343481<span class="o">]</span> 3f215040.uart: ttyS0 at MMIO 0x3f215040 <span class="o">(</span><span class="nv">irq</span> <span class="o">=</span> <span class="m">59</span>, <span class="nv">base_baud</span> <span class="o">=</span> <span class="m">31250000</span><span class="o">)</span> is a <span class="m">16550</span>
-<span class="o">[</span>    <span class="m">1</span>.078177<span class="o">]</span> console <span class="o">[</span>ttyS0<span class="o">]</span> enabled
-<span class="o">[</span>    <span class="m">2</span>.210431<span class="o">]</span> 3f201000.uart: ttyAMA0 at MMIO 0x3f201000 <span class="o">(</span><span class="nv">irq</span> <span class="o">=</span> <span class="m">87</span>, <span class="nv">base_baud</span> <span class="o">=</span> <span class="m">0</span><span class="o">)</span> is a PL011 rev2
-<span class="o">[</span>    <span class="m">3</span>.527349<span class="o">]</span> systemd<span class="o">[</span><span class="m">1</span><span class="o">]</span>: Expecting device dev-ttyS0.device...
-<span class="o">[</span>    <span class="m">4</span>.653975<span class="o">]</span> systemd<span class="o">[</span><span class="m">1</span><span class="o">]</span>: Starting system-serial<span class="se">\x</span>2dgetty.slice.
-<span class="o">[</span>    <span class="m">4</span>.669517<span class="o">]</span> systemd<span class="o">[</span><span class="m">1</span><span class="o">]</span>: Created slice system-serial<span class="se">\x</span>2dgetty.slice.
+<span class="o">[</span>    0.001365<span class="o">]</span> console <span class="o">[</span>tty1<span class="o">]</span> enabled
+<span class="o">[</span>    0.343313<span class="o">]</span> console <span class="o">[</span>ttyS0<span class="o">]</span> disabled
+<span class="o">[</span>    0.343481<span class="o">]</span> 3f215040.uart: ttyS0 at MMIO 0x3f215040 <span class="o">(</span><span class="nv">irq</span> <span class="o">=</span> <span class="m">59</span>, <span class="nv">base_baud</span> <span class="o">=</span> <span class="m">31250000</span><span class="o">)</span> is a <span class="m">16550</span>
+<span class="o">[</span>    1.078177<span class="o">]</span> console <span class="o">[</span>ttyS0<span class="o">]</span> enabled
+<span class="o">[</span>    2.210431<span class="o">]</span> 3f201000.uart: ttyAMA0 at MMIO 0x3f201000 <span class="o">(</span><span class="nv">irq</span> <span class="o">=</span> <span class="m">87</span>, <span class="nv">base_baud</span> <span class="o">=</span> <span class="m">0</span><span class="o">)</span> is a PL011 rev2
+<span class="o">[</span>    3.527349<span class="o">]</span> systemd<span class="o">[</span><span class="m">1</span><span class="o">]</span>: Expecting device dev-ttyS0.device...
+<span class="o">[</span>    4.653975<span class="o">]</span> systemd<span class="o">[</span><span class="m">1</span><span class="o">]</span>: Starting system-serial<span class="se">\x</span>2dgetty.slice.
+<span class="o">[</span>    4.669517<span class="o">]</span> systemd<span class="o">[</span><span class="m">1</span><span class="o">]</span>: Created slice system-serial<span class="se">\x</span>2dgetty.slice.
 </pre></div>
 </div>
 <p>The console needs to be disabled on the serial port <code class="docutils literal notranslate"><span class="pre">ttyAMA0</span></code>.</p>
@@ -419,13 +401,13 @@ dmesg <span class="p">|</span> grep tty
 </div>
 <p>The output now should look like:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ dmesg <span class="p">|</span> grep tty
-<span class="o">[</span>    <span class="m">0</span>.000000<span class="o">]</span> Kernel <span class="nb">command</span> line: <span class="m">8250</span>.nr_uarts<span class="o">=</span><span class="m">1</span> bcm2708_fb.fbwidth<span class="o">=</span><span class="m">1824</span> bcm2708_fb.fbheight<span class="o">=</span><span class="m">984</span> bcm2708_fb.fbswap<span class="o">=</span><span class="m">1</span>
+<span class="o">[</span>    0.000000<span class="o">]</span> Kernel <span class="nb">command</span> line: <span class="m">8250</span>.nr_uarts<span class="o">=</span><span class="m">1</span> bcm2708_fb.fbwidth<span class="o">=</span><span class="m">1824</span> bcm2708_fb.fbheight<span class="o">=</span><span class="m">984</span> bcm2708_fb.fbswap<span class="o">=</span><span class="m">1</span>
 dma.dmachans<span class="o">=</span>0x7f35 bcm2709.boardrev<span class="o">=</span>0xa02082 bcm2709.serial<span class="o">=</span>0x11f38c9c bcm2709.uart_clock<span class="o">=</span><span class="m">48000000</span>
 smsc95xx.macaddr<span class="o">=</span>B8:27:EB:F3:8C:9C vc_mem.mem_base<span class="o">=</span>0x3dc00000 vc_mem.mem_size<span class="o">=</span>0x3f000000  dwc_otg.lpm_enable<span class="o">=</span><span class="m">0</span>
 <span class="nv">console</span><span class="o">=</span>tty1 <span class="nv">root</span><span class="o">=</span>/dev/mmcblk0p7 <span class="nv">rootfstype</span><span class="o">=</span>ext4 <span class="nv">elevator</span><span class="o">=</span>deadline fsck.repair<span class="o">=</span>yes rootwait splash plymouth.ignore-serial-consoles
-<span class="o">[</span>    <span class="m">0</span>.001345<span class="o">]</span> console <span class="o">[</span>tty1<span class="o">]</span> enabled
-<span class="o">[</span>    <span class="m">0</span>.343464<span class="o">]</span> 3f215040.uart: ttyS0 at MMIO 0x3f215040 <span class="o">(</span><span class="nv">irq</span> <span class="o">=</span> <span class="m">59</span>, <span class="nv">base_baud</span> <span class="o">=</span> <span class="m">31250000</span><span class="o">)</span> is a <span class="m">16550</span>
-<span class="o">[</span>    <span class="m">1</span>.146776<span class="o">]</span> 3f201000.uart: ttyAMA0 at MMIO 0x3f201000 <span class="o">(</span><span class="nv">irq</span> <span class="o">=</span> <span class="m">87</span>, <span class="nv">base_baud</span> <span class="o">=</span> <span class="m">0</span><span class="o">)</span> is a PL011 rev2
+<span class="o">[</span>    0.001345<span class="o">]</span> console <span class="o">[</span>tty1<span class="o">]</span> enabled
+<span class="o">[</span>    0.343464<span class="o">]</span> 3f215040.uart: ttyS0 at MMIO 0x3f215040 <span class="o">(</span><span class="nv">irq</span> <span class="o">=</span> <span class="m">59</span>, <span class="nv">base_baud</span> <span class="o">=</span> <span class="m">31250000</span><span class="o">)</span> is a <span class="m">16550</span>
+<span class="o">[</span>    1.146776<span class="o">]</span> 3f201000.uart: ttyAMA0 at MMIO 0x3f201000 <span class="o">(</span><span class="nv">irq</span> <span class="o">=</span> <span class="m">87</span>, <span class="nv">base_baud</span> <span class="o">=</span> <span class="m">0</span><span class="o">)</span> is a PL011 rev2
 </pre></div>
 </div>
 </div>
@@ -783,16 +765,15 @@ sudo python LSM9DS1_Basic_I2C.py
 
 
            </div>
-           
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="software.html" class="btn btn-neutral float-right" title="Software" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="software.html" class="btn btn-neutral float-right" title="Software" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="mechanical.html" class="btn btn-neutral" title="Mechanical" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="mechanical.html" class="btn btn-neutral" title="Mechanical" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -805,7 +786,7 @@ sudo python LSM9DS1_Basic_I2C.py
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -824,11 +805,9 @@ sudo python LSM9DS1_Basic_I2C.py
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
             VERSION:'2018',
-            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
+            HAS_SOURCE:  true
         };
     </script>
       <script type="text/javascript" src="../../_static/jquery.js"></script>
@@ -842,11 +821,14 @@ sudo python LSM9DS1_Basic_I2C.py
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
   
 
+  
+  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
+          SphinxRtdTheme.StickyNav.enable();
       });
-  </script> 
+  </script>
+   
 
 </body>
 </html>
