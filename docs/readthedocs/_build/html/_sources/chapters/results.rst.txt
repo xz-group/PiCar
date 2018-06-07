@@ -8,3 +8,4 @@ This page gives a comprehensive list of different results that were achieved.
    :maxdepth: 1
 
    results/imu_autonomous_navigation
+   results/power_management
