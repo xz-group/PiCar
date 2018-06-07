@@ -74,6 +74,72 @@ Client side
   print('connection closed')
 
 
+Sensors(Lidar,IMU) reading and writing
+--------------------------------------
+
+Setup:
+^^^^^^
+Make sure you have alreadly connect TFmini Lidar and IMU as
+`TFmini Lidar <http://picar.readthedocs.io/en/latest/chapters/usage/electronics.html#pi-and-tfmini-lidar-communication>`_
+, `IMU by LSM9DS1 <http://picar.readthedocs.io/en/latest/chapters/usage/electronics.html#pi-and-imu-communication>`_ did.
+and download corresponding libraris.
+
+source code:
+Under Directory PiCar/src/pi/IMU_Lidar
+
+steps:
+^^^^^^
+1.Download the repository and connect sensors correctly
+
+2.run the python script Lidar_IMU_read_optimize.py
+
+3.After the program ends, you should see two csv files under the same directory.One records
+the time between two consecutive reads, and the other one contains data from sensors in the format:
+timestamp, distance, accelaration in x,y,z, angular velocity in x,y,z
+
+
+
+Camera(picture) data by rapid capturing
+---------------------------------------
+Connection
+^^^^^^^^^^
+Connect the camera correctly
+
+Code
+^^^^
+
+.. code-block:: python
+  :linenos:
+
+  import time
+  import picamera
+  import datetime
+
+  frames = 20
+
+  def filenames():
+      frame = 0
+      while frame < frames:
+          current = datetime.datetime.now()
+          yield '%s.jpg' % current
+          frame += 1
+
+  with picamera.PiCamera(resolution=(480,480), framerate=100) as camera:
+      camera.start_preview()
+      # Give the camera some warm-up time
+      time.sleep(2)
+      start = time.time()
+      camera.capture_sequence(filenames(), use_video_port=True)
+      finish = time.time()
+  print('Captured %d frames at %.2ffps, in %f seconds' % (
+      frames,
+      frames / (finish - start), (finish - start)))
+
+This will give you real time and fps.
+
+Resources
+^^^^^^^^^
+`rapid capture and processing <https://picamera.readthedocs.io/en/release-1.13/recipes2.html#rapid-capture-and-processing>`_
 
 Data Logging
 ------------
