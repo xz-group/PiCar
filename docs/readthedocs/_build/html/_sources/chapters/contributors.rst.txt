@@ -37,5 +37,5 @@ Former Team
     * `Patrick Naughton <https://github.com/patricknaughton01>`_
     * Reese Frerichs
     * Sam Chai
-    * `Will Luer <https://github.com/willluer>`_
+    * `William Luer <https://github.com/willluer>`_
     * Yak Fishman
