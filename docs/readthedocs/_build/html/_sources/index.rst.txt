@@ -14,7 +14,7 @@ Click on ``Introduction`` on the sidebar, use the search-bar or use any of
 the following links to get started.
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 3
 
    chapters/introduction
    chapters/tutorials
