@@ -122,7 +122,159 @@ See Also:
 
 SPI Method
 ^^^^^^^^^^
-To do
+**Wiring:**
+
++--------------+-----------+
+|Rasberry Pi 3 |arduino Uno|
++==============+===========+
+|GND           | GND       |
++--------------+-----------+
+|MOSI(Pin19)   |MOSI(Pin11)|
++--------------+-----------+
+|MISO(Pin21)   |MISO(Pin12)|
++--------------+-----------+
+|SCLK(Pin23)   |SCLK(Pin13)|
++--------------+-----------+
+
+and you can choose to power the arduino using USB cable on Pi
+or on your laptop.
+
+
+**SPI on arduino:**
+
+First the MISO pin has to be defined as an output pin.
+All other pins are configured automatically as input pins if the SPI is enabled:
+
+.. code-block:: c
+
+  pinMode(MISO, OUTPUT);
+
+Second the SPI enable bit needs to be set:
+
+.. code-block:: c
+
+  SPCR |= _BV(SPE);
+
+Reading and writing of SPI data is performed through SPDR. Programmatically you can treat SPDR as you would a variable. To read the contents of SDPR, it can either be accessed directly,
+or another variable can be set equal to it:
+
+.. code-block:: c
+
+  i = SPDR;
+
+To load the data register with a value to transmit back to the master, the statement is reversed:
+
+.. code-block:: c
+
+  SPDR = i;
+
+At the hardware level SPDR includes both an 8-bit shift register and an 8-bit receive buffer.
+When the slave is receiving data, that data is shifted into the shift register one bit at a time while the original 8-bits in the register are shifted back to the master.
+When a complete byte has been shifted into the register, that byte is then copied into the receive buffer. The receive buffer won't be updated again until the next complete byte is received.
+
+**This means if the pi(master) wants to read from arduino(slave), it has to send something first !! **
+
+**Code:**
+
+code on arduino
+
+.. code-block:: c
+
+  /*************************************************************
+   SPI_Hello_Raspi
+     Configures Arduino as an SPI slave and demonstrates
+     bidirectional communication with an Raspberry Pi SPI master
+  ****************************************************************/
+
+  #include <SPI.h>
+
+  byte c = 0;
+
+  /***************************************************************
+   Setup SPI in slave mode (1) define MISO pin as output (2) set
+   enable bit of the SPI configuration register
+  ****************************************************************/
+
+  void setup (void)
+  {
+    Serial.begin(9600);
+    pinMode(MISO, OUTPUT);
+    SPCR |= _BV(SPE);
+
+  }
+
+  /***************************************************************
+   Loop until the SPI End of Transmission Flag (SPIF) is set
+   indicating a byte has been received.  When a byte is
+   received, load the byte,print it, and put 0x08 into SPDR for pi
+   to read
+  ****************************************************************/
+
+  void loop (void)
+  {
+
+    if((SPSR & (1 << SPIF)) != 0)
+    {
+      //arduino should receive 3 and 4
+      //and send 8 to pi
+      c = SPDR;
+      Serial.print("we received: ");
+      Serial.println(c);
+      SPDR = 8;
+    }
+
+  }
+
+Python code on Pi(make sure you have pigpio installed and running by sudo pigpiod):
+
+.. code-block:: python
+
+  #!/usr/bin/env python
+
+  import time,pigpio
+
+
+  #open spi
+  pi = pigpio.pi()
+
+  if not pi.connected:
+     exit(0)
+
+  h = pi.spi_open(0, 40000)
+
+
+  #function for communicating with arduino
+  def communicate():
+     while True:
+        #first send byts to arduino
+        pi.spi_write(h,b'\x03\x04')
+
+        #sleep 1 second and read 1 byte
+        time.sleep(1)
+        #pi shoudl receive 0x08, which is sent from arduino
+        #spi_read returns a tuple, first is the number of bytes read,
+        #second is the byte array contains the bytes
+        (count,data) = pi.spi_read(h,1)
+        #at the same time for reading, arduino will receive 1 byte, which is 0x00
+        #Why? remember in order to read, the pi has to send something to the arduino first !
+        #By default, it will write 0 to arduino in order to read.
+        print("we get %s" % data)
+
+
+  if __name__ == '__main__':
+     try:
+        communicate()
+     except:
+        pi.spi_close(h)
+        pi.stop()
+
+The arduino should continueously print 3,4 and 0(for pi reading purpose) and
+pi should receive and print 0x08.
+
+Resources
+#########
+* `Pi_Arduino_SPI_communication <http://robotics.hobbizine.com/raspiduino.html>`_
+
 
 USB Method
 ^^^^^^^^^^
@@ -132,7 +284,7 @@ PI and TFMini Lidar Communication
 ------------------------------------
 
 Setup
-^^^^^^^^^^
+^^^^^
 To search for available serial ports, enter the following command in terminal:
 
 .. code-block:: bash
@@ -191,7 +343,7 @@ The output now should look like:
 
 
 Wiring
-^^^^^^^^^^
+^^^^^^
 
 +--------------+-----------+
 |Rasberry Pi 3 |TFmini     |
@@ -213,7 +365,7 @@ The pinout of the Rasberry Pi is:
 
 
 Code
-^^^^^^^^^^
+^^^^
 
 .. code-block:: python
     :linenos:

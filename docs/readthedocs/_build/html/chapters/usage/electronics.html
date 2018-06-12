@@ -99,22 +99,22 @@
 <li class="toctree-l4"><a class="reference internal" href="#setup">Setup</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#wiring">Wiring</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#code">Code</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#resources">Resources</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Resources</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#pi-camera-usage">Pi Camera Usage</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#connection">Connection</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#capture-an-image">Capture an image</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#record-a-video-for-10-seconds">Record a video for 10 seconds</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id1">Resources</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">Resources</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#pi-and-imu-communication">PI and IMU communication</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#i2c-method-by-lsm9ds1-library">I2C Method by LSM9DS1 Library</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id2">Setup</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id3">Resources</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id4">I2C Method</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">Setup</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id6">Resources</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">I2C Method</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">Resources</a></li>
 </ul>
 </li>
 </ul>
@@ -374,7 +374,154 @@ and Arduino using only three wires.</p>
 </div>
 <div class="section" id="spi-method">
 <h3>SPI Method<a class="headerlink" href="#spi-method" title="Permalink to this headline">¶</a></h3>
-<p>To do</p>
+<p><strong>Wiring:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="56%" />
+<col width="44%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Rasberry Pi 3</th>
+<th class="head">arduino Uno</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>GND</td>
+<td>GND</td>
+</tr>
+<tr class="row-odd"><td>MOSI(Pin19)</td>
+<td>MOSI(Pin11)</td>
+</tr>
+<tr class="row-even"><td>MISO(Pin21)</td>
+<td>MISO(Pin12)</td>
+</tr>
+<tr class="row-odd"><td>SCLK(Pin23)</td>
+<td>SCLK(Pin13)</td>
+</tr>
+</tbody>
+</table>
+<p>and you can choose to power the arduino using USB cable on Pi
+or on your laptop.</p>
+<p><strong>SPI on arduino:</strong></p>
+<p>First the MISO pin has to be defined as an output pin.
+All other pins are configured automatically as input pins if the SPI is enabled:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">pinMode</span><span class="p">(</span><span class="n">MISO</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Second the SPI enable bit needs to be set:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">SPCR</span> <span class="o">|=</span> <span class="n">_BV</span><span class="p">(</span><span class="n">SPE</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Reading and writing of SPI data is performed through SPDR. Programmatically you can treat SPDR as you would a variable. To read the contents of SDPR, it can either be accessed directly,
+or another variable can be set equal to it:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="n">SPDR</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>To load the data register with a value to transmit back to the master, the statement is reversed:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">SPDR</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>At the hardware level SPDR includes both an 8-bit shift register and an 8-bit receive buffer.
+When the slave is receiving data, that data is shifted into the shift register one bit at a time while the original 8-bits in the register are shifted back to the master.
+When a complete byte has been shifted into the register, that byte is then copied into the receive buffer. The receive buffer won’t be updated again until the next complete byte is received.</p>
+<p><a href="#id1"><span class="problematic" id="id2">**</span></a>This means if the pi(master) wants to read from arduino(slave), it has to send something first !! **</p>
+<p><strong>Code:</strong></p>
+<p>code on arduino</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*************************************************************</span>
+<span class="cm"> SPI_Hello_Raspi</span>
+<span class="cm">   Configures Arduino as an SPI slave and demonstrates</span>
+<span class="cm">   bidirectional communication with an Raspberry Pi SPI master</span>
+<span class="cm">****************************************************************/</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;SPI.h&gt;</span><span class="cp"></span>
+
+<span class="n">byte</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="cm">/***************************************************************</span>
+<span class="cm"> Setup SPI in slave mode (1) define MISO pin as output (2) set</span>
+<span class="cm"> enable bit of the SPI configuration register</span>
+<span class="cm">****************************************************************/</span>
+
+<span class="kt">void</span> <span class="nf">setup</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">MISO</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">SPCR</span> <span class="o">|=</span> <span class="n">_BV</span><span class="p">(</span><span class="n">SPE</span><span class="p">);</span>
+
+<span class="p">}</span>
+
+<span class="cm">/***************************************************************</span>
+<span class="cm"> Loop until the SPI End of Transmission Flag (SPIF) is set</span>
+<span class="cm"> indicating a byte has been received.  When a byte is</span>
+<span class="cm"> received, load the byte,print it, and put 0x08 into SPDR for pi</span>
+<span class="cm"> to read</span>
+<span class="cm">****************************************************************/</span>
+
+<span class="kt">void</span> <span class="nf">loop</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+
+  <span class="k">if</span><span class="p">((</span><span class="n">SPSR</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">SPIF</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="c1">//arduino should receive 3 and 4</span>
+    <span class="c1">//and send 8 to pi</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">SPDR</span><span class="p">;</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;we received: &quot;</span><span class="p">);</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+    <span class="n">SPDR</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+  <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Python code on Pi(make sure you have pigpio installed and running by sudo pigpiod):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">time</span><span class="o">,</span><span class="nn">pigpio</span>
+
+
+<span class="c1">#open spi</span>
+<span class="n">pi</span> <span class="o">=</span> <span class="n">pigpio</span><span class="o">.</span><span class="n">pi</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">pi</span><span class="o">.</span><span class="n">connected</span><span class="p">:</span>
+   <span class="nb">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">h</span> <span class="o">=</span> <span class="n">pi</span><span class="o">.</span><span class="n">spi_open</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">40000</span><span class="p">)</span>
+
+
+<span class="c1">#function for communicating with arduino</span>
+<span class="k">def</span> <span class="nf">communicate</span><span class="p">():</span>
+   <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+      <span class="c1">#first send byts to arduino</span>
+      <span class="n">pi</span><span class="o">.</span><span class="n">spi_write</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x03\x04</span><span class="s1">&#39;</span><span class="p">)</span>
+
+      <span class="c1">#sleep 1 second and read 1 byte</span>
+      <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+      <span class="c1">#pi shoudl receive 0x08, which is sent from arduino</span>
+      <span class="c1">#spi_read returns a tuple, first is the number of bytes read,</span>
+      <span class="c1">#second is the byte array contains the bytes</span>
+      <span class="p">(</span><span class="n">count</span><span class="p">,</span><span class="n">data</span><span class="p">)</span> <span class="o">=</span> <span class="n">pi</span><span class="o">.</span><span class="n">spi_read</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+      <span class="c1">#at the same time for reading, arduino will receive 1 byte, which is 0x00</span>
+      <span class="c1">#Why? remember in order to read, the pi has to send something to the arduino first !</span>
+      <span class="c1">#By default, it will write 0 to arduino in order to read.</span>
+      <span class="k">print</span><span class="p">(</span><span class="s2">&quot;we get </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">data</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+   <span class="k">try</span><span class="p">:</span>
+      <span class="n">communicate</span><span class="p">()</span>
+   <span class="k">except</span><span class="p">:</span>
+      <span class="n">pi</span><span class="o">.</span><span class="n">spi_close</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+      <span class="n">pi</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The arduino should continueously print 3,4 and 0(for pi reading purpose) and
+pi should receive and print 0x08.</p>
+<div class="section" id="resources">
+<h4>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><a class="reference external" href="http://robotics.hobbizine.com/raspiduino.html">Pi_Arduino_SPI_communication</a></li>
+</ul>
+</div>
 </div>
 <div class="section" id="usb-method">
 <h3>USB Method<a class="headerlink" href="#usb-method" title="Permalink to this headline">¶</a></h3>
@@ -628,8 +775,8 @@ smsc95xx.macaddr<span class="o">=</span>B8:27:EB:F3:8C:9C vc_mem.mem_base<span c
 </pre></div>
 </td></tr></table></div>
 </div>
-<div class="section" id="resources">
-<h3>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h3>Resources<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><a class="reference external" href="http://www.instructables.com/id/Read-and-write-from-serial-port-with-Raspberry-Pi/">Read and write from serial port with Raspberry Pi</a></li>
@@ -657,8 +804,8 @@ The cable slots into the connector situated between the Ethernet and HDMI ports,
 </pre></div>
 </div>
 </div>
-<div class="section" id="id1">
-<h3>Resources<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id4">
+<h3>Resources<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><a class="reference external" href="https://thepihut.com/blogs/raspberry-pi-tutorials/16021420-how-to-install-use-the-raspberry-pi-camera">How to install/use the pi camera</a></li>
@@ -672,8 +819,8 @@ The cable slots into the connector situated between the Ethernet and HDMI ports,
 <div class="section" id="i2c-method-by-lsm9ds1-library">
 <h3>I2C Method by LSM9DS1 Library<a class="headerlink" href="#i2c-method-by-lsm9ds1-library" title="Permalink to this headline">¶</a></h3>
 </div>
-<div class="section" id="id2">
-<h3>Setup<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id5">
+<h3>Setup<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <p>In order to use the LSM9DS1 Library, we need to install WiringPi first.
 Enter the following command in Pi terminal:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get install libi2c-dev
@@ -722,14 +869,14 @@ sudo python LSM9DS1_Basic_I2C.py
 </tbody>
 </table>
 </div>
-<div class="section" id="id3">
-<h3>Resources<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id6">
+<h3>Resources<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><a class="reference external" href="https://github.com/akimach/LSM9DS1_RaspberryPi_Library">LSM9DS1_RaspberryPi_Library</a></li>
 </ul>
 </div>
-<div class="section" id="id4">
-<h3>I2C Method<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id7">
+<h3>I2C Method<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <p>The example code for this section in the <code class="docutils literal notranslate"><span class="pre">PiCar/src/pi/imu</span></code>.</p>
 <p>To compile, use the command:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gcc -o &lt;programname&gt; runi2c.c -lm
@@ -764,15 +911,15 @@ sudo python LSM9DS1_Basic_I2C.py
 <p>The connection is by SMBUS.</p>
 <p>For RPI, go to <code class="docutils literal notranslate"><span class="pre">/usr/include/linux</span></code>, replace <code class="docutils literal notranslate"><span class="pre">i2c_dev.h</span></code> with the header file in the repository</p>
 <p>(Method ‘enableIMU’ needs further development to enable IMU configuration setting)</p>
-<div class="section" id="id5">
-<h4>See Also:<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id8">
+<h4>See Also:<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><a class="reference external" href="https://cdn.sparkfun.com/assets/learn_tutorials/3/7/3/LSM9DS1_Datasheet.pdf/">IMU datasheet</a></li>
 </ul>
 </div>
 </div>
-<div class="section" id="id6">
-<h3>Resources<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id9">
+<h3>Resources<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><a class="reference external" href="https://learn.sparkfun.com/tutorials/i2c">I2C SPI Reference page</a></li>
 </ul>
