@@ -77,8 +77,8 @@ Client side
 Sensors(Lidar,IMU) reading and writing
 --------------------------------------
 
-Setup:
-^^^^^^
+Setup
+^^^^^
 Make sure you have alreadly connect TFmini Lidar and IMU as
 `TFmini Lidar <http://picar.readthedocs.io/en/latest/chapters/usage/electronics.html#pi-and-tfmini-lidar-communication>`_
 , `IMU by LSM9DS1 <http://picar.readthedocs.io/en/latest/chapters/usage/electronics.html#pi-and-imu-communication>`_ did.
@@ -87,8 +87,8 @@ and download corresponding libraris.
 source code:
 Under Directory PiCar/src/pi/IMU_Lidar
 
-steps:
-^^^^^^
+Steps
+^^^^^
 1.Download the repository and connect sensors correctly
 
 2.run the python script Lidar_IMU_read_optimize.py
@@ -140,6 +140,25 @@ This will give you real time and fps.
 Resources
 ^^^^^^^^^
 `rapid capture and processing <https://picamera.readthedocs.io/en/release-1.13/recipes2.html#rapid-capture-and-processing>`_
+
+
+
+Sensors/Camera concurrent reading by Timer(Version1)
+----------------------------------------------------
+Connection
+^^^^^^^^^^
+Connect IMU,TFmini Lidar, and Pi Camera correctly as previous tutorial did.
+
+Code
+^^^^
+The code for this part is under directory PiCar/src/pi/pythonTimer;
+I put most of the explanation in the code.
+
+Resources
+^^^^^^^^^
+  * `Python multiprocessing--Process-based Parallelism <https://docs.python.org/3.4/library/multiprocessing.html?highlight=process>`_
+
+  * `Python threading timer object <https://docs.python.org/3/library/threading.html#timer-objects>`_
 
 Data Logging
 ------------

@@ -12,7 +12,7 @@ algorithms.
   <a href="https://github.com/xz-group/PiCar" target="_blank"
   class="btn btn-neutral" title="Go to the PiCar Repo">
   <span class="icon icon-github"></span> PiCar GitHub</a>
-
+  &nbsp;
   <a href="../index.html" target="_blank"
   class="btn btn-neutral" title="Go to the Table of Contents">
   <span class="fa fa-navicon"></span> Table of Contents</a></p>

@@ -17,6 +17,7 @@ Current Team
     * `Jerry Kong <https://github.com/woodcutter1998>`_
     * `Shadi Davari <https://github.com/shadidavari>`_
     * `Feiyang Jin <https://github.com/FeiyangJin>`_
+    * `Hayden Sierra <https://github.com/Yruhere88>`_
 
 Former Team
   - Advisor(s):
@@ -36,5 +37,5 @@ Former Team
     * `Patrick Naughton <https://github.com/patricknaughton01>`_
     * Reese Frerichs
     * Sam Chai
-    * `Will Luer <https://github.com/willluer>`_
+    * `William Luer <https://github.com/willluer>`_
     * Yak Fishman

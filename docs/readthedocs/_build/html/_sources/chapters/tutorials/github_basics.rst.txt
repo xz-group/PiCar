@@ -101,6 +101,59 @@ Procedure
           friends. Use them when you run into an issue with git (merge
           conflicts, etc.).
 
+Syncing a Fork
+---------------
+If the main branch of the repository is ahead of your forked repo, you will need
+to sync your repo with the main one.
+
+1. Navigate to the directory containing your forked repo.
+2. Add a new remote called ``upstream`` which essentially points to
+   the main repository:
+
+   .. code-block:: bash
+
+      git remote add upstream https://github.com/xz-group/PiCar.git
+
+3. Verify the remotes:
+
+   .. code-block:: bash
+
+      git remote -v
+
+   You should see something like:
+
+   .. code-block:: bash
+
+     origin	https://github.com/username/PiCar.git (fetch)
+     origin	https://github.com/username/PiCar.git (push)
+     upstream	https://github.com/xz-group/PiCar.git (fetch)
+     upstream	https://github.com/xz-group/PiCar.git (push)
+
+4. Grab the latest version of the ``upstream`` remote:
+
+   .. code-block:: bash
+
+      git fetch upstream
+
+5. Merge your local branch with ``upstream``:
+
+   .. code-block:: bash
+
+      git checkout master
+      git merge upstream/master
+
+.. warning:: If there are conflicts between your local repo due to you having
+             changed files that have other commits in the main repo, you will
+             have to fix those conflicts before being able to merge.
+
+6. Push your changes to your ``remote`` repository:
+
+   .. code-block:: bash
+
+      git push origin master
+
+7. After making changes, submit a pull request as usual.
+
 Resources
 ---------
 - `GitHub Guide <https://guides.github.com/activities/hello-world/>`_

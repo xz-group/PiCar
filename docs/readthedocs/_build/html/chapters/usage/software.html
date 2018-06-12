@@ -96,14 +96,20 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#sensors-lidar-imu-reading-and-writing">Sensors(Lidar,IMU) reading and writing</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#setup">Setup:</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#steps">steps:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setup">Setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#steps">Steps</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#camera-picture-data-by-rapid-capturing">Camera(picture) data by rapid capturing</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#connection">Connection</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#code">Code</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#resources">Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#sensors-camera-concurrent-reading-by-timer-version1">Sensors/Camera concurrent reading by Timer(Version1)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Connection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Resources</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#data-logging">Data Logging</a></li>
@@ -303,7 +309,7 @@ the Electronics section.</p>
 <div class="section" id="sensors-lidar-imu-reading-and-writing">
 <h2>Sensors(Lidar,IMU) reading and writing<a class="headerlink" href="#sensors-lidar-imu-reading-and-writing" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="setup">
-<h3>Setup:<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h3>
+<h3>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h3>
 <p>Make sure you have alreadly connect TFmini Lidar and IMU as
 <a class="reference external" href="http://picar.readthedocs.io/en/latest/chapters/usage/electronics.html#pi-and-tfmini-lidar-communication">TFmini Lidar</a>
 , <a class="reference external" href="http://picar.readthedocs.io/en/latest/chapters/usage/electronics.html#pi-and-imu-communication">IMU by LSM9DS1</a> did.
@@ -312,7 +318,7 @@ and download corresponding libraris.</p>
 Under Directory PiCar/src/pi/IMU_Lidar</p>
 </div>
 <div class="section" id="steps">
-<h3>steps:<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h3>
+<h3>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h3>
 <p>1.Download the repository and connect sensors correctly</p>
 <p>2.run the python script Lidar_IMU_read_optimize.py</p>
 <p>3.After the program ends, you should see two csv files under the same directory.One records
@@ -380,6 +386,27 @@ timestamp, distance, accelaration in x,y,z, angular velocity in x,y,z</p>
 <div class="section" id="resources">
 <h3>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="https://picamera.readthedocs.io/en/release-1.13/recipes2.html#rapid-capture-and-processing">rapid capture and processing</a></p>
+</div>
+</div>
+<div class="section" id="sensors-camera-concurrent-reading-by-timer-version1">
+<h2>Sensors/Camera concurrent reading by Timer(Version1)<a class="headerlink" href="#sensors-camera-concurrent-reading-by-timer-version1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Connection<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Connect IMU,TFmini Lidar, and Pi Camera correctly as previous tutorial did.</p>
+</div>
+<div class="section" id="id2">
+<h3>Code<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>The code for this part is under directory PiCar/src/pi/pythonTimer;
+I put most of the explanation in the code.</p>
+</div>
+<div class="section" id="id3">
+<h3>Resources<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="https://docs.python.org/3.4/library/multiprocessing.html?highlight=process">Python multiprocessing–Process-based Parallelism</a></li>
+<li><a class="reference external" href="https://docs.python.org/3/library/threading.html#timer-objects">Python threading timer object</a></li>
+</ul>
+</div></blockquote>
 </div>
 </div>
 <div class="section" id="data-logging">
