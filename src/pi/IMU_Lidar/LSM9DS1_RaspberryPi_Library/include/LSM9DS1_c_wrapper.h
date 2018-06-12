@@ -1,6 +1,8 @@
 #ifndef __SparkFunLSM9DS1_C_WRAPPER_H__
 #define __SparkFunLSM9DS1_C_WRAPPER_H__
 
+
+#include <unistd.h>
 #include "LSM9DS1.h"
 
 extern "C" {
@@ -29,6 +31,14 @@ extern "C" {
     float lsm9ds1_calcGyro(LSM9DS1* obj, float gyro);
     float lsm9ds1_calcAccel(LSM9DS1* obj, float accel);
     float lsm9ds1_calcMag(LSM9DS1* obj, float mag);
+    // Set scaling
+    void lsm9ds1_setAccelScale(LSM9DS1* obj, uint8_t aScl);
+    void lsm9ds1_setAccelODR(LSM9DS1* obj, uint8_t aRate);
+    void lsm9ds1_setGyroScale(LSM9DS1* obj, uint8_t gScl);
+    void lsm9ds1_setGyroODR(LSM9DS1* obj, uint8_t gRate);
+    void lsm9ds1_setMagScale(LSM9DS1* obj, uint8_t mScl);
+    void lsm9ds1_setMagODR(LSM9DS1* obj, uint8_t mRate);
+
 }
 
 #endif /* __SparkFunLSM9DS1_C_WRAPPER_H__ */
