@@ -53,3 +53,16 @@ lib.lsm9ds1_calcAccel.argtypes = [c_void_p, c_float]
 lib.lsm9ds1_calcAccel.restype = c_float
 lib.lsm9ds1_calcMag.argtypes = [c_void_p, c_float]
 lib.lsm9ds1_calcMag.restype = c_float
+
+lib.lsm9ds1_setAccelScale.argtypes = [c_void_p, c_uint]
+lib.lsm9ds1_setAccelScale.restype = None
+lib.lsm9ds1_setAccelODR.argtypes = [c_void_p, c_uint]
+lib.lsm9ds1_setAccelODR.restype = None
+lib.lsm9ds1_setGyroScale.argtypes = [c_void_p, c_uint]
+lib.lsm9ds1_setGyroScale.restype = None
+lib.lsm9ds1_setGyroODR.argtypes = [c_void_p, c_uint]
+lib.lsm9ds1_setGyroODR.restype = None
+lib.lsm9ds1_setMagScale.argtypes = [c_void_p, c_uint]
+lib.lsm9ds1_setMagScale.restype = None
+lib.lsm9ds1_setMagODR.argtypes = [c_void_p, c_uint]
+lib.lsm9ds1_setMagODR.restype = None

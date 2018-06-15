@@ -22,7 +22,7 @@ $(LIB)liblsm9ds1.a: LSM9DS1.o
 # dynamic library
 $(LIB)liblsm9ds1.so: LSM9DS1.o
 	mkdir -p $(LIB)
-	$(CC) -I$(INCLUDE) -Wall -O2 -fexceptions $(SRC)LSM9DS1.cpp -lwiringPi -shared -o $(LIB)liblsm9ds1.so
+	$(CC) -I$(INCLUDE) -Wall -O2 -fPIC -fexceptions $(SRC)LSM9DS1.cpp -lwiringPi -shared -o $(LIB)liblsm9ds1.so
 
 
 LSM9DS1_c_wrapper.o: $(SRC)LSM9DS1_c_wrapper.cpp
