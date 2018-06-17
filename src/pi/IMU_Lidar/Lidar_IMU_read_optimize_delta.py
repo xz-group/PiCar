@@ -18,11 +18,20 @@ if sys.argv[1]=="-U":
 sys.version[0] == '3' #declare for python 3
 
 ser = serial.Serial("/dev/ttyS0", 115200) #serial port for Lidar
-filename = 'Lidar_IMU_Frequency_optimize.csv'
-datafile = 'Lidar_IMU_data_optimize.csv'
+beginTime = str(datetime.datetime.now())
+filename = beginTime+'/Lidar_IMU_Data.csv'
+
 timeDiffer = []
 rowList = []
 duration = 10
+setAccRate = 0.02
+setGyroRate = 0.02
+setMagRate = 0.02
+trAccRate = 6
+trGyroRate = 6
+trMagRate = 7
+lidarRate = 0.02
+imuRate = 0.02
 
 #see document for available scales
 
@@ -59,6 +68,7 @@ def getIMU():
     return (cax,cay,caz,cgx,cgy,cgz)
 
 
+
 #get TFmini Lidar data
 def getLidar():
     #TFmini data
@@ -73,45 +83,42 @@ def getLidar():
 
 #the function which calls getIMU and getLidar
 def getData():
-    global lasttime
     global imu
 
+    startTime = time.time()
+    lastTimeLidar = time.time()
+    lastTimeIMU = time.time()
     current = time.time()
     while current - startTime < duration:
-
         current = time.time()
-        if lib.lsm9ds1_accelAvailable(imu) > 0 and ser.in_waiting > 8:
+        if current-lastTimeIMU>setAccRate and lib.lsm9ds1_accelAvailable(imu) > 0 and current-lastTimeLidar>lidarRate and ser.in_waiting > 8:
+            lastTimeIMU = time.time()
+            lastTimeLidar = lastTimeIMU
+            currentTime = str(datetime.datetime.now())
             IMUdata = getIMU()
             Lidardata = getLidar()
+            rowList.append([currentTime,Lidardata,IMUdata[0],IMUdata[1],IMUdata[2],IMUdata[3],IMUdata[4],IMUdata[5]])
+        elif current-lastTimeIMU>setAccRate and lib.lsm9ds1_accelAvailable(imu) > 0:
+            lastTimeIMU = time.time()
+            currentTime = str(datetime.datetime.now())
+            IMUdata = getIMU()
+            rowList.append([currentTime,"NA",IMUdata[0],IMUdata[1],IMUdata[2],IMUdata[3],IMUdata[4],IMUdata[5]])
+        elif current-lastTime>lidarRate and ser.in_waiting > 8:
+            lastTimeLidar = time.time()
+            currentTime = str(datetime.datetime.now())
+            Lidardata = getLidar()
+            rowList.append([currentTime,Lidardata,"NA","NA","NA","NA","NA","NA"])
 
-            currentTime = str(datetime.datetime.now()); #timestamp data
-            row = [currentTime,Lidardata,IMUdata[0],IMUdata[1],IMUdata[2],IMUdata[3],IMUdata[4],IMUdata[5]] #the row being written to csv file, just x and y accel
-            rowList.append(row)
-            diff = time.time() - lasttime
-            timeDiffer.append(diff)
-            #print(diff)
-            lasttime = time.time()
-            #print(row)
 
     #After 10 seconds, write IMU and Lidar data into a csv file
     print("start writing data")
     with open(datafile,"a",newline = '') as csvfile:
         spamwriter = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
-        for i in range(len(rowList)):
-            row = [rowList[i]]
-            spamwriter.writerow(row)
-
-    #write reading frequency into a csv file
-    print("start writing frequency")
-    with open(filename,"a",newline = '') as csvfile:
-        spamwriter = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
-        for i in range(len(timeDiffer)):
-            row = [timeDiffer[i]]
+        for row in rowList:
             spamwriter.writerow(row)
 
 
-startTime = time.time()
-lasttime = time.time()
+
 #connect with IMU
 imu = lib.lsm9ds1_create()
 lib.lsm9ds1_begin(imu)

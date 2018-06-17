@@ -76,3 +76,21 @@ float lsm9ds1_calcAccel(LSM9DS1* obj, float accel) {
 float lsm9ds1_calcMag(LSM9DS1* obj, float mag) {
     return obj->calcMag(mag);
 }
+void lsm9ds1_setAccelScale(LSM9DS1* obj, uint8_t aScl){
+    obj->setAccelScale(aScl);
+}
+void lsm9ds1_setAccelODR(LSM9DS1* obj, uint8_t aRate){
+    obj->setAccelODR(aRate);
+}
+void lsm9ds1_setGyroScale(LSM9DS1* obj, uint8_t gScl){
+    obj->setGyroScale(gScl);
+}
+void lsm9ds1_setGyroODR(LSM9DS1* obj, uint8_t gRate){
+    obj->setGyroODR(gRate);
+}
+void lsm9ds1_setMagScale(LSM9DS1* obj, uint8_t mScl){
+    obj->setMagScale(mScl);
+}
+void lsm9ds1_setMagODR(LSM9DS1* obj, uint8_t mRate){
+    obj->setMagODR(mRate);
+}
