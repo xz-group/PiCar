@@ -276,9 +276,109 @@ Resources
 * `Pi_Arduino_SPI_communication <http://robotics.hobbizine.com/raspiduino.html>`_
 
 
+I2C by GPIO(General Purpose Input Output)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Reason**
+Sometimes, we may want to save I2C pin to other device, or we may want to connect multiple
+arduino to raspberry pi. In this sections, we will use GPIO pins to connect our arduino by i2c.
+
+**Wiring**
+
++--------------+-----------------------+
+|Rasberry Pi 3 |arduino Uno            |
++==============+=======================+
+|GND           | GND                   |
++--------------+-----------------------+
+|Pin19         |SDA(The pin above AREF)|
++--------------+-----------------------+
+|Pin13         |SCL(The pin above SDA) |
++--------------+-----------------------+
+
+And you can power Arduino in whatever way you want.
+
+**Code**
+
+The arduino code is the same as above(I2C section)
+
+The following is the code on Pi, make sure you have pigpio installed and running.
+
+.. code-block:: python
+
+  import pigpio
+  import time
+
+  pi = pigpio.pi()
+  address = 0x04
+
+  SDA = 19
+  SCL = 13
+
+
+  def communication():
+
+      while True:
+          connection = pi.bb_i2c_open(SDA,SCL,9600)
+          var = int(input("Enter 1  ^ ^  9: "))
+          if not var:
+              continue
+          pi.bb_i2c_zip(SDA,[4,address,0x02,0x07,0x01,var,0x03,0x00])
+          print("RPI: Hi Arduino, I sent you ", var)
+
+          time.sleep(1)
+
+          number = pi.bb_i2c_zip(SDA,[4,address,0x02,0x06,0x01,0x03,0x00])
+          print("Arduino: Hey RPI, I received a digit ", number)
+          print()
+
+          pi.bb_i2c_close(SDA)
+
+
+  if __name__ == '__main__':
+      try:
+          communication()
+      except:
+          pi.bb_i2c_close(SDA)
+
+
+Resources
+#########
+
+* `pigpio documentation <http://abyz.me.uk/rpi/pigpio/python.html>`_
+
+
 USB Method
 ^^^^^^^^^^
 To do
+
+
+Sending more than one byte between Pi and Arduino
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Reason**
+
+The above method(i2c,spi) allows us to send one byte between pi and arduino.
+However, if we want to send data that is more than one byte, such as float,
+the above method does not work.
+We first thought this is a well developed problem, and there should be easy function
+being called to send block of data. However, the truth is that as far as we searched,
+none of the proposed solution works.
+We come out this example for sending float between pi and arduino. If you want to develop
+data other than float, you are welcomed to do so.
+
+**Wiring**
+
+Same as I2C secion did
+
+**Code**
+
+The code for this is under PiCar/src/Pi_Arduino_Communication
+i2cProtocol.ino runs on arduino
+i2cProtocol.py runs on pi
+
+The key for this code is to write a simple protocol, and split a float
+into 4 bytes, so we can send 1 byte each time.
+
 
 PI and TFMini Lidar Communication
 ------------------------------------
@@ -585,5 +685,6 @@ See Also:
 Resources
 ^^^^^^^^^
 * `I2C SPI Reference page <https://learn.sparkfun.com/tutorials/i2c>`_
+
 
 Contributors: Jerry Kong, Shadi Davari, Josh Jin

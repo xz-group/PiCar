@@ -92,29 +92,31 @@
 <li class="toctree-l3"><a class="reference internal" href="#pi-and-arduino-communication">Pi and Arduino Communication</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#i2c-method">I2C Method</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#spi-method">SPI Method</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#i2c-by-gpio-general-purpose-input-output">I2C by GPIO(General Purpose Input Output)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#usb-method">USB Method</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sending-more-than-one-byte-between-pi-and-arduino">Sending more than one byte between Pi and Arduino</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#pi-and-tfmini-lidar-communication">PI and TFMini Lidar Communication</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#setup">Setup</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#wiring">Wiring</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#code">Code</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id3">Resources</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">Resources</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#pi-camera-usage">Pi Camera Usage</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#connection">Connection</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#capture-an-image">Capture an image</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#record-a-video-for-10-seconds">Record a video for 10 seconds</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id4">Resources</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">Resources</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#pi-and-imu-communication">PI and IMU communication</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#i2c-method-by-lsm9ds1-library">I2C Method by LSM9DS1 Library</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id5">Setup</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id6">Resources</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id7">I2C Method</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id9">Resources</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">Setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">Resources</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">I2C Method</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">Resources</a></li>
 </ul>
 </li>
 </ul>
@@ -523,9 +525,104 @@ pi should receive and print 0x08.</p>
 </ul>
 </div>
 </div>
+<div class="section" id="i2c-by-gpio-general-purpose-input-output">
+<h3>I2C by GPIO(General Purpose Input Output)<a class="headerlink" href="#i2c-by-gpio-general-purpose-input-output" title="Permalink to this headline">¶</a></h3>
+<p><strong>Reason</strong>
+Sometimes, we may want to save I2C pin to other device, or we may want to connect multiple
+arduino to raspberry pi. In this sections, we will use GPIO pins to connect our arduino by i2c.</p>
+<p><strong>Wiring</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="38%" />
+<col width="62%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Rasberry Pi 3</th>
+<th class="head">arduino Uno</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>GND</td>
+<td>GND</td>
+</tr>
+<tr class="row-odd"><td>Pin19</td>
+<td>SDA(The pin above AREF)</td>
+</tr>
+<tr class="row-even"><td>Pin13</td>
+<td>SCL(The pin above SDA)</td>
+</tr>
+</tbody>
+</table>
+<p>And you can power Arduino in whatever way you want.</p>
+<p><strong>Code</strong></p>
+<p>The arduino code is the same as above(I2C section)</p>
+<p>The following is the code on Pi, make sure you have pigpio installed and running.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pigpio</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">pi</span> <span class="o">=</span> <span class="n">pigpio</span><span class="o">.</span><span class="n">pi</span><span class="p">()</span>
+<span class="n">address</span> <span class="o">=</span> <span class="mh">0x04</span>
+
+<span class="n">SDA</span> <span class="o">=</span> <span class="mi">19</span>
+<span class="n">SCL</span> <span class="o">=</span> <span class="mi">13</span>
+
+
+<span class="k">def</span> <span class="nf">communication</span><span class="p">():</span>
+
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">connection</span> <span class="o">=</span> <span class="n">pi</span><span class="o">.</span><span class="n">bb_i2c_open</span><span class="p">(</span><span class="n">SDA</span><span class="p">,</span><span class="n">SCL</span><span class="p">,</span><span class="mi">9600</span><span class="p">)</span>
+        <span class="n">var</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter 1  ^ ^  9: &quot;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">var</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">pi</span><span class="o">.</span><span class="n">bb_i2c_zip</span><span class="p">(</span><span class="n">SDA</span><span class="p">,[</span><span class="mi">4</span><span class="p">,</span><span class="n">address</span><span class="p">,</span><span class="mh">0x02</span><span class="p">,</span><span class="mh">0x07</span><span class="p">,</span><span class="mh">0x01</span><span class="p">,</span><span class="n">var</span><span class="p">,</span><span class="mh">0x03</span><span class="p">,</span><span class="mh">0x00</span><span class="p">])</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;RPI: Hi Arduino, I sent you &quot;</span><span class="p">,</span> <span class="n">var</span><span class="p">)</span>
+
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">number</span> <span class="o">=</span> <span class="n">pi</span><span class="o">.</span><span class="n">bb_i2c_zip</span><span class="p">(</span><span class="n">SDA</span><span class="p">,[</span><span class="mi">4</span><span class="p">,</span><span class="n">address</span><span class="p">,</span><span class="mh">0x02</span><span class="p">,</span><span class="mh">0x06</span><span class="p">,</span><span class="mh">0x01</span><span class="p">,</span><span class="mh">0x03</span><span class="p">,</span><span class="mh">0x00</span><span class="p">])</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Arduino: Hey RPI, I received a digit &quot;</span><span class="p">,</span> <span class="n">number</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">()</span>
+
+        <span class="n">pi</span><span class="o">.</span><span class="n">bb_i2c_close</span><span class="p">(</span><span class="n">SDA</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">communication</span><span class="p">()</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">pi</span><span class="o">.</span><span class="n">bb_i2c_close</span><span class="p">(</span><span class="n">SDA</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="id3">
+<h4>Resources<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><a class="reference external" href="http://abyz.me.uk/rpi/pigpio/python.html">pigpio documentation</a></li>
+</ul>
+</div>
+</div>
 <div class="section" id="usb-method">
 <h3>USB Method<a class="headerlink" href="#usb-method" title="Permalink to this headline">¶</a></h3>
 <p>To do</p>
+</div>
+<div class="section" id="sending-more-than-one-byte-between-pi-and-arduino">
+<h3>Sending more than one byte between Pi and Arduino<a class="headerlink" href="#sending-more-than-one-byte-between-pi-and-arduino" title="Permalink to this headline">¶</a></h3>
+<p><strong>Reason</strong></p>
+<p>The above method(i2c,spi) allows us to send one byte between pi and arduino.
+However, if we want to send data that is more than one byte, such as float,
+the above method does not work.
+We first thought this is a well developed problem, and there should be easy function
+being called to send block of data. However, the truth is that as far as we searched,
+none of the proposed solution works.
+We come out this example for sending float between pi and arduino. If you want to develop
+data other than float, you are welcomed to do so.</p>
+<p><strong>Wiring</strong></p>
+<p>Same as I2C secion did</p>
+<p><strong>Code</strong></p>
+<p>The code for this is under PiCar/src/Pi_Arduino_Communication
+i2cProtocol.ino runs on arduino
+i2cProtocol.py runs on pi</p>
+<p>The key for this code is to write a simple protocol, and split a float
+into 4 bytes, so we can send 1 byte each time.</p>
 </div>
 </div>
 <div class="section" id="pi-and-tfmini-lidar-communication">
@@ -775,8 +872,8 @@ smsc95xx.macaddr<span class="o">=</span>B8:27:EB:F3:8C:9C vc_mem.mem_base<span c
 </pre></div>
 </td></tr></table></div>
 </div>
-<div class="section" id="id3">
-<h3>Resources<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id4">
+<h3>Resources<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><a class="reference external" href="http://www.instructables.com/id/Read-and-write-from-serial-port-with-Raspberry-Pi/">Read and write from serial port with Raspberry Pi</a></li>
@@ -804,8 +901,8 @@ The cable slots into the connector situated between the Ethernet and HDMI ports,
 </pre></div>
 </div>
 </div>
-<div class="section" id="id4">
-<h3>Resources<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id5">
+<h3>Resources<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><a class="reference external" href="https://thepihut.com/blogs/raspberry-pi-tutorials/16021420-how-to-install-use-the-raspberry-pi-camera">How to install/use the pi camera</a></li>
@@ -819,8 +916,8 @@ The cable slots into the connector situated between the Ethernet and HDMI ports,
 <div class="section" id="i2c-method-by-lsm9ds1-library">
 <h3>I2C Method by LSM9DS1 Library<a class="headerlink" href="#i2c-method-by-lsm9ds1-library" title="Permalink to this headline">¶</a></h3>
 </div>
-<div class="section" id="id5">
-<h3>Setup<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id6">
+<h3>Setup<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <p>In order to use the LSM9DS1 Library, we need to install WiringPi first.
 Enter the following command in Pi terminal:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get install libi2c-dev
@@ -869,14 +966,14 @@ sudo python LSM9DS1_Basic_I2C.py
 </tbody>
 </table>
 </div>
-<div class="section" id="id6">
-<h3>Resources<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id7">
+<h3>Resources<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><a class="reference external" href="https://github.com/akimach/LSM9DS1_RaspberryPi_Library">LSM9DS1_RaspberryPi_Library</a></li>
 </ul>
 </div>
-<div class="section" id="id7">
-<h3>I2C Method<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id8">
+<h3>I2C Method<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
 <p>The example code for this section in the <code class="docutils literal notranslate"><span class="pre">PiCar/src/pi/imu</span></code>.</p>
 <p>To compile, use the command:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gcc -o &lt;programname&gt; runi2c.c -lm
@@ -911,15 +1008,15 @@ sudo python LSM9DS1_Basic_I2C.py
 <p>The connection is by SMBUS.</p>
 <p>For RPI, go to <code class="docutils literal notranslate"><span class="pre">/usr/include/linux</span></code>, replace <code class="docutils literal notranslate"><span class="pre">i2c_dev.h</span></code> with the header file in the repository</p>
 <p>(Method ‘enableIMU’ needs further development to enable IMU configuration setting)</p>
-<div class="section" id="id8">
-<h4>See Also:<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id9">
+<h4>See Also:<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><a class="reference external" href="https://cdn.sparkfun.com/assets/learn_tutorials/3/7/3/LSM9DS1_Datasheet.pdf/">IMU datasheet</a></li>
 </ul>
 </div>
 </div>
-<div class="section" id="id9">
-<h3>Resources<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id10">
+<h3>Resources<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><a class="reference external" href="https://learn.sparkfun.com/tutorials/i2c">I2C SPI Reference page</a></li>
 </ul>
