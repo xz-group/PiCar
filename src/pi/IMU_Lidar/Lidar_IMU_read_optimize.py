@@ -10,11 +10,6 @@ import threading
 from multiprocessing import Pool
 from IMU_SETUP import lib
 
-
-if sys.argv[1]=="-U":
-    print("Usage")
-
-
 sys.version[0] == '3' #declare for python 3
 
 ser = serial.Serial("/dev/ttyS0", 115200) #serial port for Lidar
@@ -22,7 +17,7 @@ filename = 'Lidar_IMU_Frequency_optimize.csv'
 datafile = 'Lidar_IMU_data_optimize.csv'
 timeDiffer = []
 rowList = []
-duration = 10
+duration = 5
 
 #see document for available scales
 
@@ -36,7 +31,7 @@ def setIMUScale(aScl=2,gScl=245,mScl=4):
 
 def setIMUodr(aRate=6,gRate=6,mRate=7):
     global imu
-    lib.lsm9ds1_setAccelODR(imu,aScl)
+    lib.lsm9ds1_setAccelODR(imu,aRate)
     lib.lsm9ds1_setGyroODR(imu,gRate)
     lib.lsm9ds1_setMagODR(imu,mRate)
 
