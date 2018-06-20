@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*
+#No extra package required to run the script
+#However, be sure you read the documentation on http://picar.readthedocs.io/en/latest/chapters/usage/software.html#data-logging
 import os
 import serial
 import time
@@ -9,24 +11,20 @@ import csv
 import threading
 import picamera
 import argparse
-from multiprocessing import Process
+import signal
+from multiprocessing import Process,Value
 from IMU_SETUP import lib
 
 
 
 beginTime = str(datetime.datetime.now())
 
-os.makedirs(beginTime+"/camera")
-
-
 sys.version[0] == '3' #declare for python 3
 
-ser = serial.Serial("/dev/ttyS0", 115200) #serial port for Lidar
 
-datafile = beginTime+'/Lidar_IMU_Data.csv'
-
-parser = argparse.ArgumentParser(description = 'PiCar log file generator', formatter_class = argparse.RawTextHelpFormatter)
-parser.add_argument("--t", help = "determine the duration that the test runs", type = int, default =5 )
+parser = argparse.ArgumentParser(description = 'PiCar log file generator', formatter_class = argparse.RawTextHelpFormatter, conflict_handler = 'resolve')
+parser.add_argument("-i","--t", help = "endless mode", action='store_const',const=1000 , default =5 )
+parser.add_argument("--t",help = "determine the duration that the test runs", type = int, default = 5)
 parser.add_argument("--sa",help = "set accelerometer ODR, available values(default = 6): \n 1 = 10 Hz    4 = 238 Hz \n 2 = 50 Hz    5 = 476 Hz \n 3 = 119 Hz   6 = 952 Hz", type = int, choices=[1,2,3,4,5,6], default = 6)
 parser.add_argument("--sg",help = "set gyro ODR, available values(default = 6): \n 1 = 14.9    4 = 238 \n 2 = 59.5    5 = 476 \n 3 = 119     6 = 952", type = int, choices = [1,2,3,4,5,6],default = 6)
 parser.add_argument("--sm",help = "set mag ODR, available values(default = 7): \n 0 = 0.625 Hz  4 = 10 Hz \n 1 = 1.25 Hz   5 = 20 Hz \n 2 = 2.5 Hz    6 = 40 Hz \n 3 = 5 Hz      7 = 80 Hz", type = int, choices = [0,1,2,3,4,5,6,7], default = 7)
@@ -39,6 +37,14 @@ parser.add_argument("--rl", help = "set LiDar reading rate(Hz)", type = int, def
 parser.add_argument("--p",help = "set the precision of the timing", type = float, default = 0.001)
 re = parser.parse_args()
 
+os.makedirs(beginTime+"/camera")
+
+
+
+ser = serial.Serial("/dev/ttyS0", 115200) #serial port for Lidar
+
+datafile = beginTime+'/Lidar_IMU_Data.csv'
+
 rowList = []
 duration = re.t
 trAccRate = re.sa
@@ -47,7 +53,7 @@ trMagRate = re.sm
 accScale = re.a
 gyroScale = re.g
 magScale = re.m
-lidarRate = float(1)/(re.rl)-0.0007
+lidarRate = float(1)/(re.rl)-0.0007   # minus 0.0007 to compensate for the call of time.time()
 imuRate = 1/float(re.ri)-0.0007
 precision = re.p
 cameraFreq = 1/float(re.c)
@@ -73,6 +79,7 @@ def setIMUodr(aRate=6,gRate=6,mRate=7):
 def getIMU():
     global imu
     lib.lsm9ds1_readAccel(imu)
+    lib.lsm9ds1_readGyro(imu)
     ax = lib.lsm9ds1_getAccelX(imu)
     ay = lib.lsm9ds1_getAccelY(imu)
     az = lib.lsm9ds1_getAccelZ(imu)
@@ -124,14 +131,14 @@ def capture():
 
 
 #the function which calls getIMU and getLidar
-def getData():
+def getData(alive):
     global imu
     startTime = time.time()
     lastTimeLidar = time.time()
     lastTimeIMU = lastTimeLidar
     lastTime = lastTimeLidar
     current = time.time()
-    while current - startTime < duration:
+    while current - startTime < duration and alive.value:
         #define the precision, i.e. the gap between two consecutive IMU or LiDar read
         if current-lastTime>precision:
             lastTime = current
@@ -155,9 +162,6 @@ def getData():
 
         current = time.time()
 
-
-
-    #After 10 seconds, write IMU and Lidar data into a csv file
     print("start writing data")
     with open(datafile,"w") as csvfile:
         spamwriter = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
@@ -165,11 +169,11 @@ def getData():
             spamwriter.writerow(row)
 
 
-
 #connect with IMU
 imu = lib.lsm9ds1_create()
 lib.lsm9ds1_begin(imu)
-
+setIMUScale(accScale,gyroScale,magScale)
+setIMUodr(trAccRate,trGyroRate,trMagRate)
 
 if __name__ == '__main__':
 
@@ -181,9 +185,10 @@ if __name__ == '__main__':
         if ser.is_open == False:
             ser.open()
         print(time.time())
+        alive = Value('b',True)
         #multicore process
         pic =  Process(target = capture)
-        sensor = Process(target = getData)
+        sensor = Process(target = getData, args=(alive,))
 
         pic.start()
         sensor.start()
@@ -194,4 +199,6 @@ if __name__ == '__main__':
     except KeyboardInterrupt:   # Ctrl+C
         if ser != None:
             ser.close()
+        pic.terminate()
+        alive.value = False
         sys.exit()

@@ -166,6 +166,8 @@ Data Logging
 Version Alpha (Camera data, IMU data, LiDar Data)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+*Creator : Jerry Kong*
+
 (Be sure to correctly wire all electronics, the wiring method could be found in the corresponding section of this doc site.)
 
 The code could be found in PiCar/src/pi/IMU_Lidar, you can find the method to enable IMU library `here <http://picar.readthedocs.io/en/latest/chapters/usage/electronics.html#pi-and-imu-communication>`_
@@ -176,7 +178,7 @@ Run the script, a folder under the same directory would be generated, its name w
 
 The file itself contains several straight forward methods that can be used to get data from IMU LiDar. The method it uses to take pictures is currently only viable within the script.
 
-The imu setting functions (setIMUodr and setIMUScale) are not called in the main functions, but willed be added to the main function in beta version. Also, they can't be used out side the script.
+The imu setting functions can't be used outside the script.
 
 If called from command line or python shell, the script would put picture taking job and data logging job into two different cores on RaspberryPi
 
@@ -189,6 +191,8 @@ Use the command line option, you can bring up the usage page
 The script is based on delta timing method. A constant value of 0.0007 is subtracted from the period to maintain a consistent reading frequency.
 
 Precision defines the minimum time that the script goes to check the diffrence between the last time and current time and consequently defines within what time difference that measures of LiDar and IMU occur simultaneously.
+
+Using -i command line input, we could run the script in endless mode (i.e. the duration would be set to 1000 seconds, we could stop the program by using KeyboardInterrupt(Ctrl + C), the pictures and logging data would be save up until the stopping point)
 
 **A great part of the codes are from Josh Jin's sensor/camera reading code**
 
