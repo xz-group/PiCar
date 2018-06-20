@@ -186,11 +186,11 @@ if __name__ == '__main__':
             ser.open()
         print(time.time())
         alive = Value('b',True)
+        #multicore process
         pic =  Process(target = capture)
         sensor = Process(target = getData, args=(alive,))
 
-        #multicore process
-        pic =  Process(target = capture)
+        pic.start()
         sensor.start()
         pic.join()
         sensor.join()
