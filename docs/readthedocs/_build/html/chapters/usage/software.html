@@ -97,19 +97,20 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#sensors-lidar-imu-reading-and-writing">Sensors(Lidar,IMU) reading and writing</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#setup">Setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#code">Code</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#steps">Steps</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#camera-picture-data-by-rapid-capturing">Camera(picture) data by rapid capturing</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#connection">Connection</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#code">Code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Code</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#resources">Resources</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#sensors-camera-concurrent-reading-by-timer-version1">Sensors/Camera concurrent reading by Timer(Version1)</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id1">Connection</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id2">Code</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id3">Resources</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Connection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">Resources</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#data-logging">Data Logging</a><ul>
@@ -317,8 +318,10 @@ the Electronics section.</p>
 <a class="reference external" href="http://picar.readthedocs.io/en/latest/chapters/usage/electronics.html#pi-and-tfmini-lidar-communication">TFmini Lidar</a>
 , <a class="reference external" href="http://picar.readthedocs.io/en/latest/chapters/usage/electronics.html#pi-and-imu-communication">IMU by LSM9DS1</a> did.
 and download corresponding libraris.</p>
-<p>source code:
-Under Directory PiCar/src/pi/IMU_Lidar</p>
+</div>
+<div class="section" id="code">
+<h3>Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h3>
+<p>Under Directory <code class="docutils literal notranslate"><span class="pre">PiCar/src/pi/IMU_Lidar</span></code></p>
 </div>
 <div class="section" id="steps">
 <h3>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h3>
@@ -335,8 +338,8 @@ timestamp, distance, accelaration in x,y,z, angular velocity in x,y,z</p>
 <h3>Connection<a class="headerlink" href="#connection" title="Permalink to this headline">¶</a></h3>
 <p>Connect the camera correctly</p>
 </div>
-<div class="section" id="code">
-<h3>Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id1">
+<h3>Code<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -393,17 +396,17 @@ timestamp, distance, accelaration in x,y,z, angular velocity in x,y,z</p>
 </div>
 <div class="section" id="sensors-camera-concurrent-reading-by-timer-version1">
 <h2>Sensors/Camera concurrent reading by Timer(Version1)<a class="headerlink" href="#sensors-camera-concurrent-reading-by-timer-version1" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id1">
-<h3>Connection<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id2">
+<h3>Connection<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>Connect IMU,TFmini Lidar, and Pi Camera correctly as previous tutorial did.</p>
 </div>
-<div class="section" id="id2">
-<h3>Code<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
-<p>The code for this part is under directory PiCar/src/pi/pythonTimer;
-I put most of the explanation in the code.</p>
-</div>
 <div class="section" id="id3">
-<h3>Resources<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<h3>Code<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>The code for this part is under directory <code class="docutils literal notranslate"><span class="pre">PiCar/src/pi/pythonTimer</span></code></p>
+<p>I put most of the explanation in the code.</p>
+</div>
+<div class="section" id="id4">
+<h3>Resources<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><a class="reference external" href="https://docs.python.org/3.4/library/multiprocessing.html?highlight=process">Python multiprocessing–Process-based Parallelism</a></li>
@@ -416,12 +419,13 @@ I put most of the explanation in the code.</p>
 <h2>Data Logging<a class="headerlink" href="#data-logging" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="version-alpha-camera-data-imu-data-lidar-data">
 <h3>Version Alpha (Camera data, IMU data, LiDar Data)<a class="headerlink" href="#version-alpha-camera-data-imu-data-lidar-data" title="Permalink to this headline">¶</a></h3>
+<p><em>Creator : Jerry Kong</em></p>
 <p>(Be sure to correctly wire all electronics, the wiring method could be found in the corresponding section of this doc site.)</p>
 <p>The code could be found in PiCar/src/pi/IMU_Lidar, you can find the method to enable IMU library <a class="reference external" href="http://picar.readthedocs.io/en/latest/chapters/usage/electronics.html#pi-and-imu-communication">here</a></p>
 <p><strong>IMPORTANT: If you have gone through the process before 06/18/2018, make sure you execute all steps again, few more functions and wrappers are added to the library</strong></p>
 <p>Run the script, a folder under the same directory would be generated, its name would be the starting timestamp of the script.</p>
 <p>The file itself contains several straight forward methods that can be used to get data from IMU LiDar. The method it uses to take pictures is currently only viable within the script.</p>
-<p>The imu setting functions (setIMUodr and setIMUScale) are not called in the main functions, but willed be added to the main function in beta version. Also, they can’t be used out side the script.</p>
+<p>The imu setting functions can’t be used outside the script.</p>
 <p>If called from command line or python shell, the script would put picture taking job and data logging job into two different cores on RaspberryPi</p>
 <p>Use the command line option, you can bring up the usage page</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python Lidar_IMU_data_optimize_delta.py -h
@@ -429,6 +433,7 @@ I put most of the explanation in the code.</p>
 </div>
 <p>The script is based on delta timing method. A constant value of 0.0007 is subtracted from the period to maintain a consistent reading frequency.</p>
 <p>Precision defines the minimum time that the script goes to check the diffrence between the last time and current time and consequently defines within what time difference that measures of LiDar and IMU occur simultaneously.</p>
+<p>Using -i command line input, we could run the script in endless mode (i.e. the duration would be set to 1000 seconds, we could stop the program by using KeyboardInterrupt(Ctrl + C), the pictures and logging data would be save up until the stopping point)</p>
 <p><strong>A great part of the codes are from Josh Jin’s sensor/camera reading code</strong></p>
 </div>
 </div>
