@@ -4,6 +4,13 @@ Electronics
 The electronics section will deal with interfacing the Raspberry Pi and Arduino
 with the sensors and actuators.
 
+First thing First:Raspberry Pi Pinout
+-------------------------------------
+
+.. image:: electronics/j8header-3b.png
+  :width: 275
+  :height: 500
+
 Pi and Arduino Communication
 ----------------------------
 
@@ -16,12 +23,21 @@ with slight changes to accommodate Python 3 instead of Python 2.
 Using I2C protocol, we could communicate between Raspberry Pi
 and Arduino using only three wires.
 
-The wiring is:
+**Wiring**
+
++--------------+-----------------------+
+|Rasberry Pi 3 |arduino Uno            |
++==============+=======================+
+|GND           | GND                   |
++--------------+-----------------------+
+|SDA(pin3)     |SDA(The pin above AREF)|
++--------------+-----------------------+
+|SCL(pin5)     |SCL(The pin above SDA) |
++--------------+-----------------------+
 
 .. image:: electronics/PiArduinoI2CHardware_bb.jpg
   :width: 500
 
-Raspberry pi and Arduino both agree on the a slave address of 0x04
 
 **Upload Arduino code to Arduino board**
 
@@ -280,6 +296,7 @@ I2C by GPIO(General Purpose Input Output)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 **Reason**
+
 Sometimes, we may want to save I2C pin to other device, or we may want to connect multiple
 arduino to raspberry pi. In this sections, we will use GPIO pins to connect our arduino by i2c.
 
@@ -347,8 +364,8 @@ Resources
 * `pigpio documentation <http://abyz.me.uk/rpi/pigpio/python.html>`_
 
 
-USB Method
-^^^^^^^^^^
+Serial Method
+^^^^^^^^^^^^^
 To do
 
 
@@ -368,15 +385,16 @@ data other than float, you are welcomed to do so.
 
 **Wiring**
 
-Same as I2C secion did
+Same as I2C section or SPI section did
 
 **Code**
 
 The code for this is under PiCar/src/Pi_Arduino_Communication
-i2cProtocol.ino runs on arduino
-i2cProtocol.py runs on pi
+each subfolder(i2c,spi) contains two files, .ino file should run on arduino, and
+.py file should run on raspberry pi.
 
-The key for this code is to write a simple protocol, and split a float
+
+The key for communication is to write a simple protocol, and split a float
 into 4 bytes, so we can send 1 byte each time.
 
 
@@ -456,12 +474,6 @@ Wiring
 +--------------+-----------+
 |RXD0          |TX (GREEN) |
 +--------------+-----------+
-
-The pinout of the Rasberry Pi is:
-
-.. image:: electronics/j8header-3b.png
-  :width: 275
-  :height: 500
 
 
 Code
@@ -631,13 +643,13 @@ Wiring
 +----------------+-----------+
 |RPI             |IMU        |
 +================+===========+
-|Pin 1 (3.3v)    |Vcc        |
+|3.3v(Pin1)      |Vcc        |
 +----------------+-----------+
-|Pin 3           |SDA        |
+|SDA(Pin3)       |SDA        |
 +----------------+-----------+
-|Pin 5           |SCL        |
+|SCL(Pin5)       |SCL        |
 +----------------+-----------+
-|Pin 6           |Gnd        |
+|GND(Pin6)       |Gnd        |
 +----------------+-----------+
 
 Resources
@@ -659,17 +671,8 @@ To compile, use the command:
 
 Wiring:
 
-+----------------+-----------+
-|RPI             |IMU        |
-+================+===========+
-|Pin 1 (3.3v)    |Vcc        |
-+----------------+-----------+
-|Pin 3           |SDA        |
-+----------------+-----------+
-|Pin 5           |SCL        |
-+----------------+-----------+
-|Pin 6           |Gnd        |
-+----------------+-----------+
+same as above did
+
 
 The connection is by SMBUS.
 

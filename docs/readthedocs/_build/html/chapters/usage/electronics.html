@@ -89,11 +89,12 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../usage.html">Usage</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="mechanical.html">Mechanical</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Electronics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#first-thing-first-raspberry-pi-pinout">First thing First:Raspberry Pi Pinout</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pi-and-arduino-communication">Pi and Arduino Communication</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#i2c-method">I2C Method</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#spi-method">SPI Method</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#i2c-by-gpio-general-purpose-input-output">I2C by GPIO(General Purpose Input Output)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#usb-method">USB Method</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#serial-method">Serial Method</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#sending-more-than-one-byte-between-pi-and-arduino">Sending more than one byte between Pi and Arduino</a></li>
 </ul>
 </li>
@@ -198,6 +199,10 @@
 <h1>Electronics<a class="headerlink" href="#electronics" title="Permalink to this headline">¶</a></h1>
 <p>The electronics section will deal with interfacing the Raspberry Pi and Arduino
 with the sensors and actuators.</p>
+<div class="section" id="first-thing-first-raspberry-pi-pinout">
+<h2>First thing First:Raspberry Pi Pinout<a class="headerlink" href="#first-thing-first-raspberry-pi-pinout" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="../../_images/j8header-3b.png"><img alt="../../_images/j8header-3b.png" src="../../_images/j8header-3b.png" style="width: 275px; height: 500px;" /></a>
+</div>
 <div class="section" id="pi-and-arduino-communication">
 <h2>Pi and Arduino Communication<a class="headerlink" href="#pi-and-arduino-communication" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="i2c-method">
@@ -206,9 +211,30 @@ with the sensors and actuators.</p>
 with slight changes to accommodate Python 3 instead of Python 2.</p>
 <p>Using I2C protocol, we could communicate between Raspberry Pi
 and Arduino using only three wires.</p>
-<p>The wiring is:</p>
+<p><strong>Wiring</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="38%" />
+<col width="62%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Rasberry Pi 3</th>
+<th class="head">arduino Uno</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>GND</td>
+<td>GND</td>
+</tr>
+<tr class="row-odd"><td>SDA(pin3)</td>
+<td>SDA(The pin above AREF)</td>
+</tr>
+<tr class="row-even"><td>SCL(pin5)</td>
+<td>SCL(The pin above SDA)</td>
+</tr>
+</tbody>
+</table>
 <a class="reference internal image-reference" href="../../_images/PiArduinoI2CHardware_bb.jpg"><img alt="../../_images/PiArduinoI2CHardware_bb.jpg" src="../../_images/PiArduinoI2CHardware_bb.jpg" style="width: 500px;" /></a>
-<p>Raspberry pi and Arduino both agree on the a slave address of 0x04</p>
 <p><strong>Upload Arduino code to Arduino board</strong></p>
 <p>The testing code is:</p>
 <div class="highlight-c notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -527,8 +553,8 @@ pi should receive and print 0x08.</p>
 </div>
 <div class="section" id="i2c-by-gpio-general-purpose-input-output">
 <h3>I2C by GPIO(General Purpose Input Output)<a class="headerlink" href="#i2c-by-gpio-general-purpose-input-output" title="Permalink to this headline">¶</a></h3>
-<p><strong>Reason</strong>
-Sometimes, we may want to save I2C pin to other device, or we may want to connect multiple
+<p><strong>Reason</strong></p>
+<p>Sometimes, we may want to save I2C pin to other device, or we may want to connect multiple
 arduino to raspberry pi. In this sections, we will use GPIO pins to connect our arduino by i2c.</p>
 <p><strong>Wiring</strong></p>
 <table border="1" class="docutils">
@@ -600,8 +626,8 @@ arduino to raspberry pi. In this sections, we will use GPIO pins to connect our 
 </ul>
 </div>
 </div>
-<div class="section" id="usb-method">
-<h3>USB Method<a class="headerlink" href="#usb-method" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="serial-method">
+<h3>Serial Method<a class="headerlink" href="#serial-method" title="Permalink to this headline">¶</a></h3>
 <p>To do</p>
 </div>
 <div class="section" id="sending-more-than-one-byte-between-pi-and-arduino">
@@ -616,12 +642,12 @@ none of the proposed solution works.
 We come out this example for sending float between pi and arduino. If you want to develop
 data other than float, you are welcomed to do so.</p>
 <p><strong>Wiring</strong></p>
-<p>Same as I2C secion did</p>
+<p>Same as I2C section or SPI section did</p>
 <p><strong>Code</strong></p>
 <p>The code for this is under PiCar/src/Pi_Arduino_Communication
-i2cProtocol.ino runs on arduino
-i2cProtocol.py runs on pi</p>
-<p>The key for this code is to write a simple protocol, and split a float
+each subfolder(i2c,spi) contains two files, .ino file should run on arduino, and
+.py file should run on raspberry pi.</p>
+<p>The key for communication is to write a simple protocol, and split a float
 into 4 bytes, so we can send 1 byte each time.</p>
 </div>
 </div>
@@ -700,8 +726,6 @@ smsc95xx.macaddr<span class="o">=</span>B8:27:EB:F3:8C:9C vc_mem.mem_base<span c
 </tr>
 </tbody>
 </table>
-<p>The pinout of the Rasberry Pi is:</p>
-<a class="reference internal image-reference" href="../../_images/j8header-3b.png"><img alt="../../_images/j8header-3b.png" src="../../_images/j8header-3b.png" style="width: 275px; height: 500px;" /></a>
 </div>
 <div class="section" id="code">
 <h3>Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h3>
@@ -951,16 +975,16 @@ sudo python LSM9DS1_Basic_I2C.py
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>Pin 1 (3.3v)</td>
+<tr class="row-even"><td>3.3v(Pin1)</td>
 <td>Vcc</td>
 </tr>
-<tr class="row-odd"><td>Pin 3</td>
+<tr class="row-odd"><td>SDA(Pin3)</td>
 <td>SDA</td>
 </tr>
-<tr class="row-even"><td>Pin 5</td>
+<tr class="row-even"><td>SCL(Pin5)</td>
 <td>SCL</td>
 </tr>
-<tr class="row-odd"><td>Pin 6</td>
+<tr class="row-odd"><td>GND(Pin6)</td>
 <td>Gnd</td>
 </tr>
 </tbody>
@@ -980,31 +1004,7 @@ sudo python LSM9DS1_Basic_I2C.py
 </pre></div>
 </div>
 <p>Wiring:</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="59%" />
-<col width="41%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">RPI</th>
-<th class="head">IMU</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>Pin 1 (3.3v)</td>
-<td>Vcc</td>
-</tr>
-<tr class="row-odd"><td>Pin 3</td>
-<td>SDA</td>
-</tr>
-<tr class="row-even"><td>Pin 5</td>
-<td>SCL</td>
-</tr>
-<tr class="row-odd"><td>Pin 6</td>
-<td>Gnd</td>
-</tr>
-</tbody>
-</table>
+<p>same as above did</p>
 <p>The connection is by SMBUS.</p>
 <p>For RPI, go to <code class="docutils literal notranslate"><span class="pre">/usr/include/linux</span></code>, replace <code class="docutils literal notranslate"><span class="pre">i2c_dev.h</span></code> with the header file in the repository</p>
 <p>(Method ‘enableIMU’ needs further development to enable IMU configuration setting)</p>

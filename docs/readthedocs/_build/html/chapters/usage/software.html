@@ -112,7 +112,10 @@
 <li class="toctree-l4"><a class="reference internal" href="#id3">Resources</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#data-logging">Data Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data-logging">Data Logging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#version-alpha-camera-data-imu-data-lidar-data">Version Alpha (Camera data, IMU data, LiDar Data)</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#data-analysis">Data Analysis</a></li>
 </ul>
 </li>
@@ -411,7 +414,23 @@ I put most of the explanation in the code.</p>
 </div>
 <div class="section" id="data-logging">
 <h2>Data Logging<a class="headerlink" href="#data-logging" title="Permalink to this headline">¶</a></h2>
-<p>To do</p>
+<div class="section" id="version-alpha-camera-data-imu-data-lidar-data">
+<h3>Version Alpha (Camera data, IMU data, LiDar Data)<a class="headerlink" href="#version-alpha-camera-data-imu-data-lidar-data" title="Permalink to this headline">¶</a></h3>
+<p>(Be sure to correctly wire all electronics, the wiring method could be found in the corresponding section of this doc site.)</p>
+<p>The code could be found in PiCar/src/pi/IMU_Lidar, you can find the method to enable IMU library <a class="reference external" href="http://picar.readthedocs.io/en/latest/chapters/usage/electronics.html#pi-and-imu-communication">here</a></p>
+<p><strong>IMPORTANT: If you have gone through the process before 06/18/2018, make sure you execute all steps again, few more functions and wrappers are added to the library</strong></p>
+<p>Run the script, a folder under the same directory would be generated, its name would be the starting timestamp of the script.</p>
+<p>The file itself contains several straight forward methods that can be used to get data from IMU LiDar. The method it uses to take pictures is currently only viable within the script.</p>
+<p>The imu setting functions (setIMUodr and setIMUScale) are not called in the main functions, but willed be added to the main function in beta version. Also, they can’t be used out side the script.</p>
+<p>If called from command line or python shell, the script would put picture taking job and data logging job into two different cores on RaspberryPi</p>
+<p>Use the command line option, you can bring up the usage page</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python Lidar_IMU_data_optimize_delta.py -h
+</pre></div>
+</div>
+<p>The script is based on delta timing method. A constant value of 0.0007 is subtracted from the period to maintain a consistent reading frequency.</p>
+<p>Precision defines the minimum time that the script goes to check the diffrence between the last time and current time and consequently defines within what time difference that measures of LiDar and IMU occur simultaneously.</p>
+<p><strong>A great part of the codes are from Josh Jin’s sensor/camera reading code</strong></p>
+</div>
 </div>
 <div class="section" id="data-analysis">
 <h2>Data Analysis<a class="headerlink" href="#data-analysis" title="Permalink to this headline">¶</a></h2>
