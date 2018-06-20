@@ -4,8 +4,8 @@ Electronics
 The electronics section will deal with interfacing the Raspberry Pi and Arduino
 with the sensors and actuators.
 
-First thing First:Raspberry Pi Pinout
--------------------------------------
+First thing First: Raspberry Pi Pinout
+--------------------------------------
 
 .. image:: electronics/j8header-3b.png
   :width: 275
@@ -20,20 +20,19 @@ I2C Method
 The code is from `here <https://oscarliang.com/raspberry-pi-arduino-connected-i2c/>`_,
 with slight changes to accommodate Python 3 instead of Python 2.
 
-Using I2C protocol, we could communicate between Raspberry Pi
-and Arduino using only three wires.
-
 **Wiring**
 
-+--------------+-----------------------+
-|Rasberry Pi 3 |arduino Uno            |
-+==============+=======================+
-|GND           | GND                   |
-+--------------+-----------------------+
-|SDA(pin3)     |SDA(The pin above AREF)|
-+--------------+-----------------------+
-|SCL(pin5)     |SCL(The pin above SDA) |
-+--------------+-----------------------+
++--------------+------------------------+
+|Rasberry Pi 3 |arduino Uno             |
++==============+========================+
+|GND           |GND                     |
++--------------+------------------------+
+|SDA (pin3)    |SDA (The pin above AREF)|
++--------------+------------------------+
+|SCL (pin5)    |SCL (The pin above SDA) |
++--------------+------------------------+
+
+And you can power arduino by usb on pi or on your labtop
 
 .. image:: electronics/PiArduinoI2CHardware_bb.jpg
   :width: 500
@@ -138,25 +137,25 @@ See Also:
 
 SPI Method
 ^^^^^^^^^^
-**Wiring:**
+**Wiring**
 
-+--------------+-----------+
-|Rasberry Pi 3 |arduino Uno|
-+==============+===========+
-|GND           | GND       |
-+--------------+-----------+
-|MOSI(Pin19)   |MOSI(Pin11)|
-+--------------+-----------+
-|MISO(Pin21)   |MISO(Pin12)|
-+--------------+-----------+
-|SCLK(Pin23)   |SCLK(Pin13)|
-+--------------+-----------+
++--------------+-------------+
+|Rasberry Pi 3 |arduino Uno  |
++==============+=============+
+|GND           | GND         |
++--------------+-------------+
+|MOSI (Pin19)  |MOSI (Pin11) |
++--------------+-------------+
+|MISO (Pin21)  |MISO (Pin12) |
++--------------+-------------+
+|SCLK (Pin23)  |SCLK (Pin13) |
++--------------+-------------+
 
 and you can choose to power the arduino using USB cable on Pi
 or on your laptop.
 
 
-**SPI on arduino:**
+**SPI on arduino**
 
 First the MISO pin has to be defined as an output pin.
 All other pins are configured automatically as input pins if the SPI is enabled:
@@ -188,7 +187,7 @@ At the hardware level SPDR includes both an 8-bit shift register and an 8-bit re
 When the slave is receiving data, that data is shifted into the shift register one bit at a time while the original 8-bits in the register are shifted back to the master.
 When a complete byte has been shifted into the register, that byte is then copied into the receive buffer. The receive buffer won't be updated again until the next complete byte is received.
 
-**This means if the pi(master) wants to read from arduino(slave), it has to send something first !! **
+.. note:: This means if the pi(master) wants to read from arduino(slave), it has to send something first !!
 
 **Code:**
 
@@ -284,7 +283,7 @@ Python code on Pi(make sure you have pigpio installed and running by sudo pigpio
         pi.spi_close(h)
         pi.stop()
 
-The arduino should continueously print 3,4 and 0(for pi reading purpose) and
+The arduino should continueously print 3,4 and 0 (for pi reading purpose) and
 pi should receive and print 0x08.
 
 Resources
@@ -292,7 +291,56 @@ Resources
 * `Pi_Arduino_SPI_communication <http://robotics.hobbizine.com/raspiduino.html>`_
 
 
-I2C by GPIO(General Purpose Input Output)
+Serial Method
+^^^^^^^^^^^^^
+
+**Wiring**
+
+Connect arduino USB port to one of the USB port on raspberry pi
+
+**Code**
+
+The code is under ``PiCar/src/Pi_Arduino_Communication/serial``
+
+On python side, it will continuously ask you to input a float, send it to arduino.
+
+On arduino side, once the float is sent, it will recive the data and then send it back to pi.
+
+**Difference compared with I2C and SPI**
+
+As Serial communication is well studied, we are able to send and read block of bytes on pi side.
+
+As a result, it is much more convenient to send data more than 1 byte (discussed in next section).
+
+
+Sending more than one byte between Pi and Arduino
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Reason**
+
+The above basic communication (i2c,spi) allows us to send one byte between pi and arduino.
+However, if we want to send data that is more than one byte, such as float,
+the above method does not work.
+We first thought this is a well developed problem, and there should be easy function
+being called to send block of data. However, the truth is that as far as we searched,
+none of the proposed solution works.
+We come out this example for sending float between pi and arduino. If you want to develop
+data other than float, you are welcomed to do so.
+
+**Wiring**
+
+Same as I2C section or SPI section did
+
+**Code**
+
+The code for this is under ``PiCar/src/Pi_Arduino_Communication``
+each subfolder(i2c,spi,serial) contains two files, .ino file should run on arduino, and
+.py file should run on raspberry pi.
+
+.. note:: The key for communication is to write a simple protocol, and split a float into 4 bytes, so we can send 1 byte each time.
+
+
+I2C by GPIO(General-purpose input/output)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 **Reason**
@@ -316,7 +364,7 @@ And you can power Arduino in whatever way you want.
 
 **Code**
 
-The arduino code is the same as above(I2C section)
+The arduino code is the same as above (I2C section)
 
 The following is the code on Pi, make sure you have pigpio installed and running.
 
@@ -364,42 +412,8 @@ Resources
 * `pigpio documentation <http://abyz.me.uk/rpi/pigpio/python.html>`_
 
 
-Serial Method
-^^^^^^^^^^^^^
-To do
-
-
-Sending more than one byte between Pi and Arduino
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-**Reason**
-
-The above method(i2c,spi) allows us to send one byte between pi and arduino.
-However, if we want to send data that is more than one byte, such as float,
-the above method does not work.
-We first thought this is a well developed problem, and there should be easy function
-being called to send block of data. However, the truth is that as far as we searched,
-none of the proposed solution works.
-We come out this example for sending float between pi and arduino. If you want to develop
-data other than float, you are welcomed to do so.
-
-**Wiring**
-
-Same as I2C section or SPI section did
-
-**Code**
-
-The code for this is under PiCar/src/Pi_Arduino_Communication
-each subfolder(i2c,spi) contains two files, .ino file should run on arduino, and
-.py file should run on raspberry pi.
-
-
-The key for communication is to write a simple protocol, and split a float
-into 4 bytes, so we can send 1 byte each time.
-
-
 PI and TFMini Lidar Communication
-------------------------------------
+---------------------------------
 
 Setup
 ^^^^^
@@ -466,13 +480,13 @@ Wiring
 +--------------+-----------+
 |Rasberry Pi 3 |TFmini     |
 +==============+===========+
-| +5V          | 5V (RED)  |
+|+5V           |5V (RED)   |
 +--------------+-----------+
-| GND          |GND (BLACK)|
+|GND           |GND (BLACK)|
 +--------------+-----------+
-|TXD0          |RX (WHITE) |
+|TXD0 (pin8)   |RX (WHITE) |
 +--------------+-----------+
-|RXD0          |TX (GREEN) |
+|RXD0 (pin10)  |TX (GREEN) |
 +--------------+-----------+
 
 
@@ -643,13 +657,13 @@ Wiring
 +----------------+-----------+
 |RPI             |IMU        |
 +================+===========+
-|3.3v(Pin1)      |Vcc        |
+|3.3v (Pin1)     |Vcc        |
 +----------------+-----------+
-|SDA(Pin3)       |SDA        |
+|SDA (Pin3)      |SDA        |
 +----------------+-----------+
-|SCL(Pin5)       |SCL        |
+|SCL (Pin5)      |SCL        |
 +----------------+-----------+
-|GND(Pin6)       |Gnd        |
+|GND (Pin6)      |Gnd        |
 +----------------+-----------+
 
 Resources
