@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*
+#No extra package required to run the script
+#However, be sure you read the documentation on http://picar.readthedocs.io/en/latest/chapters/usage/software.html#data-logging
 import os
 import serial
 import time
@@ -136,12 +138,8 @@ def getData(alive):
     lastTimeIMU = lastTimeLidar
     lastTime = lastTimeLidar
     current = time.time()
-<<<<<<< HEAD
     while current - startTime < duration and alive.value:
-=======
-    while current - startTime < duration:
         #define the precision, i.e. the gap between two consecutive IMU or LiDar read
->>>>>>> 9207bbcf68ba18b02262c0d0eef0cd85c92450da
         if current-lastTime>precision:
             lastTime = current
             if current-lastTimeIMU>imuRate and lib.lsm9ds1_accelAvailable(imu) > 0 and current-lastTimeLidar>lidarRate and ser.in_waiting > 8:
@@ -187,18 +185,12 @@ if __name__ == '__main__':
         if ser.is_open == False:
             ser.open()
         print(time.time())
-<<<<<<< HEAD
         alive = Value('b',True)
         pic =  Process(target = capture)
         sensor = Process(target = getData, args=(alive,))
-        
-=======
+
         #multicore process
         pic =  Process(target = capture)
-        sensor = Process(target = getData)
-
->>>>>>> 9207bbcf68ba18b02262c0d0eef0cd85c92450da
-        pic.start()
         sensor.start()
         pic.join()
         sensor.join()
