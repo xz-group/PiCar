@@ -106,8 +106,10 @@ def getLidar():
         return distance
     else:
         ser.reset_input_buffer()
-        return "value"
-    
+        return "UP"
+
+
+#a timer wrapped inside a python generator to take picture
 def filenames():
     startTime = time.time()
     lastTime = time.time()
@@ -119,8 +121,8 @@ def filenames():
             name = beginTime+'/camera/'+str(name)+'.jpg'
             lastTime = time.time()
             yield name
-    
-    
+
+
 def capture():
     camera = picamera.PiCamera(resolution=(480,480), framerate=40)
     camera.capture_sequence(filenames(), use_video_port=True)
@@ -134,7 +136,12 @@ def getData(alive):
     lastTimeIMU = lastTimeLidar
     lastTime = lastTimeLidar
     current = time.time()
+<<<<<<< HEAD
     while current - startTime < duration and alive.value:
+=======
+    while current - startTime < duration:
+        #define the precision, i.e. the gap between two consecutive IMU or LiDar read
+>>>>>>> 9207bbcf68ba18b02262c0d0eef0cd85c92450da
         if current-lastTime>precision:
             lastTime = current
             if current-lastTimeIMU>imuRate and lib.lsm9ds1_accelAvailable(imu) > 0 and current-lastTimeLidar>lidarRate and ser.in_waiting > 8:
@@ -171,7 +178,7 @@ setIMUScale(accScale,gyroScale,magScale)
 setIMUodr(trAccRate,trGyroRate,trMagRate)
 
 if __name__ == '__main__':
-    
+
     if lib.lsm9ds1_begin(imu) == 0:
         print("Failed to communicate with LSM9DS1.")
         quit()
@@ -180,15 +187,22 @@ if __name__ == '__main__':
         if ser.is_open == False:
             ser.open()
         print(time.time())
+<<<<<<< HEAD
         alive = Value('b',True)
         pic =  Process(target = capture)
         sensor = Process(target = getData, args=(alive,))
         
+=======
+        #multicore process
+        pic =  Process(target = capture)
+        sensor = Process(target = getData)
+
+>>>>>>> 9207bbcf68ba18b02262c0d0eef0cd85c92450da
         pic.start()
         sensor.start()
         pic.join()
         sensor.join()
-        
+
         print(time.time())
     except KeyboardInterrupt:   # Ctrl+C
         if ser != None:
