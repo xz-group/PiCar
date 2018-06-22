@@ -102,6 +102,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#setup">Setup</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#wiring">Wiring</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#code">Code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#use-gpio-pin-for-reading">Use GPIO pin for reading</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id2">Resources</a></li>
 </ul>
 </li>
@@ -425,6 +426,9 @@ with slight changes to accommodate Python 3 instead of Python 2.</p>
 <tr class="row-odd"><td>SCLK (Pin23)</td>
 <td>SCLK (Pin13)</td>
 </tr>
+<tr class="row-even"><td>cell0 (Pin24)</td>
+<td>SS (Pin10)</td>
+</tr>
 </tbody>
 </table>
 <p>and you can choose to power the arduino using USB cable on Pi
@@ -738,6 +742,10 @@ smsc95xx.macaddr<span class="o">=</span>B8:27:EB:F3:8C:9C vc_mem.mem_base<span c
 </tr>
 </tbody>
 </table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">the white wire on TFmini Lidar is used to write command to it. If we just want to read from it, we can leave the white wire not connected.</p>
+</div>
 </div>
 <div class="section" id="code">
 <h3>Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h3>
@@ -907,6 +915,50 @@ smsc95xx.macaddr<span class="o">=</span>B8:27:EB:F3:8C:9C vc_mem.mem_base<span c
             <span class="n">ser</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </td></tr></table></div>
+</div>
+<div class="section" id="use-gpio-pin-for-reading">
+<h3>Use GPIO pin for reading<a class="headerlink" href="#use-gpio-pin-for-reading" title="Permalink to this headline">¶</a></h3>
+<p>If we connect TX (green wire on TFmini Lidar) to the GPIO pin23, we can use it as a simulative port and read from it.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*</span>
+<span class="kn">import</span> <span class="nn">pigpio</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">RX</span> <span class="o">=</span> <span class="mi">23</span>
+
+<span class="n">pi</span> <span class="o">=</span> <span class="n">pigpio</span><span class="o">.</span><span class="n">pi</span><span class="p">()</span>
+<span class="n">pi</span><span class="o">.</span><span class="n">set_mode</span><span class="p">(</span><span class="n">RX</span><span class="p">,</span> <span class="n">pigpio</span><span class="o">.</span><span class="n">INPUT</span><span class="p">)</span>
+<span class="n">pi</span><span class="o">.</span><span class="n">bb_serial_read_open</span><span class="p">(</span><span class="n">RX</span><span class="p">,</span> <span class="mi">115200</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">getTFminiData</span><span class="p">():</span>
+  <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="c1">#print(&quot;#############&quot;)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)</span>  <span class="c1">#change the value if needed</span>
+    <span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="n">recv</span><span class="p">)</span> <span class="o">=</span> <span class="n">pi</span><span class="o">.</span><span class="n">bb_serial_read</span><span class="p">(</span><span class="n">RX</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">8</span><span class="p">:</span>
+      <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">count</span><span class="o">-</span><span class="mi">9</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">recv</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">89</span> <span class="ow">and</span> <span class="n">recv</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">89</span><span class="p">:</span> <span class="c1"># 0x59 is 89</span>
+          <span class="n">checksum</span> <span class="o">=</span> <span class="mi">0</span>
+          <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">):</span>
+            <span class="n">checksum</span> <span class="o">=</span> <span class="n">checksum</span> <span class="o">+</span> <span class="n">recv</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">]</span>
+          <span class="n">checksum</span> <span class="o">=</span> <span class="n">checksum</span> <span class="o">%</span> <span class="mi">256</span>
+          <span class="k">if</span> <span class="n">checksum</span> <span class="o">==</span> <span class="n">recv</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">8</span><span class="p">]:</span>
+            <span class="n">distance</span> <span class="o">=</span> <span class="n">recv</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">recv</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="mi">256</span>
+            <span class="n">strength</span> <span class="o">=</span> <span class="n">recv</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">4</span><span class="p">]</span> <span class="o">+</span> <span class="n">recv</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">5</span><span class="p">]</span> <span class="o">*</span> <span class="mi">256</span>
+            <span class="k">if</span> <span class="n">distance</span> <span class="o">&lt;=</span> <span class="mi">1200</span> <span class="ow">and</span> <span class="n">strength</span> <span class="o">&lt;</span> <span class="mi">2000</span><span class="p">:</span>
+              <span class="k">print</span><span class="p">(</span><span class="n">distance</span><span class="p">,</span> <span class="n">strength</span><span class="p">)</span>
+            <span class="c1">#else:</span>
+              <span class="c1"># raise ValueError(&#39;distance error: %d&#39; % distance)</span>
+            <span class="c1">#i = i + 9</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+  <span class="k">try</span><span class="p">:</span>
+    <span class="n">getTFminiData</span><span class="p">()</span>
+  <span class="k">except</span><span class="p">:</span>
+    <span class="n">pi</span><span class="o">.</span><span class="n">bb_serial_read_close</span><span class="p">(</span><span class="n">RX</span><span class="p">)</span>
+    <span class="n">pi</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>In this way, we can save the TX port for other device, or connect multiple lidars to raspberry pi</p>
 </div>
 <div class="section" id="id2">
 <h3>Resources<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
