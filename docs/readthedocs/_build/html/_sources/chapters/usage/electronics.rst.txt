@@ -150,6 +150,8 @@ SPI Method
 +--------------+-------------+
 |SCLK (Pin23)  |SCLK (Pin13) |
 +--------------+-------------+
+|cell0 (Pin24) |SS (Pin10)   |
++--------------+-------------+
 
 and you can choose to power the arduino using USB cable on Pi
 or on your laptop.
@@ -489,6 +491,7 @@ Wiring
 |RXD0 (pin10)  |TX (GREEN) |
 +--------------+-----------+
 
+.. note:: the white wire on TFmini Lidar is used to write command to it. If we just want to read from it, we can leave the white wire not connected.
 
 Code
 ^^^^
@@ -584,6 +587,52 @@ Code
             if ser != None:
                 ser.close()
 
+
+Use GPIO pin for reading
+^^^^^^^^^^^^^^^^^^^^^^^^
+If we connect TX (green wire on TFmini Lidar) to the GPIO pin23, we can use it as a simulative port and read from it.
+
+.. code-block:: python
+
+  # -*- coding: utf-8 -*
+  import pigpio
+  import time
+
+  RX = 23
+
+  pi = pigpio.pi()
+  pi.set_mode(RX, pigpio.INPUT)
+  pi.bb_serial_read_open(RX, 115200)
+
+  def getTFminiData():
+    while True:
+      #print("#############")
+      time.sleep(0.05)	#change the value if needed
+      (count, recv) = pi.bb_serial_read(RX)
+      if count > 8:
+        for i in range(0, count-9):
+          if recv[i] == 89 and recv[i+1] == 89: # 0x59 is 89
+            checksum = 0
+            for j in range(0, 8):
+              checksum = checksum + recv[i+j]
+            checksum = checksum % 256
+            if checksum == recv[i+8]:
+              distance = recv[i+2] + recv[i+3] * 256
+              strength = recv[i+4] + recv[i+5] * 256
+              if distance <= 1200 and strength < 2000:
+                print(distance, strength)
+              #else:
+                # raise ValueError('distance error: %d' % distance)
+              #i = i + 9
+
+  if __name__ == '__main__':
+    try:
+      getTFminiData()
+    except:
+      pi.bb_serial_read_close(RX)
+      pi.stop()
+
+In this way, we can save the TX port for other device, or connect multiple lidars to raspberry pi
 
 Resources
 ^^^^^^^^^
