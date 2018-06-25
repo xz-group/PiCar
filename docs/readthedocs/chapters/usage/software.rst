@@ -8,8 +8,11 @@ the Electronics section.
 Socket File Transfer
 --------------------
 
+Basic File Transfer
+^^^^^^^^^^^^^^^^^^^
+
 Server side
-^^^^^^^^^^^
+###########
 
 .. code-block:: python
   :linenos:
@@ -43,7 +46,7 @@ Server side
       conn.close()
 
 Client side
-^^^^^^^^^^^
+###########
 
 .. code-block:: python
   :linenos:
@@ -72,6 +75,18 @@ Client side
   print('Successfully get the file')
   s.close()
   print('connection closed')
+
+Advanced Folder Transfer
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+*Creator: Jerry Kong
+
+To meet our need of a neat and organized data structure, this script is created.
+It has the capability to transfer the entire folder to another remote desktop, no matter it is on a Windows System or Unix system.
+The script rests in PiCar/src/Logging
+To use the script, first setup the ip addresses like in the basic version, change the root variable to the root folder name.
+Place the script at the same level as the root folder. Start the server script and then start the client script. The folder would then be transferred.
+A better protocol could be implemented, since the protocol now being used is not really efficient though fulfill the need of our experiment for now.
 
 
 Sensors(Lidar,IMU) reading and writing
