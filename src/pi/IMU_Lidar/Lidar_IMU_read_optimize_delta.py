@@ -12,17 +12,21 @@ import threading
 import picamera
 import argparse
 import signal
-from multiprocessing import Process,Value
+from socket_folder_server import send
+from multiprocessing import Process,Event
 from IMU_SETUP import lib
 
 
 
 beginTime = str(datetime.datetime.now())
 
+
 sys.version[0] == '3' #declare for python 3
 
 
 parser = argparse.ArgumentParser(description = 'PiCar log file generator', formatter_class = argparse.RawTextHelpFormatter, conflict_handler = 'resolve')
+parser.add_argument("--ip",help="Ip of this raspberry pi",default="192.168.1.121")
+parser.add_argument("--po",help = "port for connection",type = int,default=60000)
 parser.add_argument("-i","--t", help = "endless mode", action='store_const',const=1000 , default =5 )
 parser.add_argument("--t",help = "determine the duration that the test runs", type = int, default = 5)
 parser.add_argument("--sa",help = "set accelerometer ODR, available values(default = 6): \n 1 = 10 Hz    4 = 238 Hz \n 2 = 50 Hz    5 = 476 Hz \n 3 = 119 Hz   6 = 952 Hz", type = int, choices=[1,2,3,4,5,6], default = 6)
@@ -46,6 +50,8 @@ ser = serial.Serial("/dev/ttyS0", 115200) #serial port for Lidar
 datafile = beginTime+'/Lidar_IMU_Data.csv'
 
 rowList = []
+host = re.ip
+port = re.po
 duration = re.t
 trAccRate = re.sa
 trGyroRate = re.sg
@@ -57,6 +63,11 @@ lidarRate = float(1)/(re.rl)-0.0007   # minus 0.0007 to compensate for the call 
 imuRate = 1/float(re.ri)-0.0007
 precision = re.p
 cameraFreq = 1/float(re.c)
+
+
+def pre_exec():
+    # To ignore CTRL+C signal in the new process
+    signal.signal(signal.SIGINT, signal.SIG_IGN)
 
 
 #see document for available scales
@@ -112,33 +123,36 @@ def getLidar():
 
 
 #a timer wrapped inside a python generator to take picture
-def filenames():
+def filenames(alive):
     startTime = time.time()
     lastTime = time.time()
     current = time.time()
-    while current-startTime<duration:
+    while current-startTime<duration and not alive.is_set():
         current = time.time()
         if current-lastTime>cameraFreq:
             name = datetime.datetime.now()
+            #name = time.time()
             name = beginTime+'/camera/'+str(name)+'.jpg'
             lastTime = time.time()
             yield name
 
 
-def capture():
+def capture(alive):
+    pre_exec()
     camera = picamera.PiCamera(resolution=(480,480), framerate=40)
-    camera.capture_sequence(filenames(), use_video_port=True)
+    camera.capture_sequence(filenames(alive), use_video_port=True)
 
 
 #the function which calls getIMU and getLidar
 def getData(alive):
+    pre_exec()
     global imu
     startTime = time.time()
     lastTimeLidar = time.time()
     lastTimeIMU = lastTimeLidar
     lastTime = lastTimeLidar
     current = time.time()
-    while current - startTime < duration and alive.value:
+    while current - startTime < duration and not alive.is_set():
         #define the precision, i.e. the gap between two consecutive IMU or LiDar read
         if current-lastTime>precision:
             lastTime = current
@@ -147,17 +161,20 @@ def getData(alive):
                 IMUdata = getIMU()
                 Lidardata = getLidar()
                 currentTime = str(datetime.datetime.fromtimestamp(lastTimeIMU))
+                #currentTime = str(lastTimeIMU)
                 lastTimeLidar = lastTimeIMU
                 rowList.append([currentTime,Lidardata,IMUdata[0],IMUdata[1],IMUdata[2],IMUdata[3],IMUdata[4],IMUdata[5]])
             elif current-lastTimeIMU>imuRate and lib.lsm9ds1_accelAvailable(imu) > 0:
                 lastTimeIMU = time.time()
                 IMUdata = getIMU()
                 currentTime = str(datetime.datetime.fromtimestamp(lastTimeIMU))
+                #currentTime = str(lastTimeIMU)
                 rowList.append([currentTime,"NA",IMUdata[0],IMUdata[1],IMUdata[2],IMUdata[3],IMUdata[4],IMUdata[5]])
             elif current-lastTimeLidar>lidarRate and ser.in_waiting > 8:
                 lastTimeLidar = time.time()
                 Lidardata = getLidar()
                 currentTime = str(datetime.datetime.fromtimestamp(lastTimeLidar))
+                #currentTime = str(lastTimeLidar)
                 rowList.append([currentTime,Lidardata,"NA","NA","NA","NA","NA","NA"])
 
         current = time.time()
@@ -185,20 +202,22 @@ if __name__ == '__main__':
         if ser.is_open == False:
             ser.open()
         print(time.time())
-        alive = Value('b',True)
+        alive = Event()
         #multicore process
-        pic =  Process(target = capture)
-        sensor = Process(target = getData, args=(alive,))
+        pic =  Process(target = capture,args=(alive,))
+        sensor = Process(target = getData,args=(alive,))
 
         pic.start()
         sensor.start()
         pic.join()
         sensor.join()
-
-        print(time.time())
+        #subprocess.Popen("python3 socket_folder_server.py localhost 60004 \""+beginTime+"\"",shell=True)
     except KeyboardInterrupt:   # Ctrl+C
         if ser != None:
             ser.close()
-        pic.terminate()
-        alive.value = False
-        sys.exit()
+        alive.set()
+        pic.join()
+        sensor.join()
+    print(time.time())
+    send(host,port,beginTime)
+    
