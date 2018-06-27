@@ -1,4 +1,6 @@
 # client.py
+
+# for picar lab students use command "python3 socket_folder_client.py 172.16.10.208 31418"
 import os
 import sys
 import socket                   # Import socket module
@@ -6,7 +8,7 @@ import time
 s = socket.socket()             # Create a socket object
 host = sys.argv[1]     # Get local machine name
 port = int(sys.argv[2])                   # Reserve a port for your service.
- 
+
 s.connect((host, port))
 data=s.recv(1024)
 #print(len(data))
@@ -19,9 +21,9 @@ folders = flds.split("!")
 for folder in folders:
     if folder!="":
         os.mkdir(folder)
- 
+
 file = ""
- 
+
 while True:
     get = s.recv(1024)
     if not get:
@@ -46,8 +48,7 @@ while True:
             ll=abs(ll)
             file=get[2:2+ll].decode('ascii')
             f = open(file,'wb')
- 
- 
+
+
 s.close()
 print('connection closed')
-
