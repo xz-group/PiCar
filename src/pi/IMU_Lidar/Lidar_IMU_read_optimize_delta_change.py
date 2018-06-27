@@ -236,6 +236,7 @@ if __name__ == '__main__':
     imuRate = 1/float(re.ri)-0.0007
     precision = re.p
     cameraFreq = 1/float(re.c)
+    save = re.s
     setIMUScale(accScale,gyroScale,magScale)
     setIMUodr(trAccRate,trGyroRate,trMagRate)
     if lib.lsm9ds1_begin(imu) == 0:
@@ -248,7 +249,7 @@ if __name__ == '__main__':
         print(time.time())
         alive = Event()
         #multicore process
-        pic =  Process(target = capture,args=(alive,duration,cameraFreq,))
+        pic =  Process(target = capture,args=(alive,duration,cameraFreq,beginTime,))
         sensor = Process(target = getData,args=(alive,duration,precision,imuRate,lidarRate,datafile,rowList,))
 
         pic.start()
