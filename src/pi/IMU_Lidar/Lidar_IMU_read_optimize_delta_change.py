@@ -76,7 +76,7 @@ def getLidar():
 
 
 #a timer wrapped inside a python generator to take picture
-def filenames(alive,duration,cameraFreq):
+def filenames(alive,duration,cameraFreq,beginTime):
     startTime = time.time()
     lastTime = time.time()
     current = time.time()
@@ -90,10 +90,10 @@ def filenames(alive,duration,cameraFreq):
             yield name
 
 
-def capture(alive,duration,cameraFreq):
+def capture(alive,duration,cameraFreq,beginTime):
     pre_exec()
     camera = picamera.PiCamera(resolution=(480,480), framerate=40)
-    camera.capture_sequence(filenames(alive,duration,cameraFreq), use_video_port=True)
+    camera.capture_sequence(filenames(alive,duration,cameraFreq,beginTime), use_video_port=True)
 
 
 #the function which calls getIMU and getLidar
@@ -165,7 +165,7 @@ def getSensorAndCamera(host='192.168.1.121',port=6000,duration=5,endless=False,t
         print(time.time())
         alive = Event()
         #multicore process
-        pic =  Process(target = capture,args=(alive,duration,cameraFreq,))
+        pic =  Process(target = capture,args=(alive,duration,cameraFreq,beginTime,))
         sensor = Process(target = getData,args=(alive,duration,precision,imuRate,lidarRate,datafile,rowList,))
 
         pic.start()
