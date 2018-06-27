@@ -189,9 +189,7 @@ def getSensorAndCamera(host='192.168.1.121',port=6000,save=False,duration=5,endl
     print(time.time())
     send(host,port,beginTime)
     if not save:
-        for i in os.listdir(beginTime):
-            os.remove(os.path.join(beginTime, i))
-        os.rmdir(beginTime)
+        os.system("rm -r \""+beginTime+"\"")
 
 
 if __name__ == '__main__':
@@ -266,6 +264,4 @@ if __name__ == '__main__':
     print(time.time())
     send(host,port,beginTime)
     if not save:
-        for i in os.listdir(beginTime):
-            os.remove(os.path.join(beginTime, i))
-        os.rmdir(beginTime)
+        os.system("rm -r \""+beginTime+"\"")
