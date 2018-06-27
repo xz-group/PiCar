@@ -187,7 +187,7 @@ if __name__ == '__main__':
     beginTime = str(datetime.datetime.now())
     parser = argparse.ArgumentParser(description = 'PiCar log file generator', formatter_class = argparse.RawTextHelpFormatter, conflict_handler = 'resolve')
     parser.add_argument("--ip",help="Ip of this raspberry pi",default="192.168.1.121")
-    parser.add_argument("--po",help = "port for connection",type = int,default=60000)
+    parser.add_argument("--po",help = "port for connection",type = int,default=6000)
     parser.add_argument("-i","--t", help = "endless mode", action='store_const',const=1000 , default =5 )
     parser.add_argument("--t",help = "determine the duration that the test runs", type = int, default = 5)
     parser.add_argument("--sa",help = "set accelerometer ODR, available values(default = 6): \n 1 = 10 Hz    4 = 238 Hz \n 2 = 50 Hz    5 = 476 Hz \n 3 = 119 Hz   6 = 952 Hz", type = int, choices=[1,2,3,4,5,6], default = 6)
