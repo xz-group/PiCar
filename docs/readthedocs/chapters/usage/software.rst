@@ -1,5 +1,5 @@
 Software
-=============
+========
 
 The software section will document all the heavy duty programming
 programming aspects of the project. There may be some overlap with
@@ -149,8 +149,10 @@ Make sure you have alreadly connect TFmini Lidar and IMU as
 , `IMU by LSM9DS1 <http://picar.readthedocs.io/en/latest/chapters/usage/electronics.html#pi-and-imu-communication>`_ did.
 and download corresponding libraris.
 
-source code:
-Under Directory PiCar/src/pi/IMU_Lidar
+Code
+^^^^
+
+Under Directory ``PiCar/src/pi/IMU_Lidar``
 
 Steps
 ^^^^^
@@ -216,7 +218,8 @@ Connect IMU,TFmini Lidar, and Pi Camera correctly as previous tutorial did.
 
 Code
 ^^^^
-The code for this part is under directory PiCar/src/pi/pythonTimer;
+The code for this part is under directory ``PiCar/src/pi/pythonTimer``
+
 I put most of the explanation in the code.
 
 Resources

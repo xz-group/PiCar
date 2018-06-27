@@ -4,6 +4,13 @@ Electronics
 The electronics section will deal with interfacing the Raspberry Pi and Arduino
 with the sensors and actuators.
 
+First thing First: Raspberry Pi Pinout
+--------------------------------------
+
+.. image:: electronics/j8header-3b.png
+  :width: 275
+  :height: 500
+
 Pi and Arduino Communication
 ----------------------------
 
@@ -13,15 +20,23 @@ I2C Method
 The code is from `here <https://oscarliang.com/raspberry-pi-arduino-connected-i2c/>`_,
 with slight changes to accommodate Python 3 instead of Python 2.
 
-Using I2C protocol, we could communicate between Raspberry Pi
-and Arduino using only three wires.
+**Wiring**
 
-The wiring is:
++--------------+------------------------+
+|Rasberry Pi 3 |arduino Uno             |
++==============+========================+
+|GND           |GND                     |
++--------------+------------------------+
+|SDA (pin3)    |SDA (The pin above AREF)|
++--------------+------------------------+
+|SCL (pin5)    |SCL (The pin above SDA) |
++--------------+------------------------+
+
+And you can power arduino by usb on pi or on your labtop
 
 .. image:: electronics/PiArduinoI2CHardware_bb.jpg
   :width: 500
 
-Raspberry pi and Arduino both agree on the a slave address of 0x04
 
 **Upload Arduino code to Arduino board**
 
@@ -122,17 +137,288 @@ See Also:
 
 SPI Method
 ^^^^^^^^^^
-To do
+**Wiring**
 
-USB Method
-^^^^^^^^^^
-To do
++--------------+-------------+
+|Rasberry Pi 3 |arduino Uno  |
++==============+=============+
+|GND           | GND         |
++--------------+-------------+
+|MOSI (Pin19)  |MOSI (Pin11) |
++--------------+-------------+
+|MISO (Pin21)  |MISO (Pin12) |
++--------------+-------------+
+|SCLK (Pin23)  |SCLK (Pin13) |
++--------------+-------------+
+|cell0 (Pin24) |SS (Pin10)   |
++--------------+-------------+
+
+and you can choose to power the arduino using USB cable on Pi
+or on your laptop.
+
+
+**SPI on arduino**
+
+First the MISO pin has to be defined as an output pin.
+All other pins are configured automatically as input pins if the SPI is enabled:
+
+.. code-block:: c
+
+  pinMode(MISO, OUTPUT);
+
+Second the SPI enable bit needs to be set:
+
+.. code-block:: c
+
+  SPCR |= _BV(SPE);
+
+Reading and writing of SPI data is performed through SPDR. Programmatically you can treat SPDR as you would a variable. To read the contents of SDPR, it can either be accessed directly,
+or another variable can be set equal to it:
+
+.. code-block:: c
+
+  i = SPDR;
+
+To load the data register with a value to transmit back to the master, the statement is reversed:
+
+.. code-block:: c
+
+  SPDR = i;
+
+At the hardware level SPDR includes both an 8-bit shift register and an 8-bit receive buffer.
+When the slave is receiving data, that data is shifted into the shift register one bit at a time while the original 8-bits in the register are shifted back to the master.
+When a complete byte has been shifted into the register, that byte is then copied into the receive buffer. The receive buffer won't be updated again until the next complete byte is received.
+
+.. note:: This means if the pi(master) wants to read from arduino(slave), it has to send something first !!
+
+**Code:**
+
+code on arduino
+
+.. code-block:: c
+
+  /*************************************************************
+   SPI_Hello_Raspi
+     Configures Arduino as an SPI slave and demonstrates
+     bidirectional communication with an Raspberry Pi SPI master
+  ****************************************************************/
+
+  #include <SPI.h>
+
+  byte c = 0;
+
+  /***************************************************************
+   Setup SPI in slave mode (1) define MISO pin as output (2) set
+   enable bit of the SPI configuration register
+  ****************************************************************/
+
+  void setup (void)
+  {
+    Serial.begin(9600);
+    pinMode(MISO, OUTPUT);
+    SPCR |= _BV(SPE);
+
+  }
+
+  /***************************************************************
+   Loop until the SPI End of Transmission Flag (SPIF) is set
+   indicating a byte has been received.  When a byte is
+   received, load the byte,print it, and put 0x08 into SPDR for pi
+   to read
+  ****************************************************************/
+
+  void loop (void)
+  {
+
+    if((SPSR & (1 << SPIF)) != 0)
+    {
+      //arduino should receive 3 and 4
+      //and send 8 to pi
+      c = SPDR;
+      Serial.print("we received: ");
+      Serial.println(c);
+      SPDR = 8;
+    }
+
+  }
+
+Python code on Pi(make sure you have pigpio installed and running by sudo pigpiod):
+
+.. code-block:: python
+
+  #!/usr/bin/env python
+
+  import time,pigpio
+
+
+  #open spi
+  pi = pigpio.pi()
+
+  if not pi.connected:
+     exit(0)
+
+  h = pi.spi_open(0, 40000)
+
+
+  #function for communicating with arduino
+  def communicate():
+     while True:
+        #first send byts to arduino
+        pi.spi_write(h,b'\x03\x04')
+
+        #sleep 1 second and read 1 byte
+        time.sleep(1)
+        #pi shoudl receive 0x08, which is sent from arduino
+        #spi_read returns a tuple, first is the number of bytes read,
+        #second is the byte array contains the bytes
+        (count,data) = pi.spi_read(h,1)
+        #at the same time for reading, arduino will receive 1 byte, which is 0x00
+        #Why? remember in order to read, the pi has to send something to the arduino first !
+        #By default, it will write 0 to arduino in order to read.
+        print("we get %s" % data)
+
+
+  if __name__ == '__main__':
+     try:
+        communicate()
+     except:
+        pi.spi_close(h)
+        pi.stop()
+
+The arduino should continueously print 3,4 and 0 (for pi reading purpose) and
+pi should receive and print 0x08.
+
+Resources
+#########
+* `Pi_Arduino_SPI_communication <http://robotics.hobbizine.com/raspiduino.html>`_
+
+
+Serial Method
+^^^^^^^^^^^^^
+
+**Wiring**
+
+Connect arduino USB port to one of the USB port on raspberry pi
+
+**Code**
+
+The code is under ``PiCar/src/Pi_Arduino_Communication/serial``
+
+On python side, it will continuously ask you to input a float, send it to arduino.
+
+On arduino side, once the float is sent, it will recive the data and then send it back to pi.
+
+**Difference compared with I2C and SPI**
+
+As Serial communication is well studied, we are able to send and read block of bytes on pi side.
+
+As a result, it is much more convenient to send data more than 1 byte (discussed in next section).
+
+
+Sending more than one byte between Pi and Arduino
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Reason**
+
+The above basic communication (i2c,spi) allows us to send one byte between pi and arduino.
+However, if we want to send data that is more than one byte, such as float,
+the above method does not work.
+We first thought this is a well developed problem, and there should be easy function
+being called to send block of data. However, the truth is that as far as we searched,
+none of the proposed solution works.
+We come out this example for sending float between pi and arduino. If you want to develop
+data other than float, you are welcomed to do so.
+
+**Wiring**
+
+Same as I2C section or SPI section did
+
+**Code**
+
+The code for this is under ``PiCar/src/Pi_Arduino_Communication``
+each subfolder(i2c,spi,serial) contains two files, .ino file should run on arduino, and
+.py file should run on raspberry pi.
+
+.. note:: The key for communication is to write a simple protocol, and split a float into 4 bytes, so we can send 1 byte each time.
+
+
+I2C by GPIO(General-purpose input/output)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Reason**
+
+Sometimes, we may want to save I2C pin to other device, or we may want to connect multiple
+arduino to raspberry pi. In this sections, we will use GPIO pins to connect our arduino by i2c.
+
+**Wiring**
+
++--------------+-----------------------+
+|Rasberry Pi 3 |arduino Uno            |
++==============+=======================+
+|GND           | GND                   |
++--------------+-----------------------+
+|Pin19         |SDA(The pin above AREF)|
++--------------+-----------------------+
+|Pin13         |SCL(The pin above SDA) |
++--------------+-----------------------+
+
+And you can power Arduino in whatever way you want.
+
+**Code**
+
+The arduino code is the same as above (I2C section)
+
+The following is the code on Pi, make sure you have pigpio installed and running.
+
+.. code-block:: python
+
+  import pigpio
+  import time
+
+  pi = pigpio.pi()
+  address = 0x04
+
+  SDA = 19
+  SCL = 13
+
+
+  def communication():
+
+      while True:
+          connection = pi.bb_i2c_open(SDA,SCL,9600)
+          var = int(input("Enter 1  ^ ^  9: "))
+          if not var:
+              continue
+          pi.bb_i2c_zip(SDA,[4,address,0x02,0x07,0x01,var,0x03,0x00])
+          print("RPI: Hi Arduino, I sent you ", var)
+
+          time.sleep(1)
+
+          number = pi.bb_i2c_zip(SDA,[4,address,0x02,0x06,0x01,0x03,0x00])
+          print("Arduino: Hey RPI, I received a digit ", number)
+          print()
+
+          pi.bb_i2c_close(SDA)
+
+
+  if __name__ == '__main__':
+      try:
+          communication()
+      except:
+          pi.bb_i2c_close(SDA)
+
+
+Resources
+#########
+
+* `pigpio documentation <http://abyz.me.uk/rpi/pigpio/python.html>`_
+
 
 PI and TFMini Lidar Communication
-------------------------------------
+---------------------------------
 
 Setup
-^^^^^^^^^^
+^^^^^
 To search for available serial ports, enter the following command in terminal:
 
 .. code-block:: bash
@@ -191,29 +477,24 @@ The output now should look like:
 
 
 Wiring
-^^^^^^^^^^
+^^^^^^
 
 +--------------+-----------+
 |Rasberry Pi 3 |TFmini     |
 +==============+===========+
-| +5V          | 5V (RED)  |
+|+5V           |5V (RED)   |
 +--------------+-----------+
-| GND          |GND (BLACK)|
+|GND           |GND (BLACK)|
 +--------------+-----------+
-|TXD0          |RX (WHITE) |
+|TXD0 (pin8)   |RX (WHITE) |
 +--------------+-----------+
-|RXD0          |TX (GREEN) |
+|RXD0 (pin10)  |TX (GREEN) |
 +--------------+-----------+
 
-The pinout of the Rasberry Pi is:
-
-.. image:: electronics/j8header-3b.png
-  :width: 275
-  :height: 500
-
+.. note:: the white wire on TFmini Lidar is used to write command to it. If we just want to read from it, we can leave the white wire not connected.
 
 Code
-^^^^^^^^^^
+^^^^
 
 .. code-block:: python
     :linenos:
@@ -307,6 +588,52 @@ Code
                 ser.close()
 
 
+Use GPIO pin for reading
+^^^^^^^^^^^^^^^^^^^^^^^^
+If we connect TX (green wire on TFmini Lidar) to the GPIO pin23, we can use it as a simulative port and read from it.
+
+.. code-block:: python
+
+  # -*- coding: utf-8 -*
+  import pigpio
+  import time
+
+  RX = 23
+
+  pi = pigpio.pi()
+  pi.set_mode(RX, pigpio.INPUT)
+  pi.bb_serial_read_open(RX, 115200)
+
+  def getTFminiData():
+    while True:
+      #print("#############")
+      time.sleep(0.05)	#change the value if needed
+      (count, recv) = pi.bb_serial_read(RX)
+      if count > 8:
+        for i in range(0, count-9):
+          if recv[i] == 89 and recv[i+1] == 89: # 0x59 is 89
+            checksum = 0
+            for j in range(0, 8):
+              checksum = checksum + recv[i+j]
+            checksum = checksum % 256
+            if checksum == recv[i+8]:
+              distance = recv[i+2] + recv[i+3] * 256
+              strength = recv[i+4] + recv[i+5] * 256
+              if distance <= 1200 and strength < 2000:
+                print(distance, strength)
+              #else:
+                # raise ValueError('distance error: %d' % distance)
+              #i = i + 9
+
+  if __name__ == '__main__':
+    try:
+      getTFminiData()
+    except:
+      pi.bb_serial_read_close(RX)
+      pi.stop()
+
+In this way, we can save the TX port for other device, or connect multiple lidars to raspberry pi
+
 Resources
 ^^^^^^^^^
   * `Read and write from serial port with Raspberry Pi <http://www.instructables.com/id/Read-and-write-from-serial-port-with-Raspberry-Pi/>`_
@@ -379,13 +706,13 @@ Wiring
 +----------------+-----------+
 |RPI             |IMU        |
 +================+===========+
-|Pin 1 (3.3v)    |Vcc        |
+|3.3v (Pin1)     |Vcc        |
 +----------------+-----------+
-|Pin 3           |SDA        |
+|SDA (Pin3)      |SDA        |
 +----------------+-----------+
-|Pin 5           |SCL        |
+|SCL (Pin5)      |SCL        |
 +----------------+-----------+
-|Pin 6           |Gnd        |
+|GND (Pin6)      |Gnd        |
 +----------------+-----------+
 
 Resources
@@ -407,17 +734,8 @@ To compile, use the command:
 
 Wiring:
 
-+----------------+-----------+
-|RPI             |IMU        |
-+================+===========+
-|Pin 1 (3.3v)    |Vcc        |
-+----------------+-----------+
-|Pin 3           |SDA        |
-+----------------+-----------+
-|Pin 5           |SCL        |
-+----------------+-----------+
-|Pin 6           |Gnd        |
-+----------------+-----------+
+same as above did
+
 
 The connection is by SMBUS.
 
@@ -433,5 +751,6 @@ See Also:
 Resources
 ^^^^^^^^^
 * `I2C SPI Reference page <https://learn.sparkfun.com/tutorials/i2c>`_
+
 
 Contributors: Jerry Kong, Shadi Davari, Josh Jin
