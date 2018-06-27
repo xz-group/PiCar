@@ -148,13 +148,13 @@ ser = serial.Serial("/dev/ttyS0", 115200) #serial port for Lidar
 def getSensorAndCamera(host='192.168.1.121',port=6000,duration=5,endless=False,trAccRate=6,trGyroRate=6,trMagRate=7,accScale=2,gyroScale=245,magScale=4,cameraFreq=5,imuRate=50,lidarRate=50,precision=0.001):
     beginTime = str(datetime.datetime.now())
     os.makedirs(beginTime+"/camera")
-    setIMUScale(accScale,gyroScale,magScale)
-    setIMUodr(trAccRate,trGyroRate,trMagRate)
     datafile = beginTime+'/Lidar_IMU_Data.csv'
     rowList=[]
     lidarRate = float(1)/lidarRate - 0.0007
     imuRate = float(1)/imuRate - 0.0007
     cameraFreq = float(1)/cameraFreq
+    setIMUScale(accScale,gyroScale,magScale)
+    setIMUodr(trAccRate,trGyroRate,trMagRate)
     if lib.lsm9ds1_begin(imu) == 0:
         print("Failed to communicate with LSM9DS1.")
         quit()
@@ -204,8 +204,7 @@ if __name__ == '__main__':
 
     os.makedirs(beginTime+"/camera")
 
-    setIMUScale(accScale,gyroScale,magScale)
-    setIMUodr(trAccRate,trGyroRate,trMagRate)
+
 
 
 
@@ -225,7 +224,8 @@ if __name__ == '__main__':
     imuRate = 1/float(re.ri)-0.0007
     precision = re.p
     cameraFreq = 1/float(re.c)
-
+    setIMUScale(accScale,gyroScale,magScale)
+    setIMUodr(trAccRate,trGyroRate,trMagRate)
     if lib.lsm9ds1_begin(imu) == 0:
         print("Failed to communicate with LSM9DS1.")
         quit()
