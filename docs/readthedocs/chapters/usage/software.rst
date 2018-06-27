@@ -79,7 +79,7 @@ Client side
 Advanced Folder Transfer
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-*Creator: Jerry Kong
+*Creator: Jerry Kong*
 
 To meet our need of a neat and organized data structure, this script is created.
 It has the capability to transfer the entire folder to another remote desktop, no matter it is on a Windows System or Unix system.
@@ -92,7 +92,7 @@ A better protocol could be implemented, since the protocol now being used is not
 WIFI Router setting
 ^^^^^^^^^^^^^^^^^^^
 
-*Creator: Jerry Kong
+*Creator: Jerry Kong*
 
 *This section is dedicated to users who are not familiar with WIFI network setting, TCP protocol and wireless connection*
 
@@ -120,7 +120,9 @@ You must be familiar with this topic. WIFI is more convenient while wired connec
 Wifi or the router serves as a broadcaster and spread the connection from the ethernet to multiple machines, but they have the same IP address. The router can identify each machine by the IP address it assigns to the machine, but the machine can't use
 that address as the identification on the internet. Conclusively, machines under the same WIFI build up a small Internet where these machines can identify each other by the address they are assigned, but once outside WIFI network they are no longer acknowledged.
 
-See `Setup static IP address for RaspberryPi<https://www.raspberrypi.org/forums/viewtopic.php?t=191140>`_, so a machine would be assigned the same IP address when connected to the WIFI.
+See
+`Setup static IP address for RaspberryPi <https://www.raspberrypi.org/forums/viewtopic.php?t=191140>`_
+, so a machine would be assigned the same IP address when connected to the WIFI.
 
 TCP
 ###
@@ -136,7 +138,9 @@ However, we do want to establish connection between two machines even if one is 
 For example, the address of the router is 172.10.10.111, and a machine under the WIFI is assigned static IP 192.168.1.188. The routher and the machine agree on that the connection to the port 30000 of the routher would be forwarded to the port 6000 of the machine and vice versa.
 Thus a laptop could setup a connection with 172.10.10.111 on port 30000 to connect the port 6000 on machine with static IP 192.168.1.188.
 
-See `How to setup port forwarding<https://www.howtogeek.com/66214/how-to-forward-ports-on-your-router/>`_
+See
+`How to setup port forwarding <https://www.howtogeek.com/66214/how-to-forward-ports-on-your-router/>`_
+
 
 
 Sensors(Lidar,IMU) reading and writing
