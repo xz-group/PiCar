@@ -181,9 +181,10 @@ def getSensorAndCamera(host='192.168.1.121',port=6000,duration=5,endless=False,t
         sensor.join()
     print(time.time())
     send(host,port,beginTime)
-    
+
 
 if __name__ == '__main__':
+    beginTime = str(datetime.datetime.now())
     parser = argparse.ArgumentParser(description = 'PiCar log file generator', formatter_class = argparse.RawTextHelpFormatter, conflict_handler = 'resolve')
     parser.add_argument("--ip",help="Ip of this raspberry pi",default="192.168.1.121")
     parser.add_argument("--po",help = "port for connection",type = int,default=60000)
@@ -206,7 +207,7 @@ if __name__ == '__main__':
     setIMUScale(accScale,gyroScale,magScale)
     setIMUodr(trAccRate,trGyroRate,trMagRate)
 
-   
+
 
     datafile = beginTime+'/Lidar_IMU_Data.csv'
 
@@ -251,4 +252,3 @@ if __name__ == '__main__':
         sensor.join()
     print(time.time())
     send(host,port,beginTime)
-    
