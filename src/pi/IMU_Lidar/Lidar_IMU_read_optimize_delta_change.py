@@ -44,6 +44,7 @@ def getIMU():
     global imu
     lib.lsm9ds1_readAccel(imu)
     lib.lsm9ds1_readGyro(imu)
+    lib.lsm9ds1_readMag(imu)
     ax = lib.lsm9ds1_getAccelX(imu)
     ay = lib.lsm9ds1_getAccelY(imu)
     az = lib.lsm9ds1_getAccelZ(imu)
@@ -56,7 +57,13 @@ def getIMU():
     cgx = lib.lsm9ds1_calcGyro(imu, gx)
     cgy = lib.lsm9ds1_calcGyro(imu, gy)
     cgz = lib.lsm9ds1_calcGyro(imu, gz)
-    return (cax,cay,caz,cgx,cgy,cgz)
+    mx = lib.lsm9ds1_getMagX(imu)
+    my = lib.lsm9ds1_getMagY(imu)
+    mz = lib.lsm9ds1_getMagZ(imu)
+    cmx = lib.lsm9ds1_calcMag(imu,mx)
+    cmy = lib.lsm9ds1_calcMag(imu,my)
+    cmz = lib.lsm9ds1_calcMag(imu,mz)
+    return (cax,cay,caz,cgx,cgy,cgz,cmx,cmy,cmz)
 
 
 
@@ -116,19 +123,19 @@ def getData(alive,duration,precision,imuRate,lidarRate,datafile,rowList):
                 currentTime = str(datetime.datetime.fromtimestamp(lastTimeIMU))
                 #currentTime = str(lastTimeIMU)
                 lastTimeLidar = lastTimeIMU
-                rowList.append([currentTime,Lidardata,IMUdata[0],IMUdata[1],IMUdata[2],IMUdata[3],IMUdata[4],IMUdata[5]])
+                rowList.append([currentTime,Lidardata,IMUdata[0],IMUdata[1],IMUdata[2],IMUdata[3],IMUdata[4],IMUdata[5],IMUdata[6],IMUdata[7],IMUdata[8]])
             elif current-lastTimeIMU>imuRate and lib.lsm9ds1_accelAvailable(imu) > 0:
                 lastTimeIMU = time.time()
                 IMUdata = getIMU()
                 currentTime = str(datetime.datetime.fromtimestamp(lastTimeIMU))
                 #currentTime = str(lastTimeIMU)
-                rowList.append([currentTime,"NA",IMUdata[0],IMUdata[1],IMUdata[2],IMUdata[3],IMUdata[4],IMUdata[5]])
+                rowList.append([currentTime,"NA",IMUdata[0],IMUdata[1],IMUdata[2],IMUdata[3],IMUdata[4],IMUdata[5],IMUdata[6],IMUdata[7],IMUdata[8]])
             elif current-lastTimeLidar>lidarRate and ser.in_waiting > 8:
                 lastTimeLidar = time.time()
                 Lidardata = getLidar()
                 currentTime = str(datetime.datetime.fromtimestamp(lastTimeLidar))
                 #currentTime = str(lastTimeLidar)
-                rowList.append([currentTime,Lidardata,"NA","NA","NA","NA","NA","NA"])
+                rowList.append([currentTime,Lidardata,"NA","NA","NA","NA","NA","NA","NA","NA","NA"])
 
         current = time.time()
 
@@ -145,7 +152,7 @@ lib.lsm9ds1_begin(imu)
 ser = serial.Serial("/dev/ttyS0", 115200) #serial port for Lidar
 
 
-def getSensorAndCamera(host='192.168.1.121',port=6000,duration=5,endless=False,trAccRate=6,trGyroRate=6,trMagRate=7,accScale=2,gyroScale=245,magScale=4,cameraFreq=5,imuRate=50,lidarRate=50,precision=0.001):
+def getSensorAndCamera(host='192.168.1.121',port=6000,save=False,duration=5,endless=False,trAccRate=6,trGyroRate=6,trMagRate=7,accScale=2,gyroScale=245,magScale=4,cameraFreq=5,imuRate=50,lidarRate=50,precision=0.001):
     beginTime = str(datetime.datetime.now())
     os.makedirs(beginTime+"/camera")
     datafile = beginTime+'/Lidar_IMU_Data.csv'
@@ -181,6 +188,10 @@ def getSensorAndCamera(host='192.168.1.121',port=6000,duration=5,endless=False,t
         sensor.join()
     print(time.time())
     send(host,port,beginTime)
+    if not save:
+        for i in os.listdir(beginTime):
+            os.remove(os.path.join(beginTime, i))
+        os.rmdir(beginTime)
 
 
 if __name__ == '__main__':
@@ -200,6 +211,7 @@ if __name__ == '__main__':
     parser.add_argument("--ri",help = "set imu reading rate(Hz)", type = int, default = 50)
     parser.add_argument("--rl", help = "set LiDar reading rate(Hz)", type = int, default = 50)
     parser.add_argument("--p",help = "set the precision of the timing", type = float, default = 0.001)
+    parser.add_argument("-s",help = "save the log locally after test", action="store_true", default=False)
     re = parser.parse_args()
 
     os.makedirs(beginTime+"/camera")
@@ -252,3 +264,7 @@ if __name__ == '__main__':
         sensor.join()
     print(time.time())
     send(host,port,beginTime)
+    if not save:
+        for i in os.listdir(beginTime):
+            os.remove(os.path.join(beginTime, i))
+        os.rmdir(beginTime)
