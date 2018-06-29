@@ -14,11 +14,11 @@ Current Team
 
     * An Zou
     * `Adith Boloor <https://github.com/ajboloor>`_
-    * Daniel Kelly
+    * `Daniel Kelly <https://github.com/daniel-kelly-32>`_
     * `Feiyang Jin <https://github.com/FeiyangJin>`_
     * `Hayden Sierra <https://github.com/Yruhere88>`_
     * `Jerry Kong <https://github.com/woodcutter1998>`_
-    * Karina N. Martinez-Reyes
+    * `Karina N. Martinez-Reyes <https://github.com/kmrtnz>`_
     * `Shadi Davari <https://github.com/shadidavari>`_
 
 Former Team
