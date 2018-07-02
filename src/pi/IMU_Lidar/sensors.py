@@ -248,7 +248,7 @@ def getSensorAndCamera(host='192.168.1.121',port=6000,save=False,duration=5,endl
     a = [None]
     timers = [lidar_timer,imu_timer]
     for timer in timers:
-        a+=timer.kit.getheader()[0:]
+        a+=timer.kit.getHeader()[0:]
     rowList.append(a)
     try:
         lidar.open()
