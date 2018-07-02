@@ -172,8 +172,8 @@ class Camera(device):
     def setFrameRate(self, fr):
         self.camera.framerate = fr
 
-    def capture(gen, *args):
-        camera.capture_sequence(gen(*args), use_video_port=True)
+    def capture(self, gen, *args):
+        self.camera.capture_sequence(gen(*args), use_video_port=True)
 
 
 class Timer:
