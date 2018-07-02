@@ -133,6 +133,10 @@ class LiDar(sensor):
         if self.__conn.is_open == False:
             self.__conn.open()
 
+    def close(self):
+        if self.__conn.is_open == True:
+            self.__conn.close()
+
     def detect(self):
         if ser.in_waiting > 8:
             return True
@@ -164,7 +168,7 @@ class Camera(device):
         self.camera = picamera.PiCamera(resolution=res, framerate=fr)
 
     def __del__(self):
-        del self.camera
+        self.camera.close()
 
     def setRes(self, res):
         self.camera.resolution = res
@@ -265,8 +269,7 @@ def getSensorAndCamera(host='192.168.1.121',port=6000,save=False,duration=5,endl
         sensor.join()
         #subprocess.Popen("python3 socket_folder_server.py localhost 60004 \""+beginTime+"\"",shell=True)
     except KeyboardInterrupt:   # Ctrl+C
-        if ser != None:
-            ser.close()
+        lidar.close()
         alive.set()
         pic.join()
         sensor.join()
