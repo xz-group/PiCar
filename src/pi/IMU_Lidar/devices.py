@@ -17,10 +17,16 @@ from multiprocessing import Process,Event
 from IMU_SETUP import lib
 
 def pre_exec():
+    """
+    Easy to use function to prevent the subprocess to receive KeyboardInterrupt
+    """
     # To ignore CTRL+C signal in the new process
     signal.signal(signal.SIGINT, signal.SIG_IGN)
 
 def filenames(alive,duration,cameraFreq,beginTime):
+    """
+    Filename generator: Used with Camera class to generate a series of filename for the picture to be stored at
+    """
     startTime = time.time()
     lastTime = time.time()
     current = time.time()
@@ -36,47 +42,82 @@ def filenames(alive,duration,cameraFreq,beginTime):
 
 class device(object):
     """
-    Base class for all Sensors
+    Base class for all Devices
     """
     def __init__(self, name="D"):
+        """
+        device class constructor: child class initialize the communication, the device name and type here, act according to the behavior of the device, quit script if neccesary
+        """
         self.name = name
         self.type = "virtual"
 
     def whoAmI(self):
+        """
+        A function that could be called to tell what device it is
+        """
         print("My name is {}, I am a {} device".format(self.name,self.type))
 
 
 class sensor(device):
+    """
+    Base class for all Sensors
+    """
     def __init__(self, name="S"):
         self.name = name
         self.type = "sensor"
         self.__conn = None
 
     def setConn(self,conn):
+        """
+        A sensor's connection should be able to be reset by this function
+        """
         print("You are assigning connection to a virtual sensor")
         self.__conn = conn
 
     def getConn(self):
+        """
+        The connection could be returned by this function
+        """
         print("You are getting connection from a virtual sensor")
         return self.__conn
 
     def getValue(self):
+        """
+        A sensor should implement this method to return values in a list
+        """
         print("Don't ask too much from a virtual sensor")
         return None
 
     def getFieldSize(self):
+        """
+        A sensor should implement this method to return the field size requested by the sensor in logging file
+        """
         return 0
 
     def getHeader(self):
+        """
+        A sensor should implement this method to return the header of it requested field in a list
+        """
         return ("Void")
 
     def detect(self):
+        """
+        A sensor should implement this method to tell if the sensor is currently available
+        """
         print("I am virtual")
         return False
 
 
 class IMU(sensor):
+    """
+    This class for IMU sensor
+    """
     def __init__(self, name="I"):
+        """
+        Constructor of IMU object:
+        Usage: IMU(self, name = "I")
+        It initializes an IMU object using lsm9ds1 library
+        """
         self.name = name
         self.type = "IMU"
         self.__conn = lib.lsm9ds1_create()
@@ -89,20 +130,46 @@ class IMU(sensor):
         self.__conn = conn
 
     def calibrate(self):
+        """
+        A wrapper for IMU calibration
+        """
         lib.lsm9ds1_calibrate(self.__conn)
 
     def detect(self):
+        """
+        This function tests if accel, gyro and mag are all available
+        """
         if lib.lsm9ds1_accelAvailable(self.__conn) and lib.lsm9ds1_gyroAvailable(self.__conn) and lib.lsm9ds1_magAvailable(self.__conn):
             return True
         else:
             return False
 
     def setIMUodr(self, aRate=6, gRate=6, mRate=7):
+        """
+        Output rate setter for IMU
+        Available rate for accel: 1 = 10 Hz    4 = 238 Hz
+                                  2 = 50 Hz    5 = 476 Hz
+                                  3 = 119 Hz   6 = 952 Hz
+        Available rate for gyro : 1 = 14.9     4 = 238
+                                  2 = 59.5     5 = 476
+                                  3 = 119      6 = 952
+        Available rate for mag  : 0 = 0.625 Hz  4 = 10 Hz
+                                  1 = 1.25 Hz   5 = 20 Hz
+                                  2 = 2.5 Hz    6 = 40 Hz
+                                  3 = 5 Hz      7 = 80 Hz
+        """
         lib.lsm9ds1_setAccelODR(self.__conn, aRate)
         lib.lsm9ds1_setGyroODR(self.__conn, gRate)
         lib.lsm9ds1_setMagODR(self.__conn, mRate)
 
     def setIMUScale(self, aScl=2, gScl=245, mScl=4):
+        """
+        Scale for IMU_SETUP
+        Available rate for accel: 2, 4, 8, 16
+        Available rate for gyro : 245, 500, 2000
+        Available rate for mag  : 4, 8, 12, 16
+        (Value set other than these value might cause IMU to crush)
+        """
         lib.lsm9ds1_setAccelScale(self.__conn, aScl)
         lib.lsm9ds1_setGyroScale(self.__conn, gScl)
         lib.lsm9ds1_setMagScale(self.__conn, mScl)
@@ -114,6 +181,9 @@ class IMU(sensor):
         return ["AccelX","AccelY","AccelZ","GyroX","GyroY","GyroZ","MagX","MagY","MagZ"]
 
     def getValue(self):
+        """
+        Return a 9-elements list containing all IMU reading
+        """
         lib.lsm9ds1_readAccel(self.__conn)
         lib.lsm9ds1_readGyro(self.__conn)
         lib.lsm9ds1_readMag(self.__conn)
@@ -167,6 +237,9 @@ class LiDar(sensor):
         return ["LiDar"]
 
     def getValue(self):
+        """
+        Return a 1 element list
+        """
         recv = self.__conn.read(9)
         self.__conn.reset_input_buffer()
 
@@ -188,17 +261,34 @@ class Camera(device):
         self.camera.close()
 
     def setRes(self, res):
+        """
+        res is a tuple (length,width)
+        """
         self.camera.resolution = res
 
     def setFrameRate(self, fr):
+        """
+        fr is in Hz
+        """
         self.camera.framerate = fr
 
     def capture(self, gen, *args):
+        """
+        gen : a filename generator that has timing functionality
+        *args : contains all the arguments gen needs
+        """
         self.camera.capture_sequence(gen(*args), use_video_port=True)
 
 
 class Timer:
+    """
+    A Timer class that helps get delta timing for a sensor
+    """
     def __init__(self, kit, gap):
+        """
+        kit : the Sensor
+        gap : the delta time
+        """
         self.gap = gap
         self.kit = kit
         self.last = time.time()
@@ -212,12 +302,29 @@ class Timer:
             return [None]*self.size
 
 
-def getCamera(filenames,alive,duration,cameraFreq,beginTime):
+def getCamera(gen,alive,duration,cameraFreq,beginTime):
+    """
+    The filming function executed in a different core
+    gen        : the filenames generator
+    alive      : the global variable to track the state in the main function
+    duration   : the elapse time for the test
+    cameraFreq : the cameraFrequncy in Hz
+    beginTime  : (string) the directory of the root folder for the logging files
+    """
     pre_exec()
     cam = Camera()
-    cam.capture(filenames,alive,duration,cameraFreq,beginTime)
-    
+    cam.capture(gen,alive,duration,cameraFreq,beginTime)
+
 def getSensor(alive,rowList,duration,precision,datafile,timers):
+    """
+    The data logging function executed in a different core
+    alive: the global variable to track the state in the main function
+    rowList: a list stores timestamp and logging data
+    duration: the elapse time for the test
+    precision: the gap between two visit of the script to sensors
+    datafile: file name of the datafile
+    timers: a list of timers holding sensors
+    """
     pre_exec()
     #print("enter sensor")
     startTime = time.time()
@@ -247,6 +354,9 @@ def getSensor(alive,rowList,duration,precision,datafile,timers):
 
 
 def getSensorAndCamera(host='192.168.1.121',port=6000,save=False,duration=5,endless=False,trAccRate=6,trGyroRate=6,trMagRate=7,accScale=2,gyroScale=245,magScale=4,cameraFreq=5,imuRate=50,lidarRate=50,precision=0.001):
+    """
+    A easy to use logging version supporting camera data logging, IMU reading, Lidar reading
+    """
     beginTime = str(datetime.datetime.now()).replace(" ","@")
     os.makedirs(beginTime+"/camera")
     datafile = beginTime+'/Lidar_IMU_Data.csv'
