@@ -16,6 +16,23 @@ from socket_folder_server import send
 from multiprocessing import Process,Event
 from IMU_SETUP import lib
 
+def pre_exec():
+    # To ignore CTRL+C signal in the new process
+    signal.signal(signal.SIGINT, signal.SIG_IGN)
+
+def filenames(alive,duration,cameraFreq,beginTime):
+    startTime = time.time()
+    lastTime = time.time()
+    current = time.time()
+    while current-startTime<duration and not alive.is_set():
+        current = time.time()
+        if current-lastTime>cameraFreq:
+            name = datetime.datetime.now()
+            #name = time.time()
+            name = beginTime+'/camera/'+str(name)+'.jpg'
+            lastTime = time.time()
+            yield name
+
 
 class device(object):
     """
@@ -138,7 +155,7 @@ class LiDar(sensor):
             self.__conn.close()
 
     def detect(self):
-        if ser.in_waiting > 8:
+        if self.__conn.in_waiting > 8:
             return True
         else:
             return False
@@ -188,19 +205,26 @@ class Timer:
         self.size = self.kit.getFieldSize()
 
     def read(self,t):
-        if t-self.gap>self.last:
+        if t-self.gap>self.last and self.kit.detect():
             self.last = t
             return self.kit.getValue()
         else:
             return [None]*self.size
 
 
+def getCamera(filenames,alive,duration,cameraFreq,beginTime):
+    pre_exec()
+    cam = Camera()
+    cam.capture(filenames,alive,duration,cameraFreq,beginTime)
+    
 def getSensor(alive,rowList,duration,precision,datafile,timers):
     pre_exec()
+    #print("enter sensor")
     startTime = time.time()
     lastTime = time.time()
     current = time.time()
     while current-startTime<duration and not alive.is_set():
+        #print("enterloop")
         if current-lastTime>precision:
             lastTime = current
             r = [current]
@@ -211,25 +235,15 @@ def getSensor(alive,rowList,duration,precision,datafile,timers):
                     f = True
                 r+=k[0:]
             if f:
+                #print("goodline")
                 rowList.append(r)
+        current = time.time()
     print("start writing data")
     with open(datafile,"w") as csvfile:
         spamwriter = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
         for row in rowList:
             spamwriter.writerow(row)
 
-def filenames(alive,duration,cameraFreq,beginTime):
-    startTime = time.time()
-    lastTime = time.time()
-    current = time.time()
-    while current-startTime<duration and not alive.is_set():
-        current = time.time()
-        if current-lastTime>cameraFreq:
-            name = datetime.datetime.now()
-            #name = time.time()
-            name = beginTime+'/camera/'+str(name)+'.jpg'
-            lastTime = time.time()
-            yield name
 
 
 def getSensorAndCamera(host='192.168.1.121',port=6000,save=False,duration=5,endless=False,trAccRate=6,trGyroRate=6,trMagRate=7,accScale=2,gyroScale=245,magScale=4,cameraFreq=5,imuRate=50,lidarRate=50,precision=0.001):
@@ -256,11 +270,10 @@ def getSensorAndCamera(host='192.168.1.121',port=6000,save=False,duration=5,endl
     rowList.append(a)
     try:
         lidar.open()
-        cam = Camera()
         print(time.time())
         alive = Event()
         #multicore process
-        pic =  Process(target = cam.capture,args=(filenames,alive,duration,cameraFreq,beginTime,))
+        pic =  Process(target = getCamera,args=(filenames,alive,duration,cameraFreq,beginTime,))
         sensor = Process(target = getSensor,args=(alive,rowList,duration,precision,datafile,timers,))
 
         pic.start()
@@ -269,19 +282,15 @@ def getSensorAndCamera(host='192.168.1.121',port=6000,save=False,duration=5,endl
         sensor.join()
         #subprocess.Popen("python3 socket_folder_server.py localhost 60004 \""+beginTime+"\"",shell=True)
     except KeyboardInterrupt:   # Ctrl+C
-        lidar.close()
         alive.set()
         pic.join()
         sensor.join()
+        lidar.close()
     print(time.time())
     send(host,port,beginTime)
     if not save:
         os.system("rm -r \""+beginTime+"\"")
 
-
-def pre_exec():
-    # To ignore CTRL+C signal in the new process
-    signal.signal(signal.SIGINT, signal.SIG_IGN)
 
 
 if __name__ == '__main__':
