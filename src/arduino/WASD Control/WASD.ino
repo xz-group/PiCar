@@ -39,6 +39,8 @@ int servo_angle = 90;
 int state = 0;
 int times = 0;
 int flag = 0;
+int right_counter = 0;
+int left_counter = 0;
 
 const int SENSOR_PIN = A0;      // Input pin for measuring Vout
 const int RS = 10;              // Shunt resistor value (in ohms)
@@ -98,14 +100,38 @@ void loop() {
       PPM_output(-150);
       break;
     case 3 :
-      myservo.write(80);
-      control_signal = control_signal + increment_pid();
-      PPM_output(control_signal);
+      if (right_counter == 1) {
+        myservo.write(85);
+        control_signal = control_signal + increment_pid();
+        PPM_output(control_signal);
+      }
+      else if (right_counter == 2) {
+        myservo.write(75);
+        control_signal = control_signal + increment_pid();
+        PPM_output(control_signal);
+      }
+      else if (right_counter == 3) {
+        myservo.write(65);
+        control_signal = control_signal + increment_pid();
+        PPM_output(control_signal);
+      }
       break;
     case 4 :
-      myservo.write(100);
-      control_signal = control_signal + increment_pid();
-      PPM_output(control_signal);
+      if (left_counter == 1) {
+        myservo.write(105);
+        control_signal = control_signal + increment_pid();
+        PPM_output(control_signal);
+      }
+      else if (left_counter == 2) {
+        myservo.write(115);
+        control_signal = control_signal + increment_pid();
+        PPM_output(control_signal);
+      }
+      else if (left_counter == 3) {
+        myservo.write(125);
+        control_signal = control_signal + increment_pid();
+        PPM_output(control_signal);
+      }
       break;
     default :
       PPM_output(0);  
@@ -201,7 +227,23 @@ void PPM_output(int command) {
 void receive_data(int byteCount){
   while(Wire.available()) {
     number = Wire.read();
-    Serial.println(number);
+    //Serial.println(number);
+    if (number != 3){
+      right_counter = 0;
+    }
+    if (number != 4){
+      left_counter = 0;
+    }
+    if (number == 3){
+      if (right_counter != 3){ 
+        right_counter++;
+      }
+    }
+    else if (number == 4){
+      if (left_counter != 3){
+        left_counter++;
+      }
+    }
   }
 }
 // callback for sending data
@@ -236,14 +278,38 @@ void current_sensor(){
       PPM_output(-150);
       break;
     case 3 :
-      myservo.write(60);
-      control_signal = control_signal + increment_pid();
-      PPM_output(control_signal);
+      if (right_counter == 1) {
+        myservo.write(85);
+        control_signal = control_signal + increment_pid();
+        PPM_output(control_signal);
+      }
+      else if (right_counter == 2) {
+        myservo.write(75);
+        control_signal = control_signal + increment_pid();
+        PPM_output(control_signal);
+      }
+      else if (right_counter == 3) {
+        myservo.write(65);
+        control_signal = control_signal + increment_pid();
+        PPM_output(control_signal);
+      }
       break;
     case 4 :
-      myservo.write(120);
-      control_signal = control_signal + increment_pid();
-      PPM_output(control_signal);
+      if (left_counter == 1) {
+        myservo.write(105);
+        control_signal = control_signal + increment_pid();
+        PPM_output(control_signal);
+      }
+      else if (left_counter == 2) {
+        myservo.write(115);
+        control_signal = control_signal + increment_pid();
+        PPM_output(control_signal);
+      }
+      else if (left_counter == 3) {
+        myservo.write(125);
+        control_signal = control_signal + increment_pid();
+        PPM_output(control_signal);
+      }
       break;
     default :
       PPM_output(0);  

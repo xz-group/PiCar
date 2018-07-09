@@ -23,6 +23,9 @@ screen.scrollok(True)
 screen.keypad(True)
 start_time = 0
 flag = True
+right_counter = 0
+left_counter = 0
+command = 0
 
 try:
         screen.addstr("CONTROLS:\n", curses.color_pair(1))
@@ -43,47 +46,79 @@ try:
             elapsed_time = time.time() - start_time
             start_time = time.time()
 
+            if char != ord('d'):
+                right_counter = 0
+
+            if char != ord('a'):
+                left_counter = 0
+
             if char == ord('q'):
+                screen.addstr(str("{0:.3f}".format(elapsed_time)) + " seconds")
                 break
 
             elif char == ord('w'):
-                screen.addstr("Forward\n")
+                if (command == 0):
+                    screen.addstr("Forward ")
+                else:
+                    screen.addstr(str("{0:.3f}".format(elapsed_time)) + " seconds\n" + "Forward ")
                 i2c.writeNumber(1)
 
             elif char == ord('s'):
-                screen.addstr("Reverse\n")
+                if (command == 0):
+                    screen.addstr("Reverse ")
+                else:
+                    screen.addstr(str("{0:.3f}".format(elapsed_time)) + " seconds\n" + "Reverse ")
                 i2c.writeNumber(2)
 
             elif char == ord('d'):
-                screen.addstr("Right\n")
+                if (right_counter != 3):
+                    right_counter += 1
+                if (right_counter == 1):
+                    if (command == 0):
+                        screen.addstr("Right(1) ")
+                    else:
+                        screen.addstr(str("{0:.3f}".format(elapsed_time)) + " seconds\n" +  "Right(1) ")
+                elif (right_counter == 2):
+                    screen.addstr(str("{0:.3f}".format(elapsed_time)) + " seconds\n" +  "Right(2) ")
+                elif (right_counter == 3):
+                    screen.addstr(str("{0:.3f}".format(elapsed_time)) + " seconds\n" +  "Right(3) ")
                 i2c.writeNumber(3)
 
             elif char == ord('a'):
-                screen.addstr("Left\n")
+                if (left_counter != 3):
+                    left_counter += 1
+                if (left_counter == 1):
+                    if (command == 0):
+                        screen.addstr("Left(1) ")
+                    else:
+                        screen.addstr(str("{0:.3f}".format(elapsed_time)) + " seconds\n" + "Left(1) ")
+                elif (left_counter == 2):
+                    screen.addstr(str("{0:.3f}".format(elapsed_time)) + " seconds\n" + "Left(2) ")
+                elif (left_counter == 3):
+                    screen.addstr(str("{0:.3f}".format(elapsed_time)) + " seconds\n" + "Left(3) ")
                 i2c.writeNumber(4)
 
             elif char == ord('x'):
                 if flag:
-                    screen.addstr("Data Recording Has Started\n")
+                    if (command == 0):
+                        screen.addstr("Data Recording Has Started\n")
+                    else:
+                        screen.addstr(str("{0:.3f}".format(elapsed_time)) + "Data Recording Has Started\n")
                     get.start()
                     flag = False
                 else:
-                    screen.addstr("Data Recording Has Stopped\n")
+                    screen.addstr(str("{0:.3f}".format(elapsed_time)) + "Data Recording Has Stopped\n")
                     get.terminate()
                     flag = True
-                #val = int(screen.getch())
-                #getSensorAndCamera(duration = 5)
-                #subprocess.call(['xterm', '-e', 'python test.py'])
-                #pid = subprocess.Popen(args=[
-                #    "gnome-terminal", "--command=python test.py"]).pid
-                #print(pid)
-                #subprocess.call(['gnome-terminal', '-x', 'python3 test.py'])
-                #getSensorAndCamera(endless = True)
 
             else:
-                screen.addstr("Stop\n")
+                if (command == 0):
+                    screen.addstr("Stop ")
+                else:
+                    screen.addstr(str("{0:.3f}".format(elapsed_time)) + " seconds\n" + "Stop ")
                 i2c.writeNumber(5)
 
+            command = 1
 finally:
     #Close down curses properly, inc turn echo back on!
     curses.nocbreak()
