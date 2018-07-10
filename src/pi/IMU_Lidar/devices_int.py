@@ -33,9 +33,8 @@ def filenames(alive,duration,cameraFreq,beginTime):
     while current-startTime<duration and not alive.is_set():
         current = time.time()
         if current-lastTime>cameraFreq:
-            name = datetime.datetime.now()
             #name = time.time()
-            name = beginTime+'/camera/'+str(name)+'.jpg'
+            name = beginTime+'/camera/'+str(current)+'.jpg'
             lastTime = time.time()
             yield name
 
@@ -272,7 +271,7 @@ class Camera(device):
 
     def setRes(self, res):
         """
-        res is a tuple (length,width)
+        res is a tuple (length,width) in pixel
         """
         self.camera.resolution = res
 
@@ -389,7 +388,7 @@ def getSensorAndCamera(host='192.168.1.121',port=6000,save=False,duration=5,endl
         a+=timer.kit.getHeader()[0:]
     rowList.append(a)
     lidar.open()
-    print(time.time())
+    print(datetime.datetime.now())
     alive = Event()
     k = Killer(alive)
     #multicore process
@@ -402,7 +401,7 @@ def getSensorAndCamera(host='192.168.1.121',port=6000,save=False,duration=5,endl
         #subprocess.Popen("python3 socket_folder_server.py localhost 60004 \""+beginTime+"\"",shell=True)
 
     lidar.close()
-    print(time.time())
+    print(datetime.datetime.now())
     send(host,port,beginTime)
     if not save:
         os.system("rm -r \""+beginTime+"\"")
