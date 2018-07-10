@@ -15,6 +15,7 @@ import signal
 from socket_folder_server import send
 from multiprocessing import Process,Event
 from IMU_SETUP import lib
+from counter_read import counter
 
 def pre_exec():
     """
@@ -66,6 +67,26 @@ class device(object):
         """
         print("My name is {}, I am a {} device".format(self.name,self.type))
 
+class pmucounter(device):
+    """
+    PMU reader
+    """
+    def __init__(self, name = "P"):
+        self.name = name
+        self.type = "counter"
+        self.__conn = counter
+    
+    def getValue(self):
+        return self.__conn.ccnt_read()
+    
+    def getFieldSize(self):
+        return 1
+    
+    def getHeader(self):
+        return ("PMUreading")
+    
+    def detect(self):
+        return True
 
 class sensor(device):
     """
@@ -380,10 +401,11 @@ def getSensorAndCamera(host='192.168.1.121',port=6000,save=False,duration=5,endl
     imu.setIMUodr(trAccRate,trGyroRate,trMagRate)
     imu.calibrate()
     lidar = LiDar()
+    pc = pmucounter()
     imu_timer = Timer(imu,imuRate)
     lidar_timer = Timer(lidar,lidarRate)
     a = [None]
-    timers = [lidar_timer,imu_timer]
+    timers = [pc,lidar_timer,imu_timer]
     for timer in timers:
         a+=timer.kit.getHeader()[0:]
     rowList.append(a)
