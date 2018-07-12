@@ -286,6 +286,33 @@ The script could either be called from the terminal or from other script by call
 
 For installation and usage see the previous section
 
+
 Data Analysis
 -------------
-To do
+*Creator: Feiyang Jin*
+
+Data and photo synchronization
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Once we get all data/photo from one experiment and save somewhere, we would like to synchronize them.
+
+As camera speed is much slower than sensors speed, the sychronization is not perfect.
+
+**Algorithem: first match each photo to a row of data based on timestamp(best fit), then for unmatched data, find its previous closed photo and take it.**
+
+.. note:: This algorithem is totally under expecatation, if you have better straetgy, please contact me.
+
+The code is called ``sync_time.py`` under ``PiCar/src/dataAnalysis``, and all raw data/photo are under ``data_photo`` under same directory.
+
+**Result: The python programe will output a csv file in the same directory, the format is [data1][data2]......[matched_photo]**
+
+Display Synchronized Data and Photo
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The sychronized csv file provides us unlimited possibility. The following image shows the display site we built.
+
+.. image:: software/data_display_site.png
+  :width: 700
+  :height: 300
+
+Source for this website is under ``PiCar/src/dataAnalysis/Display``, the html requires you to upload the sychronized csv file, and then give you all the magic.
+
+.. note:: You will need to install chart.js first; for papaParse.js, I include the package for you.
