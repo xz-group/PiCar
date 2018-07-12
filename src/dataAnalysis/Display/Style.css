@@ -1,0 +1,25 @@
+body
+{
+	background-color:lemonchiffon;
+}
+
+/* h1 is used for homepage on the top lefg */
+h1{
+  display: inline-block;
+	text-align:left;
+	font-size:15.5px;
+	font-family:cursive;
+
+}
+
+
+h3{
+	color:Blue;
+
+}
+
+p{
+	font-size: 130%;
+	font-family: "Comic Sans MS", cursive, sans-serif;
+  margin-top: 1px;
+}
