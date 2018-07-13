@@ -31,9 +31,9 @@ def filenames(alive,duration,cameraFreq,beginTime):
     startTime = time.time()
     lastTime = time.time()
     current = time.time()
-    while current-startTime<duration and not alive.is_set():
+    while current - startTime < duration and not alive.is_set():
         current = time.time()
-        if current-lastTime>cameraFreq:
+        if current - lastTime > cameraFreq:
             #name = time.time()
             name = beginTime+'/camera/'+str(current)+'.jpg'
             lastTime = time.time()
@@ -65,28 +65,8 @@ class device(object):
         """
         A function that could be called to tell what device it is
         """
-        print("My name is {}, I am a {} device".format(self.name,self.type))
+        print("My name is {}, I am a {} device".format(self.name, self.type))
 
-class pmucounter(device):
-    """
-    PMU reader
-    """
-    def __init__(self, name = "P"):
-        self.name = name
-        self.type = "counter"
-        self.__conn = counter
-    
-    def getValue(self):
-        return self.__conn.ccnt_read()
-    
-    def getFieldSize(self):
-        return 1
-    
-    def getHeader(self):
-        return ("PMUreading")
-    
-    def detect(self):
-        return True
 
 class sensor(device):
     """
@@ -137,6 +117,26 @@ class sensor(device):
         print("I am virtual")
         return False
 
+class pmucounter(sensor):
+    """
+    PMU (Performance Monitoring Unit) reader
+    """
+    def __init__(self, name = "P"):
+        self.name = name
+        self.type = "counter"
+        self.__conn = counter
+
+    def getValue(self):
+        return self.__conn.ccnt_read()
+
+    def getFieldSize(self):
+        return 1
+
+    def getHeader(self):
+        return ("PMUreading")
+
+    def detect(self):
+        return True
 
 class IMU(sensor):
     """
@@ -383,7 +383,8 @@ def getSensor(alive,rowList,duration,precision,datafile,timers):
 
 
 
-def getSensorAndCamera(host='192.168.1.121',port=6000,save=False,duration=5,endless=False,trAccRate=6,trGyroRate=6,trMagRate=7,accScale=2,gyroScale=245,magScale=4,cameraFreq=5,imuRate=50,lidarRate=50,precision=0.001):
+def getSensorAndCamera(host='192.168.1.121',port=6000,save=False,duration=5,endless=False,trAccRate=6,trGyroRate=6,
+                        trMagRate=7,accScale=2,gyroScale=245,magScale=4,cameraFreq=5,imuRate=50,lidarRate=50,precision=0.001,tm=[]):
     """
     A easy to use logging version supporting camera data logging, IMU reading, Lidar reading
     """
@@ -402,10 +403,11 @@ def getSensorAndCamera(host='192.168.1.121',port=6000,save=False,duration=5,endl
     imu.calibrate()
     lidar = LiDar()
     pc = pmucounter()
-    imu_timer = Timer(imu,imuRate)
-    lidar_timer = Timer(lidar,lidarRate)
+    pc_timer = Timer(pc, 0.02)
+    imu_timer = Timer(imu, imuRate)
+    lidar_timer = Timer(lidar, lidarRate)
     a = [None]
-    timers = [pc,lidar_timer,imu_timer]
+    timers = [pc_timer,lidar_timer,imu_timer]+tm[0:]
     for timer in timers:
         a+=timer.kit.getHeader()[0:]
     rowList.append(a)
