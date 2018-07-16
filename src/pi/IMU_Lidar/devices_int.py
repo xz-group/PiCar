@@ -388,7 +388,8 @@ def getSensorAndCamera(host='192.168.1.121',port=6000,save=False,duration=5,endl
     """
     A easy to use logging version supporting camera data logging, IMU reading, Lidar reading
     """
-    beginTime = str(datetime.datetime.now()).replace(" ","@")
+    #datetime format YYYY-MM-DD_HH-MM-SS
+    beginTime = str(datetime.datetime.now()).replace(" ","_").replace(":","-").replace(".","-")
     os.makedirs(beginTime+"/camera")
     datafile = beginTime+'/Lidar_IMU_Data.csv'
     rowList=[]
@@ -406,7 +407,7 @@ def getSensorAndCamera(host='192.168.1.121',port=6000,save=False,duration=5,endl
     pc_timer = Timer(pc, 0.02)
     imu_timer = Timer(imu, imuRate)
     lidar_timer = Timer(lidar, lidarRate)
-    a = [None]
+    a = ["Timestamp"]
     timers = [pc_timer,lidar_timer,imu_timer]+tm[0:]
     for timer in timers:
         a+=timer.kit.getHeader()[0:]
