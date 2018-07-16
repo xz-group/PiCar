@@ -127,13 +127,13 @@ class pmucounter(sensor):
         self.__conn = counter
 
     def getValue(self):
-        return self.__conn.ccnt_read()
+        return [self.__conn.ccnt_read()]
 
     def getFieldSize(self):
         return 1
 
     def getHeader(self):
-        return ("PMUreading")
+        return ["PMUreading"]
 
     def detect(self):
         return True
