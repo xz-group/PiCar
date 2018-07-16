@@ -395,8 +395,8 @@ def getSensorAndCamera(host='192.168.1.121',port=6000,save=False,duration=5,endl
     rowList=[]
     if endless:
         duration = 1000
-    lidarRate = float(1)/lidarRate - 0.0007
-    imuRate = float(1)/imuRate - 0.0007
+    lidarRate = float(1)/lidarRate - 0.0006
+    imuRate = float(1)/imuRate - 0.0006
     cameraFreq = float(1)/cameraFreq
     imu = IMU()
     imu.setIMUScale(accScale,gyroScale,magScale)
