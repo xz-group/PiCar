@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta charset = "utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> Home Page </title>
+
+<link rel = "stylesheet" type = "text/css" href = "Style.css">
+
+</head>
+
+<body>
+  <tr>
+    <td>Select a File to Load:</td>
+    <td><input type="file" id="fileToLoad"></td>
+    <td><button onclick="loadFileAsText()">Load Selected File</button><td>
+  </tr>
+
+  <div id = "time_data">
+    here should have time data
+  </div>
+
+  <div id = "lidar_data">
+    here should have Lidar data
+  </div>
+
+  <div id = "imu_data">
+    here should have IMU data
+  </div>
+
+  <div id="move_button" hidden>
+  <button id = "prev_button">PREV</button>
+  <button id = "next_button">NEXT</button>
+  <button id = "first_button">First</button>
+
+  <br>
+  <input id = "autoPlay_frequency" value = "Frequency">
+  <button id = "autoPlay_button">AutoPlay</button>
+  <button id = "autoPlay_stop" hidden>Stop autoPlay</button>
+  </div>
+
+  <div id = "image_div" style="display:inline">
+    here should have image
+  </div>
+
+  <canvas id = "myChart" width="900" height="400" style="display:inline"></canvas>
+
+
+
+  <script src = "PapaParse-4.5.0/papaparse.min.js"></script>
+  <script src = "/Users/kinfeiyang/node_modules/chart.js/dist/Chart.js"></script>
+
+  <script src = "chartPlot.js"></script>
+  <script src = "dataControl.js"></script>
+</body>
+
+
+
+</html>
