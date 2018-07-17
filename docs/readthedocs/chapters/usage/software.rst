@@ -286,6 +286,82 @@ The script could either be called from the terminal or from other script by call
 
 For installation and usage see the previous section
 
+
+Version Beta 2.0 (Code re-organization, Process, self contained, PMU reading)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+*Creator : Jerry Kong*
+
+*The code could be found in PiCar/src/pi/IMU_Lidar, device_int is the main file*
+
+The code is factor out and classified in an interface-oriented manner(i.e. the objects are put into class by its interface)
+
+The class structure is:
+
+.. code-block:: bash
+
+    device
+    |-----camera
+    |-----sensor
+            |-----pmucounter
+            |-----IMU
+            |-----LiDar
+
+Instead of its different class structure, the parameter for the main function is also different
+
+.. code-block:: python
+
+   getSensorAndCamera(host='192.168.1.121',port=6000,save=False,duration=5,endless=False,trAccRate=6,trGyroRate=6,
+                        trMagRate=7,accScale=2,gyroScale=245,magScale=4,cameraFreq=5,imuRate=50,lidarRate=50,precision=0.001,tm=[])
+
+Currently, to stop the sending process, a remote desktop must reach to the Server
+
+To pass a new device outside the file to the function, see the sample code below
+
+.. code-block:: python
+
+   import device_int
+   from multiprocessing import Process
+
+   class currentSensor(device_int.sensor):
+
+     def __init__(self, name="CS"):
+       self.name = name
+       self.type = "currentSensor"
+       self.__conn = currentSensorCommunicationPort
+
+     def detect(self):
+       return self.__conn.is_available()
+
+     def getFieldSize(self):
+       """
+       return a int
+       """
+       return 1
+
+     def getHeader(self):
+       """
+       return a list
+       """
+       return ["current"]
+
+     def getValue(self):
+       """
+       return the sensor reading
+       """
+       return [self.__conn.getCurrent()]
+
+    cs = currentSensor()
+
+    currentTimer = device_int.Timer(cs, currentSensor_read_period)
+
+    p = Process(target = device_int.getSensorAndCamera, args = (host,port,save,duration,endless,trAccRate,trGyroRate,
+                         trMagRate,accScale,gyroScale,magScale,cameraFreq,imuRate,lidarRate,precision,[currentTimer]))
+
+    p.start()
+    #do some operation
+    p.terminate()
+
 Data Analysis
 -------------
 To do
