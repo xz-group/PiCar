@@ -12,7 +12,7 @@ import threading
 import picamera
 import argparse
 import signal
-from socket_folder_server import send
+#from socket_folder_server import send
 from multiprocessing import Process,Event
 from IMU_SETUP import lib
 from counter_read import counter
@@ -417,17 +417,17 @@ def getSensorAndCamera(host='192.168.1.121',port=6000,save=False,duration=5,endl
     alive = Event()
     k = Killer(alive)
     #multicore process
-    pic =  Process(target = getCamera,args=(filenames,alive,duration,cameraFreq,beginTime,))
+    #pic =  Process(target = getCamera,args=(filenames,alive,duration,cameraFreq,beginTime,))
     sensor = Process(target = getSensor,args=(alive,rowList,duration,precision,datafile,timers,))
-    pic.start()
+    #pic.start()
     sensor.start()
-    pic.join()
+    #pic.join()
     sensor.join()
         #subprocess.Popen("python3 socket_folder_server.py localhost 60004 \""+beginTime+"\"",shell=True)
 
     lidar.close()
     print(datetime.datetime.now())
-    send(host,port,beginTime)
+    #send(host,port,beginTime)
     if not save:
         os.system("rm -r \""+beginTime+"\"")
 
