@@ -5,13 +5,28 @@
 <head>
 <meta charset = "utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> Home Page </title>
+<title> Data Visulization </title>
 
 <link rel = "stylesheet" type = "text/css" href = "Style.css">
 
 </head>
 
 <body>
+  <h1 id="homePage"> Home Page</h1>
+  &nbsp; &nbsp; &nbsp;
+  <h1 id="plotPage"> All Data plot </h1>
+  <br>
+  <br>
+
+  <div id="all_plot_div" hidden>
+    here should have all the plot
+    <canvas id = "lidarChart" width="1000" height="300"></canvas>
+    <canvas id = "imuAChart" width="1000" height="300"></canvas>
+    <canvas id = "imuGChart" width="1000" height="300"></canvas>
+    <canvas id = "imuMChart" width="1000" height="300"></canvas>
+  </div>
+
+<div id="home_div">
   <tr>
     <td>Select a File to Load:</td>
     <td><input type="file" id="fileToLoad"></td>
@@ -46,7 +61,7 @@
   </div>
 
   <canvas id = "myChart" width="900" height="400" style="display:inline"></canvas>
-
+</div>
 
 
   <script src = "PapaParse-4.5.0/papaparse.min.js"></script>
@@ -54,6 +69,8 @@
 
   <script src = "chartPlot.js"></script>
   <script src = "dataControl.js"></script>
+  <script src = "UI.js"></script>
+  <script src = "allChartPlot.js"></script>
 </body>
 
 
