@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Object Tracking in Low-Power Autonomous Systems &mdash; PiCar Project 2018 documentation</title>
+  <title>PiCar Mobile Movement Control &mdash; PiCar Project 2018 documentation</title>
   
 
   
@@ -35,8 +35,8 @@
         <link rel="search" title="Search" href="../../search.html"/>
     <link rel="top" title="PiCar Project 2018 documentation" href="../../index.html"/>
         <link rel="up" title="Results" href="../results.html"/>
-        <link rel="next" title="PiCar Mobile Movement Control" href="mobile_movement_control.html"/>
-        <link rel="prev" title="Power Management" href="power_management.html"/> 
+        <link rel="next" title="Changelogs" href="../changelogs.html"/>
+        <link rel="prev" title="Object Tracking in Low-Power Autonomous Systems" href="optical_flow.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -92,13 +92,13 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../results.html">Results</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="imu_autonomous_navigation.html">IMU Autonomous Navigation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="power_management.html">Power Management</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Object Tracking in Low-Power Autonomous Systems</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="optical_flow.html">Object Tracking in Low-Power Autonomous Systems</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">PiCar Mobile Movement Control</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#proposal">Proposal</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#authors">Authors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#links">Links</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="mobile_movement_control.html">PiCar Mobile Movement Control</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../changelogs.html">Changelogs</a></li>
@@ -135,11 +135,11 @@
       
           <li><a href="../results.html">Results</a> &raquo;</li>
       
-    <li>Object Tracking in Low-Power Autonomous Systems</li>
+    <li>PiCar Mobile Movement Control</li>
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/chapters/results/optical_flow.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/chapters/results/mobile_movement_control.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -149,48 +149,22 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="object-tracking-in-low-power-autonomous-systems">
-<h1>Object Tracking in Low-Power Autonomous Systems<a class="headerlink" href="#object-tracking-in-low-power-autonomous-systems" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="picar-mobile-movement-control">
+<h1>PiCar Mobile Movement Control<a class="headerlink" href="#picar-mobile-movement-control" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="proposal">
 <h2>Proposal<a class="headerlink" href="#proposal" title="Permalink to this headline">¶</a></h2>
-<blockquote>
-<div><p>Computer vision algorithms are typically reserved for platforms that can
-handle the computational workload needed to process the huge amount of data
-in images and videos. The recent surge in artificial intelligence, machine
-learning, and computer vision have guided the development of powerful
-processors that can quickly and more efficiently handle the computationally
-intensive algorithms.  For this project, I aimed to go against the grain and
-implement computer vision and artificial intelligence on a Raspberry Pi, a
-low-power IoT device that is the on-board processor for a small autonomous
-vehicle project called the PiCar.</p>
-<p>The first part of the project was the development and implementation of a
-real-time control algorithm using optical flow and machine learning to
-successfully navigate randomly generated obstacle fields. The processing was
-done entirely on a Raspberry Pi 3 and the video stream was provided from the
-standard Raspberry Pi camera module. The algorithm worked in the following
-manner:</p>
-<ol class="arabic simple">
-<li>Read images from video stream</li>
-<li>Detect features using Shi-Tomasi corner detection</li>
-<li>Calculate optical flow vectors</li>
-<li>Calculate time to contact (TTC) for each tracked point (x,y)</li>
-<li>Cluster three dimensional data (x,y,TTC) using DBSCAN</li>
-<li>Sort clusters by lowest TTC</li>
-<li>Calculate servomotor angle and motor PWM</li>
-<li>Send signal to motor-controller via SPI</li>
-</ol>
-</div></blockquote>
+<p>This report is aimed at introducing new researchers to the findings and progress made on the PiCar Project as of July, 2018 regarding the movement control of the PiCar.  This report will cover the currently implemented features of the PiCar, including semi-automated movement,  a killswitch, real-time user control using WASD on a keyboard, a replay function, and data collection.  Additionally, the last section of the report covers known issues with the PiCar which includes inaccurate servo controls and noisy Inertial Measurement Unit (IMU) data.</p>
 </div>
 <div class="section" id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><a class="reference external" href="https://github.com/willluer">William Luer</a></li>
+<li>Hayden Sierra</li>
+<li>Daniel Kelly</li>
 </ul>
 </div>
 <div class="section" id="links">
 <h2>Links<a class="headerlink" href="#links" title="Permalink to this headline">¶</a></h2>
-<p>[<a class="reference external" href="https://github.com/xz-group/PiCar/blob/master/docs/reports/optical_flow_luer_2018/optical_flow_luer_2018.pdf">Report</a>]
-[<a class="reference external" href="https://github.com/xz-group/PiCar/tree/master/src/pi/computer_vision">Code</a>]</p>
+<p>[<a class="reference external" href="https://github.com/xz-group/PiCar/blob/master/docs/reports/mobile_movement_control/mobile_movement_control.pdf">Report</a>]</p>
 </div>
 </div>
 
@@ -201,10 +175,10 @@ manner:</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="mobile_movement_control.html" class="btn btn-neutral float-right" title="PiCar Mobile Movement Control" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../changelogs.html" class="btn btn-neutral float-right" title="Changelogs" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="power_management.html" class="btn btn-neutral" title="Power Management" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="optical_flow.html" class="btn btn-neutral" title="Object Tracking in Low-Power Autonomous Systems" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
