@@ -12,9 +12,9 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
+import os
+import sys
+sys.path.insert(0, os.path.abspath('../../src/pi/IMU_Lidar'))
 
 
 # -- Project information -----------------------------------------------------
@@ -39,8 +39,11 @@ release = '2018'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.imgmath', 'sphinx.ext.graphviz'
+    'sphinx.ext.imgmath', 'sphinx.ext.graphviz', 'sphinx.ext.autodoc'
 ]
+
+autodoc_mock_imports = ["picamera", "IMU_SETUP", "counter_read"]
+
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
