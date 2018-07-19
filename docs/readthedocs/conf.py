@@ -42,7 +42,7 @@ extensions = [
     'sphinx.ext.imgmath', 'sphinx.ext.graphviz', 'sphinx.ext.autodoc'
 ]
 
-autodoc_mock_imports = ["picamera", "IMU_SETUP", "counter_read"]
+autodoc_mock_imports = ["picamera", "IMU_SETUP", "counter_read","serial"]
 
 
 # Add any paths that contain templates here, relative to this directory.
