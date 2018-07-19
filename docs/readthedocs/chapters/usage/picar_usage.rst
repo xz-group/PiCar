@@ -1,4 +1,4 @@
-The picar Module Usage
+The Picar Module Usage
 #######################
 
 .. autoclass:: picar.device
