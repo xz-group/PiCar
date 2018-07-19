@@ -1,5 +1,5 @@
 The Device Module Usage
-####################
+#######################
 
 .. autoclass:: devices_int.device
    :members:
