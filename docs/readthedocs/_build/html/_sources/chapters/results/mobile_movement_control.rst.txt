@@ -15,4 +15,4 @@ Authors
 Links
 -----
 
-[`Report <https://github.com/xz-group/PiCar/blob/master/docs/reports/mobile_movement_control/mobile_movement_control.pdf>`_]
+[`Report <https://github.com/xz-group/PiCar/blob/master/docs/reports/mobile_movement_control/PiCar%20Mobile%20Movement%20Control%20Report.pdf>`_]
