@@ -41,6 +41,7 @@ int times = 0;
 int flag = 0;
 int right_counter = 0;
 int left_counter = 0;
+boolean from_left = false;
 
 const int SENSOR_PIN = A0;      // Input pin for measuring Vout
 const int RS = 10;              // Shunt resistor value (in ohms)
@@ -91,6 +92,11 @@ void loop() {
   
   switch(number){
     case 1 :
+      if(from_left == true){
+        from_left = false;
+        myservo.write(75);
+        delay(100);
+      }
       myservo.write(95);
       control_signal = control_signal + increment_pid();
       PPM_output(control_signal);
@@ -101,22 +107,23 @@ void loop() {
       break;
     case 3 :
       if (right_counter == 1) {
-        myservo.write(85);
-        control_signal = control_signal + increment_pid();
-        PPM_output(control_signal);
-      }
-      else if (right_counter == 2) {
         myservo.write(75);
         control_signal = control_signal + increment_pid();
         PPM_output(control_signal);
       }
-      else if (right_counter == 3) {
+      else if (right_counter == 2) {
         myservo.write(65);
+        control_signal = control_signal + increment_pid();
+        PPM_output(control_signal);
+      }
+      else if (right_counter == 3) {
+        myservo.write(55);
         control_signal = control_signal + increment_pid();
         PPM_output(control_signal);
       }
       break;
     case 4 :
+      from_left = true;
       if (left_counter == 1) {
         myservo.write(105);
         control_signal = control_signal + increment_pid();
@@ -134,7 +141,7 @@ void loop() {
       }
       break;
     default :
-      PPM_output(0);  
+      PPM_output(0); 
   }
   
 //  if (flag == 1){
@@ -267,8 +274,13 @@ void current_sensor(){
     sensorValue = (sensorValue * VOLTAGE_REF) / 1023;
     current = sensorValue / (10 * RS);
     avg(current);
-  switch(number){
+   switch(number){
     case 1 :
+      if(from_left == true){
+        from_left = false;
+        myservo.write(75);
+        delay(100);
+      }
       myservo.write(95);
       control_signal = control_signal + increment_pid();
       PPM_output(control_signal);
@@ -279,22 +291,23 @@ void current_sensor(){
       break;
     case 3 :
       if (right_counter == 1) {
-        myservo.write(85);
-        control_signal = control_signal + increment_pid();
-        PPM_output(control_signal);
-      }
-      else if (right_counter == 2) {
         myservo.write(75);
         control_signal = control_signal + increment_pid();
         PPM_output(control_signal);
       }
-      else if (right_counter == 3) {
+      else if (right_counter == 2) {
         myservo.write(65);
+        control_signal = control_signal + increment_pid();
+        PPM_output(control_signal);
+      }
+      else if (right_counter == 3) {
+        myservo.write(55);
         control_signal = control_signal + increment_pid();
         PPM_output(control_signal);
       }
       break;
     case 4 :
+      from_left = true;
       if (left_counter == 1) {
         myservo.write(105);
         control_signal = control_signal + increment_pid();
@@ -312,7 +325,7 @@ void current_sensor(){
       }
       break;
     default :
-      PPM_output(0);  
+      PPM_output(0); 
   }
 }
 
