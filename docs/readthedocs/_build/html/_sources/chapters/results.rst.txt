@@ -10,3 +10,4 @@ This page gives a comprehensive list of different results that were achieved.
    results/imu_autonomous_navigation
    results/power_management
    results/optical_flow
+   results/mobile_movement_control

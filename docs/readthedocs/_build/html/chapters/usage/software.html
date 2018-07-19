@@ -117,6 +117,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#data-logging">Data Logging</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#version-alpha-camera-data-imu-data-lidar-data">Version Alpha (Camera data, IMU data, LiDar Data)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#version-beta-magnetic-reading-added-to-imu">Version Beta (Magnetic reading added to IMU)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#version-beta-2-0-code-re-organization-process-self-contained-pmu-reading">Version Beta 2.0 (Code re-organization, Process, self contained, PMU reading)</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#data-analysis">Data Analysis</a><ul>
@@ -505,6 +506,71 @@ timestamp, distance, accelaration in x,y,z, angular velocity in x,y,z</p>
 <p>The script could either be called from the terminal or from other script by calling the funtion getSensorAndCamera.</p>
 <p>‘-s’ command line argument and save parameter for getSensorAndCamera is implemented so that users can decide whether they want the logging file to be saved locally.</p>
 <p>For installation and usage see the previous section</p>
+</div>
+<div class="section" id="version-beta-2-0-code-re-organization-process-self-contained-pmu-reading">
+<h3>Version Beta 2.0 (Code re-organization, Process, self contained, PMU reading)<a class="headerlink" href="#version-beta-2-0-code-re-organization-process-self-contained-pmu-reading" title="Permalink to this headline">¶</a></h3>
+<p><em>Creator : Jerry Kong</em></p>
+<p><em>The code could be found in PiCar/src/pi/IMU_Lidar, device_int is the main file</em></p>
+<p>The code is factor out and classified in an interface-oriented manner(i.e. the objects are put into class by its interface)</p>
+<p>The class structure is:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>device
+<span class="p">|</span>-----camera
+<span class="p">|</span>-----sensor
+        <span class="p">|</span>-----pmucounter
+        <span class="p">|</span>-----IMU
+        <span class="p">|</span>-----LiDar
+</pre></div>
+</div>
+<p>Instead of its different class structure, the parameter for the main function is also different</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">getSensorAndCamera</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;192.168.1.121&#39;</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">6000</span><span class="p">,</span><span class="n">save</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">duration</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">endless</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">trAccRate</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">trGyroRate</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+                     <span class="n">trMagRate</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">accScale</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">gyroScale</span><span class="o">=</span><span class="mi">245</span><span class="p">,</span><span class="n">magScale</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">cameraFreq</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">imuRate</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">lidarRate</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">precision</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span><span class="n">tm</span><span class="o">=</span><span class="p">[])</span>
+</pre></div>
+</div>
+<p>Currently, to stop the sending process, a remote desktop must reach to the Server</p>
+<p>To pass a new device outside the file to the function, see the sample code below</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">device_int</span>
+<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span>
+
+<span class="k">class</span> <span class="nc">currentSensor</span><span class="p">(</span><span class="n">device_int</span><span class="o">.</span><span class="n">sensor</span><span class="p">):</span>
+
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;CS&quot;</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;currentSensor&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__conn</span> <span class="o">=</span> <span class="n">currentSensorCommunicationPort</span>
+
+  <span class="k">def</span> <span class="nf">detect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__conn</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span>
+
+  <span class="k">def</span> <span class="nf">getFieldSize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    return a int</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="mi">1</span>
+
+  <span class="k">def</span> <span class="nf">getHeader</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    return a list</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;current&quot;</span><span class="p">]</span>
+
+  <span class="k">def</span> <span class="nf">getValue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    return the sensor reading</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__conn</span><span class="o">.</span><span class="n">getCurrent</span><span class="p">()]</span>
+
+ <span class="n">cs</span> <span class="o">=</span> <span class="n">currentSensor</span><span class="p">()</span>
+
+ <span class="n">currentTimer</span> <span class="o">=</span> <span class="n">device_int</span><span class="o">.</span><span class="n">Timer</span><span class="p">(</span><span class="n">cs</span><span class="p">,</span> <span class="n">currentSensor_read_period</span><span class="p">)</span>
+
+ <span class="n">p</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">target</span> <span class="o">=</span> <span class="n">device_int</span><span class="o">.</span><span class="n">getSensorAndCamera</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">host</span><span class="p">,</span><span class="n">port</span><span class="p">,</span><span class="n">save</span><span class="p">,</span><span class="n">duration</span><span class="p">,</span><span class="n">endless</span><span class="p">,</span><span class="n">trAccRate</span><span class="p">,</span><span class="n">trGyroRate</span><span class="p">,</span>
+                      <span class="n">trMagRate</span><span class="p">,</span><span class="n">accScale</span><span class="p">,</span><span class="n">gyroScale</span><span class="p">,</span><span class="n">magScale</span><span class="p">,</span><span class="n">cameraFreq</span><span class="p">,</span><span class="n">imuRate</span><span class="p">,</span><span class="n">lidarRate</span><span class="p">,</span><span class="n">precision</span><span class="p">,[</span><span class="n">currentTimer</span><span class="p">]))</span>
+
+ <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+ <span class="c1">#do some operation</span>
+ <span class="n">p</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="data-analysis">

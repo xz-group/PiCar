@@ -100,7 +100,7 @@ The testing code is:
 
   import smbus
   import time
-  # for RPI version 1, use  ^ ^ bus = smbus.SMBus(0) ^ ^
+
   bus = smbus.SMBus(1)
 
   # This is the address we setup in the Arduino Program
@@ -134,6 +134,27 @@ See Also:
 #########
 * `SMBus Package <https://pypi.org/project/smbus-cffi/>`_
 
+.. Tip::  To open i2c bus0 on raspberry pi, you need to change the file /boot/config.txt
+
+          **Under the i2c section, the txt should be**
+
+          #Uncomment some or all of these to enable the optional hardware interfaces
+
+          dtparam=i2c_arm=on
+
+          dtparam=i2c_vc=on
+
+          dtparam=i2c_baudrate=1000000
+
+          #dtparam=i2s=on
+
+          device_tree_param=i2c0=on
+
+          device_tree_param=i2c=on
+
+          dtparam=spi=on
+
+          **Then you can use the bus0 for i2c.**
 
 SPI Method
 ^^^^^^^^^^
@@ -142,7 +163,7 @@ SPI Method
 +--------------+-------------+
 |Rasberry Pi 3 |arduino Uno  |
 +==============+=============+
-|GND           | GND         |
+|GND           |GND          |
 +--------------+-------------+
 |MOSI (Pin19)  |MOSI (Pin11) |
 +--------------+-------------+
@@ -242,14 +263,13 @@ code on arduino
 
   }
 
-Python code on Pi(make sure you have pigpio installed and running by sudo pigpiod):
+Python code on Pi(make sure you have pigpio installed and running by sudo pigpiod in terminal):
 
 .. code-block:: python
 
   #!/usr/bin/env python
 
   import time,pigpio
-
 
   #open spi
   pi = pigpio.pi()
@@ -355,7 +375,7 @@ arduino to raspberry pi. In this sections, we will use GPIO pins to connect our 
 +--------------+-----------------------+
 |Rasberry Pi 3 |arduino Uno            |
 +==============+=======================+
-|GND           | GND                   |
+|GND           |GND                    | 
 +--------------+-----------------------+
 |Pin19         |SDA(The pin above AREF)|
 +--------------+-----------------------+

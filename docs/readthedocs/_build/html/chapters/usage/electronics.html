@@ -362,7 +362,7 @@ with slight changes to accommodate Python 3 instead of Python 2.</p>
 30
 31</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">smbus</span>
 <span class="kn">import</span> <span class="nn">time</span>
-<span class="c1"># for RPI version 1, use  ^ ^ bus = smbus.SMBus(0) ^ ^</span>
+
 <span class="n">bus</span> <span class="o">=</span> <span class="n">smbus</span><span class="o">.</span><span class="n">SMBus</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1"># This is the address we setup in the Arduino Program</span>
@@ -398,6 +398,20 @@ with slight changes to accommodate Python 3 instead of Python 2.</p>
 <ul class="simple">
 <li><a class="reference external" href="https://pypi.org/project/smbus-cffi/">SMBus Package</a></li>
 </ul>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>To open i2c bus0 on raspberry pi, you need to change the file /boot/config.txt</p>
+<p><strong>Under the i2c section, the txt should be</strong></p>
+<p>#Uncomment some or all of these to enable the optional hardware interfaces</p>
+<p>dtparam=i2c_arm=on</p>
+<p>dtparam=i2c_vc=on</p>
+<p>dtparam=i2c_baudrate=1000000</p>
+<p>#dtparam=i2s=on</p>
+<p>device_tree_param=i2c0=on</p>
+<p>device_tree_param=i2c=on</p>
+<p>dtparam=spi=on</p>
+<p class="last"><strong>Then you can use the bus0 for i2c.</strong></p>
+</div>
 </div>
 </div>
 <div class="section" id="spi-method">
@@ -507,11 +521,10 @@ When a complete byte has been shifted into the register, that byte is then copie
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Python code on Pi(make sure you have pigpio installed and running by sudo pigpiod):</p>
+<p>Python code on Pi(make sure you have pigpio installed and running by sudo pigpiod in terminal):</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
 
 <span class="kn">import</span> <span class="nn">time</span><span class="o">,</span><span class="nn">pigpio</span>
-
 
 <span class="c1">#open spi</span>
 <span class="n">pi</span> <span class="o">=</span> <span class="n">pigpio</span><span class="o">.</span><span class="n">pi</span><span class="p">()</span>

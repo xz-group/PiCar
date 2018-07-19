@@ -111,7 +111,7 @@ function loadFileAsText(){
       updateData();
       updateImage();
       updateDataChart("add");
-
+      updateAllPlot();
   	}
   });
 }
@@ -150,4 +150,55 @@ function updateImage(){
     imageDiv.appendChild(image);
   }
 
+}
+
+var allTime = [];
+var allLidarData = [];
+var allimuAX = [];
+var allimuAY = [];
+var allimuAZ = [];
+var allimuGX = [];
+var allimuGY = [];
+var allimuGZ = [];
+
+//update plots with all data
+var updateAllPlot = function(){
+    var index;
+    for(index = 0; index < csvData.data.length; index++){
+      var allRowData7 = csvData.data[index]
+      var dataTime7 = allRowData7[0]
+      var Lidar7 = allRowData7[1]
+      var imuAX7 = allRowData7[2]
+      var imuAY7 = allRowData7[3]
+      var imuAZ7 = allRowData7[4]
+      var imuGX7 = allRowData7[5]
+      var imuGY7 = allRowData7[6]
+      var imuGZ7 = allRowData7[7]
+      allTime.push(dataTime7);
+      allLidarData.push(Lidar7);
+      allimuAX.push(imuAX7);
+      allimuAY.push(imuAY7);
+      allimuAZ.push(imuAZ7);
+      allimuGX.push(imuGX7);
+      allimuGY.push(imuGY7);
+      allimuGZ.push(imuGZ7);
+    }
+    
+    lidarPlot.data.labels = allTime;
+    lidarPlot.data.datasets[0].data = allLidarData;
+    lidarPlot.update();
+
+    imuAPlot.data.labels = allTime;
+    imuAPlot.data.datasets[0].data = allimuAX;
+    imuAPlot.data.datasets[1].data = allimuAY;
+    imuAPlot.data.datasets[2].data = allimuAZ;
+    imuAPlot.update();
+
+    imuGPlot.data.labels = allTime;
+    imuGPlot.data.datasets[0].data = allimuGX;
+    imuGPlot.data.datasets[1].data = allimuGY;
+    imuGPlot.data.datasets[2].data = allimuGZ;
+    imuGPlot.update();
+
+    console.log("finished")
 }
