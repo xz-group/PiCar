@@ -27,6 +27,11 @@ def pre_exec():
 def filenames(alive,duration,cameraFreq,beginTime):
     """
     Filename generator: Used with Camera class to generate a series of filename for the picture to be stored at
+
+    :param alive: The global variable keeping the state of the program and processes
+    :param duration: Experiment duration
+    :param cameraFreq: Camera Frequency
+    :param beginTime: root directory as a timestamp
     """
     startTime = time.time()
     lastTime = time.time()
@@ -41,7 +46,15 @@ def filenames(alive,duration,cameraFreq,beginTime):
 
 
 class Killer:
+    """
+
+    A elegant killer, to make sure the process and subprocesses functions as expected
+
+    """
     def __init__(self,state):
+        """
+        :param state: A global variable keeping the state of the processes
+        """
         self.state = state
         signal.signal(signal.SIGINT, self.exit)
         signal.signal(signal.SIGTERM, self.exit)
@@ -157,6 +170,9 @@ class IMU(sensor):
             quit()
 
     def setConn(self, conn):
+        """
+        :param conn: an IMU object created by imu library
+        """
         self.__conn = conn
 
     def calibrate(self):
@@ -177,16 +193,22 @@ class IMU(sensor):
     def setIMUodr(self, aRate=6, gRate=6, mRate=7):
         """
         Output rate setter for IMU
-        Available rate for accel: 1 = 10 Hz    4 = 238 Hz
-                                  2 = 50 Hz    5 = 476 Hz
-                                  3 = 119 Hz   6 = 952 Hz
-        Available rate for gyro : 1 = 14.9     4 = 238
-                                  2 = 59.5     5 = 476
-                                  3 = 119      6 = 952
-        Available rate for mag  : 0 = 0.625 Hz  4 = 10 Hz
-                                  1 = 1.25 Hz   5 = 20 Hz
-                                  2 = 2.5 Hz    6 = 40 Hz
-                                  3 = 5 Hz      7 = 80 Hz
+
+        Available rate for accel :
+                                    1 = 10 Hz    4 = 238 Hz\n
+                                    2 = 50 Hz    5 = 476 Hz\n
+                                    3 = 119 Hz   6 = 952 Hz
+
+        Available rate for gyro :
+                                    1 = 14.9     4 = 238\n
+                                    2 = 59.5     5 = 476\n
+                                    3 = 119      6 = 952
+
+        Available rate for mag  :
+                                    0 = 0.625 Hz  4 = 10 Hz\n
+                                    1 = 1.25 Hz   5 = 20 Hz\n
+                                    2 = 2.5 Hz    6 = 40 Hz\n
+                                    3 = 5 Hz      7 = 80 Hz
         """
         lib.lsm9ds1_setAccelODR(self.__conn, aRate)
         lib.lsm9ds1_setGyroODR(self.__conn, gRate)
@@ -195,9 +217,16 @@ class IMU(sensor):
     def setIMUScale(self, aScl=2, gScl=245, mScl=4):
         """
         Scale for IMU_SETUP
-        Available rate for accel: 2, 4, 8, 16
-        Available rate for gyro : 245, 500, 2000
-        Available rate for mag  : 4, 8, 12, 16
+
+        Available rate for accel :
+                                    2, 4, 8, 16
+
+        Available rate for gyro :
+                                    245, 500, 2000
+
+        Available rate for mag :
+                                    4, 8, 12, 16
+
         (Value set other than these value might cause IMU to crush)
         """
         lib.lsm9ds1_setAccelScale(self.__conn, aScl)
@@ -205,9 +234,15 @@ class IMU(sensor):
         lib.lsm9ds1_setMagScale(self.__conn, mScl)
 
     def getFieldSize(self):
+        """
+        Field size = 9
+        """
         return 9
 
     def getHeader(self):
+        """
+        Header: AccelX, AccelY, AccelZ, GyroX, GyroY, GyroZ, MagX, MagY, MagZ
+        """
         return ["AccelX","AccelY","AccelZ","GyroX","GyroY","GyroZ","MagX","MagY","MagZ"]
 
     def getValue(self):
@@ -244,6 +279,9 @@ class LiDar(sensor):
         self.__conn = serial.Serial("/dev/ttyS0", 115200)
 
     def setConn(self, conn):
+        """
+        :param conn: a serial port
+        """
         self.__conn = conn
 
     def open(self):
@@ -261,9 +299,15 @@ class LiDar(sensor):
             return False
 
     def getFieldSize(self):
+        """
+        FieldSize = 1
+        """
         return 1
 
     def getHeader(self):
+        """
+        Header : LiDar
+        """
         return ["LiDar"]
 
     def getValue(self):
@@ -292,20 +336,20 @@ class Camera(device):
 
     def setRes(self, res):
         """
-        res is a tuple (length,width) in pixel
+        :param res: resolution (length,width) in a tuple
         """
         self.camera.resolution = res
 
     def setFrameRate(self, fr):
         """
-        fr is in Hz
+        :param fr: int in Hz
         """
         self.camera.framerate = fr
 
     def capture(self, gen, *args):
         """
-        gen : a filename generator that has timing functionality
-        *args : contains all the arguments gen needs
+        :param gen: a filename generator that has timing functionality
+        :param \*args: contains all the arguments gen needs
         """
         self.camera.capture_sequence(gen(*args), use_video_port=True)
 
@@ -316,8 +360,8 @@ class Timer:
     """
     def __init__(self, kit, gap):
         """
-        kit : the Sensor
-        gap : the delta time
+        :param kit: the Sensor object
+        :param gap: the delta time
         """
         self.gap = gap
         self.kit = kit
@@ -325,6 +369,9 @@ class Timer:
         self.size = self.kit.getFieldSize()
 
     def read(self,t):
+        """
+        :param t: current time to be compared with the time kept by the object
+        """
         if t-self.gap>self.last and self.kit.detect():
             self.last = t
             return self.kit.getValue()
@@ -335,11 +382,11 @@ class Timer:
 def getCamera(gen,alive,duration,cameraFreq,beginTime):
     """
     The filming function executed in a different core
-    gen        : the filenames generator
-    alive      : the global variable to track the state in the main function
-    duration   : the elapse time for the test
-    cameraFreq : the cameraFrequncy in Hz
-    beginTime  : (string) the directory of the root folder for the logging files
+    :param gen: the filenames generator
+    :param alive: the global variable to track the state in the main function
+    :param duration: the elapse time for the test
+    :param cameraFreq: the cameraFrequncy in Hz
+    :param beginTime: (string) the directory of the root folder for the logging files
     """
     pre_exec()
     cam = Camera()
@@ -348,12 +395,12 @@ def getCamera(gen,alive,duration,cameraFreq,beginTime):
 def getSensor(alive,rowList,duration,precision,datafile,timers):
     """
     The data logging function executed in a different core
-    alive: the global variable to track the state in the main function
-    rowList: a list stores timestamp and logging data
-    duration: the elapse time for the test
-    precision: the gap between two visit of the script to sensors
-    datafile: file name of the datafile
-    timers: a list of timers holding sensors
+    :param alive: the global variable to track the state in the main function
+    :param rowList: a list stores timestamp and logging data
+    :param duration: the elapse time for the test
+    :param precision: the gap between two visit of the script to sensors
+    :param datafile: file name of the datafile
+    :param timers: a list of timers holding sensors
     """
     pre_exec()
     #print("enter sensor")
