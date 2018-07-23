@@ -1,0 +1,616 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The Picar Module Usage &mdash; PiCar Project 2018 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="PiCar Project 2018 documentation" href="../../index.html"/>
+        <link rel="up" title="Usage" href="../usage.html"/>
+        <link rel="next" title="Results" href="../results.html"/>
+        <link rel="prev" title="Datasheet" href="datasheet.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> PiCar Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../usage.html">Usage</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="mechanical.html">Mechanical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="electronics.html">Electronics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="software.html">Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasheet.html">Datasheet</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">The Picar Module Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../results.html">Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelogs.html">Changelogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributors.html">Contributors</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">PiCar Project</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../usage.html">Usage</a> &raquo;</li>
+      
+    <li>The Picar Module Usage</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/chapters/usage/picar_usage.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-picar-module-usage">
+<h1>The Picar Module Usage<a class="headerlink" href="#the-picar-module-usage" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="picar.device">
+<em class="property">class </em><code class="descclassname">picar.</code><code class="descname">device</code><span class="sig-paren">(</span><em>name='D'</em><span class="sig-paren">)</span><a class="headerlink" href="#picar.device" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for all Devices</p>
+<dl class="method">
+<dt id="picar.device.whoAmI">
+<code class="descname">whoAmI</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#picar.device.whoAmI" title="Permalink to this definition">¶</a></dt>
+<dd><p>A function that could be called to tell what device it is</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="picar.sensor">
+<em class="property">class </em><code class="descclassname">picar.</code><code class="descname">sensor</code><span class="sig-paren">(</span><em>name='S'</em><span class="sig-paren">)</span><a class="headerlink" href="#picar.sensor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for all Sensors</p>
+<dl class="method">
+<dt id="picar.sensor.detect">
+<code class="descname">detect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#picar.sensor.detect" title="Permalink to this definition">¶</a></dt>
+<dd><p>A sensor should implement this method to tell if the sensor is currently available</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="picar.sensor.getConn">
+<code class="descname">getConn</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#picar.sensor.getConn" title="Permalink to this definition">¶</a></dt>
+<dd><p>The connection could be returned by this function</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="picar.sensor.getFieldSize">
+<code class="descname">getFieldSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#picar.sensor.getFieldSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>A sensor should implement this method to return the field size requested by the sensor in logging file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="picar.sensor.getHeader">
+<code class="descname">getHeader</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#picar.sensor.getHeader" title="Permalink to this definition">¶</a></dt>
+<dd><p>A sensor should implement this method to return the header of it requested field in a list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="picar.sensor.getValue">
+<code class="descname">getValue</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#picar.sensor.getValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>A sensor should implement this method to return values in a list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="picar.sensor.setConn">
+<code class="descname">setConn</code><span class="sig-paren">(</span><em>conn</em><span class="sig-paren">)</span><a class="headerlink" href="#picar.sensor.setConn" title="Permalink to this definition">¶</a></dt>
+<dd><p>A sensor’s connection should be able to be reset by this function</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="picar.sensor.whoAmI">
+<code class="descname">whoAmI</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#picar.sensor.whoAmI" title="Permalink to this definition">¶</a></dt>
+<dd><p>A function that could be called to tell what device it is</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="picar.pmucounter">
+<em class="property">class </em><code class="descclassname">picar.</code><code class="descname">pmucounter</code><span class="sig-paren">(</span><em>name='P'</em><span class="sig-paren">)</span><a class="headerlink" href="#picar.pmucounter" title="Permalink to this definition">¶</a></dt>
+<dd><p>PMU (Performance Monitoring Unit) reader</p>
+<dl class="method">
+<dt id="picar.pmucounter.detect">
+<code class="descname">detect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#picar.pmucounter.detect" title="Permalink to this definition">¶</a></dt>
+<dd><p>A sensor should implement this method to tell if the sensor is currently available</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="picar.pmucounter.getConn">
+<code class="descname">getConn</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#picar.pmucounter.getConn" title="Permalink to this definition">¶</a></dt>
+<dd><p>The connection could be returned by this function</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="picar.pmucounter.getFieldSize">
+<code class="descname">getFieldSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#picar.pmucounter.getFieldSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>A sensor should implement this method to return the field size requested by the sensor in logging file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="picar.pmucounter.getHeader">
+<code class="descname">getHeader</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#picar.pmucounter.getHeader" title="Permalink to this definition">¶</a></dt>
+<dd><p>A sensor should implement this method to return the header of it requested field in a list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="picar.pmucounter.getValue">
+<code class="descname">getValue</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#picar.pmucounter.getValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>A sensor should implement this method to return values in a list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="picar.pmucounter.setConn">
+<code class="descname">setConn</code><span class="sig-paren">(</span><em>conn</em><span class="sig-paren">)</span><a class="headerlink" href="#picar.pmucounter.setConn" title="Permalink to this definition">¶</a></dt>
+<dd><p>A sensor’s connection should be able to be reset by this function</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="picar.pmucounter.whoAmI">
+<code class="descname">whoAmI</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#picar.pmucounter.whoAmI" title="Permalink to this definition">¶</a></dt>
+<dd><p>A function that could be called to tell what device it is</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="picar.IMU">
+<em class="property">class </em><code class="descclassname">picar.</code><code class="descname">IMU</code><span class="sig-paren">(</span><em>name='I'</em><span class="sig-paren">)</span><a class="headerlink" href="#picar.IMU" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class for IMU sensor</p>
+<dl class="method">
+<dt id="picar.IMU.calibrate">
+<code class="descname">calibrate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#picar.IMU.calibrate" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for IMU calibration</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="picar.IMU.detect">
+<code class="descname">detect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#picar.IMU.detect" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function tests if accel, gyro and mag are all available</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="picar.IMU.getConn">
+<code class="descname">getConn</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#picar.IMU.getConn" title="Permalink to this definition">¶</a></dt>
+<dd><p>The connection could be returned by this function</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="picar.IMU.getFieldSize">
+<code class="descname">getFieldSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#picar.IMU.getFieldSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field size = 9</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="picar.IMU.getHeader">
+<code class="descname">getHeader</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#picar.IMU.getHeader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Header: AccelX, AccelY, AccelZ, GyroX, GyroY, GyroZ, MagX, MagY, MagZ</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="picar.IMU.getValue">
+<code class="descname">getValue</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#picar.IMU.getValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a 9-elements list containing all IMU reading</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="picar.IMU.setConn">
+<code class="descname">setConn</code><span class="sig-paren">(</span><em>conn</em><span class="sig-paren">)</span><a class="headerlink" href="#picar.IMU.setConn" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>conn</strong> – an IMU object created by imu library</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="picar.IMU.setIMUScale">
+<code class="descname">setIMUScale</code><span class="sig-paren">(</span><em>aScl=2</em>, <em>gScl=245</em>, <em>mScl=4</em><span class="sig-paren">)</span><a class="headerlink" href="#picar.IMU.setIMUScale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scale for IMU_SETUP</p>
+<dl class="docutils">
+<dt>Available rate for accel :</dt>
+<dd>2, 4, 8, 16</dd>
+<dt>Available rate for gyro :</dt>
+<dd>245, 500, 2000</dd>
+<dt>Available rate for mag :</dt>
+<dd>4, 8, 12, 16</dd>
+</dl>
+<p>(Value set other than these value might cause IMU to crush)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="picar.IMU.setIMUodr">
+<code class="descname">setIMUodr</code><span class="sig-paren">(</span><em>aRate=6</em>, <em>gRate=6</em>, <em>mRate=7</em><span class="sig-paren">)</span><a class="headerlink" href="#picar.IMU.setIMUodr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output rate setter for IMU</p>
+<dl class="docutils">
+<dt>Available rate for accel :</dt>
+<dd><p class="first">1 = 10 Hz    4 = 238 Hz</p>
+<p>2 = 50 Hz    5 = 476 Hz</p>
+<p class="last">3 = 119 Hz   6 = 952 Hz</p>
+</dd>
+<dt>Available rate for gyro :</dt>
+<dd><p class="first">1 = 14.9     4 = 238</p>
+<p>2 = 59.5     5 = 476</p>
+<p class="last">3 = 119      6 = 952</p>
+</dd>
+<dt>Available rate for mag  :</dt>
+<dd><p class="first">0 = 0.625 Hz  4 = 10 Hz</p>
+<p>1 = 1.25 Hz   5 = 20 Hz</p>
+<p>2 = 2.5 Hz    6 = 40 Hz</p>
+<p class="last">3 = 5 Hz      7 = 80 Hz</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="picar.IMU.whoAmI">
+<code class="descname">whoAmI</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#picar.IMU.whoAmI" title="Permalink to this definition">¶</a></dt>
+<dd><p>A function that could be called to tell what device it is</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="picar.LiDar">
+<em class="property">class </em><code class="descclassname">picar.</code><code class="descname">LiDar</code><span class="sig-paren">(</span><em>name='L'</em><span class="sig-paren">)</span><a class="headerlink" href="#picar.LiDar" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="picar.LiDar.detect">
+<code class="descname">detect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#picar.LiDar.detect" title="Permalink to this definition">¶</a></dt>
+<dd><p>A sensor should implement this method to tell if the sensor is currently available</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="picar.LiDar.getConn">
+<code class="descname">getConn</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#picar.LiDar.getConn" title="Permalink to this definition">¶</a></dt>
+<dd><p>The connection could be returned by this function</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="picar.LiDar.getFieldSize">
+<code class="descname">getFieldSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#picar.LiDar.getFieldSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>FieldSize = 1</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="picar.LiDar.getHeader">
+<code class="descname">getHeader</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#picar.LiDar.getHeader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Header : LiDar</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="picar.LiDar.getValue">
+<code class="descname">getValue</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#picar.LiDar.getValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a 1 element list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="picar.LiDar.setConn">
+<code class="descname">setConn</code><span class="sig-paren">(</span><em>conn</em><span class="sig-paren">)</span><a class="headerlink" href="#picar.LiDar.setConn" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>conn</strong> – a serial port</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="picar.LiDar.whoAmI">
+<code class="descname">whoAmI</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#picar.LiDar.whoAmI" title="Permalink to this definition">¶</a></dt>
+<dd><p>A function that could be called to tell what device it is</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="picar.Camera">
+<em class="property">class </em><code class="descclassname">picar.</code><code class="descname">Camera</code><span class="sig-paren">(</span><em>name='C'</em>, <em>res=(480</em>, <em>480)</em>, <em>fr=40</em><span class="sig-paren">)</span><a class="headerlink" href="#picar.Camera" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="picar.Camera.capture">
+<code class="descname">capture</code><span class="sig-paren">(</span><em>gen</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#picar.Camera.capture" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>gen</strong> – a filename generator that has timing functionality</li>
+<li><strong>*args</strong> – contains all the arguments gen needs</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="picar.Camera.setFrameRate">
+<code class="descname">setFrameRate</code><span class="sig-paren">(</span><em>fr</em><span class="sig-paren">)</span><a class="headerlink" href="#picar.Camera.setFrameRate" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fr</strong> – int in Hz</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="picar.Camera.setRes">
+<code class="descname">setRes</code><span class="sig-paren">(</span><em>res</em><span class="sig-paren">)</span><a class="headerlink" href="#picar.Camera.setRes" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>res</strong> – resolution (length,width) in a tuple</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="picar.Camera.whoAmI">
+<code class="descname">whoAmI</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#picar.Camera.whoAmI" title="Permalink to this definition">¶</a></dt>
+<dd><p>A function that could be called to tell what device it is</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="picar.Timer">
+<em class="property">class </em><code class="descclassname">picar.</code><code class="descname">Timer</code><span class="sig-paren">(</span><em>kit</em>, <em>gap</em><span class="sig-paren">)</span><a class="headerlink" href="#picar.Timer" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Timer class that helps get delta timing for a sensor</p>
+<dl class="method">
+<dt id="picar.Timer.read">
+<code class="descname">read</code><span class="sig-paren">(</span><em>t</em><span class="sig-paren">)</span><a class="headerlink" href="#picar.Timer.read" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>t</strong> – current time to be compared with the time kept by the object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="picar.Killer">
+<em class="property">class </em><code class="descclassname">picar.</code><code class="descname">Killer</code><span class="sig-paren">(</span><em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#picar.Killer" title="Permalink to this definition">¶</a></dt>
+<dd><p>A elegant killer, to make sure the process and subprocesses functions as expected</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="picar.pre_exec">
+<code class="descclassname">picar.</code><code class="descname">pre_exec</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#picar.pre_exec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Easy to use function to prevent the subprocess to receive KeyboardInterrupt</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="picar.filenames">
+<code class="descclassname">picar.</code><code class="descname">filenames</code><span class="sig-paren">(</span><em>alive</em>, <em>duration</em>, <em>cameraFreq</em>, <em>beginTime</em><span class="sig-paren">)</span><a class="headerlink" href="#picar.filenames" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filename generator: Used with Camera class to generate a series of filename for the picture to be stored at</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>alive</strong> – The global variable keeping the state of the program and processes</li>
+<li><strong>duration</strong> – Experiment duration</li>
+<li><strong>cameraFreq</strong> – Camera Frequency</li>
+<li><strong>beginTime</strong> – root directory as a timestamp</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="picar.getCamera">
+<code class="descclassname">picar.</code><code class="descname">getCamera</code><span class="sig-paren">(</span><em>gen</em>, <em>alive</em>, <em>duration</em>, <em>cameraFreq</em>, <em>beginTime</em><span class="sig-paren">)</span><a class="headerlink" href="#picar.getCamera" title="Permalink to this definition">¶</a></dt>
+<dd><p>The filming function executed in a different core
+:param gen: the filenames generator
+:param alive: the global variable to track the state in the main function
+:param duration: the elapse time for the test
+:param cameraFreq: the cameraFrequncy in Hz
+:param beginTime: (string) the directory of the root folder for the logging files</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="picar.getSensor">
+<code class="descclassname">picar.</code><code class="descname">getSensor</code><span class="sig-paren">(</span><em>alive</em>, <em>rowList</em>, <em>duration</em>, <em>precision</em>, <em>datafile</em>, <em>timers</em><span class="sig-paren">)</span><a class="headerlink" href="#picar.getSensor" title="Permalink to this definition">¶</a></dt>
+<dd><p>The data logging function executed in a different core
+:param alive: the global variable to track the state in the main function
+:param rowList: a list stores timestamp and logging data
+:param duration: the elapse time for the test
+:param precision: the gap between two visit of the script to sensors
+:param datafile: file name of the datafile
+:param timers: a list of timers holding sensors</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="picar.getSensorAndCamera">
+<code class="descclassname">picar.</code><code class="descname">getSensorAndCamera</code><span class="sig-paren">(</span><em>host='192.168.1.121'</em>, <em>port=6000</em>, <em>save=False</em>, <em>duration=5</em>, <em>endless=False</em>, <em>trAccRate=6</em>, <em>trGyroRate=6</em>, <em>trMagRate=7</em>, <em>accScale=2</em>, <em>gyroScale=245</em>, <em>magScale=4</em>, <em>cameraFreq=5</em>, <em>imuRate=50</em>, <em>lidarRate=50</em>, <em>precision=0.001</em>, <em>tm=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#picar.getSensorAndCamera" title="Permalink to this definition">¶</a></dt>
+<dd><p>A easy to use logging version supporting camera data logging, IMU reading, Lidar reading</p>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../results.html" class="btn btn-neutral float-right" title="Results" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="datasheet.html" class="btn btn-neutral" title="Datasheet" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, xz-group.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'2018',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
