@@ -52,7 +52,7 @@ The testing code is:
 
   void setup() {
     pinMode(13, OUTPUT);
-    Serial.begin(9600); // start serial for output
+    Serial.begin(9600);
 
     // initialize i2c as slave
     Wire.begin(SLAVE_ADDRESS);
@@ -108,12 +108,10 @@ The testing code is:
 
   def writeNumber(value):
     bus.write_byte(address, value)
-    # bus.write_byte_data(address, 0, value)
     return -1
 
   def readNumber():
     number = bus.read_byte(address)
-    # number = bus.read_byte_data(address, 1)
     return number
 
   while True:
@@ -123,7 +121,7 @@ The testing code is:
 
     writeNumber(var)
     print("RPI: Hi Arduino, I sent you ", var)
-    # sleep one second
+    # sleep one second for debug
     time.sleep(1)
 
     number = readNumber()
@@ -375,7 +373,7 @@ arduino to raspberry pi. In this sections, we will use GPIO pins to connect our 
 +--------------+-----------------------+
 |Rasberry Pi 3 |arduino Uno            |
 +==============+=======================+
-|GND           |GND                    | 
+|GND           |GND                    |
 +--------------+-----------------------+
 |Pin19         |SDA(The pin above AREF)|
 +--------------+-----------------------+

@@ -1,3 +1,9 @@
+/*
+Author: Feiyang Jin
+Email: feiyang.jin@wustl.edu
+Organization: Washington University in St. Louis
+Date: July 2018
+*/
 #include <SPI.h>
 
 byte inputByte = 100;
@@ -36,7 +42,7 @@ void loop (void)
     inputByte = SPDR;
     //Serial.print("we received: ");
     //Serial.println(c);
-    
+
     //we first decide we are in the process or reading data
     //if not, we explain the byte as data header:
     //if we receive 2, we know pi wants to read a float
@@ -62,7 +68,7 @@ void loop (void)
     else if(inputByte == 4 && !beginReadingInt){
       beginReadingInt = 1;
     }
-    
+
   }
 
 }
@@ -72,7 +78,7 @@ void readInt(){
   intData = inputByte;
   Serial.print("the int we received is:");
   Serial.println(intData);
-  beginReadingInt = 0;  
+  beginReadingInt = 0;
 }
 
 void readFloatByByte(){
@@ -81,17 +87,17 @@ void readFloatByByte(){
       v.asBytes[0] = inputByte;
       currentReadFloatByte++;
       break;
-    
+
     case 2:
       v.asBytes[1] = inputByte;
       currentReadFloatByte ++;
       break;
-      
+
     case 3:
       v.asBytes[2] = inputByte;
       currentReadFloatByte ++;
       break;
-      
+
     case 4:
       v.asBytes[3] = inputByte;
       currentReadFloatByte = 1;
@@ -99,7 +105,7 @@ void readFloatByByte(){
       Serial.print("The float we received is:");
       Serial.println(v.asFloat,5);
       break;
-  
+
   }
 }
 
@@ -111,22 +117,22 @@ void sendFloatByByte(){
         SPDR = (rawBits >> 24 & 0xff);
         currentSendFloatByte ++;
         break;
-        
+
         case 2:
         SPDR = (rawBits >> 16 & 0xff);
         currentSendFloatByte ++;
         break;
-        
+
         case 3:
         SPDR = (rawBits >> 8 & 0xff);
         currentSendFloatByte ++;
         break;
-        
+
         case 4:
         SPDR = (rawBits & 0xff);
         currentSendFloatByte = 1;
         beginSendingFloat = 0;
         break;
-      
+
       }
 }

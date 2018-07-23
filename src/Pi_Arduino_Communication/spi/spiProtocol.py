@@ -1,8 +1,10 @@
-#!/usr/bin/env python
+## Author: Feiyang jin
+## Email: feiyang.jin@wustl.edu
+## Organization: Washington University in St. Louis
+## Date: July 2018
 
 import time,pigpio,struct
 
-#open spi
 pi = pigpio.pi()
 
 if not pi.connected:
@@ -18,7 +20,7 @@ def getReadyForReadFloat():
 
 #function that reads the float
 def readFloat():
-   
+
    (count1,byte1) = pi.spi_read(h,1)
 
    (count2,byte2) = pi.spi_read(h,1)
@@ -65,17 +67,17 @@ def communicate():
       sendInt(intVar)
 
       time.sleep(1)
-      
+
       #send float to arduino
       var = float(input("Please enter a float "))
       if not var:
          continue
-      
+
       getReadyForSendFloat()
       sendFloat(var)
-      
+
       time.sleep(1)
-      
+
       getReadyForReadFloat()
 
       #we want to check if arduino is able to send the float

@@ -1,5 +1,17 @@
+/*
+Author: Feiyang Jin
+Email: feiyang.jin@wustl.edu
+Organization: Washington University in St. Louis
+Date: July 2018
+*/
 float data = 3.14159;
 
+//This union is where we save the float
+//Union saves all data in same address
+//So the structure looks like:
+//byte1-byte2-byte3-byte4
+//F----L----O----T---E
+//Basically the byte array and float share same data at one address
 typedef union{
 byte asBytes[4];
 float asFloat;
@@ -10,6 +22,7 @@ floatval v;
 
 void setup(){
 Serial.begin(9600);
+
 }
 
 void loop(){
@@ -27,9 +40,9 @@ void loop(){
       data = v.asFloat;
       sendFloat();
     }
-    
+
   }
-  
+
 }
 
 void sendFloat(){
