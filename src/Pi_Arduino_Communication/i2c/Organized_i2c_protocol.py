@@ -1,3 +1,7 @@
+## Author: Feiyang jin
+## Email: feiyang.jin@wustl.edu
+## Organization: Washington University in St. Louis
+## Date: July 2018
 import smbus
 import time
 import struct
@@ -35,9 +39,9 @@ def readFloat():
 
 def getReadyForSendingFloat():
    bus.write_byte(address,FloatHeader)
-   
-   
-def sentFloat(data): 
+
+
+def sentFloat(data):
     binary = struct.pack('f',data)
     for byte in binary:
         bus.write_byte(address,byte)
@@ -52,24 +56,23 @@ def communicate():
      getReadyForSendingInt()
      sendInt(intVar)
 
-     
+
      #send float to arduino
      var = float(input("Enter a float number "))
      if not var:
          continue
      getReadyForSendingFloat()
      sentFloat(var)
-     
-     
-     # sleep one second
+
+     # sleep one second for debug
      time.sleep(1)
-     
+
      number = bus.read_byte(address)
      #if its ascii is 35, we are going to read a float(4 bytes)
      if number == FloatHeader:
         result = readFloat()
         print("I received a float",result)
-        
+
      print()
 
 
