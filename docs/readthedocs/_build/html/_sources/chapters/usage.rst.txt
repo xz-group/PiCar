@@ -10,4 +10,4 @@ The project is split into three parts:
    usage/electronics
    usage/software
    usage/datasheet
-   usage/device_int
+   usage/picar_usage
