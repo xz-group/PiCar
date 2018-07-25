@@ -5,6 +5,39 @@ var AllphotoPath = "../data_photo/camera/"; // path where you save all photos fr
 var PlayTimer
 imageDiv = document.getElementById("image_div"); //where we put the photo
 
+//following are all data from one csv file
+var allTime = [];
+var allLidarData = [];
+var allimuAX = [];
+var allimuAY = [];
+var allimuAZ = [];
+var allimuGX = [];
+var allimuGY = [];
+var allimuGZ = [];
+
+//search and jump to a given time
+var time_search = function(){
+  var given_time = document.getElementById("time_search").value;
+  if(isNaN(given_time)){
+    alert("Please give a time")
+  }
+  else{
+    console.log("Given time is " + given_time);
+    var time_index;
+    for(time_index = 0; time_index < allTime.length; time_index++){
+      if(allTime[time_index] == given_time){
+        console.log("We find the time, index is " + time_index);
+        while(time != time_index){
+          document.getElementById('next_button').click();
+        }
+        break;
+      }
+    }
+
+  }
+
+}
+document.getElementById('time_serach_button').addEventListener('click',time_search)
 
 //jump to the first row of all data
 var jump_first = function(){
@@ -152,14 +185,7 @@ function updateImage(){
 
 }
 
-var allTime = [];
-var allLidarData = [];
-var allimuAX = [];
-var allimuAY = [];
-var allimuAZ = [];
-var allimuGX = [];
-var allimuGY = [];
-var allimuGZ = [];
+
 
 //update plots with all data
 var updateAllPlot = function(){
@@ -183,7 +209,7 @@ var updateAllPlot = function(){
       allimuGY.push(imuGY7);
       allimuGZ.push(imuGZ7);
     }
-    
+
     lidarPlot.data.labels = allTime;
     lidarPlot.data.datasets[0].data = allLidarData;
     lidarPlot.update();
