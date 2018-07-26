@@ -6,6 +6,7 @@ var maxDataSets = 50;
 
 
 //make the initial blank chart
+//just have imu ax and imu ay
 var chart = new Chart(ctx,{
   type: 'line',
   data: {
