@@ -24,7 +24,8 @@
 
   
 
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -89,12 +90,10 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Mechanical</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#design">Design</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#cad">CAD</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#assembly">Assembly</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#materials-required">Materials Required</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#assembly">Assembly</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="electronics.html">Electronics</a></li>
@@ -176,10 +175,16 @@
 <h1>Mechanical<a class="headerlink" href="#mechanical" title="Permalink to this headline">¶</a></h1>
 <p>The mechanical documentation involves designing, 3D printing and assembling
 the PiCar chassis</p>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">The mechanical design and assembly of the PiCar will continue
+being modified over the course of the research. The following guide reflects
+the earliest version of PiCar v2.0.</p>
+</div>
 <div class="section" id="design">
 <h2>Design<a class="headerlink" href="#design" title="Permalink to this headline">¶</a></h2>
-<p>For the base chassis of PiCar v2, we will be using the Dromida 1/18 Scale
-Buggy. It retrofit it with sensors and micro-controllers, we will be adding
+<p>For the base chassis of PiCar v2, we will be using the <code class="docutils literal notranslate"><span class="pre">Dromida</span> <span class="pre">1/18</span> <span class="pre">Scale</span>
+<span class="pre">Buggy</span></code>. To retrofit it with sensors and micro-controllers, we will be adding
 some 3D printed parts.</p>
 <div class="section" id="cad">
 <h3>CAD<a class="headerlink" href="#cad" title="Permalink to this headline">¶</a></h3>
@@ -192,7 +197,7 @@ chassis into three layers, connected with spacers for better management:</p>
 <li>DC Motor (drive)</li>
 <li>Servo (steer)</li>
 <li>Encoder</li>
-<li>ESC</li>
+<li>ESC (Electronic Speed Controller)</li>
 </ul>
 </dd>
 <dt>Layer One</dt>
@@ -201,7 +206,7 @@ chassis into three layers, connected with spacers for better management:</p>
 <li>Arduino</li>
 <li>Lipo Battery(s)</li>
 <li>Current sensors</li>
-<li>IMU</li>
+<li>IMU (Intertial Measurement Unit)</li>
 </ul>
 </dd>
 <dt>Layer Two</dt>
@@ -213,9 +218,6 @@ chassis into three layers, connected with spacers for better management:</p>
 </dd>
 </dl>
 </div>
-</div>
-<div class="section" id="assembly">
-<h2>Assembly<a class="headerlink" href="#assembly" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="materials-required">
 <h3>Materials Required<a class="headerlink" href="#materials-required" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="docutils">
@@ -311,6 +313,150 @@ chassis into three layers, connected with spacers for better management:</p>
 </table>
 </div>
 </div>
+<div class="section" id="assembly">
+<h2>Assembly<a class="headerlink" href="#assembly" title="Permalink to this headline">¶</a></h2>
+<p>Tools Required:
+- Dremel kit (with drill and sanding bits)
+- Screw drivers
+- Pliers</p>
+<ol class="arabic simple">
+<li>Download the Fusion 360 CAD files, convert them to STL and 3D print them.</li>
+<li>For PiCar v2.0, the <code class="docutils literal notranslate"><span class="pre">Dromida</span> <span class="pre">1/18th</span> <span class="pre">Scale</span> <span class="pre">Buggy</span></code> was used:</li>
+</ol>
+<div class="figure align-center" id="id2">
+<img alt="Dromida 1/18th Scale Buggy" src="../../_images/assembly001.jpg" />
+<p class="caption"><span class="caption-text">Dromida 1/18th Scale Buggy</span></p>
+</div>
+<p>3. Remove the plastic covering and unplug the NiMh battery.
+We will be using a <code class="docutils literal notranslate"><span class="pre">LiPo</span> <span class="pre">battery</span></code> to power the PiCar.</p>
+<div class="figure align-center" id="id3">
+<img alt="PiCar (casing removed)" src="../../_images/assembly002.jpg" />
+<p class="caption"><span class="caption-text">Buggy with plastic casing and battery removed</span></p>
+</div>
+<p>4. Unscrew, and remove the rear gear covering and the plastic
+spline that goes along the center of the car.</p>
+<div class="figure align-center" id="id4">
+<img alt="Rear gear covering and spine removed" src="../../_images/assembly003.jpg" />
+<p class="caption"><span class="caption-text">Rear gear covering and spine removed</span></p>
+</div>
+<p>5. Unscrew the plastic cover for the <code class="docutils literal notranslate"><span class="pre">ESC</span></code> (Electronic Speed Controller).
+Unplug the motor and servo connectors from the <code class="docutils literal notranslate"><span class="pre">ESC</span></code> and remove it from
+the car.</p>
+<div class="figure align-center" id="id5">
+<img alt="ESC removed" src="../../_images/assembly004.jpg" />
+<p class="caption"><span class="caption-text">ESC removed</span></p>
+</div>
+<p>6. Unscrew the metallic motor mount. Pull out the plastic ‘pillar’ on the
+left of the rear gear.</p>
+<div class="figure align-center" id="id6">
+<img alt="Motor removed" src="../../_images/assembly005.jpg" />
+<p class="caption"><span class="caption-text">Motor removed</span></p>
+</div>
+<p>7. Since we are using a rotary <code class="docutils literal notranslate"><span class="pre">encoder</span></code> for the low level speed controller,
+we need to ensure that the <code class="docutils literal notranslate"><span class="pre">encoder</span></code> meshes with the rear gear. Using the dremel
+and a sanding tool, carefully clear away the plastic from the gear as shown.</p>
+<div class="figure align-center" id="id7">
+<img alt="Plastic cleared away for meshing Encoder" src="../../_images/assembly006.jpg" />
+<p class="caption"><span class="caption-text">Plastic cleared away for meshing Encoder</span></p>
+</div>
+<p>Ensure that the <code class="docutils literal notranslate"><span class="pre">encoder</span></code> with its gear meshes with the rear gear and is not
+blocked by the plastic casing.</p>
+<p>8. Screw in the <code class="docutils literal notranslate"><span class="pre">printed</span> <span class="pre">encoder</span> <span class="pre">mount</span></code> to the <code class="docutils literal notranslate"><span class="pre">encoder</span></code> and place it
+on the <code class="docutils literal notranslate"><span class="pre">chassis</span></code> as shown in the figure:</p>
+<div class="figure align-center" id="id8">
+<img alt="Placed the encoder" src="../../_images/assembly007.jpg" />
+<p class="caption"><span class="caption-text">Placed the encoder</span></p>
+</div>
+<p>Ensure that the rear gear rotates along with the <code class="docutils literal notranslate"><span class="pre">encoder</span> <span class="pre">gear</span></code> with little
+to no friction. Holding the encoder in place, using a long narrow tipped
+screwdriver or nail or drill-bit, mark where the mounting holes would go.
+Drill 2mm holes in those points and mount the <code class="docutils literal notranslate"><span class="pre">encoder</span></code> either by using screws
+on the bottom of the <code class="docutils literal notranslate"><span class="pre">chassis</span></code> (recommened), or from the top.</p>
+<p>9. Replace the <code class="docutils literal notranslate"><span class="pre">Dromida</span> <span class="pre">motor</span></code> with the <code class="docutils literal notranslate"><span class="pre">TrackStar</span> <span class="pre">Motor</span></code>. Screw the motor
+mount back in.</p>
+<div class="figure align-center" id="id9">
+<img alt="Replaced the default motor witht he TrackStar motor." src="../../_images/assembly008.jpg" />
+<p class="caption"><span class="caption-text">Replaced the default motor with the TrackStar motor.</span></p>
+</div>
+<p>10. Now we are going to begin adding the layers that hold the electronics. Drill
+2mm holes as specified in the following figure:</p>
+<div class="figure align-center" id="id10">
+<img alt="Drilled holes to mount the first printed layer" src="../../_images/assembly009.jpg" />
+<p class="caption"><span class="caption-text">Drilled holes to mount the first printed layer</span></p>
+</div>
+<p>11. Connect the <code class="docutils literal notranslate"><span class="pre">TrackStar</span> <span class="pre">ESC</span></code> to the motor using the color coded wires.
+Reattach the spine:</p>
+<div class="figure align-center" id="id11">
+<img alt="Connected the ESC" src="../../_images/assembly010.jpg" />
+<p class="caption"><span class="caption-text">ESC connected</span></p>
+</div>
+<p>12. Before we mount the <code class="docutils literal notranslate"><span class="pre">printed</span> <span class="pre">first</span> <span class="pre">layer</span></code> to the car, it may help to
+mount the <code class="docutils literal notranslate"><span class="pre">IMU</span></code>, <code class="docutils literal notranslate"><span class="pre">Raspberry</span> <span class="pre">Pi</span></code>, and the <code class="docutils literal notranslate"><span class="pre">Arduino</span></code> to the first layer.</p>
+<dl class="docutils">
+<dt>Pre-requisites for this step:</dt>
+<dd><ul class="first last simple">
+<li>Create a common GND and +5V channel (we used a broken off piece from a small
+<code class="docutils literal notranslate"><span class="pre">breadboard</span></code>)</li>
+<li>Wire the <code class="docutils literal notranslate"><span class="pre">IMU</span></code> and mount it to the first layer using a screw.</li>
+<li>Mount the <code class="docutils literal notranslate"><span class="pre">Arduino</span></code> and <code class="docutils literal notranslate"><span class="pre">Raspberry</span> <span class="pre">Pi</span></code> in their respective positions
+using <code class="docutils literal notranslate"><span class="pre">spacers</span></code>.</li>
+</ul>
+</dd>
+</dl>
+<div class="figure align-center" id="id12">
+<img alt="First Layer Setup" src="../../_images/assembly011.jpg" />
+<p class="caption"><span class="caption-text">First Layer Setup</span></p>
+</div>
+<dl class="docutils">
+<dt>Post-requisites for this step:</dt>
+<dd><ul class="first last simple">
+<li>Connect the <code class="docutils literal notranslate"><span class="pre">steering</span> <span class="pre">servo</span></code>, <code class="docutils literal notranslate"><span class="pre">ESC</span></code> and the <code class="docutils literal notranslate"><span class="pre">encoder</span></code> to the
+<code class="docutils literal notranslate"><span class="pre">Raspberry</span> <span class="pre">Pi</span></code> using <a class="reference external" href="electronics.html">usage/electronics.html</a></li>
+<li>Mount the <code class="docutils literal notranslate"><span class="pre">printed</span> <span class="pre">first</span> <span class="pre">layer</span></code> to the <code class="docutils literal notranslate"><span class="pre">chassis</span></code> using <code class="docutils literal notranslate"><span class="pre">spacers</span></code>
+(preferably metal ones)</li>
+</ul>
+</dd>
+</dl>
+<ol class="arabic simple" start="13">
+<li>Mount the <code class="docutils literal notranslate"><span class="pre">printed</span> <span class="pre">second</span> <span class="pre">layer</span></code> to the chassis using the <code class="docutils literal notranslate"><span class="pre">spacers</span></code>.</li>
+</ol>
+<div class="figure align-center" id="id13">
+<img alt="Second Layer Setup" src="../../_images/assembly012.jpg" />
+<p class="caption"><span class="caption-text">Second Layer Setup</span></p>
+</div>
+<p>14. Again, using <a class="reference external" href="electronics.html">usage/electronics.html</a> as a guide,
+complete the electrical assembly for the second layer.</p>
+<dl class="docutils">
+<dt>This includes:</dt>
+<dd><ul class="first last simple">
+<li>Connecting a <code class="docutils literal notranslate"><span class="pre">relay</span></code> that acts as a kill switch</li>
+<li>Connecting the SPI / I2C communication between the <code class="docutils literal notranslate"><span class="pre">Raspberry</span> <span class="pre">Pi</span></code> and the
+<code class="docutils literal notranslate"><span class="pre">Arduino</span></code></li>
+<li>Connecting the <code class="docutils literal notranslate"><span class="pre">IMU</span></code> to the <code class="docutils literal notranslate"><span class="pre">Raspberry</span> <span class="pre">Pi</span></code></li>
+</ul>
+</dd>
+</dl>
+<p>Now the PiCar is usable, and should look like this:</p>
+<div class="figure align-center" id="id14">
+<img alt="PiCar: Side View" src="../../_images/assembly013.jpg" />
+<p class="caption"><span class="caption-text">PiCar: Side View</span></p>
+</div>
+<div class="figure align-center" id="id15">
+<img alt="PiCar: Isometric View" src="../../_images/assembly014.jpg" />
+<p class="caption"><span class="caption-text">PiCar: Isometric View</span></p>
+</div>
+<p>15. Once the base PiCar has been built, you can add the <code class="docutils literal notranslate"><span class="pre">Lidar</span></code>, <code class="docutils literal notranslate"><span class="pre">PiCamera</span></code>,
+etc using the 3D printed mounts, and wire them accordingly.</p>
+<dl class="docutils">
+<dt>Ending notes:</dt>
+<dd><ul class="first last simple">
+<li>The <code class="docutils literal notranslate"><span class="pre">LiPo</span> <span class="pre">battery</span></code> sits in the first layer, behind the microcontrollers.</li>
+<li>For the time being, we are using a <code class="docutils literal notranslate"><span class="pre">compact</span> <span class="pre">power</span> <span class="pre">bank</span></code> to power the
+<code class="docutils literal notranslate"><span class="pre">Raspberry</span> <span class="pre">Pi</span></code>, which in turn powers the <code class="docutils literal notranslate"><span class="pre">Arduino</span></code> via USB.</li>
+</ul>
+</dd>
+</dl>
+</div>
 </div>
 
 
@@ -369,7 +515,10 @@ chassis into three layers, connected with spacers for better management:</p>
 
   
 
-  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
 
   <script type="text/javascript">
       jQuery(function () {
