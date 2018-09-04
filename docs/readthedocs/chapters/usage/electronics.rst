@@ -4,8 +4,8 @@ Electronics
 The electronics section will deal with interfacing the Raspberry Pi and Arduino
 with the sensors and actuators.
 
-First thing First: Raspberry Pi Pinout
---------------------------------------
+Raspberry Pi Pinout
+--------------------
 
 .. image:: electronics/j8header-3b.png
   :width: 275
