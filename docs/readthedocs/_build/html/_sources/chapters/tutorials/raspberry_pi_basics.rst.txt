@@ -112,6 +112,12 @@ Procedure
           Currently, SSH will only allow you to access the Pi when your
           computer and the Pi are connected to the same router.
 
+.. note:: The IP addresses of devices including the Raspberry Pi may change
+          each time you reboot it. To solve this you could either set up a
+          `static IP address <https://raspberrypi.stackexchange.com/questions/37920/how-do-i-set-up-networking-wifi-static-ip-address>`_
+          for each Pi or `create a way to email the IP to your email address
+          <https://classes.engineering.wustl.edu/ese205/core/index.php?title=SSHing_into_your_Raspberry_Pi#Emailing_the_IP_address>`_.
+
 Desktop Interface
 -----------------
 Sometimes an terminal only interface does not suffice. We can alternatively
@@ -211,8 +217,10 @@ Procedure
    .. code-block:: bash
 
       ssh_id=<some unique name>
-      echo "\nHost $ssh_id\n   Hostname $ssh_ip" >> ~/.ssh/config
-      echo "\n   User $ssh_user\n   Port $ssh_port" >> ~/.ssh/config
+      echo "Host $ssh_id" >> ~/.ssh/config
+      echo "  Hostname $ssh_ip" >> ~/.ssh/config
+      echo "  User $ssh_user" >> ~/.ssh/config
+      echo "  Port $ssh_port" >> ~/.ssh/config
 
    * Example (in ``~/.ssh/config``):
 

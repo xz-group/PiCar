@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Introduction &mdash; PiCar Project 2018 documentation</title>
+  <title>Getting Started &mdash; PiCar Project 2018 documentation</title>
   
 
   
@@ -84,7 +84,7 @@
             
             
               <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="results.html">Results</a></li>
@@ -135,7 +135,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>Introduction</li>
+      <li>Getting Started</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -154,8 +154,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="introduction">
-<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
 <p>The PiCar project is a miniature four-wheeled car powered by a Raspberry Pi 3
 board. This lab-scale autonomous research platform is easy to build and modify.
 A camera and LIDAR mounted on the car allows for complex computer vision
@@ -174,19 +174,50 @@ including:</p>
 <div><ul class="simple">
 <li>Chassis 3D printing, and CAD sources.</li>
 <li>Raspberry Pi 3 breakout PCB to connect peripherals and draw power from
-LiPo battery.</li>
-<li>Source code of the following software modules capable of:</li>
-<li>Acquire wheel RPM data using encoder.</li>
-<li>Acquire acceleration, angular velocity, and compass data from an I²C
-LSM9DS1 IMU.</li>
-<li>Acquire video data from a Raspberry Pi NoIR camera.</li>
-<li>Perform real-time computer vision using camera data.</li>
-<li>Control the speed of brushed DC motor.</li>
+LiPo battery (v1).</li>
+<li>Source code for intergrating sensors like the encoder, IMU, Lidar and
+camera</li>
+<li>Source code for controlling the PiCar, networking, computer vision, etc.</li>
 </ul>
 </div></blockquote>
 <p>The purpose of this documentation is to create a full fledged, clear formal
 guide for using the PiCar project. It will also serve as a place for showcasing
 results.</p>
+<p><strong>Where to begin:</strong></p>
+<p>1. A good place to start is to think about what you want your robot to do. The
+PiCar is intended to be a inexpensive way to build a robust mobile robot
+capable of running complex algorithms.</p>
+<p>2. <a class="reference external" href="usage/mechanical.html">Usage -&gt; Mechanical</a> has a list of parts you would
+need to build the PiCar. It also contains instructions on how to assemble the
+PiCar.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>For your particular project, you may not need all the parts to
+assemble the PiCar.</p>
+<ul class="last simple">
+<li>If the <code class="docutils literal notranslate"><span class="pre">Dromida</span> <span class="pre">Buggy</span></code> is not available, you may consider
+buying other similaryly sized (1/18th scale) chassis.</li>
+<li>If you are looking for having higher computational power, you could replace
+the <code class="docutils literal notranslate"><span class="pre">Raspberry</span> <span class="pre">Pi</span></code> with something like the <code class="docutils literal notranslate"><span class="pre">NVidia</span> <span class="pre">Jetson</span> <span class="pre">TX2</span></code>.</li>
+<li>You may not need the <code class="docutils literal notranslate"><span class="pre">Current</span> <span class="pre">Sensors</span></code> for your project.</li>
+<li>You could substitute the <code class="docutils literal notranslate"><span class="pre">TFMini</span> <span class="pre">Lidar</span></code> with a more powerful one like the
+<code class="docutils literal notranslate"><span class="pre">YDLidar</span> <span class="pre">F4</span></code> or a less powerful one like the <code class="docutils literal notranslate"><span class="pre">SR05</span> <span class="pre">Ultrasonic</span> <span class="pre">sensor</span></code>.</li>
+</ul>
+</div>
+<p>3. On the software side of things, we currently use <code class="docutils literal notranslate"><span class="pre">Python</span> <span class="pre">3</span></code> as the
+primary programming language for the <code class="docutils literal notranslate"><span class="pre">Raspberry</span> <span class="pre">Pi</span></code>. <code class="docutils literal notranslate"><span class="pre">Arduino</span></code> uses
+<code class="docutils literal notranslate"><span class="pre">Arduino</span> <span class="pre">C</span></code>. If you are unfamiliar with any of these hardware or software,
+the <a class="reference external" href="tutorials.html">Tutorials</a> section is a great place to start. The
+<a class="reference external" href="https://github.com/xz-group/PiCar">PiCar GitHub Repository</a> contains all the
+code and also houses this documentation.</p>
+<p>4. Once the PiCar has been assembled, the <a class="reference external" href="usage.html">Usage</a>  secrtion has
+information about how the different modules work and how they can be controlled.
+It also has information about the <code class="docutils literal notranslate"><span class="pre">PiCar</span> <span class="pre">Module</span></code> or Class that is used for
+controlling any aspect of the PiCar.</p>
+<p>5. If you would like to add your results to the <a class="reference external" href="results.html">Results</a> page,
+kindly let us know. For contributing directly to the project, either by
+fixing or updating the codebase or documentation, kindly submit a <a class="reference external" href="https://github.com/xz-group/PiCar/pulls">GitHub pull
+request</a>.</p>
 </div>
 
 

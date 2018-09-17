@@ -84,7 +84,7 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../usage.html">Usage</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="mechanical.html">Mechanical</a></li>
@@ -93,22 +93,22 @@
 <li class="toctree-l3"><a class="reference internal" href="#socket-file-transfer">Socket File Transfer</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#basic-file-transfer">Basic File Transfer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#advanced-folder-transfer">Advanced Folder Transfer</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#wifi-router-setting">WIFI Router setting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#wi-fi-router-settings">Wi-Fi Router Settings</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#sensors-lidar-imu-reading-and-writing">Sensors(Lidar,IMU) reading and writing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sensors-lidar-imu">Sensors (Lidar, IMU)</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#setup">Setup</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#code">Code</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#steps">Steps</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#camera-picture-data-by-rapid-capturing">Camera(picture) data by rapid capturing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#camera-data-by-rapid-capturing">Camera data by rapid capturing</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#connection">Connection</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id1">Code</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#resources">Resources</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#sensors-camera-concurrent-reading-by-timer-version1">Sensors/Camera concurrent reading by Timer(Version1)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sensors-camera-concurrent-reading-using-timers">Sensors &amp; Camera concurrent reading using Timers</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id2">Connection</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id3">Code</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id4">Resources</a></li>
@@ -116,6 +116,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#data-logging">Data Logging</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#version-alpha-camera-data-imu-data-lidar-data">Version Alpha (Camera data, IMU data, LiDar Data)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">Code</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#version-beta-magnetic-reading-added-to-imu">Version Beta (Magnetic reading added to IMU)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#version-beta-2-0-code-re-organization-process-self-contained-pmu-reading">Version Beta 2.0 (Code re-organization, Process, self contained, PMU reading)</a></li>
 </ul>
@@ -128,7 +129,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="datasheet.html">Datasheet</a></li>
-<li class="toctree-l2"><a class="reference internal" href="picar_usage.html">The Picar Module Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="picar_usage.html">The Picar Module</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../results.html">Results</a></li>
@@ -241,7 +242,7 @@ the Electronics section.</p>
 
 <span class="n">port</span> <span class="o">=</span> <span class="mi">60000</span>                    <span class="c1"># Reserve a port for your service.</span>
 <span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">()</span>             <span class="c1"># Create a socket object</span>
-<span class="n">host</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">gethostbyaddr</span><span class="p">(</span><span class="s2">&quot;your IP static IP if under same WIFI&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>     <span class="c1"># Get local machine name</span>
+<span class="n">host</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">gethostbyaddr</span><span class="p">(</span><span class="s2">&quot;your IP static IP if under same Wi-Fi&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>     <span class="c1"># Get local machine name</span>
 <span class="n">s</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">))</span>            <span class="c1"># Bind to the port</span>
 <span class="n">s</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>                     <span class="c1"># Now wait for client connection.</span>
 
@@ -324,81 +325,119 @@ the Electronics section.</p>
 <h3>Advanced Folder Transfer<a class="headerlink" href="#advanced-folder-transfer" title="Permalink to this headline">¶</a></h3>
 <p><em>Creator: Jerry Kong</em></p>
 <p>To meet our need of a neat and organized data structure, this script is created.
-It has the capability to transfer the entire folder to another remote desktop, no matter it is on a Windows System or Unix system.
+It has the capability to transfer the entire folder to another remote desktop,
+no matter whether it is on a Windows System or Unix system.
 The script rests in <code class="docutils literal notranslate"><span class="pre">PiCar/src/Logging</span></code>
-To use the script, first setup the ip addresses like in the basic version, change the root variable to the root folder name.
-Place the script at the same level as the root folder. Start the server script and then start the client script. The folder would then be transferred.
-A better protocol could be implemented, since the protocol now being used is not really efficient though fulfill the need of our experiment for now.</p>
+To use the script, first set-up the IP addresses like in the basic version,
+change the root variable to the root folder name.
+Place the script at the same level as the root folder. Start the server script
+and then start the client script. The folder would then be transferred.
+A better protocol could be implemented, since the protocol being used now
+is not really efficient.</p>
 </div>
-<div class="section" id="wifi-router-setting">
-<h3>WIFI Router setting<a class="headerlink" href="#wifi-router-setting" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="wi-fi-router-settings">
+<h3>Wi-Fi Router Settings<a class="headerlink" href="#wi-fi-router-settings" title="Permalink to this headline">¶</a></h3>
 <p><em>Creator: Jerry Kong</em></p>
-<p><em>This section is dedicated to users who are not familiar with WIFI network setting, TCP protocol and wireless connection</em></p>
-<p>To establish communication between two machine we need to know their address. Moreover, to provide a consistent and save network experience, a machine would have many ports to receive connections with different forms,
-thus we also need to agree on the port that two machine establish the connection on. However, depending on different internet environment and different ways of connection (wifi or ethernet), the IP address would also vary.
-Read through this section, you would get a sense of how this astonishingly complicated system works and hopefully learn how to cope with “Connection fails” error when you are using the script I wrote in the repo or any kind of
-Internet application.</p>
-<div class="section" id="ip">
-<h4>IP<a class="headerlink" href="#ip" title="Permalink to this headline">¶</a></h4>
-<p>IP’s full name is Internet Protocol. It’s a scheme that specifies how computers find each other in the pool of Internet. The rules behind it is complicated, but the most important thing is that it is a identification
-for modern computer wired to Internet and is universally used as the synonym of IP address.</p>
+<p><em>This section is dedicated to users who are not familiar with Wi-Fi network
+setting, TCP protocol and wireless connection</em></p>
+<p>To establish communication between two machine we need to know their IP address.
+Moreover, to provide a consistent network experience, a machine would
+have many ports to receive connections of different forms, with other devices.
+Thus we also need to agree on the port that two machines establish the
+connection on. However, depending on different internet environment and
+different ways of connection (Wi-Fi or ethernet), the IP address would also vary.
+With this section, you would get a sense of how this complicated system works
+and hopefully learn how to cope with “Connection fails” error when you are
+using the script.</p>
+<div class="section" id="ip-address">
+<h4>IP Address<a class="headerlink" href="#ip-address" title="Permalink to this headline">¶</a></h4>
+<p>IP’s full name is Internet Protocol. It’s a scheme that specifies how computers
+find each other in the pool of Internet. The rules behind it is complicated,
+but the most important thing is that it serves as an identification
+for modern devices connected to Internet.</p>
 </div>
-<div class="section" id="ipv4-ipv6">
-<h4>IPv4? IPv6?<a class="headerlink" href="#ipv4-ipv6" title="Permalink to this headline">¶</a></h4>
-<p>As a protocal, IP would have different versions, the latest version is version 6 and thus called IPv6. While IPv6 is stronger and has a larger pool of Internet, the older version IPv4 is not obsoleted.
-The logic behind the two protocals are the same, hence we would now stick with IPv4, since it has a more concise format. (XXX.XX.XX.XXX)</p>
+<div class="section" id="ipv4-vs-ipv6">
+<h4>IPv4 vs IPv6<a class="headerlink" href="#ipv4-vs-ipv6" title="Permalink to this headline">¶</a></h4>
+<p>As a protocal, IP would have different versions, the latest version is version
+6 and thus called IPv6. While IPv6 is stronger and has a larger pool of
+Internet, the older version IPv4 is not obsolete.
+The logic behind the two protocals are the same, hence we would now stick with
+IPv4, since it has a more concise format. (XXX.XX.XX.XXX)</p>
 </div>
-<div class="section" id="wifi-vs-ethernet">
-<h4>WIFI vs ethernet<a class="headerlink" href="#wifi-vs-ethernet" title="Permalink to this headline">¶</a></h4>
-<p>You must be familiar with this topic. WIFI is more convenient while wired connection (ethernet) offer steadiness and low latency. However, it is important to note that a computer connected to wifi does not have an IP, or at least, an acknowledged IP.
-Wifi or the router serves as a broadcaster and spread the connection from the ethernet to multiple machines, but they have the same IP address. The router can identify each machine by the IP address it assigns to the machine, but the machine can’t use
-that address as the identification on the internet. Conclusively, machines under the same WIFI build up a small Internet where these machines can identify each other by the address they are assigned, but once outside WIFI network they are no longer acknowledged.</p>
+<div class="section" id="wi-fi-vs-ethernet">
+<h4>Wi-Fi vs Ethernet<a class="headerlink" href="#wi-fi-vs-ethernet" title="Permalink to this headline">¶</a></h4>
+<p>Wi-Fi is more convenient while wired connection (ethernet) offer steadiness and
+low latency. However, it is important to note that a computer connected to
+Wi-Fi does not have an IP, or at least, an acknowledged IP.
+The Wi-Fi or the router serves as a broadcaster and spread the connection from
+the ethernet to multiple machines, but they have the same IP address. The
+router can identify each machine by the IP address it assigns to the machine,
+but the machine can’t use that address as the identification on the internet.
+Conclusively, machines under the same Wi-Fi build up a small intranet where
+these machines can identify each other by the address they are assigned,
+but once outside Wi-Fi network they are no longer acknowledged.</p>
 <p>See
 <a class="reference external" href="https://www.raspberrypi.org/forums/viewtopic.php?t=191140">Setup static IP address for RaspberryPi</a>
-, so a machine would be assigned the same IP address when connected to the WIFI.</p>
+, so a machine would be assigned the same IP address when connected to the Wi-Fi.</p>
 </div>
 <div class="section" id="tcp">
 <h4>TCP<a class="headerlink" href="#tcp" title="Permalink to this headline">¶</a></h4>
-<p>TCP, transmission Control Protocol, is a higher level protocol that enables data sending via the connection established by IP. Socket, a method based on TCP is prevailing on data transfer.</p>
+<p>TCP, Transmission Control Protocol, is a higher level protocol that enables
+data sending via the connection established by IP. Socket, a method based on
+TCP is typical method used for data transfer.</p>
 </div>
-<div class="section" id="port-and-port-forwarding">
-<h4>Port and Port forwarding<a class="headerlink" href="#port-and-port-forwarding" title="Permalink to this headline">¶</a></h4>
-<p>With the knowledge about address in mind we could start the connection once we have the right port. It is easy to do so if both machines are on Internet or under the same WIFI, since they can identify with each other. Just pick up an empty port and they are good to go.
-However, we do want to establish connection between two machines even if one is on WIFI and the other is on Internet. To do so, these smart people invented port forwarding. With port forwarding, a client can find the address of the router and use the port that is forwarded to connect with the machine.</p>
-<p>For example, the address of the router is 172.10.10.111, and a machine under the WIFI is assigned static IP 192.168.1.188. The routher and the machine agree on that the connection to the port 30000 of the routher would be forwarded to the port 6000 of the machine and vice versa.
-Thus a laptop could setup a connection with 172.10.10.111 on port 30000 to connect the port 6000 on machine with static IP 192.168.1.188.</p>
+<div class="section" id="port-forwarding">
+<h4>Port Forwarding<a class="headerlink" href="#port-forwarding" title="Permalink to this headline">¶</a></h4>
+<p>With the knowledge about address in mind we could start the connection once we
+have the right port. It is easy to do so if both machines are on Internet or
+under the same Wi-Fi, since they can identify with each other. Just pick up an
+empty port and they are good to go.
+However, we do want to establish connection between two machines even if one is
+on Wi-Fi and the other is on Internet. To do so, we use port forwarding. With
+port forwarding, a client can find the address of the router and use the port
+that is forwarded to connect with the machine.</p>
+<p>For example, the address of the router is <code class="docutils literal notranslate"><span class="pre">172.10.10.111</span></code>, and a machine
+under the Wi-Fi is assigned static IP <code class="docutils literal notranslate"><span class="pre">192.168.1.188</span></code>. The routher and the
+machine agree on that the connection to the port <code class="docutils literal notranslate"><span class="pre">30000</span></code> of the routher would
+be forwarded to the port <code class="docutils literal notranslate"><span class="pre">6000</span></code> of the machine and vice versa.
+Thus a laptop could setup a connection with <code class="docutils literal notranslate"><span class="pre">172.10.10.111</span></code> on port <code class="docutils literal notranslate"><span class="pre">30000</span></code>
+to connect the port 6000 on machine with static IP <code class="docutils literal notranslate"><span class="pre">192.168.1.188</span></code>.</p>
 <p>See
 <a class="reference external" href="https://www.howtogeek.com/66214/how-to-forward-ports-on-your-router/">How to setup port forwarding</a></p>
 </div>
 </div>
 </div>
-<div class="section" id="sensors-lidar-imu-reading-and-writing">
-<h2>Sensors(Lidar,IMU) reading and writing<a class="headerlink" href="#sensors-lidar-imu-reading-and-writing" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="sensors-lidar-imu">
+<h2>Sensors (Lidar, IMU)<a class="headerlink" href="#sensors-lidar-imu" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="setup">
 <h3>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h3>
-<p>Make sure you have alreadly connect TFmini Lidar and IMU as
-<a class="reference external" href="http://picar.readthedocs.io/en/latest/chapters/usage/electronics.html#pi-and-tfmini-lidar-communication">TFmini Lidar</a>
-, <a class="reference external" href="http://picar.readthedocs.io/en/latest/chapters/usage/electronics.html#pi-and-imu-communication">IMU by LSM9DS1</a> did.
-and download corresponding libraris.</p>
+<p>Make sure you have alreadly connected TFmini Lidar and IMU as
+<a class="reference external" href="/usage/electronics.html#pi-and-tfmini-lidar-communication">TFmini Lidar</a>
+, <a class="reference external" href="/usage/electronics.html#pi-and-imu-communication">IMU by LSM9DS1</a> did,
+and download the corresponding libraries.</p>
 </div>
 <div class="section" id="code">
 <h3>Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h3>
-<p>Under Directory <code class="docutils literal notranslate"><span class="pre">PiCar/src/pi/IMU_Lidar</span></code></p>
+<p>Under sub-directory <code class="docutils literal notranslate"><span class="pre">PiCar/src/pi/IMU_Lidar</span></code></p>
 </div>
 <div class="section" id="steps">
 <h3>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h3>
-<p>1.Download the repository and connect sensors correctly</p>
-<p>2.run the python script Lidar_IMU_read_optimize.py</p>
-<p>3.After the program ends, you should see two csv files under the same directory.One records
-the time between two consecutive reads, and the other one contains data from sensors in the format:
-timestamp, distance, accelaration in x,y,z, angular velocity in x,y,z</p>
+<ol class="arabic simple">
+<li>Download the repository and connect sensors correctly</li>
+<li>Run the python script <code class="docutils literal notranslate"><span class="pre">Lidar_IMU_read_optimize.py</span></code></li>
+</ol>
+<p>3. After the program ends, you should see two csv files under the same
+directory. One records the time between two consecutive reads, and the other
+one contains data from sensors in the format:
+<code class="docutils literal notranslate"><span class="pre">timestamp,</span> <span class="pre">distance,</span> <span class="pre">accelaration</span> <span class="pre">in</span> <span class="pre">x,y,z,</span> <span class="pre">angular</span> <span class="pre">velocity</span> <span class="pre">in</span> <span class="pre">x,y,z</span></code></p>
 </div>
 </div>
-<div class="section" id="camera-picture-data-by-rapid-capturing">
-<h2>Camera(picture) data by rapid capturing<a class="headerlink" href="#camera-picture-data-by-rapid-capturing" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="camera-data-by-rapid-capturing">
+<h2>Camera data by rapid capturing<a class="headerlink" href="#camera-data-by-rapid-capturing" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="connection">
 <h3>Connection<a class="headerlink" href="#connection" title="Permalink to this headline">¶</a></h3>
-<p>Connect the camera correctly</p>
+<p>Connect the camera correctly as mentioned in <a class="reference external" href="https://projects.raspberrypi.org/en/projects/getting-started-with-picamera">Getting started with
+picamera</a></p>
 </div>
 <div class="section" id="id1">
 <h3>Code<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
@@ -453,28 +492,28 @@ timestamp, distance, accelaration in x,y,z, angular velocity in x,y,z</p>
 </div>
 <div class="section" id="resources">
 <h3>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference external" href="https://picamera.readthedocs.io/en/release-1.13/recipes2.html#rapid-capture-and-processing">rapid capture and processing</a></p>
+<ul class="simple">
+<li><a class="reference external" href="https://picamera.readthedocs.io/en/release-1.13/">PiCamera Module</a></li>
+<li><a class="reference external" href="https://picamera.readthedocs.io/en/release-1.13/recipes2.html#rapid-capture-and-processing">Rapid capture and processing</a></li>
+</ul>
 </div>
 </div>
-<div class="section" id="sensors-camera-concurrent-reading-by-timer-version1">
-<h2>Sensors/Camera concurrent reading by Timer(Version1)<a class="headerlink" href="#sensors-camera-concurrent-reading-by-timer-version1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="sensors-camera-concurrent-reading-using-timers">
+<h2>Sensors &amp; Camera concurrent reading using Timers<a class="headerlink" href="#sensors-camera-concurrent-reading-using-timers" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id2">
 <h3>Connection<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
-<p>Connect IMU,TFmini Lidar, and Pi Camera correctly as previous tutorial did.</p>
+<p>Connect the IMU, TFmini Lidar, and PiCamera as before.</p>
 </div>
 <div class="section" id="id3">
 <h3>Code<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>The code for this part is under directory <code class="docutils literal notranslate"><span class="pre">PiCar/src/pi/pythonTimer</span></code></p>
-<p>I put most of the explanation in the code.</p>
 </div>
 <div class="section" id="id4">
 <h3>Resources<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<div><ul class="simple">
+<ul class="simple">
 <li><a class="reference external" href="https://docs.python.org/3.4/library/multiprocessing.html?highlight=process">Python multiprocessing–Process-based Parallelism</a></li>
 <li><a class="reference external" href="https://docs.python.org/3/library/threading.html#timer-objects">Python threading timer object</a></li>
 </ul>
-</div></blockquote>
 </div>
 </div>
 <div class="section" id="data-logging">
@@ -482,25 +521,39 @@ timestamp, distance, accelaration in x,y,z, angular velocity in x,y,z</p>
 <div class="section" id="version-alpha-camera-data-imu-data-lidar-data">
 <h3>Version Alpha (Camera data, IMU data, LiDar Data)<a class="headerlink" href="#version-alpha-camera-data-imu-data-lidar-data" title="Permalink to this headline">¶</a></h3>
 <p><em>Creator : Jerry Kong</em></p>
-<p>(Be sure to correctly wire all electronics, the wiring method could be found in the corresponding section of this doc site.)</p>
-<p>The code could be found in PiCar/src/pi/IMU_Lidar, you can find the method to enable IMU library <a class="reference external" href="http://picar.readthedocs.io/en/latest/chapters/usage/electronics.html#pi-and-imu-communication">here</a></p>
-<p><strong>IMPORTANT: If you have gone through the process before 06/18/2018, make sure you execute all steps again, few more functions and wrappers are added to the library</strong></p>
-<p>Run the script, a folder under the same directory would be generated, its name would be the starting timestamp of the script.</p>
-<p>The file itself contains several straight forward methods that can be used to get data from IMU LiDar. The method it uses to take pictures is currently only viable within the script.</p>
-<p>The imu setting functions can’t be used outside the script.</p>
-<p>If called from command line or python shell, the script would put picture taking job and data logging job into two different cores on RaspberryPi</p>
+<p>Ensure to correctly connect all electronics.</p>
+</div>
+<div class="section" id="id5">
+<h3>Code<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>The code could be found in`` PiCar/src/pi/IMU_Lidar``, you can find the method
+to enable IMU library <a class="reference external" href="http://picar.readthedocs.io/en/latest/chapters/usage/electronics.html#pi-and-imu-communication">here</a></p>
+<p><strong>IMPORTANT: If you have gone through the process before 06/18/2018, make
+sure you execute all steps again, few more functions and wrappers are added to
+the library</strong></p>
+<p>Run the script, a folder under the same directory would be generated, its
+name would be the starting timestamp of the script.</p>
+<p>The file itself contains several straight forward methods that can be used to
+get data from IMU LiDar. The method it uses to take pictures is currently only
+viable within the script.</p>
+<p>The IMU setting functions can’t be used outside the script.</p>
+<p>If called from command line or python shell, the script would place the image
+capturing and data logging proceses into two different cores on RaspberryPi</p>
 <p>Use the command line option, you can bring up the usage page</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python Lidar_IMU_data_optimize_delta.py -h
 </pre></div>
 </div>
-<p>The script is based on delta timing method. A constant value of 0.0007 is subtracted from the period to maintain a consistent reading frequency.</p>
-<p>Precision defines the minimum time that the script goes to check the diffrence between the last time and current time and consequently defines within what time difference that measures of LiDar and IMU occur simultaneously.</p>
+<p>The script is based on delta timing (<a class="reference external" href="https://docs.python.org/2.4/lib/timer-objects.html">timers</a>)
+method. A constant value of 0.0007 is subtracted from the period to maintain a
+consistent reading frequency.</p>
+<p>Precision defines the minimum time that the script goes to check the diffrence
+between the last time and current time and consequently defines within what
+time difference that measures of LiDar and IMU occur simultaneously.</p>
 <p><strong>A great part of the codes are from Josh Jin’s sensor/camera reading code</strong></p>
 </div>
 <div class="section" id="version-beta-magnetic-reading-added-to-imu">
 <h3>Version Beta (Magnetic reading added to IMU)<a class="headerlink" href="#version-beta-magnetic-reading-added-to-imu" title="Permalink to this headline">¶</a></h3>
 <p><em>Creator : Jerry Kong</em></p>
-<p><em>The code could be found in PiCar/src/pi/IMU_Lidar, the  socket_server_client.py file is a integrated and important part of this data logging script, to learn more about socket folder sending, take a look at</em> ` socket based file sending &lt;<a class="reference external" href="http://picar.readthedocs.io/en/latest/chapters/usage/software.html#advanced-folder-transfer">http://picar.readthedocs.io/en/latest/chapters/usage/software.html#advanced-folder-transfer</a>&gt;`_</p>
+<p><em>The code could be found in PiCar/src/pi/IMU_Lidar, the socket_server_client.py file is a integrated and important part of this data logging script, to learn more about socket folder sending, take a look at</em> ` socket based file sending &lt;<a class="reference external" href="http://picar.readthedocs.io/en/latest/chapters/usage/software.html#advanced-folder-transfer">http://picar.readthedocs.io/en/latest/chapters/usage/software.html#advanced-folder-transfer</a>&gt;`_</p>
 <p>Endless mode is implemented. User could stop the experiment with KeyboardInterrupt, the logging file and camera file would still be saved</p>
 <p>Using -i command line input, we could run the script in endless mode (i.e. the duration would be set to 1000 seconds, we could stop the program by using KeyboardInterrupt(Ctrl + C))</p>
 <p>Logging file sending module is integarted into the logging script. After the multiprocessing finished (loggind and filming), the script would start a raw socket server and a client on another computer could use the client side script to receive the logging file.</p>
@@ -581,10 +634,10 @@ timestamp, distance, accelaration in x,y,z, angular velocity in x,y,z</p>
 <h3>Data and photo synchronization<a class="headerlink" href="#data-and-photo-synchronization" title="Permalink to this headline">¶</a></h3>
 <p>Once we get all data/photo from one experiment and save somewhere, we would like to synchronize them.</p>
 <p>As camera speed is much slower than sensors speed, the sychronization is not perfect.</p>
-<p><strong>Algorithem: first match each photo to a row of data based on timestamp(best fit), then for unmatched data, find its previous closed photo and take it.</strong></p>
+<p><strong>Algorithm: first match each photo to a row of data based on timestamp(best fit), then for unmatched data, find its previous closed photo and take it.</strong></p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This algorithem is totally under expecatation, if you have better straetgy, please contact me.</p>
+<p class="last">This algorithm is a work in progress. If you have better strategy, please contact me.</p>
 </div>
 <p>The code is called <code class="docutils literal notranslate"><span class="pre">sync_time.py</span></code> under <code class="docutils literal notranslate"><span class="pre">PiCar/src/dataAnalysis</span></code>, and all raw data/photo are under <code class="docutils literal notranslate"><span class="pre">data_photo</span></code> under same directory.</p>
 <p><strong>Result: The python programe will output a csv file in the same directory, the format is [data1][data2]……[matched_photo]</strong></p>

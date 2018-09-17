@@ -51,6 +51,7 @@ Assembly
 --------
 
 Tools Required:
+
 - Dremel kit (with drill and sanding bits)
 - Screw drivers
 - Pliers
