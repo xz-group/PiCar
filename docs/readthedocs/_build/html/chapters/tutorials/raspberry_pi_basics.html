@@ -84,7 +84,7 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Getting Started</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../tutorials.html">Tutorials</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Raspberry Pi Basics</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#what-is-a-raspberry-pi">What is a Raspberry Pi?</a></li>
@@ -314,6 +314,13 @@ and Pi password are strong, the security risk is minimized.
 Currently, SSH will only allow you to access the Pi when your
 computer and the Pi are connected to the same router.</p>
 </div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The IP addresses of devices including the Raspberry Pi may change
+each time you reboot it. To solve this you could either set up a
+<a class="reference external" href="https://raspberrypi.stackexchange.com/questions/37920/how-do-i-set-up-networking-wifi-static-ip-address">static IP address</a>
+for each Pi or <a class="reference external" href="https://classes.engineering.wustl.edu/ese205/core/index.php?title=SSHing_into_your_Raspberry_Pi#Emailing_the_IP_address">create a way to email the IP to your email address</a>.</p>
+</div>
 </div>
 </div>
 <div class="section" id="desktop-interface">
@@ -419,8 +426,10 @@ faster, do the following:</p>
 <li>Or you can use the following command:</li>
 </ul>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">ssh_id</span><span class="o">=</span>&lt;some unique name&gt;
-<span class="nb">echo</span> <span class="s2">&quot;\nHost </span><span class="nv">$ssh_id</span><span class="s2">\n   Hostname </span><span class="nv">$ssh_ip</span><span class="s2">&quot;</span> &gt;&gt; ~/.ssh/config
-<span class="nb">echo</span> <span class="s2">&quot;\n   User </span><span class="nv">$ssh_user</span><span class="s2">\n   Port </span><span class="nv">$ssh_port</span><span class="s2">&quot;</span> &gt;&gt; ~/.ssh/config
+<span class="nb">echo</span> <span class="s2">&quot;Host </span><span class="nv">$ssh_id</span><span class="s2">&quot;</span> &gt;&gt; ~/.ssh/config
+<span class="nb">echo</span> <span class="s2">&quot;  Hostname </span><span class="nv">$ssh_ip</span><span class="s2">&quot;</span> &gt;&gt; ~/.ssh/config
+<span class="nb">echo</span> <span class="s2">&quot;  User </span><span class="nv">$ssh_user</span><span class="s2">&quot;</span> &gt;&gt; ~/.ssh/config
+<span class="nb">echo</span> <span class="s2">&quot;  Port </span><span class="nv">$ssh_port</span><span class="s2">&quot;</span> &gt;&gt; ~/.ssh/config
 </pre></div>
 </div>
 <ul class="simple">
