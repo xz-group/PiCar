@@ -11,6 +11,22 @@ Raspberry Pi Pinout
   :width: 275
   :height: 500
 
+The Pi pinout image is often used as a reference because the GPIO pins on the
+board are often labelled.
+
+Overall Circuitry
+-----------------
+
+**Wiring Simple**
+
+.. image:: electronics/wiring_fritzing.png
+
+**Wiring Schematics**
+
+.. image:: electronics/wiring_schematics.png
+
+.. warning:: The circuits are always prone to change, use with caution.
+
 Pi and Arduino Communication
 ----------------------------
 
