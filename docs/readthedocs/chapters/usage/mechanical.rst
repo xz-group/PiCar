@@ -58,6 +58,10 @@ Tools Required:
 
 1. Download the Fusion 360 CAD files, convert them to STL and 3D print them.
 
+  - Encoder Mount: `<https://a360.co/2DUNNK6>`_
+  - First Layer: `<https://a360.co/2RquoDs>`_
+  - Second Layer: `<https://a360.co/2OBMGmP>`_
+
 2. For PiCar v2.0, the ``Dromida 1/18th Scale Buggy`` was used:
 
 .. figure:: mechanical/assembly001.jpg
