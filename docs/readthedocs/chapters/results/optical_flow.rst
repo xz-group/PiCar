@@ -38,5 +38,5 @@ Authors
 Links
 -----
 
-[`Report <https://github.com/xz-group/PiCar/blob/master/docs/reports/optical_flow_luer_2018/optical_flow_luer_2018.pdf>`_]
+[`Report <../../../../reports/optical_flow_luer_2018/optical_flow_luer_2018.pdf>`_]
 [`Code <https://github.com/xz-group/PiCar/tree/master/src/pi/computer_vision>`_]

@@ -47,6 +47,16 @@ Materials Required
    :header-rows: 1
    :file: mechanical/bill_of_materials.csv
 
+.. warning::
+
+   The 7.4V LiPo battery must be used with care. Use a voltmeter or battery
+   checker to ensure that the battery voltage does not drop below 30%.
+
+.. note::
+
+   If the ``48P 20T 4mm bore Pinion Gear`` cannot be found, buy a 48P 20T Pinion
+   Gear and use a drill to create a 4mm bore (shaft diamater).
+
 Assembly
 --------
 
@@ -61,6 +71,7 @@ Tools Required:
   - Encoder Mount: `<https://a360.co/2DUNNK6>`_
   - First Layer: `<https://a360.co/2RquoDs>`_
   - Second Layer: `<https://a360.co/2OBMGmP>`_
+  - Camera: `<https://a360.co/2QQB4dp>`_
 
 2. For PiCar v2.0, the ``Dromida 1/18th Scale Buggy`` was used:
 
@@ -89,8 +100,8 @@ spline that goes along the center of the car.
    Rear gear covering and spine removed
 
 5. Unscrew the plastic cover for the ``ESC`` (Electronic Speed Controller).
-Unplug the motor and servo connectors from the ``ESC`` and remove it from
-the car.
+Unplug the motor and servo connectors from the ``ESC``. Remove the motor from
+the car. Do not remove the servo.
 
 .. figure:: mechanical/assembly004.jpg
    :alt: ESC removed
@@ -117,8 +128,8 @@ and a sanding tool, carefully clear away the plastic from the gear as shown.
 
    Plastic cleared away for meshing Encoder
 
-Ensure that the ``encoder`` with its gear meshes with the rear gear and is not
-blocked by the plastic casing.
+Ensure that the ``encoder`` with its ``pinion gear`` meshes with the rear gear
+and is not blocked by the plastic casing.
 
 8. Screw in the ``printed encoder mount`` to the ``encoder`` and place it
 on the ``chassis`` as shown in the figure:
@@ -153,6 +164,11 @@ mount back in.
 
    Drilled holes to mount the first printed layer
 
+.. note::
+
+   It may be more convenient to use the corner mounting holes as a guide to
+   mark the locations of the holes on the base.
+
 11. Connect the ``TrackStar ESC`` to the motor using the color coded wires.
 Reattach the spine:
 
@@ -162,8 +178,9 @@ Reattach the spine:
 
    ESC connected
 
-12. Before we mount the ``printed first layer`` to the car, it may help to
-mount the ``IMU``, ``Raspberry Pi``, and the ``Arduino`` to the first layer.
+12. Before we mount the ``printed first layer`` to the car using ``spacers``,
+it may help to mount the ``IMU``, ``Raspberry Pi``, and the ``Arduino`` to the
+first layer.
 
 Pre-requisites for this step:
   - Create a common GND and +5V channel (we used a broken off piece from a small
@@ -216,7 +233,7 @@ Now the PiCar is usable, and should look like this:
    PiCar: Isometric View
 
 15. Once the base PiCar has been built, you can add the ``Lidar``, ``PiCamera``,
-etc using the 3D printed mounts, and wire them accordingly.
+etc. using the 3D printed mounts, and wire them accordingly.
 
 Ending notes:
   - The ``LiPo battery`` sits in the first layer, behind the microcontrollers.

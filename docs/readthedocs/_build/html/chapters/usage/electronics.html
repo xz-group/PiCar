@@ -122,6 +122,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#id8">Resources</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-ros-on-raspbian">Installing ROS on Raspbian</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="software.html">Software</a></li>
@@ -221,6 +222,18 @@ board are often labelled.</p>
 </div>
 <div class="section" id="pi-and-arduino-communication">
 <h2>Pi and Arduino Communication<a class="headerlink" href="#pi-and-arduino-communication" title="Permalink to this headline">¶</a></h2>
+<p>There are three commonly used to communicate between the Arduino and the
+Raspberry Pi.</p>
+<ol class="arabic simple">
+<li>I2C</li>
+<li>SPI</li>
+<li>Serial</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Most teams who used the PiCar platform recommended using Serial communication
+for its ease of use.</p>
+</div>
 <div class="section" id="i2c-method">
 <h3>I2C Method<a class="headerlink" href="#i2c-method" title="Permalink to this headline">¶</a></h3>
 <p>The code is from <a class="reference external" href="https://oscarliang.com/raspberry-pi-arduino-connected-i2c/">here</a>,
@@ -435,24 +448,24 @@ with slight changes to accommodate Python 3 instead of Python 2.</p>
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Rasberry Pi 3</th>
-<th class="head">arduino Uno</th>
+<th class="head">Arduino UNO</th>
 </tr>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>GND</td>
 <td>GND</td>
 </tr>
-<tr class="row-odd"><td>MOSI (Pin19)</td>
-<td>MOSI (Pin11)</td>
+<tr class="row-odd"><td>MOSI (Pin 19)</td>
+<td>MOSI (Pin 11)</td>
 </tr>
-<tr class="row-even"><td>MISO (Pin21)</td>
-<td>MISO (Pin12)</td>
+<tr class="row-even"><td>MISO (Pin 21)</td>
+<td>MISO (Pin 12)</td>
 </tr>
-<tr class="row-odd"><td>SCLK (Pin23)</td>
-<td>SCLK (Pin13)</td>
+<tr class="row-odd"><td>SCLK (Pin 23)</td>
+<td>SCLK (Pin 13)</td>
 </tr>
-<tr class="row-even"><td>cell0 (Pin24)</td>
-<td>SS (Pin10)</td>
+<tr class="row-even"><td>cell0 (Pin 24)</td>
+<td>SS (Pin 10)</td>
 </tr>
 </tbody>
 </table>
@@ -628,18 +641,18 @@ arduino to raspberry pi. In this sections, we will use GPIO pins to connect our 
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Rasberry Pi 3</th>
-<th class="head">arduino Uno</th>
+<th class="head">Arduino UNO</th>
 </tr>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>GND</td>
 <td>GND</td>
 </tr>
-<tr class="row-odd"><td>Pin19</td>
-<td>SDA(The pin above AREF)</td>
+<tr class="row-odd"><td>Pin 19</td>
+<td>SDA (pin above AREF)</td>
 </tr>
-<tr class="row-even"><td>Pin13</td>
-<td>SCL(The pin above SDA)</td>
+<tr class="row-even"><td>Pin 13</td>
+<td>SCL (pin above SDA)</td>
 </tr>
 </tbody>
 </table>
@@ -1110,6 +1123,10 @@ sudo python LSM9DS1_Basic_I2C.py
 </ul>
 <p>Contributors: Jerry Kong, Shadi Davari, Josh Jin</p>
 </div>
+</div>
+<div class="section" id="installing-ros-on-raspbian">
+<h2>Installing ROS on Raspbian<a class="headerlink" href="#installing-ros-on-raspbian" title="Permalink to this headline">¶</a></h2>
+<p>This is how you build something.</p>
 </div>
 </div>
 
