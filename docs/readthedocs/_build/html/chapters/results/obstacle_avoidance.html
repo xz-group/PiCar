@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Power Management &mdash; PiCar Project 2018 documentation</title>
+  <title>LIDAR Obstacle Avoidance &mdash; PiCar Project 2018 documentation</title>
   
 
   
@@ -29,8 +29,8 @@
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Object Tracking in Low-Power Autonomous Systems" href="optical_flow.html" />
-    <link rel="prev" title="IMU Autonomous Navigation" href="imu_autonomous_navigation.html" /> 
+    <link rel="next" title="Changelogs" href="../changelogs.html" />
+    <link rel="prev" title="PiCar Mobile Movement Control" href="mobile_movement_control.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -89,15 +89,15 @@
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../results.html">Results</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="imu_autonomous_navigation.html">IMU Autonomous Navigation</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Power Management</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="power_management.html">Power Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="optical_flow.html">Object Tracking in Low-Power Autonomous Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mobile_movement_control.html">PiCar Mobile Movement Control</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">LIDAR Obstacle Avoidance</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#proposal">Proposal</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#authors">Authors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#links">Links</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="optical_flow.html">Object Tracking in Low-Power Autonomous Systems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mobile_movement_control.html">PiCar Mobile Movement Control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="obstacle_avoidance.html">LIDAR Obstacle Avoidance</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../changelogs.html">Changelogs</a></li>
@@ -149,13 +149,13 @@
         
           <li><a href="../results.html">Results</a> &raquo;</li>
         
-      <li>Power Management</li>
+      <li>LIDAR Obstacle Avoidance</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../_sources/chapters/results/power_management.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/chapters/results/obstacle_avoidance.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -168,32 +168,32 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="power-management">
-<h1>Power Management<a class="headerlink" href="#power-management" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="lidar-obstacle-avoidance">
+<h1>LIDAR Obstacle Avoidance<a class="headerlink" href="#lidar-obstacle-avoidance" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="proposal">
 <h2>Proposal<a class="headerlink" href="#proposal" title="Permalink to this headline">¶</a></h2>
 <blockquote>
-<div><p>There are many industrial robotics platforms, from large to small scale, from autonomous to
-manual manipulation. However, only a few studies the power monitoring and management.
-However, this filed will become increasingly important when robots are given more functionalities
-for various tasks desired. In this regard, the battery life could become an important criterion to
-judge whether a robot is suitable for the task.</p>
-<p>By studying each electric component’s power consumption, we can build a mathematical
-performance model and guide the user to decide which mode is supposed to operate to obtain a
-better performance. We believe, this model could also be used in the performance prediction
-field, which potentially saves more energy based on the same platform. Therefore, the success
-experiment could be extremely valuable for the industry.</p>
-</div></blockquote>
+<div>Object tracking and obstacle avoidance are two key features for a robot with
+mechanical movability and visual detection functionality. They are associated
+with many hot application fields such as path followers and self-driving cars.
+With the big picture in mind, we chose to implement those basic functions on
+the PiCar, a Raspberry Pi powered and wheeled robotic car, as a research
+project. By implementing the obstacle avoidance and the object tracking
+features onto the car, we aim to create powerful and practical algorithms
+that enable the car to follow a certain object wisely without crashing into
+any obstacles.</div></blockquote>
 </div>
 <div class="section" id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Yunshen Huang</li>
+<li>Amelia Ma</li>
+<li>Chufan Chen</li>
 </ul>
 </div>
 <div class="section" id="links">
 <h2>Links<a class="headerlink" href="#links" title="Permalink to this headline">¶</a></h2>
-<p>[<a class="reference external" href="../../../../reports/power_management_huang_2018/power_management_huang_2018.pdf">Report</a>]</p>
+<p>[<a class="reference external" href="../../../../reports/obstacle_avoidance/obstacle_avoidance_amelia_chufan_2018.pdf">Report</a>]
+[<a class="reference external" href="https://sites.wustl.edu/498picar/">Website</a>]</p>
 </div>
 </div>
 
@@ -205,10 +205,10 @@ experiment could be extremely valuable for the industry.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="optical_flow.html" class="btn btn-neutral float-right" title="Object Tracking in Low-Power Autonomous Systems" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../changelogs.html" class="btn btn-neutral float-right" title="Changelogs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="imu_autonomous_navigation.html" class="btn btn-neutral" title="IMU Autonomous Navigation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="mobile_movement_control.html" class="btn btn-neutral" title="PiCar Mobile Movement Control" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

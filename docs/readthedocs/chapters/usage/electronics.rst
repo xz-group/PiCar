@@ -30,6 +30,18 @@ Overall Circuitry
 Pi and Arduino Communication
 ----------------------------
 
+There are three commonly used to communicate between the Arduino and the
+Raspberry Pi.
+
+1. I2C
+2. SPI
+3. Serial
+
+.. note::
+
+   Most teams who used the PiCar platform recommended using Serial communication
+   for its ease of use.
+
 I2C Method
 ^^^^^^^^^^
 
@@ -174,19 +186,19 @@ SPI Method
 ^^^^^^^^^^
 **Wiring**
 
-+--------------+-------------+
-|Rasberry Pi 3 |arduino Uno  |
-+==============+=============+
-|GND           |GND          |
-+--------------+-------------+
-|MOSI (Pin19)  |MOSI (Pin11) |
-+--------------+-------------+
-|MISO (Pin21)  |MISO (Pin12) |
-+--------------+-------------+
-|SCLK (Pin23)  |SCLK (Pin13) |
-+--------------+-------------+
-|cell0 (Pin24) |SS (Pin10)   |
-+--------------+-------------+
++---------------+--------------+
+|Rasberry Pi 3  |Arduino UNO   |
++===============+==============+
+|GND            |GND           |
++---------------+--------------+
+|MOSI (Pin 19)  |MOSI (Pin 11) |
++---------------+--------------+
+|MISO (Pin 21)  |MISO (Pin 12) |
++---------------+--------------+
+|SCLK (Pin 23)  |SCLK (Pin 13) |
++---------------+--------------+
+|cell0 (Pin 24) |SS (Pin 10)   |
++---------------+--------------+
 
 and you can choose to power the arduino using USB cable on Pi
 or on your laptop.
@@ -387,13 +399,13 @@ arduino to raspberry pi. In this sections, we will use GPIO pins to connect our 
 **Wiring**
 
 +--------------+-----------------------+
-|Rasberry Pi 3 |arduino Uno            |
+|Rasberry Pi 3 |Arduino UNO            |
 +==============+=======================+
 |GND           |GND                    |
 +--------------+-----------------------+
-|Pin19         |SDA(The pin above AREF)|
+|Pin 19        |SDA (pin above AREF)   |
 +--------------+-----------------------+
-|Pin13         |SCL(The pin above SDA) |
+|Pin 13        |SCL (pin above SDA)    |
 +--------------+-----------------------+
 
 And you can power Arduino in whatever way you want.
@@ -788,3 +800,8 @@ Resources
 
 
 Contributors: Jerry Kong, Shadi Davari, Josh Jin
+
+Installing ROS on Raspbian
+---------------------------
+
+This is how you build something.

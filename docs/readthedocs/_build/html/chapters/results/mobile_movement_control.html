@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Changelogs" href="../changelogs.html" />
+    <link rel="next" title="LIDAR Obstacle Avoidance" href="obstacle_avoidance.html" />
     <link rel="prev" title="Object Tracking in Low-Power Autonomous Systems" href="optical_flow.html" /> 
 
   
@@ -84,7 +84,7 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../results.html">Results</a><ul class="current">
@@ -97,6 +97,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#links">Links</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="obstacle_avoidance.html">LIDAR Obstacle Avoidance</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../changelogs.html">Changelogs</a></li>
@@ -171,7 +172,22 @@
 <h1>PiCar Mobile Movement Control<a class="headerlink" href="#picar-mobile-movement-control" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="proposal">
 <h2>Proposal<a class="headerlink" href="#proposal" title="Permalink to this headline">¶</a></h2>
-<p>This report is aimed at introducing new researchers to the findings and progress made on the PiCar Project as of July, 2018 regarding the movement control of the PiCar.  This report will cover the currently implemented features of the PiCar, including semi-automated movement,  a killswitch, real-time user control using WASD on a keyboard, a replay function, and data collection.  Additionally, the last section of the report covers known issues with the PiCar which includes inaccurate servo controls and noisy Inertial Measurement Unit (IMU) data.</p>
+<blockquote>
+<div>This report is aimed at introducing new researchers to the findings and
+progress made on the PiCar Project as of July, 2018 regarding the movement
+control of the PiCar.  This report will cover the currently implemented
+features of the PiCar, including semi-automated movement,  a killswitch,
+real-time user control using WASD on a keyboard, a replay function, and data
+collection.  Additionally, the last section of the report covers known issues
+with the PiCar which includes inaccurate servo controls and noisy Inertial
+Measurement Unit (IMU) data.</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">While uploading the Arduino program, if there is an issue with the
+<code class="docutils literal notranslate"><span class="pre">Simpletimer</span></code> library, download the <code class="docutils literal notranslate"><span class="pre">Simpletimer.h</span></code> file from the
+<a class="reference external" href="http://playground.arduino.cc/Code/SimpleTimer">Official Arduino Codebase</a>,
+and place it in the same folder as the <code class="docutils literal notranslate"><span class="pre">WASD.ino</span></code> file.</p>
+</div>
 </div>
 <div class="section" id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
@@ -182,7 +198,7 @@
 </div>
 <div class="section" id="links">
 <h2>Links<a class="headerlink" href="#links" title="Permalink to this headline">¶</a></h2>
-<p>[<a class="reference external" href="https://github.com/xz-group/PiCar/blob/master/docs/reports/mobile_movement_control/PiCar%20Mobile%20Movement%20Control%20Report.pdf">Report</a>]
+<p>[<a class="reference external" href="../../../../reports/mobile_movement_control/PiCar%20Mobile%20Movement%20Control%20Report.pdf">Report</a>]
 [<a class="reference external" href="https://www.youtube.com/watch?v=rVKRBl99Qow">Video 1</a>]
 [<a class="reference external" href="https://www.youtube.com/watch?v=RHe-8m1kZ9I">Video 2</a>]</p>
 </div>
@@ -196,7 +212,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../changelogs.html" class="btn btn-neutral float-right" title="Changelogs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="obstacle_avoidance.html" class="btn btn-neutral float-right" title="LIDAR Obstacle Avoidance" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="optical_flow.html" class="btn btn-neutral" title="Object Tracking in Low-Power Autonomous Systems" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

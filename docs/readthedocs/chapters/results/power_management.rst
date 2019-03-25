@@ -24,4 +24,4 @@ Authors
 Links
 -----
 
-[`Report <https://github.com/xz-group/PiCar/blob/master/docs/reports/power_management_huang_2018/power_management_huang_2018.pdf>`_]
+[`Report <../../../../reports/power_management_huang_2018/power_management_huang_2018.pdf>`_]

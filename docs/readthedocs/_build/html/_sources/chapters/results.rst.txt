@@ -11,3 +11,4 @@ This page gives a comprehensive list of different results that were achieved.
    results/power_management
    results/optical_flow
    results/mobile_movement_control
+   results/obstacle_avoidance
